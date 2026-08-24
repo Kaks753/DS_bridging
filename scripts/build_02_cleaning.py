@@ -119,6 +119,100 @@ print("income dtype:", clean["income"].dtype)
 """)
 
 nb.md(r"""
+## 2.4b Renaming columns — clean, consistent names save hours
+
+Messy column names (`"Customer ID"`, `"Monthly  Charges"`, mixed case, spaces)
+break dot-access (`df.Customer ID` is a syntax error) and make joins fragile.
+A senior habit: **snake_case everything, once, up front.**
+
+Three tools:
+- `df.rename(columns={...})` — rename *specific* columns explicitly (safest, readable).
+- `df.columns = [...]` — replace *all* names at once (use when standardizing wholesale).
+- A vectorized string clean — programmatic, scales to 200 columns.
+
+`rename` also takes `index=` to rename rows, and `inplace=True` (we avoid inplace —
+returning a new frame is clearer and chains better).
+""")
+
+nb.code(r"""
+# Simulate messy names so you see the fix (real files look like this):
+messy = clean.copy()
+messy.columns = ["Customer ID", "Age ", "Plan", "Monthly  Charges",
+                 "City", "Income", "Churn", "income_was_missing",
+                 "income_capped"][:len(messy.columns)]
+print("BEFORE:", list(messy.columns))
+
+# (1) Explicit rename of just the columns you care about:
+messy = messy.rename(columns={"Customer ID": "customer_id",
+                              "Monthly  Charges": "monthly_charges"})
+
+# (2) Programmatic standardization of ALL names -> snake_case:
+messy.columns = (messy.columns
+                 .str.strip()          # kill leading/trailing spaces
+                 .str.lower()          # case-insensitive
+                 .str.replace(r"\s+", "_", regex=True))  # collapse spaces -> _
+print("AFTER: ", list(messy.columns))
+""")
+
+nb.md(r"""
+**Takeaway:** do this immediately after loading. Every downstream line
+(`df.customer_id`, merges, `groupby`) becomes predictable. `str.replace(regex=True)`
+with `\s+` handles single *and* double spaces in one shot.
+""")
+
+nb.md(r"""
+## 2.4c Datetimes — the column type that unlocks time-based analysis
+
+Dates arrive as **strings** (`"2023-07-15"`, `"15/07/2023"`). As strings you
+*cannot* subtract them, sort them chronologically, or extract the month. You must
+parse them into real `datetime64` with `pd.to_datetime`. Then the `.dt` accessor
+gives you year/month/day/weekday/etc. — the raw material for seasonality features.
+
+Key arguments:
+- `errors="coerce"` → unparseable values become `NaT` (missing) instead of crashing.
+- `format="..."` → give the exact format when you know it (faster + avoids ambiguity
+  like month-vs-day). `dayfirst=True` for `DD/MM/YYYY` data.
+""")
+
+nb.code(r"""
+# customers.csv has no date, so we attach a realistic 'signup_date' to teach parsing.
+rng = np.random.default_rng(0)
+n = len(clean)
+raw_dates = pd.to_datetime("2022-01-01") + pd.to_timedelta(
+    rng.integers(0, 730, size=n), unit="D")
+# Store as messy strings, exactly like a real CSV would:
+clean["signup_date"] = raw_dates.strftime("%Y-%m-%d")
+print("dtype as loaded (string!):", clean["signup_date"].dtype)
+print(clean["signup_date"].head(3).tolist())
+
+# Parse to real datetime:
+clean["signup_date"] = pd.to_datetime(clean["signup_date"], errors="coerce")
+print("dtype after to_datetime:", clean["signup_date"].dtype)
+""")
+
+nb.code(r"""
+# The .dt accessor: pull calendar parts out of a datetime column (vectorized).
+clean["signup_year"]    = clean["signup_date"].dt.year
+clean["signup_month"]   = clean["signup_date"].dt.month
+clean["signup_weekday"] = clean["signup_date"].dt.day_name()
+clean["days_as_member"] = (pd.Timestamp("2024-01-01") - clean["signup_date"]).dt.days
+
+print(clean[["signup_date", "signup_year", "signup_month",
+             "signup_weekday", "days_as_member"]].head())
+""")
+
+nb.md(r"""
+**Why this matters:** `days_as_member` (a *duration*) is often far more predictive
+than the raw date. `signup_month`/`weekday` capture **seasonality**. You can only
+compute these once the column is a true datetime — which is exactly why parsing is
+step one of any time-aware cleaning. (Full time-series modeling: Module 18.)
+
+**Interview line:** *"Strings that look like dates are a trap — I parse with
+`to_datetime(errors='coerce')`, verify no unexpected `NaT`, then derive durations
+and calendar features via `.dt`."*
+""")
+
+nb.md(r"""
 ## 2.5 Missing data — the part everyone gets wrong
 
 First, **quantify** it. Then diagnose the **mechanism**, because the mechanism

@@ -115,6 +115,48 @@ print(df_tfidf)
 """)
 
 nb.md(r"""
+## 19.3b N-grams — putting *word order* back in (unigrams, bigrams, trigrams)
+
+Bag-of-Words and plain TF-IDF throw away order, so **"not good"** and **"good"**
+look almost identical — a disaster for sentiment. **N-grams** fix this by treating
+sequences of *n* adjacent words as features:
+- **unigram** (n=1): `good`, `not`, `movie`
+- **bigram** (n=2): `not good`, `good movie`
+- **trigram** (n=3): `was not good`
+
+Set `ngram_range=(1, 2)` to keep unigrams **and** bigrams. Now `not good` is its own
+feature and the model can learn it's negative.
+""")
+
+nb.code(r"""
+neg = "the movie was not good not funny"
+uni = CountVectorizer(ngram_range=(1,1)).fit([neg])
+bi  = CountVectorizer(ngram_range=(2,2)).fit([neg])
+tri = CountVectorizer(ngram_range=(3,3)).fit([neg])
+print("unigrams:", uni.get_feature_names_out().tolist())
+print("bigrams :", bi.get_feature_names_out().tolist())
+print("trigrams:", tri.get_feature_names_out().tolist())
+""")
+
+nb.code(r"""
+# Proof it helps: 'not good' vs 'good' become DIFFERENT features with bigrams.
+from sklearn.metrics.pairwise import cosine_similarity
+pair = ["this is good", "this is not good"]
+uni_v = TfidfVectorizer(ngram_range=(1,1)).fit_transform(pair)
+bi_v  = TfidfVectorizer(ngram_range=(1,2)).fit_transform(pair)
+print("cosine similarity of the two sentences:")
+print(f"  unigrams only : {cosine_similarity(uni_v)[0,1]:.3f}  (look almost identical!)")
+print(f"  with bigrams  : {cosine_similarity(bi_v)[0,1]:.3f}  (correctly more different)")
+""")
+
+nb.md(r"""
+**Trade-off:** higher n captures more context but **explodes** the vocabulary
+(sparsity, memory) and risks overfitting. Practical defaults: `ngram_range=(1,2)`
+plus `min_df` (ignore ultra-rare n-grams) and `max_df` (ignore near-universal ones).
+Character n-grams (`analyzer="char_wb"`) are great for typos and language ID.
+""")
+
+nb.md(r"""
 ## 19.4 Cosine similarity — semantic/document search
 
 To find similar documents, measure the **angle** between their TF-IDF vectors.
@@ -136,6 +178,58 @@ query = tfidf.transform(["wonderful great acting"])
 scores = cosine_similarity(query, X_tfidf).ravel()
 best = scores.argmax()
 print(f"\nquery best-matches doc{best}: '{corpus[best]}' (score {scores[best]:.2f})")
+""")
+
+nb.md(r"""
+## 19.4b Topic modeling with LDA (Latent Dirichlet Allocation)
+
+*(Careful: this "LDA" is **not** Linear Discriminant Analysis from Module 10 — same
+acronym, totally different method. This one is **unsupervised topic discovery**.)*
+
+**Latent Dirichlet Allocation** finds hidden **topics** in a collection of
+documents with **no labels**. Its model of the world:
+- each **topic** is a distribution over words (e.g. a "sports" topic puts weight on
+  *game, team, score*),
+- each **document** is a mixture of topics (60% sports + 40% politics).
+
+You give it the number of topics; it returns the word-mix per topic and the
+topic-mix per document. Great for exploring a large unlabeled corpus (news, reviews,
+support tickets). Feed it **counts** (CountVectorizer), not TF-IDF.
+""")
+
+nb.code(r"""
+from sklearn.decomposition import LatentDirichletAllocation
+
+docs = [
+    "the team won the game with a great score",
+    "players scored goals in the football match",
+    "the election results show the new policy vote",
+    "government policy and the election campaign debate",
+    "the match ended with a winning goal by the team",
+    "voters chose the party in the national election",
+]
+cv = CountVectorizer(stop_words="english")
+dtm = cv.fit_transform(docs)
+
+lda_topics = LatentDirichletAllocation(n_components=2, random_state=0).fit(dtm)
+
+# Show the top words defining each discovered topic:
+vocab = cv.get_feature_names_out()
+for k, comp in enumerate(lda_topics.components_):
+    top = [vocab[i] for i in comp.argsort()[-5:][::-1]]
+    print(f"Topic {k}: {top}")
+
+# Which topic dominates each document?
+doc_topics = lda_topics.transform(dtm)
+for i, dist in enumerate(doc_topics):
+    print(f"doc{i} topic mix -> {dist.round(2)}  (dominant: Topic {dist.argmax()})")
+""")
+
+nb.md(r"""
+**Reading it:** one discovered topic should cluster the *sports* words
+(team/game/goal), the other the *politics* words (election/policy/vote) — with **no
+labels given**. Each document then gets a topic-mixture. That's unsupervised
+structure discovery over text, complementing the supervised sentiment model next.
 """)
 
 nb.md(r"""
@@ -254,6 +348,10 @@ nb.md(r"""
 - NLP pipeline: clean → tokenize → stopwords → stem/lemmatize → **vectorize**.
 - **Bag-of-Words** counts words; **TF-IDF** weights them by informativeness
   (TF × IDF) — the basis of search and text classification.
+- **N-grams** (`ngram_range=(1,2)`) restore word order so **"not good" ≠ "good"** —
+  essential for sentiment.
+- **LDA topic modeling** discovers hidden topics in unlabeled text (distinct from
+  Linear Discriminant Analysis — same acronym, different method).
 - **Cosine similarity** compares text vectors by angle → semantic search &
   clustering (your LexiGenius).
 - Sentiment = **TF-IDF → classifier** Pipeline (your Twitter app).

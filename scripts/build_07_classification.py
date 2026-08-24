@@ -117,6 +117,70 @@ plt.title("Choosing k: too small overfits, too large underfits"); plt.show()
 """)
 
 nb.md(r"""
+## 7.2b KNN, deeper — distance metrics, weighting, regression, the curse
+
+**(1) Distance metric** — "nearest" depends on how you measure distance. KNN's
+`metric`/`p` parameter controls this:
+- **Euclidean** (`p=2`, default): straight-line distance. The usual choice.
+- **Manhattan** (`p=1`): sum of absolute differences ("city-block"). More robust to
+  outliers and often better in **high dimensions**.
+- **Minkowski**: the general form; `p=1`→Manhattan, `p=2`→Euclidean. sklearn's
+  default is Minkowski with `p=2`.
+
+**(2) Weighting** — `weights="uniform"` (all k neighbors vote equally) vs
+`weights="distance"` (closer neighbors get **more** vote). Distance-weighting helps
+when clusters overlap.
+""")
+
+nb.code(r"""
+from sklearn.model_selection import cross_val_score
+
+for metric, p in [("euclidean", 2), ("manhattan", 1)]:
+    for w in ["uniform", "distance"]:
+        clf = KNeighborsClassifier(n_neighbors=15, weights=w, p=p)
+        s = cross_val_score(clf, X_tr_s, y_tr, cv=5, scoring="f1").mean()
+        print(f"metric={metric:9s} weights={w:8s} -> CV F1 = {s:.3f}")
+""")
+
+nb.md(r"""
+**(3) KNN also does regression.** Instead of a majority *vote*, `KNeighborsRegressor`
+**averages** the target of the k nearest neighbors. Same geometry, continuous output.
+""")
+
+nb.code(r"""
+from sklearn.neighbors import KNeighborsRegressor
+# tiny 1-D demo: predict y from x by averaging nearest neighbors' y
+xr = np.linspace(0, 10, 60)
+yr = np.sin(xr) + np.random.default_rng(0).normal(0, 0.15, xr.size)
+knr = KNeighborsRegressor(n_neighbors=5).fit(xr.reshape(-1,1), yr)
+grid = np.linspace(0, 10, 300).reshape(-1,1)
+plt.figure(figsize=(7,3.8))
+plt.scatter(xr, yr, s=15, alpha=0.6, label="data")
+plt.plot(grid, knr.predict(grid), "r-", lw=2, label="KNN regression (k=5)")
+plt.title("KNN regression = local average of neighbors' targets")
+plt.legend(); plt.show()
+""")
+
+nb.md(r"""
+**(4) The curse of dimensionality — KNN's Achilles heel.** As the number of
+features grows, points become **almost equidistant** from each other, so "nearest
+neighbor" loses meaning and KNN degrades. The demo below shows the ratio of nearest
+to farthest distance heading toward 1 as dimensions increase.
+""")
+
+nb.code(r"""
+rng = np.random.default_rng(0)
+print(f"{'dims':>5} {'min_dist':>9} {'max_dist':>9} {'min/max':>8}")
+for d in [2, 5, 20, 100, 500]:
+    pts = rng.random((500, d))
+    from scipy.spatial.distance import pdist
+    dd = pdist(pts)
+    print(f"{d:5d} {dd.min():9.3f} {dd.max():9.3f} {dd.min()/dd.max():8.3f}")
+print("\nAs dims grow, min/max -> 1: all points look equally far => KNN struggles.")
+print("Fixes: reduce dimensions (PCA, feature selection) or use Manhattan distance.")
+""")
+
+nb.md(r"""
 ## 7.3 Why accuracy is a TRAP on imbalanced data
 
 If 95% of customers don't churn, a model that predicts "no churn" for everyone
@@ -132,6 +196,13 @@ disp.plot(cmap="Blues", values_format="d"); plt.title("Confusion Matrix"); plt.s
 
 tn, fp, fn, tp = cm.ravel()
 print(f"TN={tn}  FP={fp}  FN={fn}  TP={tp}")
+
+precision   = tp / (tp + fp) if (tp+fp) else 0
+recall      = tp / (tp + fn) if (tp+fn) else 0   # = sensitivity / TPR
+specificity = tn / (tn + fp) if (tn+fp) else 0   # = TNR
+f1          = 2*precision*recall/(precision+recall) if (precision+recall) else 0
+print(f"precision={precision:.3f}  recall/sensitivity={recall:.3f}  "
+      f"specificity={specificity:.3f}  F1={f1:.3f}")
 """)
 
 nb.md(r"""
@@ -143,8 +214,13 @@ nb.md(r"""
 
 From these:
 - **Precision** = TP / (TP+FP) — *of those we flagged, how many were right?*
-- **Recall** = TP / (TP+FN) — *of all real churners, how many did we catch?*
-- **F1** = harmonic mean of precision & recall — one balanced number.
+- **Recall** (a.k.a. **Sensitivity**, TPR) = TP / (TP+FN) — *of all real churners,
+  how many did we catch?*
+- **Specificity** (TNR) = TN / (TN+FP) — *of all real non-churners, how many did we
+  correctly clear?* (recall for the negative class; 1 − specificity = FPR, the ROC
+  x-axis).
+- **F1** = harmonic mean of precision & recall — one balanced number. Harmonic (not
+  plain) mean punishes imbalance: F1 is only high when **both** are high.
 """)
 
 nb.code(r"""

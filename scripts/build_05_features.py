@@ -24,6 +24,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import (StandardScaler, MinMaxScaler, RobustScaler,
+                                    MaxAbsScaler, Normalizer, QuantileTransformer,
                                     OneHotEncoder, OrdinalEncoder)
 
 sns.set_theme(style="whitegrid")
@@ -128,6 +129,66 @@ extremes distort the scale for *everything*, masking normal-day variation.
 **RobustScaler** uses median + IQR — statistics that ignore the tails — so ordinary
 days stay informative and true anomalies remain visibly extreme. That's why it's a
 strong default for financial and fraud features.
+""")
+
+nb.md(r"""
+## 5.2b Three MORE scalers you must recognize (and when to reach for them)
+
+The big three above cover 90% of cases. These complete the picture — interviewers
+love asking about the last one:
+
+| Scaler | Formula (per feature) | Output | Use it when |
+|---|---|---|---|
+| **MaxAbsScaler** | `x / max(|x|)` | [−1, 1] | data is **sparse** (lots of zeros); it does NOT shift/center, so zeros stay zero (critical for sparse matrices like TF-IDF). |
+| **Normalizer** | `x / ‖x‖` **per ROW** | unit-norm rows | you care about **direction not magnitude** — text vectors, cosine similarity. Note: works on *rows*, not columns! |
+| **QuantileTransformer** | maps to ranks → target dist | uniform or normal | you want to **force** a feature to normal/uniform regardless of its shape; crushes outliers hard. Non-linear (can distort relationships). |
+
+**The trap:** `Normalizer` scales each **sample (row)** to unit length, while every
+other scaler works **column-wise (per feature)**. Mixing these up is a classic
+mistake. Say it out loud: *"Normalizer is per-row, the rest are per-column."*
+""")
+
+nb.code(r"""
+# MaxAbs vs the rest on a SPARSE-style feature (many zeros + a few large values)
+sparse_feat = np.array([0, 0, 0, 2, 0, 0, 8, 0, 0, 20]).reshape(-1, 1).astype(float)
+comp = pd.DataFrame({
+    "raw":      sparse_feat.ravel(),
+    "MaxAbs":   MaxAbsScaler().fit_transform(sparse_feat).ravel(),   # zeros stay 0
+    "MinMax":   MinMaxScaler().fit_transform(sparse_feat).ravel(),
+    "Standard": StandardScaler().fit_transform(sparse_feat).ravel(), # zeros move!
+})
+print(comp.round(3))
+print("\nNote: under MaxAbs the zeros remain EXACTLY 0 (sparsity preserved);")
+print("under Standard the zeros became non-zero (sparsity destroyed).")
+""")
+
+nb.code(r"""
+# Normalizer works per-ROW: scale each sample's [x, y] to unit length.
+rows = np.array([[3.0, 4.0],     # length 5  -> becomes (0.6, 0.8)
+                 [1.0, 0.0],     # length 1  -> stays (1, 0)
+                 [10.0, 10.0]])  # length ~14.1 -> (0.707, 0.707)
+normed = Normalizer().fit_transform(rows)
+print("row lengths BEFORE:", np.linalg.norm(rows, axis=1).round(3))
+print("row lengths AFTER :", np.linalg.norm(normed, axis=1).round(3), "(all 1.0)")
+print(normed.round(3))
+
+# QuantileTransformer forces income to a normal shape:
+qt = QuantileTransformer(output_distribution="normal", n_quantiles=200,
+                         random_state=0)
+income_q = qt.fit_transform(df[["income"]]).ravel()
+print("\nincome skew  raw: {:.2f}  ->  quantile-normal: {:.2f}".format(
+    df["income"].skew(), pd.Series(income_q).skew()))
+""")
+
+nb.md(r"""
+**Decision guide (memorize this ladder):**
+1. Outliers / fat tails / finance → **RobustScaler**.
+2. Sparse data (TF-IDF, one-hot) → **MaxAbsScaler** (keeps zeros).
+3. Row-direction matters (text similarity) → **Normalizer**.
+4. Model assumes Gaussian & shape is ugly → **PowerTransformer** (parametric) or
+   **QuantileTransformer** (non-parametric, stronger but can distort).
+5. Otherwise, neat-ish data → **StandardScaler** (the sane default).
+6. Trees / Random Forest / boosting → **don't scale at all** (Module 09 explains why).
 """)
 
 nb.md(r"""

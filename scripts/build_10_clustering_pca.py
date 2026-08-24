@@ -26,9 +26,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.preprocessing import StandardScaler
-from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN
+from sklearn.mixture import GaussianMixture
 from sklearn.metrics import silhouette_score, silhouette_samples
 from sklearn.decomposition import PCA
+from sklearn.model_selection import cross_val_score
 
 sns.set_theme(style="whitegrid")
 blobs = pd.read_csv("../data/blobs_2d.csv")   # we KNOW there are 3 clusters
@@ -169,6 +171,141 @@ print("Unscaled silhouette:", round(silhouette_score(feat, lab_raw), 3),
 """)
 
 nb.md(r"""
+## 10.4b Hierarchical (Agglomerative) clustering — no need to pre-pick k
+
+K-Means demands you choose *k* up front. **Agglomerative** clustering builds a
+**tree (dendrogram)** instead: start with every point as its own cluster, then
+repeatedly **merge the two closest clusters** until one remains. You then "cut" the
+tree at whatever height gives the number of clusters you want.
+
+**"Closest" depends on the `linkage`:**
+- `ward` — merge the pair that increases total within-cluster variance least
+  (default; gives compact, K-Means-like clusters). **Best general choice.**
+- `complete` — distance = farthest pair (tight, sensitive to outliers).
+- `average` — distance = average pairwise.
+- `single` — distance = nearest pair (can "chain" — good for non-globular, but
+  noisy).
+
+**Why use it:** no k needed up front, the dendrogram *shows* the cluster structure,
+and it handles non-spherical shapes better than K-Means. Downside: O(n²) memory —
+slow for very large n.
+""")
+
+nb.code(r"""
+from scipy.cluster.hierarchy import dendrogram, linkage
+
+# Build the linkage matrix (Ward) and draw the dendrogram.
+Z = linkage(X, method="ward")
+plt.figure(figsize=(9, 4))
+dendrogram(Z, truncate_mode="level", p=5, color_threshold=0.7*max(Z[:,2]))
+plt.title("Dendrogram (Ward) — the big vertical gap suggests 3 clusters")
+plt.xlabel("samples (merged bottom-up)"); plt.ylabel("merge distance")
+plt.show()
+""")
+
+nb.md(r"""
+**Reading a dendrogram:** the y-axis is the distance at which clusters merge. Find
+the **tallest vertical gap** that no horizontal line crosses — cutting there gives
+the natural number of clusters. Here the largest jump splits the data into **3**,
+matching what K-Means found.
+""")
+
+nb.code(r"""
+agg = AgglomerativeClustering(n_clusters=3, linkage="ward").fit(X)
+plt.figure(figsize=(6,5))
+plt.scatter(X[:,0], X[:,1], c=agg.labels_, cmap="viridis", alpha=0.6)
+plt.title("Agglomerative (Ward, k=3)")
+plt.show()
+print("Agglomerative silhouette:", round(silhouette_score(X, agg.labels_), 3))
+""")
+
+nb.md(r"""
+## 10.4c DBSCAN — density-based, finds arbitrary shapes & flags noise
+
+DBSCAN groups points that are **densely packed** and labels sparse points as
+**noise (−1)**. It shines exactly where K-Means fails: non-spherical clusters
+(rings, moons), and it does **not** need k — it discovers the number of clusters.
+
+**Two parameters:**
+- `eps` — neighborhood radius: how close is "close".
+- `min_samples` — how many neighbors within `eps` make a point a dense "core".
+
+A point is: **core** (≥ min_samples neighbors), **border** (near a core), or
+**noise** (neither). Watch it separate two moons that K-Means cannot:
+""")
+
+nb.code(r"""
+from sklearn.datasets import make_moons
+Xm, _ = make_moons(n_samples=300, noise=0.06, random_state=42)
+
+km_m  = KMeans(n_clusters=2, n_init=10, random_state=42).fit_predict(Xm)
+db_m  = DBSCAN(eps=0.20, min_samples=5).fit_predict(Xm)
+
+fig, ax = plt.subplots(1, 2, figsize=(12, 4.5))
+ax[0].scatter(Xm[:,0], Xm[:,1], c=km_m, cmap="coolwarm", alpha=0.7)
+ax[0].set_title("K-Means: splits the moons WRONG (needs spheres)")
+ax[1].scatter(Xm[:,0], Xm[:,1], c=db_m, cmap="coolwarm", alpha=0.7)
+ax[1].set_title(f"DBSCAN: correct shapes; noise pts = {(db_m==-1).sum()}")
+plt.tight_layout(); plt.show()
+""")
+
+nb.md(r"""
+**When to reach for DBSCAN:** arbitrary shapes, unknown number of clusters, and
+you want automatic **outlier/noise detection** (label −1). Downsides: very
+sensitive to `eps`/`min_samples`, and it struggles when clusters have very
+different densities. **Always scale first** (it's distance-based).
+""")
+
+nb.md(r"""
+## 10.4d Gaussian Mixture Models (GMM) — soft, elliptical clusters
+
+K-Means gives **hard** assignments (a point belongs to exactly one cluster) and
+assumes round blobs. A **GMM** models the data as a mix of Gaussian "bells" and
+gives each point a **probability** of belonging to each cluster (**soft**
+assignment). Because each Gaussian has its own covariance, clusters can be
+**stretched/rotated ellipses**, not just circles.
+
+- Fit via **Expectation-Maximization (EM)**: E-step assigns soft
+  responsibilities, M-step re-estimates each Gaussian's mean/covariance. Repeat.
+- Choose the number of components with **BIC/AIC** (lower = better) — an
+  information-criterion analogue to the elbow.
+""")
+
+nb.code(r"""
+gmm = GaussianMixture(n_components=3, covariance_type="full",
+                      random_state=42).fit(X)
+proba = gmm.predict_proba(X)          # soft memberships (rows sum to 1)
+hard  = gmm.predict(X)
+
+print("example soft memberships (first 3 points):")
+print(np.round(proba[:3], 3))
+
+# Model selection by BIC:
+bics = [GaussianMixture(n, covariance_type="full", random_state=42).fit(X).bic(X)
+        for n in range(1, 7)]
+print("\nBIC by n_components:", [round(b) for b in bics],
+      "-> best =", int(np.argmin(bics)) + 1)
+
+plt.figure(figsize=(6,5))
+plt.scatter(X[:,0], X[:,1], c=hard, cmap="viridis", alpha=0.6)
+plt.title("GMM (3 components) — soft, elliptical clusters"); plt.show()
+""")
+
+nb.md(r"""
+**K-Means vs GMM in one line:** K-Means is a *special case* of GMM with spherical,
+equal covariances and hard assignments. Use **GMM** when clusters overlap or are
+elliptical, or when you need a **probability** (e.g. "80% likely high-risk").
+
+### Clustering algorithm cheat-sheet
+| Algorithm | Needs k? | Cluster shape | Gives probabilities? | Detects noise? |
+|---|---|---|---|---|
+| **K-Means** | yes | spherical, equal size | no (hard) | no |
+| **Agglomerative** | cut the tree | flexible (linkage) | no | no |
+| **DBSCAN** | no | **arbitrary** | no | **yes (−1)** |
+| **GMM** | yes (n_components) | **elliptical** | **yes (soft)** | no |
+""")
+
+nb.md(r"""
 ## 10.5 PCA — Principal Component Analysis
 
 PCA finds new axes (**principal components**) that are (1) orthogonal and (2)
@@ -231,6 +368,50 @@ interpretability.
 """)
 
 nb.md(r"""
+## 10.5b LDA vs PCA — the two dimensionality-reduction cousins
+
+**PCA is unsupervised**: it finds axes of maximum *variance*, ignoring labels.
+**Linear Discriminant Analysis (LDA)** is **supervised**: it finds axes that
+maximize *class separation* — the direction that pushes class means apart while
+keeping each class tight. When your goal is classification, LDA's projection is
+often more useful than PCA's.
+
+- PCA maximizes: total variance.
+- LDA maximizes: between-class scatter ÷ within-class scatter (the Fisher criterion).
+- LDA can produce **at most (n_classes − 1)** components (3 iris classes → 2 LDA axes).
+
+LDA is *also* a full **classifier** (it fits a Gaussian per class with a shared
+covariance → linear decision boundaries). Two tools in one.
+""")
+
+nb.code(r"""
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+
+lda = LinearDiscriminantAnalysis(n_components=2)
+proj_lda = lda.fit_transform(Xi, iris.target)   # NOTE: uses labels (supervised)
+
+fig, ax = plt.subplots(1, 2, figsize=(12, 4.5))
+for cls, name, c in zip(range(3), iris.target_names, ["navy","darkorange","green"]):
+    m = iris.target == cls
+    ax[0].scatter(proj[m,0],     proj[m,1],     label=name, alpha=0.7, color=c)
+    ax[1].scatter(proj_lda[m,0], proj_lda[m,1], label=name, alpha=0.7, color=c)
+ax[0].set_title("PCA (unsupervised): max variance")
+ax[1].set_title("LDA (supervised): max class separation")
+for a in ax: a.set_xlabel("component 1"); a.set_ylabel("component 2"); a.legend()
+plt.tight_layout(); plt.show()
+
+# LDA as a classifier too:
+print("LDA classification accuracy (5-fold):",
+      round(cross_val_score(LinearDiscriminantAnalysis(), Xi, iris.target, cv=5).mean(), 3))
+""")
+
+nb.md(r"""
+**When to use which:** unlabeled data or general compression/denoising → **PCA**.
+Labeled data where the downstream task is classification → try **LDA** (it uses the
+labels to separate classes better, and doubles as a fast linear classifier).
+""")
+
+nb.md(r"""
 ## 10.6 Mini-exercises
 
 1. Cluster the customers on 4 scaled features; pick k by silhouette; then *profile*
@@ -248,6 +429,10 @@ nb.md(r"""
   clusters; needs **scaling** and a chosen **k**.
 - Choose k with the **elbow** (inertia bend) and, more rigorously, the
   **silhouette** score — the metric behind your NSE 0.32→0.717 win.
+- **Agglomerative/hierarchical** builds a **dendrogram** (cut it to pick k; `ward`
+  is the go-to linkage). **DBSCAN** finds **arbitrary shapes** + **noise** without k.
+  **GMM** gives **soft, elliptical** clusters with membership probabilities (choose
+  components by BIC). Match the algorithm to the cluster *shape*.
 - **PCA** re-expresses data along max-variance orthogonal axes (eigenvectors of
   covariance); keep top PCs for compression/denoising/plots. **Scale first.**
 - Trade interpretability for compactness knowingly.
