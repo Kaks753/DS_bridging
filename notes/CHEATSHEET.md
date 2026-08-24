@@ -25,6 +25,8 @@ Fast recall before interviews. Each line is a *claim you can defend* from the no
 - Never mutate raw; work on a copy; make it reproducible.
 - Duplicates: drop exact, then dedupe on the **business key**.
 - Text keys: `.str.strip().str.title()`; map real typos explicitly.
+- **Rename cols** to snake_case: `df.rename(columns={...})` or `df.columns = df.columns.str.strip().str.lower().str.replace(r"\s+","_",regex=True)`.
+- **Datetimes**: `pd.to_datetime(col, errors="coerce")` → then `.dt.year/month/day_name()`; durations (e.g. `days_as_member`) often beat raw dates.
 - Dtypes match meaning (numeric / category / datetime).
 - Missing: **quantify → diagnose MCAR/MAR/MNAR → impute honestly (+ missing flag)**; fit on train only.
 - Use **median** (robust) for skewed vars.
@@ -49,6 +51,7 @@ Fast recall before interviews. Each line is a *claim you can defend* from the no
 ## 05 — Feature Engineering & Scaling
 - Fix positive skew: `log1p`, Yeo-Johnson (linear/distance models). **Trees don't need it.**
 - **Scalers**: Standard (mean/std) → distorted by outliers; MinMax (min/max) → destroyed by outliers; **Robust (median/IQR)** → survives (finance/fraud default).
+- More scalers: **MaxAbs** (`x/max|x|`, keeps zeros → **sparse/TF-IDF**); **Normalizer** (per-**ROW** unit length → text/cosine); **Quantile/Power** (force normal shape). *Normalizer is per-row; all others per-column.* Trees → don't scale.
 - Encoding: **one-hot** nominal, **ordinal** only truly-ordered. High-cardinality → target/frequency encoding (inside CV).
 - Engineer ratios/bins/flags from domain knowledge.
 - **Leakage**: split first, `fit` transforms on train only, use Pipelines.
@@ -62,9 +65,10 @@ Fast recall before interviews. Each line is a *claim you can defend* from the no
 
 ## 07 — Classification & KNN
 - Logistic regression: linear score → **sigmoid** → probability; coefficients are **log-odds**.
-- KNN: majority vote of nearest neighbors; **must scale**; k = bias–variance knob.
+- KNN: majority vote of nearest neighbors; **must scale**; k = bias–variance knob. Also does **regression** (average neighbors).
+- KNN knobs: `metric`/`p` (**euclidean** p=2, **manhattan** p=1, minkowski), `weights` (uniform vs **distance**). Suffers the **curse of dimensionality** → reduce dims / use manhattan.
 - **Accuracy lies** under imbalance → use the **confusion matrix**.
-- **Precision** = TP/(TP+FP) (of flagged, right?); **Recall** = TP/(TP+FN) (of real, caught?); **F1** balances.
+- **Precision** = TP/(TP+FP) (of flagged, right?); **Recall/Sensitivity** = TP/(TP+FN) (of real, caught?); **Specificity** = TN/(TN+FP); **F1** = harmonic mean (high only when both high).
 - Fraud/churn/disease → maximize **recall**; spam/expensive review → **precision**. Tune the **threshold**.
 - **ROC/AUC**: ranking quality across thresholds (0.5 random, 1 perfect).
 - Imbalance: right metric, `class_weight="balanced"`, resampling (in CV), threshold.
@@ -88,8 +92,11 @@ Fast recall before interviews. Each line is a *claim you can defend* from the no
 ## 10 — Clustering & PCA
 - **K-Means** minimizes within-cluster variance; assumes spherical/similar-size; needs **scaling** + chosen **k**; `n_init>1`.
 - Choose k: **elbow** (inertia bend) + **silhouette** ([-1,1]; higher = better separated).
-- Non-spherical/odd density → **DBSCAN** / **Gaussian Mixtures**.
-- **PCA**: orthogonal max-variance axes = eigenvectors of covariance; keep PCs for ~90–95% variance. **Scale first.** Less interpretable.
+- **Hierarchical/Agglomerative**: build a **dendrogram** (cut at tallest gap); linkage `ward` (default), complete, average, single. No k up front.
+- **DBSCAN**: density-based → **arbitrary shapes** + **noise (−1)**; params `eps`, `min_samples`; no k. **GMM**: **soft**, **elliptical** clusters w/ probabilities (EM; pick components by **BIC**).
+- Match algo to **shape**: spheres→KMeans, tree→Agglomerative, blobs+noise→DBSCAN, ellipses/probabilities→GMM.
+- **PCA** (unsupervised, max variance) vs **LDA** (supervised, max class separation; ≤ n_classes−1 comps; also a classifier). PCA/LDA: **scale first**.
+- **PCA**: orthogonal max-variance axes = eigenvectors of covariance; keep PCs for ~90–95% variance. Less interpretable.
 
 ## 11 — Neural Networks
 - Neuron = weighted sum + **non-linear activation**; sigmoid neuron = logistic regression.
@@ -149,6 +156,33 @@ Fast recall before interviews. Each line is a *claim you can defend* from the no
 ## 19 — NLP & Recommenders
 - NLP pipeline: clean → tokenize → remove stopwords → stem/lemmatize → vectorize.
 - **Bag-of-Words / TF-IDF**: term frequency × inverse document frequency (rare-but-present words weigh more).
+- **N-grams** `ngram_range=(1,2)`: unigrams+bigrams so **"not good" ≠ "good"** (vital for sentiment). Tune with `min_df`/`max_df`.
 - Similarity: **cosine similarity** of TF-IDF vectors (document/semantic search).
 - Classify text with **Naive Bayes / Logistic Regression** (your sentiment app).
+- **Topic modeling = LDA (Latent Dirichlet Allocation)**: unsupervised topics over unlabeled docs (≠ Linear Discriminant Analysis!). Feed **counts**, not TF-IDF.
 - Recommenders: **content-based** (item features) vs **collaborative filtering** (user–item matrix); cold-start problem.
+
+## 20 — Bash & Git
+- **Bash core**: `pwd/cd/ls -la/mkdir -p/cp/mv/rm -r/cat/head/tail`.
+- **Peek at big files** without Python: `head -n5`, `wc -l` (row count), `cut -d, -f2 | sort | uniq -c` (value counts), `grep pattern`, `awk -F, 'NR>1{s+=$4}END{print s}'`. Pipe with `|`.
+- **Git model**: working dir →`add`→ **staging** →`commit`→ local repo →`push`→ remote.
+- Everyday: `git status/diff/log --oneline`, `git add -A`, `git commit -m`, `git pull` **before** push.
+- **Branches**: `git checkout -b feat` → work → `git checkout main` → `git merge feat`. Conflicts marked `<<<<<<< ======= >>>>>>>` → edit, `add`, `commit`.
+- **.gitignore**: exclude data, `__pycache__`, `.ipynb_checkpoints`, `.venv`, and **secrets** (`.env`, keys). Never commit credentials.
+- Team loop: **pull → branch → small commits → push → Pull Request → review → merge**.
+
+## 21 — Big Data & Spark
+- Scale **up** (bigger box) vs scale **out** (many boxes). Spark = scale out.
+- **Driver** plans; **executors** run work on **partitions** in parallel.
+- **DataFrame** API (≈pandas+SQL, optimized by Catalyst) ≫ raw RDDs.
+- **Lazy**: transformations (`select/filter/groupBy/join/withColumn`) build a DAG; **actions** (`show/count/collect/write`) trigger it → chain transforms, act once.
+- `groupBy().agg()`, joins, **window functions**, and **Spark SQL** (`createOrReplaceTempView`) mirror Modules 01 & 13.
+- **When NOT to**: if data fits one machine (<~50GB), **DuckDB/Polars/pandas** are faster & simpler. Use Spark for TB–PB or existing clusters.
+
+## 22 — Deployment & MLOps
+- Deploy the **whole Pipeline** (preprocessing + model) → avoids train/serve skew.
+- **Serialize**: `joblib.dump/load` (better than pickle for sklearn). Save **metadata** (versions, feature baseline). Only load **trusted** artifacts.
+- **Serve**: `/predict` API (Flask/FastAPI) — load model **once** at startup, accept JSON, return JSON; `/health` probe.
+- **Docker**: package code+deps+runtime → runs identically everywhere. `docker build -t api . && docker run -p 8080:8080 api`.
+- **AWS map**: **S3** (storage), **EC2/ECS/Fargate** (compute), **ECR** (images), **Lambda+API Gateway** (serverless), **SageMaker** (managed endpoints), **IAM** (access), **CloudWatch** (logs/metrics).
+- **MLOps**: reproducibility (pin versions, DVC/MLflow) + CI/CD + monitoring. **Data drift** (inputs shift) vs **concept drift** (input→target relationship changes) → compare live stats to training baseline → retrain.

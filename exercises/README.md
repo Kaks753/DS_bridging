@@ -22,6 +22,13 @@ Every notebook (`notebooks/NN_*.ipynb`) ends with a **Mini-exercises** section a
 - **Python/pandas**: StrataScratch, Kaggle "Pandas" micro-course problems.
 - **ML**: Kaggle Titanic → House Prices → your own DrivenData re-entry.
 - **Stats/A-B**: explain a p-value, design an A/B test for a feature you use daily.
+- **Bash/Git (M20)**: on a real CSV, get a value-count with only `cut|sort|uniq -c`;
+  make a repo, branch, commit 3 times, merge; write a `.gitignore` from memory.
+- **Spark (M21)**: rewrite one pandas `groupby` from an earlier module in PySpark and
+  as Spark SQL; explain which lines are transformations vs actions.
+- **Deployment/MLOps (M22)**: `joblib`-save a model you trained in M06–M09, write its
+  `/predict` function + `Dockerfile`, and describe one data-drift and one concept-drift
+  scenario for it.
 
 There is no separate solutions file on purpose: the *worked examples inside each
 notebook are the solutions template*. If you get stuck, re-read the section above the

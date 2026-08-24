@@ -47,12 +47,24 @@ shows the **math intuition**, runs on **realistic messy data**, and ends with
 | 16 | A/B testing, ANOVA & power | experiments, z/t-tests, ANOVA+Tukey, power analysis |
 | 17 | OOP + linear algebra & calculus | classes, sklearn estimator pattern, eigen/PCA, gradient descent |
 | 18 | Time series & forecasting | decomposition, stationarity, ARIMA/SARIMA, MAPE |
-| 19 | NLP & recommendation systems | TF-IDF, cosine similarity, sentiment, content/collaborative |
+| 19 | NLP & recommendation systems | TF-IDF, **n-grams/bigrams**, cosine similarity, sentiment, **LDA topics**, content/collaborative |
+| 20 | Bash & Git for data science | shell file-wrangling (`grep/cut/awk/pipes`), the git model, branching, `.gitignore` |
+| 21 | Big Data & Apache Spark | scale-out, partitions, lazy eval, PySpark DataFrames, Spark SQL, when *not* to use it |
+| 22 | Deployment & MLOps | serialize (joblib), serving API, Docker, the AWS map, drift monitoring |
 
 > **Modules 00–12** are the core ML spine; **13–19** fill in the full
 > Moringa/Flatiron syllabus (SQL, APIs/scraping, probability & Bayes, A/B testing,
-> OOP/linear-algebra/calculus, time series, NLP & recommenders) so nothing crucial
-> is missing.
+> OOP/linear-algebra/calculus, time series, NLP & recommenders); **20–22** add the
+> engineering/production track (Bash/Git, Spark/Big Data, AWS deployment & MLOps).
+> Nothing crucial is left out.
+
+**Deepened in this pass (per your checklist):** column **renaming** + **datetime
+parsing** (`to_datetime`/`.dt`) in M02; **all** scalers — Standard/MinMax/Robust/
+**MaxAbs**/**Normalizer**/**Quantile**/Power — in M05; KNN **distance metrics**,
+**weights**, **regression**, and the **curse of dimensionality** in M07;
+**hierarchical (dendrogram)**, **DBSCAN**, **GMM**, and **LDA vs PCA** in M10;
+**specificity** added to the metrics vocabulary in M07; **n-grams** + **LDA topic
+modeling** in M19.
 
 ### Coverage vs the official 40-topic Data Science syllabus
 
@@ -61,11 +73,11 @@ shows the **math intuition**, runs on **realistic messy data**, and ends with
 | **1** | Python, Pandas, cleaning, **SQL**, **APIs**, **web scraping** | M00–M02, **M13**, **M14** |
 | **2** | Probability, distributions, CLT/CI, hypothesis tests, **ANOVA/power**, **A/B testing**, **Bayes**, linear regression | M04, **M15**, **M16**, M06 |
 | **3** | **OOP**+sklearn, **linear algebra/calculus**, ML fundamentals, logistic, class metrics, trees, KNN, **Naive Bayes**, tuning/pipelines, ensembles | **M17**, M05–M09, M15 |
-| **4** | PCA, clustering, **time series**, **NLP**, **recommenders**, neural nets, tuning | M10, **M18**, **M19**, M11 |
+| **4** | PCA, **LDA**, clustering (KMeans/**hierarchical**/**DBSCAN**/**GMM**), **time series**, **NLP**, **recommenders**, neural nets, tuning | M10, **M18**, **M19**, M11 |
+| **Infra / Production** | **Bash/Git**, **Big Data/Spark**, **AWS deployment & MLOps** | **M20**, **M21**, **M22** |
 
-*(Deliberately lighter on infra-only topics — Bash/Git basics, Spark/Big Data, AWS
-deployment — which are environment setup rather than data-science reasoning. Ask if
-you want a dedicated module on any of them.)*
+*Every topic across all four phases — plus the infrastructure/production track — is
+now covered with runnable, verified notebooks.*
 
 ---
 
@@ -85,7 +97,7 @@ and you can *see* the ground truth to check whether your methods actually work.
 ```
 notebooks/   # the lessons (run these)
 notes/       # 1-page revision notes per module
-exercises/   # drills with a solutions file
+exercises/   # practice methodology + drills (deliberately no answer key)
 data/        # practice datasets
 scripts/     # dataset generator + notebook build tooling
 ```
