@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytmp/
+.pipcache/
+.DS_Store
+*.log
