@@ -41,6 +41,31 @@ shows the **math intuition**, runs on **realistic messy data**, and ends with
 | 10 | Unsupervised: clustering & PCA | KMeans, silhouette, PCA math + intuition |
 | 11 | Neural networks intro | neurons, activations, backprop intuition, a tiny net |
 | 12 | Job readiness | how to *talk* DS, project narratives, interview Q&A |
+| 13 | SQL for data science | execution order, JOINs, subqueries, CTEs, window functions |
+| 14 | APIs & web scraping | requests, JSON, status codes, BeautifulSoup, ethics |
+| 15 | Probability, combinatorics & Bayes | counting, Bayes' theorem, Naive Bayes classifier |
+| 16 | A/B testing, ANOVA & power | experiments, z/t-tests, ANOVA+Tukey, power analysis |
+| 17 | OOP + linear algebra & calculus | classes, sklearn estimator pattern, eigen/PCA, gradient descent |
+| 18 | Time series & forecasting | decomposition, stationarity, ARIMA/SARIMA, MAPE |
+| 19 | NLP & recommendation systems | TF-IDF, cosine similarity, sentiment, content/collaborative |
+
+> **Modules 00–12** are the core ML spine; **13–19** fill in the full
+> Moringa/Flatiron syllabus (SQL, APIs/scraping, probability & Bayes, A/B testing,
+> OOP/linear-algebra/calculus, time series, NLP & recommenders) so nothing crucial
+> is missing.
+
+### Coverage vs the official 40-topic Data Science syllabus
+
+| Phase | Official topics | Where it's covered here |
+|---|---|---|
+| **1** | Python, Pandas, cleaning, **SQL**, **APIs**, **web scraping** | M00–M02, **M13**, **M14** |
+| **2** | Probability, distributions, CLT/CI, hypothesis tests, **ANOVA/power**, **A/B testing**, **Bayes**, linear regression | M04, **M15**, **M16**, M06 |
+| **3** | **OOP**+sklearn, **linear algebra/calculus**, ML fundamentals, logistic, class metrics, trees, KNN, **Naive Bayes**, tuning/pipelines, ensembles | **M17**, M05–M09, M15 |
+| **4** | PCA, clustering, **time series**, **NLP**, **recommenders**, neural nets, tuning | M10, **M18**, **M19**, M11 |
+
+*(Deliberately lighter on infra-only topics — Bash/Git basics, Spark/Big Data, AWS
+deployment — which are environment setup rather than data-science reasoning. Ask if
+you want a dedicated module on any of them.)*
 
 ---
 
