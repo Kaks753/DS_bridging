@@ -16,3 +16,4 @@ jupyter
 nbformat
 nbconvert
 ipykernel
+markdown>=3.5

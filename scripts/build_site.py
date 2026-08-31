@@ -267,7 +267,7 @@ def render_code_cell(cell):
     )
 
 def parse_notebook(path):
-    nb = json.loads(Path(path).read_text())
+    nb = json.loads(Path(path).read_text(encoding="utf-8"))
     title, subtitle = None, None
     blocks = []
     for cell in nb.get("cells", []):
@@ -449,6 +449,7 @@ def page_shell(title, body, active_slug, prev_link, next_link, module_num, stem)
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 </head>
 <body>
+<div id="read-progress"></div>
 <button id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
 <div id="sidebar-overlay"></div>
 <aside id="sidebar">
@@ -482,6 +483,7 @@ def page_shell(title, body, active_slug, prev_link, next_link, module_num, stem)
     </div>
   </div>
 </main>
+<button id="back-to-top" aria-label="Back to top">↑</button>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
 <script src="/assets/app.js"></script>
@@ -536,7 +538,7 @@ def build():
             next_link = f'<a class="pn next" href="/lessons/{slug_for(ns)}.html">{html.escape(nl)} →</a>'
 
         page = page_shell(title, body, slug, prev_link, next_link, module_num, stem)
-        (LESSONS / f"{slug}.html").write_text(page)
+        (LESSONS / f"{slug}.html").write_text(page, encoding="utf-8")
         built.append((slug, title, emoji, module_num, label))
 
         # search index: strip markdown/emoji, keep words
@@ -547,7 +549,7 @@ def build():
             "text": clean[:4000]
         })
 
-    (ASSETS / "search-index.json").write_text(json.dumps(search_index, ensure_ascii=False))
+    (ASSETS / "search-index.json").write_text(json.dumps(search_index, ensure_ascii=False), encoding="utf-8")
     build_index(built)
     write_seo_files(built)
     print(f"Built {len(built)} lesson pages + index.html + sitemap/robots")
@@ -566,9 +568,9 @@ def write_seo_files(built):
     sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n'
                '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                f"{entries}\n</urlset>\n")
-    (SITE / "sitemap.xml").write_text(sitemap)
+    (SITE / "sitemap.xml").write_text(sitemap, encoding="utf-8")
     (SITE / "robots.txt").write_text(
-        "User-agent: *\nAllow: /\n\n" f"Sitemap: {SITE_URL}/sitemap.xml\n"
+        "User-agent: *\nAllow: /\n\n" f"Sitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8"
     )
 
 def _card(built_by_idx, i):
@@ -651,6 +653,7 @@ def build_index(built):
 <script type="application/ld+json">{course_jsonld(built)}</script>
 </head>
 <body class="home">
+<div id="read-progress"></div>
 
 <nav class="topnav" id="topnav">
   <a class="topnav-brand" href="#top">{logo_svg(28)}<span>DS Bridging</span></a>
@@ -685,7 +688,16 @@ def build_index(built):
   </div>
 </header>
 
-<section class="how" id="how">
+<section class="stats">
+  <div class="stats-grid reveal">
+    <div class="stat"><div class="stat-num">{total}</div><div class="stat-label">Modules</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-label">Phases</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Free & open</div></div>
+    <div class="stat"><div class="stat-num">Colab</div><div class="stat-label">Runnable</div></div>
+  </div>
+</section>
+
+<section class="how reveal" id="how">
   <h2>How every lesson works</h2>
   <p class="section-sub">The same four layers, every time — so you can stop at intuition, or go all the way to the math.</p>
   <div class="how-grid">
@@ -718,7 +730,17 @@ def build_index(built):
   <div class="center"><a class="cta" href="/lessons/{first_slug}.html">Start learning →</a></div>
 </section>
 
-<section class="about" id="about">
+<section class="proof reveal" id="proof">
+  <h2>Built for the messy middle</h2>
+  <p class="section-sub">Not another cheat-sheet dump. For learners who have projects but shaky foundations.</p>
+  <div class="proof-grid">
+    <div class="proof-card"><strong>“Finally understood p-values without panic.”</strong><p>Every concept lands in plain English first, then the code, then the math — so you can actually defend it in an interview.</p><div class="who">— early learner feedback</div></div>
+    <div class="proof-card"><strong>“Run it, break it, fix it.”</strong><p>Every lesson ships as a runnable notebook — open in Colab in one click, restart & run all to prove it works.</p><div class="who">— the golden rule</div></div>
+    <div class="proof-card"><strong>“From zero to job-story.”</strong><p>Phase 3 teaches you how to talk DS: project narratives and 40+ interview Q&A distilled to one-liners.</p><div class="who">— Module 13</div></div>
+  </div>
+</section>
+
+<section class="about reveal" id="about">
   <h2>Who this is for</h2>
   <div class="about-grid">
     <div class="about-box"><h3>👤 Built for</h3><ul>
@@ -742,16 +764,29 @@ def build_index(built):
   </div>
 </section>
 
+<section class="faq reveal" id="faq">
+  <h2>FAQ</h2>
+  <details><summary>Do I need prior coding experience?</summary><p>No. Module 0 starts from “what is a program?” — no assumptions.</p></details>
+  <details><summary>How long does it take?</summary><p>~20 hours total if you run every cell. Do one module a day and finish in 3 weeks.</p></details>
+  <details><summary>Can I use this for interviews?</summary><p>Yes — every takeaway has a “say this in an interview” one-liner you can defend whiteboard-style.</p></details>
+  <details><summary>Is it really free?</summary><p>100% free, MIT-friendly. Datasets are synthetic, notebooks are yours to fork.</p></details>
+</section>
+
 <footer class="foot" id="foot">
   <div class="center"><a class="cta" href="/lessons/{first_slug}.html">Begin at Module 0 →</a></div>
-  <p>Built by <strong>Stephen Muema</strong> · Mathematics + Data Science ·
-     <a href="https://github.com/{GH_OWNER}/{GH_REPO}">GitHub</a> ·
-     <a href="https://github.com/{GH_OWNER}/{GH_REPO}/issues">Feedback</a></p>
+  <p>Built by <strong>Stephen Muema</strong> · Mathematics + Data Science</p>
+  <div class="foot-links">
+    <a href="https://github.com/{GH_OWNER}/{GH_REPO}" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://github.com/{GH_OWNER}/{GH_REPO}/issues" target="_blank" rel="noopener noreferrer">Feedback</a>
+    <a href="/sitemap.xml">Sitemap</a>
+    <a href="#top">Back to top ↑</a>
+  </div>
 </footer>
+<button id="back-to-top" aria-label="Back to top">↑</button>
 <script src="/assets/app.js"></script>
 </body>
 </html>"""
-    (SITE / "index.html").write_text(index)
+    (SITE / "index.html").write_text(index, encoding="utf-8")
 
 if __name__ == "__main__":
     build()
