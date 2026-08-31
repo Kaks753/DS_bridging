@@ -1,0 +1,12 @@
+# The site is pre-built and committed in site/.
+# Ignore everything else so Vercel doesn't try to detect a Python/Node app.
+scripts/
+notebooks/
+notes/
+exercises/
+data/
+assets/
+requirements.txt
+*.py
+.pytmp/
+.pipcache/

@@ -25,6 +25,19 @@ SITE = ROOT / "site"
 LESSONS = SITE / "lessons"
 ASSETS = SITE / "assets"
 
+# --- GitHub / Colab config (public repo so Colab & Binder can fetch) --------
+GH_OWNER = "Kaks753"
+GH_REPO = "DS_bridging"
+GH_BRANCH = "main"
+
+def colab_url(stem):
+    return (f"https://colab.research.google.com/github/{GH_OWNER}/{GH_REPO}"
+            f"/blob/{GH_BRANCH}/notebooks/{stem}.ipynb")
+
+def github_nb_url(stem):
+    return (f"https://github.com/{GH_OWNER}/{GH_REPO}"
+            f"/blob/{GH_BRANCH}/notebooks/{stem}.ipynb")
+
 # --- markdown backend -------------------------------------------------------
 try:
     import markdown as _md
@@ -254,7 +267,20 @@ def sidebar_html(active_slug):
         )
     return "\n".join(items)
 
-def page_shell(title, body, active_slug, prev_link, next_link, module_num):
+def run_bar(stem):
+    """The 'run this lesson for real' bar shown at the top of every lesson."""
+    return (
+        '<div class="runbar">'
+        '<span class="runbar-label">▶ Run this lesson yourself:</span>'
+        f'<a class="runbtn colab" href="{colab_url(stem)}" target="_blank" rel="noopener">'
+        'Open in Colab</a>'
+        f'<a class="runbtn gh" href="{github_nb_url(stem)}" target="_blank" rel="noopener">'
+        'View on GitHub</a>'
+        '<span class="runbar-hint">In Colab, press <kbd>Shift</kbd>+<kbd>Enter</kbd> to run each cell.</span>'
+        '</div>'
+    )
+
+def page_shell(title, body, active_slug, prev_link, next_link, module_num, stem):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -283,6 +309,7 @@ def page_shell(title, body, active_slug, prev_link, next_link, module_num):
 <main id="content">
   <div class="lesson-wrap">
     <div class="crumb">Module {module_num}</div>
+    {run_bar(stem)}
     {body}
     <div class="lesson-nav">
       {prev_link}
@@ -322,7 +349,7 @@ def build():
             ns, nl, ne = present[idx + 1]
             next_link = f'<a class="pn next" href="{slug_for(ns)}.html">{html.escape(nl)} →</a>'
 
-        page = page_shell(title, body, slug, prev_link, next_link, module_num)
+        page = page_shell(title, body, slug, prev_link, next_link, module_num, stem)
         (LESSONS / f"{slug}.html").write_text(page)
         built.append((slug, title, emoji, module_num, label))
 

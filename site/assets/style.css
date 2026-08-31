@@ -91,6 +91,16 @@ pre.code code{background:none!important;color:#e7e9f3}
 .out.html{padding:10px 16px;overflow:auto}
 .out.html table{font-size:12.5px}
 
+/* ---------- run bar (Colab / GitHub) ---------- */
+.runbar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 22px}
+.runbar-label{font-weight:700;font-size:14px}
+.runbtn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:9px;font-weight:700;font-size:13px;border:1px solid var(--line)}
+.runbtn.colab{background:linear-gradient(135deg,#f9ab00,#ff6d00);color:#1a1a1a!important}
+.runbtn.gh{background:var(--panel2);color:var(--ink)!important}
+.runbtn:hover{text-decoration:none;filter:brightness(1.08)}
+.runbar-hint{color:var(--muted);font-size:12.5px;flex-basis:100%}
+.runbar-hint kbd{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:11px;font-family:monospace}
+
 /* ---------- lesson nav ---------- */
 .lesson-nav{display:flex;justify-content:space-between;gap:12px;margin-top:44px;padding-top:20px;border-top:1px solid var(--line)}
 .pn{padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel);max-width:46%}
