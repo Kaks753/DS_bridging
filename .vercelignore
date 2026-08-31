@@ -1,12 +1,15 @@
-# The site is pre-built and committed in site/.
-# Ignore everything else so Vercel doesn't try to detect a Python/Node app.
-scripts/
-notebooks/
-notes/
-exercises/
-data/
-assets/
-requirements.txt
-*.py
-.pytmp/
-.pipcache/
+# The site is pre-built and committed in public/ (served as-is by Vercel).
+# IMPORTANT: every pattern is ROOT-ANCHORED with a leading slash so it can
+# NEVER accidentally match the same-named folder inside public/
+# (a bare "assets/" would match public/assets/ too and strip our CSS/JS -> 404).
+/scripts/
+/notebooks/
+/notes/
+/exercises/
+/data/
+/assets/
+/site/
+/requirements.txt
+/*.py
+/.pytmp/
+/.pipcache/
