@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 0 — Absolute Basics: Python from Zero — DS Bridging Bootcamp</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle menu">☰</button>
+<aside id="sidebar">
+  <a class="brand" href="../index.html">
+    <span class="brand-logo">🚀</span>
+    <span class="brand-text">DS Bridging<br><small>Bootcamp</small></span>
+  </a>
+  <div class="search-box">
+    <input id="search" type="search" placeholder="Search lessons…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <nav id="nav">
+    <a class="nav-item active" href="0_absolute_basics_python.html" data-slug="0_absolute_basics_python"><span class="nav-emoji">🐣</span><span class="nav-num">M0</span><span class="nav-label">Absolute Basics: Python from Zero</span></a>
+<a class="nav-item " href="01_numpy.html" data-slug="01_numpy"><span class="nav-emoji">🔢</span><span class="nav-num">M1</span><span class="nav-label">NumPy: Fast Arrays</span></a>
+<a class="nav-item " href="02_pandas.html" data-slug="02_pandas"><span class="nav-emoji">🐼</span><span class="nav-num">M2</span><span class="nav-label">Pandas: Spreadsheets in Python</span></a>
+<a class="nav-item " href="02_data_cleaning.html" data-slug="02_data_cleaning"><span class="nav-emoji">🧹</span><span class="nav-num">M3</span><span class="nav-label">Data Cleaning</span></a>
+<a class="nav-item " href="03_eda_visualization.html" data-slug="03_eda_visualization"><span class="nav-emoji">📊</span><span class="nav-num">M4</span><span class="nav-label">EDA &amp; Visualization</span></a>
+<a class="nav-item " href="04_statistics_probability.html" data-slug="04_statistics_probability"><span class="nav-emoji">📈</span><span class="nav-num">M5</span><span class="nav-label">Statistics &amp; Probability</span></a>
+<a class="nav-item " href="05_feature_engineering_scaling.html" data-slug="05_feature_engineering_scaling"><span class="nav-emoji">⚙️</span><span class="nav-num">M6</span><span class="nav-label">Feature Engineering &amp; Scaling</span></a>
+<a class="nav-item " href="06_regression.html" data-slug="06_regression"><span class="nav-emoji">📉</span><span class="nav-num">M7</span><span class="nav-label">Regression</span></a>
+<a class="nav-item " href="07_classification_knn.html" data-slug="07_classification_knn"><span class="nav-emoji">🎯</span><span class="nav-num">M8</span><span class="nav-label">Classification &amp; KNN</span></a>
+<a class="nav-item " href="08_evaluation_cv_gridsearch.html" data-slug="08_evaluation_cv_gridsearch"><span class="nav-emoji">🔍</span><span class="nav-num">M9</span><span class="nav-label">Evaluation, CV &amp; Grid Search</span></a>
+<a class="nav-item " href="09_trees_ensembles_boosting.html" data-slug="09_trees_ensembles_boosting"><span class="nav-emoji">🌳</span><span class="nav-num">M10</span><span class="nav-label">Trees, Ensembles &amp; Boosting</span></a>
+<a class="nav-item " href="10_clustering_pca.html" data-slug="10_clustering_pca"><span class="nav-emoji">🔮</span><span class="nav-num">M11</span><span class="nav-label">Clustering &amp; PCA</span></a>
+<a class="nav-item " href="11_neural_networks_intro.html" data-slug="11_neural_networks_intro"><span class="nav-emoji">🧠</span><span class="nav-num">M12</span><span class="nav-label">Neural Networks Intro</span></a>
+<a class="nav-item " href="12_job_readiness_interview_prep.html" data-slug="12_job_readiness_interview_prep"><span class="nav-emoji">💼</span><span class="nav-num">M13</span><span class="nav-label">Job Readiness &amp; Interviews</span></a>
+<a class="nav-item " href="13_sql_for_data_science.html" data-slug="13_sql_for_data_science"><span class="nav-emoji">🗄️</span><span class="nav-num">M14</span><span class="nav-label">SQL for Data Science</span></a>
+<a class="nav-item " href="14_apis_web_scraping.html" data-slug="14_apis_web_scraping"><span class="nav-emoji">🕸️</span><span class="nav-num">M15</span><span class="nav-label">APIs &amp; Web Scraping</span></a>
+<a class="nav-item " href="15_probability_combinatorics_bayes.html" data-slug="15_probability_combinatorics_bayes"><span class="nav-emoji">🎲</span><span class="nav-num">M16</span><span class="nav-label">Probability, Combinatorics, Bayes</span></a>
+<a class="nav-item " href="16_ab_testing_anova_power.html" data-slug="16_ab_testing_anova_power"><span class="nav-emoji">🧪</span><span class="nav-num">M17</span><span class="nav-label">A/B Testing, ANOVA &amp; Power</span></a>
+<a class="nav-item " href="17_oop_linear_algebra_calculus.html" data-slug="17_oop_linear_algebra_calculus"><span class="nav-emoji">➗</span><span class="nav-num">M18</span><span class="nav-label">OOP, Linear Algebra &amp; Calculus</span></a>
+<a class="nav-item " href="18_time_series.html" data-slug="18_time_series"><span class="nav-emoji">⏳</span><span class="nav-num">M19</span><span class="nav-label">Time Series</span></a>
+<a class="nav-item " href="19_nlp_recommendation_systems.html" data-slug="19_nlp_recommendation_systems"><span class="nav-emoji">💬</span><span class="nav-num">M20</span><span class="nav-label">NLP &amp; Recommender Systems</span></a>
+<a class="nav-item " href="20_bash_git.html" data-slug="20_bash_git"><span class="nav-emoji">🐚</span><span class="nav-num">M21</span><span class="nav-label">Bash &amp; Git</span></a>
+<a class="nav-item " href="21_bigdata_spark.html" data-slug="21_bigdata_spark"><span class="nav-emoji">⚡</span><span class="nav-num">M22</span><span class="nav-label">Big Data &amp; Spark</span></a>
+<a class="nav-item " href="22_aws_deployment_mlops.html" data-slug="22_aws_deployment_mlops"><span class="nav-emoji">☁️</span><span class="nav-num">M23</span><span class="nav-label">AWS Deployment &amp; MLOps</span></a>
+  </nav>
+</aside>
+<main id="content">
+  <div class="lesson-wrap">
+    <div class="crumb">Module 0</div>
+    <div class="intro"><p><strong>Read this even if you think you know Python.</strong> We start from <em>nothing</em> — what a
+program even is — and build up slowly to the point where the rest of the bootcamp
+makes sense. No step is skipped. If you already know a bit, skim the 🎓 boxes and
+do the ✍️ practice prompts to check yourself.</p>
+<p>By the end you'll comfortably understand:
+- what code, a notebook, and a "cell" actually are
+- <strong>variables</strong> and the main <strong>data types</strong> (text, numbers, True/False)
+- <strong>lists</strong> and <strong>dictionaries</strong> (how Python holds many things)
+- <strong>if</strong> decisions and <strong>for</strong> loops
+- <strong>functions</strong> (reusable mini-machines)
+- <strong>importing libraries</strong> (borrowing other people's code)
+- how to <strong>read an error message</strong> without panicking</p>
+<blockquote>
+<p>Teaching style for the whole bootcamp: 🌱 plain-English first → 🔤 code explained
+line by line → 🎓 the deeper why → ✅ a one-line takeaway. Take your time.</p>
+</blockquote></div>
+<h2>0.1 What is a program? What is this notebook?</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>A <strong>program</strong> is just a list of instructions you give a computer, written in a
+language it understands. We use the <strong>Python</strong> language because it reads almost
+like English and is the #1 language in data science.</p>
+<p>You're reading a <strong>Jupyter notebook</strong> — a document made of stacked boxes called
+<strong>cells</strong>. Two kinds:
+- <em>text cells</em> (like this one) — notes for humans.
+- <em>code cells</em> (grey, below) — instructions Python runs when you press
+  <strong>Shift+Enter</strong>. Any result appears right underneath.</p>
+<p>Think of a notebook like a <strong>kitchen worktop</strong>: each code cell is one step of a
+recipe. You run steps top-to-bottom, and ingredients you prepared earlier are
+still there for later steps.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># This grey box is a CODE cell. Lines starting with # are &#x27;comments&#x27; —
+# notes for humans that Python ignores. The line below is a real instruction.
+print(&quot;Hello, Stephen! This line ran on the computer.&quot;)</code></pre><div class="outputs"><pre class="out stream">Hello, Stephen! This line ran on the computer.
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code># ...</code> → a <strong>comment</strong>. Python skips it. Use comments to explain your thinking.</li>
+<li><code>print(...)</code> → a built-in command that <strong>shows</strong> whatever is inside the brackets.</li>
+<li><code>"Hello, Stephen! ..."</code> → the text to show. Text wrapped in quotes is called a
+  <strong>string</strong> (more on that next).</li>
+</ul>
+<p>Press <strong>Shift+Enter</strong> on a code cell to run it. The line under the cell is the
+<strong>output</strong> — what the code produced.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>0.2 Variables — labelled boxes that store values</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>A <strong>variable</strong> is a <strong>labelled box</strong> where you store a value so you can use it
+again later by its name. You <em>create</em> a variable with <code>=</code>, which means
+"put the thing on the right into the box named on the left" (it does <strong>not</strong> mean
+"equals" like in maths).</p>
+<p>Example: <code>age = 27</code> means <em>"make a box called <code>age</code> and put <code>27</code> in it."</em> From then
+on, wherever you write <code>age</code>, Python swaps in <code>27</code>.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">name = &quot;Stephen&quot;     # a box called name, holding the text &quot;Stephen&quot;
+age = 27             # a box called age, holding the number 27
+height_m = 1.78      # a box called height_m, holding a decimal number
+
+print(name)          # show what&#x27;s in the name box
+print(age)
+print(height_m)
+
+age = 28             # we can OVERWRITE a box; now age holds 28
+print(&quot;updated age:&quot;, age)</code></pre><div class="outputs"><pre class="out stream">Stephen
+27
+1.78
+updated age: 28
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>name = "Stephen"</code> → create box <code>name</code>, store the string <code>"Stephen"</code>.</li>
+<li><code>age = 27</code> → create box <code>age</code>, store the number <code>27</code>.</li>
+<li><code>print(name)</code> → look inside box <code>name</code> and show it → <code>Stephen</code>.</li>
+<li><code>age = 28</code> → replace what's in <code>age</code>; the old <code>27</code> is gone.</li>
+<li><code>print("updated age:", age)</code> → <code>print</code> can show several things separated by
+  commas; it prints them on one line with a space between.</li>
+</ul></div>
+<div class="callout warn"><div class="callout-h">Watch out</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<h2>0.3 Data types — the main <em>kinds</em> of value</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Every value has a <strong>type</strong> — what <em>kind</em> of thing it is. The four you'll use most:</p>
+<ul>
+<li><strong>string</strong> (<code>str</code>): text, always in quotes → <code>"hello"</code>, <code>"Nairobi"</code>.</li>
+<li><strong>integer</strong> (<code>int</code>): a whole number → <code>27</code>, <code>-4</code>, <code>1000</code>.</li>
+<li><strong>float</strong> (<code>float</code>): a number with a decimal point → <code>1.78</code>, <code>3.0</code>.</li>
+<li><strong>boolean</strong> (<code>bool</code>): a yes/no value → only <code>True</code> or <code>False</code>.</li>
+</ul>
+<p>Why care? Because Python treats them differently. <code>"5" + "5"</code> glues text into
+<code>"55"</code>, but <code>5 + 5</code> adds numbers into <code>10</code>. Same-looking, totally different!</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">a_string  = &quot;data science&quot;
+an_int    = 42
+a_float   = 3.14
+a_bool    = True
+
+# type() tells you the kind of a value:
+print(type(a_string))
+print(type(an_int))
+print(type(a_float))
+print(type(a_bool))
+
+# The classic gotcha — text vs numbers:
+print(&quot;5&quot; + &quot;5&quot;)   # strings get GLUED together
+print(5 + 5)       # numbers get ADDED</code></pre><div class="outputs"><pre class="out stream">&lt;class &#x27;str&#x27;&gt;
+&lt;class &#x27;int&#x27;&gt;
+&lt;class &#x27;float&#x27;&gt;
+&lt;class &#x27;bool&#x27;&gt;
+55
+10
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>type(x)</code> → asks Python "what kind of value is <code>x</code>?" and prints it (e.g.
+  <code>&lt;class 'str'&gt;</code> means it's a string).</li>
+<li><code>"5" + "5"</code> → both are <strong>strings</strong>, so <code>+</code> means <em>join text</em> → <code>"55"</code>.</li>
+<li><code>5 + 5</code> → both are <strong>numbers</strong>, so <code>+</code> means <em>add</em> → <code>10</code>.</li>
+</ul>
+<p>That one difference causes a huge share of beginner bugs, so always know your types.</p></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p>You can <strong>convert</strong> between types when it's sensible:
+<code>int("5")</code> → the number <code>5</code>; <code>str(5)</code> → the string <code>"5"</code>; <code>float("3.14")</code> → <code>3.14</code>.
+This is called <strong>casting</strong>. It matters constantly in data work: a CSV loads
+everything as text, so a column of ages arrives as strings like <code>"27"</code> and you must
+cast it to numbers before you can average it. (Module on cleaning covers this.)</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>0.4 Lists and dictionaries — holding <em>many</em> things</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>So far one box held one value. Often you have <strong>many</strong> values. Two everyday
+containers:</p>
+<ul>
+<li>A <strong>list</strong> is an <strong>ordered shopping list</strong> — items in a row, each with a position
+  number (its <em>index</em>). Written with square brackets: <code>[ ]</code>.
+  ⚠️ Python counts positions from <strong>0</strong>, not 1. So the first item is index <code>0</code>.</li>
+<li>A <strong>dictionary</strong> is a <strong>labelled drawer set</strong> — each value is stored under a
+  <em>name</em> (a "key") instead of a position. Written with curly braces: <code>{ }</code>.
+  Great when "the 2nd thing" is less meaningful than "the <em>income</em> thing".</li>
+</ul></div>
+<div class="codecell"><pre class="code"><code class="language-python"># A LIST — ordered, accessed by position (starting at 0)
+cities = [&quot;Nairobi&quot;, &quot;Mombasa&quot;, &quot;Kisumu&quot;]
+print(&quot;whole list :&quot;, cities)
+print(&quot;first item :&quot;, cities[0])     # index 0 = first
+print(&quot;second item:&quot;, cities[1])
+print(&quot;how many   :&quot;, len(cities))   # len() counts the items
+
+cities.append(&quot;Nakuru&quot;)              # add a new item to the end
+print(&quot;after adding:&quot;, cities)</code></pre><div class="outputs"><pre class="out stream">whole list : [&#x27;Nairobi&#x27;, &#x27;Mombasa&#x27;, &#x27;Kisumu&#x27;]
+first item : Nairobi
+second item: Mombasa
+how many   : 3
+after adding: [&#x27;Nairobi&#x27;, &#x27;Mombasa&#x27;, &#x27;Kisumu&#x27;, &#x27;Nakuru&#x27;]
+</pre></div></div>
+<div class="codecell"><pre class="code"><code class="language-python"># A DICTIONARY — accessed by name (key), not position
+customer = {
+    &quot;name&quot;: &quot;Stephen&quot;,
+    &quot;age&quot;: 27,
+    &quot;city&quot;: &quot;Nairobi&quot;,
+}
+print(&quot;the whole dict:&quot;, customer)
+print(&quot;just the city :&quot;, customer[&quot;city&quot;])   # look up by KEY, not number
+customer[&quot;plan&quot;] = &quot;Premium&quot;                  # add a new key:value pair
+print(&quot;after adding plan:&quot;, customer)</code></pre><div class="outputs"><pre class="out stream">the whole dict: {&#x27;name&#x27;: &#x27;Stephen&#x27;, &#x27;age&#x27;: 27, &#x27;city&#x27;: &#x27;Nairobi&#x27;}
+just the city : Nairobi
+after adding plan: {&#x27;name&#x27;: &#x27;Stephen&#x27;, &#x27;age&#x27;: 27, &#x27;city&#x27;: &#x27;Nairobi&#x27;, &#x27;plan&#x27;: &#x27;Premium&#x27;}
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><p>List cell:
+- <code>cities = [...]</code> → make a list of three strings.
+- <code>cities[0]</code> → the item at position 0 (the <strong>first</strong>) → <code>"Nairobi"</code>.
+- <code>len(cities)</code> → <strong>len</strong>gth = how many items → <code>3</code>.
+- <code>cities.append("Nakuru")</code> → stick a new item on the end.</p>
+<p>Dictionary cell:
+- <code>customer = { "name": "Stephen", ... }</code> → pairs of <code>key: value</code>.
+- <code>customer["city"]</code> → fetch the value stored under the key <code>"city"</code>.
+- <code>customer["plan"] = "Premium"</code> → add (or overwrite) the <code>"plan"</code> entry.</p></div>
+<div class="callout analogy"><div class="callout-h">Analogy</div></div>
+<div class="callout warn"><div class="callout-h">Watch out</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<h2>0.5 Making decisions — <code>if</code> / <code>elif</code> / <code>else</code></h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Programs often need to <strong>choose</strong> what to do. <code>if</code> runs a block <strong>only when</strong> a
+condition is true. It reads like English:</p>
+<blockquote>
+<p><em>if it's raining, take an umbrella; otherwise, wear sunglasses.</em></p>
+</blockquote>
+<p>The condition is a yes/no (<strong>boolean</strong>) test. To compare values you use:
+<code>==</code> (equal?), <code>!=</code> (not equal?), <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>.</p>
+<p><strong>Indentation matters in Python.</strong> The lines <em>inside</em> an <code>if</code> are pushed right (4
+spaces). That spacing is how Python knows which lines belong to the <code>if</code>.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">age = 20
+
+if age &gt;= 18:                     # note the colon &#x27;:&#x27; and the indented line below
+    print(&quot;Adult&quot;)                # runs only if age &gt;= 18 is True
+elif age &gt;= 13:                   # &#x27;elif&#x27; = &quot;else, if...&quot; checked next
+    print(&quot;Teenager&quot;)
+else:                             # if none of the above were True
+    print(&quot;Child&quot;)
+
+# comparison operators produce booleans (True/False):
+print(&quot;is 5 equal to 5? &quot;, 5 == 5)
+print(&quot;is 5 equal to 6? &quot;, 5 == 6)
+print(&quot;is 7 greater than 3?&quot;, 7 &gt; 3)</code></pre><div class="outputs"><pre class="out stream">Adult
+is 5 equal to 5?  True
+is 5 equal to 6?  False
+is 7 greater than 3? True
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>if age &gt;= 18:</code> → test "is age at least 18?". The <code>:</code> starts the block.</li>
+<li>the <strong>indented</strong> <code>print("Adult")</code> → runs only if the test was <code>True</code>.</li>
+<li><code>elif age &gt;= 13:</code> → "else, if age is at least 13" — checked only if the first
+  test failed. You can have many <code>elif</code>s.</li>
+<li><code>else:</code> → the fallback when nothing above matched.</li>
+<li><code>5 == 5</code> → double-equals <strong>asks</strong> "are these equal?" → <code>True</code>. (Single <code>=</code> would
+  try to <em>assign</em> and error here.)</li>
+</ul></div>
+<div class="callout warn"><div class="callout-h">Watch out</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>0.6 Repeating work — the <code>for</code> loop</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>A <strong>loop</strong> does something <strong>once for each item</strong> in a collection — so you don't
+copy-paste the same line ten times. A <code>for</code> loop reads like:</p>
+<blockquote>
+<p><em>for each city in my list, print a greeting for it.</em></p>
+</blockquote>
+<p>This is the backbone of data work: "for each row, do X".</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">cities = [&quot;Nairobi&quot;, &quot;Mombasa&quot;, &quot;Kisumu&quot;]
+
+for city in cities:               # &#x27;city&#x27; takes each value in turn
+    print(&quot;Welcome to&quot;, city)     # this indented line runs once per city
+
+print(&quot;---&quot;)
+
+# Loop a fixed number of times with range():
+for i in range(3):                # range(3) gives 0, 1, 2
+    print(&quot;this is loop number&quot;, i)</code></pre><div class="outputs"><pre class="out stream">Welcome to Nairobi
+Welcome to Mombasa
+Welcome to Kisumu
+---
+this is loop number 0
+this is loop number 1
+this is loop number 2
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>for city in cities:</code> → repeat the indented block once for <strong>each</strong> item in
+  <code>cities</code>. Each time, the variable <code>city</code> holds the current item.</li>
+<li><code>print("Welcome to", city)</code> → runs 3 times (once per city).</li>
+<li><code>range(3)</code> → a quick way to get the numbers <code>0, 1, 2</code>. <code>for i in range(3)</code> loops
+  three times, with <code>i</code> = 0 then 1 then 2.</li>
+</ul></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p>Later you'll learn that in <strong>NumPy and pandas</strong> we usually <em>avoid</em> writing <code>for</code>
+loops over data, because there's a faster "do it to the whole column at once" way
+called <strong>vectorization</strong> (next module). But understanding the loop first is
+essential — it's the mental model of "do this for every item", and you'll still use
+loops constantly for non-data tasks (files, API calls, experiments).</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<h2>0.7 Functions — reusable mini-machines</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>A <strong>function</strong> is a <strong>mini-machine</strong>: you feed it <strong>inputs</strong>, it does some work, and
+it hands back an <strong>output</strong>. You define it once, then reuse it forever — no copy-paste.</p>
+<p>Real-life analogy: a <strong>blender</strong>. You put in fruit (input), press go (the work
+inside), and get a smoothie (output). You don't rebuild the blender each time — you
+just use it.</p>
+<p>We <em>define</em> a function with <code>def</code>, and <em>call</em> (use) it by writing its name with
+brackets.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">def greet(person):                 # &#x27;def&#x27; defines a function called greet
+    message = &quot;Hello, &quot; + person   # the work it does (inputs -&gt; some result)
+    return message                 # &#x27;return&#x27; hands the result back
+
+# Now we CALL it, as many times as we like:
+print(greet(&quot;Stephen&quot;))
+print(greet(&quot;Ada&quot;))
+
+def area_of_rectangle(width, height):   # a function can take several inputs
+    return width * height
+
+print(&quot;area:&quot;, area_of_rectangle(4, 3))</code></pre><div class="outputs"><pre class="out stream">Hello, Stephen
+Hello, Ada
+area: 12
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>def greet(person):</code> → define a function named <code>greet</code> that expects one input,
+  which it will call <code>person</code>.</li>
+<li>the indented lines → the work the machine does when called.</li>
+<li><code>return message</code> → send the result back to whoever called the function.</li>
+<li><code>greet("Stephen")</code> → <strong>call</strong> the machine with the input <code>"Stephen"</code>; it returns
+  <code>"Hello, Stephen"</code>, which <code>print</code> then shows.</li>
+<li><code>area_of_rectangle(4, 3)</code> → two inputs (<code>width=4</code>, <code>height=3</code>); returns <code>12</code>.</li>
+</ul></div>
+<div class="callout warn"><div class="callout-h">Watch out</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>0.8 Importing libraries — borrowing other people's code</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>You don't build everything yourself. A <strong>library</strong> is a toolbox of ready-made code
+someone else wrote. To use one you <strong>import</strong> it. Data science stands on a few:</p>
+<ul>
+<li><strong>NumPy</strong> — fast maths on lots of numbers (next module).</li>
+<li><strong>pandas</strong> — spreadsheets/tables in Python.</li>
+<li><strong>matplotlib / seaborn</strong> — charts.</li>
+<li><strong>scikit-learn</strong> — machine-learning models.</li>
+</ul>
+<p>We often import "as" a short nickname so we type less (<code>import pandas as pd</code>).</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">import math                       # import the built-in maths library
+
+print(&quot;square root of 16:&quot;, math.sqrt(16))   # use a tool from it with math.&lt;tool&gt;
+print(&quot;pi is about:&quot;, round(math.pi, 3))
+
+import numpy as np                # import NumPy, nicknamed &#x27;np&#x27; (the convention)
+print(&quot;a NumPy array:&quot;, np.array([1, 2, 3]))</code></pre><div class="outputs"><pre class="out stream">square root of 16: 4.0
+pi is about: 3.142
+</pre><pre class="out stream">a NumPy array: [1 2 3]
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>import math</code> → load the <code>math</code> toolbox.</li>
+<li><code>math.sqrt(16)</code> → use the <code>sqrt</code> (square-root) tool <em>from</em> <code>math</code>; the dot means
+  "reach inside math and get sqrt". → <code>4.0</code>.</li>
+<li><code>round(math.pi, 3)</code> → <code>math.pi</code> is the value 3.14159…, and <code>round(..., 3)</code> keeps
+  3 decimals.</li>
+<li><code>import numpy as np</code> → load NumPy but refer to it by the nickname <code>np</code>
+  (everyone does this — you'll see <code>np.</code> everywhere).</li>
+</ul></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>0.9 Errors are normal — how to read them without panic</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Every programmer — including seniors — sees errors constantly. An error is not a
+failure; it's Python <strong>telling you what confused it</strong>, and <em>where</em>. The trick is to
+read the <strong>last line first</strong> — it names the problem — then look at the line number.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># We deliberately cause an error, then read it. (This cell is MEANT to fail.)
+try:
+    numbers = [10, 20, 30]
+    print(numbers[5])          # position 5 doesn&#x27;t exist (only 0,1,2)
+except Exception as e:
+    print(&quot;Python raised:&quot;, type(e).__name__)
+    print(&quot;message      :&quot;, e)</code></pre><div class="outputs"><pre class="out stream">Python raised: IndexError
+message      : list index out of range
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li>We ask for <code>numbers[5]</code> but the list only has positions 0, 1, 2.</li>
+<li><code>try: ... except ...:</code> lets us <em>catch</em> the error so the notebook keeps running and
+  we can print it nicely (normally you'd just see a red traceback).</li>
+<li>The important parts of any error:</li>
+<li>the <strong>type</strong>, here <code>IndexError</code> → the <em>category</em> of problem.</li>
+<li>the <strong>message</strong>, here <code>list index out of range</code> → the plain explanation.</li>
+</ul></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p>A few error types you'll meet early and what they usually mean:
+- <strong>NameError</strong> — you used a variable/function name that doesn't exist (often a typo).
+- <strong>TypeError</strong> — you combined incompatible types (e.g. <code>"5" + 5</code>).
+- <strong>IndexError / KeyError</strong> — you asked for a list position / dict key that isn't there.
+- <strong>SyntaxError</strong> — a typo in the code's grammar (missing <code>:</code>, bracket, or quote).
+- <strong>IndentationError</strong> — your spacing is off (Python cares about indentation).</p>
+<p>Workflow: read the <strong>last line</strong>, note the <strong>line number</strong>, fix that one thing, re-run.
+Copy-pasting the error message into a search engine is a <em>normal, professional</em> move.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>0.10 Putting it together — a tiny real program</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Let's combine <em>everything</em> from this module into one small, readable program: we'll
+store some customers, loop over them, make a decision for each, and use a function.
+This is the shape of real code — small pieces clicking together.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">def risk_label(support_calls):        # a function: input -&gt; output
+    if support_calls &gt;= 4:
+        return &quot;HIGH risk&quot;
+    elif support_calls &gt;= 2:
+        return &quot;medium risk&quot;
+    else:
+        return &quot;low risk&quot;
+
+# a list of dictionaries — a very common data shape (like rows in a table)
+customers = [
+    {&quot;name&quot;: &quot;Ann&quot;,  &quot;calls&quot;: 5},
+    {&quot;name&quot;: &quot;Ben&quot;,  &quot;calls&quot;: 1},
+    {&quot;name&quot;: &quot;Cara&quot;, &quot;calls&quot;: 3},
+]
+
+for c in customers:                   # loop over each customer (each row)
+    label = risk_label(c[&quot;calls&quot;])    # call our function on this customer&#x27;s calls
+    print(c[&quot;name&quot;], &quot;-&gt;&quot;, label)</code></pre><div class="outputs"><pre class="out stream">Ann -&gt; HIGH risk
+Ben -&gt; low risk
+Cara -&gt; medium risk
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>def risk_label(...)</code> → a reusable machine that turns a number of support calls
+  into a risk word, using <code>if/elif/else</code>.</li>
+<li><code>customers = [ {..}, {..}, {..} ]</code> → a <strong>list of dictionaries</strong>: each dict is one
+  customer, like one row of a table. (This is <em>exactly</em> how tabular data feels
+  before we upgrade to pandas.)</li>
+<li><code>for c in customers:</code> → do the block once per customer.</li>
+<li><code>c["calls"]</code> → read that customer's <code>calls</code> value (dict lookup by key).</li>
+<li><code>risk_label(c["calls"])</code> → feed it into our function, store the returned word in
+  <code>label</code>, then print it.</li>
+</ul></div>
+<div class="callout interview"><div class="callout-h">Say this in an interview</div></div>
+<p>dicts, control flow with if/for, writing functions, and importing libraries — and I
+can read a traceback to debug. That's the base everything else builds on."</p>
+<h2>0.11 Practice (do these before moving on)</h2>
+<ol>
+<li>Make a variable <code>price = 1200</code> and print <code>"The price is 1200"</code> using commas.</li>
+<li>Create a list of 4 fruits; print the 1st and the last; add a 5th with <code>.append</code>.</li>
+<li>Build a dict for yourself with keys <code>name</code>, <code>age</code>, <code>city</code>; print each value.</li>
+<li>Write an <code>if/elif/else</code> that prints <code>"pass"</code> if a score ≥ 50 else <code>"retake"</code>.</li>
+<li>Loop over <code>range(5)</code> and print each number times 10.</li>
+<li>Write a function <code>to_celsius(f)</code> that returns <code>(f - 32) * 5/9</code>; call it on <code>98.6</code>.</li>
+<li>Import <code>math</code> and print <code>math.factorial(5)</code>.</li>
+<li>Deliberately cause a <code>NameError</code> (use an undefined variable), read the message,
+   then fix it.</li>
+</ol>
+<h2>Summary — the vocabulary you now own</h2>
+<ul>
+<li><strong>variable</strong> (<code>=</code>), the four <strong>types</strong> (str/int/float/bool), and <code>type()</code>.</li>
+<li><strong>list</strong> <code>[ ]</code> (by index, from 0) and <strong>dictionary</strong> <code>{ }</code> (by key).</li>
+<li><strong>if / elif / else</strong> decisions; comparison operators (<code>==</code>, <code>!=</code>, <code>&gt;</code> …).</li>
+<li><strong>for</strong> loops ("do X for each item") and <code>range()</code>.</li>
+<li><strong>functions</strong> (<code>def</code>, arguments, <code>return</code>) — reusable mini-machines.</li>
+<li><strong>import</strong>ing libraries (and the <code>as</code> nickname).</li>
+<li>reading <strong>errors</strong> calmly (last line first).</li>
+</ul>
+<p>Next: <strong>Module 1 — Python &amp; NumPy</strong>, where we make Python <em>fast</em> on lots of numbers.</p>
+    <div class="lesson-nav">
+      <a class="pn prev" href="../index.html">← Home</a>
+      <a class="pn next" href="01_numpy.html">NumPy: Fast Arrays →</a>
+    </div>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 1 — NumPy: Fast Maths on Lots of Numbers — DS Bridging Bootcamp</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle menu">☰</button>
+<aside id="sidebar">
+  <a class="brand" href="../index.html">
+    <span class="brand-logo">🚀</span>
+    <span class="brand-text">DS Bridging<br><small>Bootcamp</small></span>
+  </a>
+  <div class="search-box">
+    <input id="search" type="search" placeholder="Search lessons…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <nav id="nav">
+    <a class="nav-item " href="0_absolute_basics_python.html" data-slug="0_absolute_basics_python"><span class="nav-emoji">🐣</span><span class="nav-num">M0</span><span class="nav-label">Absolute Basics: Python from Zero</span></a>
+<a class="nav-item active" href="01_numpy.html" data-slug="01_numpy"><span class="nav-emoji">🔢</span><span class="nav-num">M1</span><span class="nav-label">NumPy: Fast Arrays</span></a>
+<a class="nav-item " href="02_pandas.html" data-slug="02_pandas"><span class="nav-emoji">🐼</span><span class="nav-num">M2</span><span class="nav-label">Pandas: Spreadsheets in Python</span></a>
+<a class="nav-item " href="02_data_cleaning.html" data-slug="02_data_cleaning"><span class="nav-emoji">🧹</span><span class="nav-num">M3</span><span class="nav-label">Data Cleaning</span></a>
+<a class="nav-item " href="03_eda_visualization.html" data-slug="03_eda_visualization"><span class="nav-emoji">📊</span><span class="nav-num">M4</span><span class="nav-label">EDA &amp; Visualization</span></a>
+<a class="nav-item " href="04_statistics_probability.html" data-slug="04_statistics_probability"><span class="nav-emoji">📈</span><span class="nav-num">M5</span><span class="nav-label">Statistics &amp; Probability</span></a>
+<a class="nav-item " href="05_feature_engineering_scaling.html" data-slug="05_feature_engineering_scaling"><span class="nav-emoji">⚙️</span><span class="nav-num">M6</span><span class="nav-label">Feature Engineering &amp; Scaling</span></a>
+<a class="nav-item " href="06_regression.html" data-slug="06_regression"><span class="nav-emoji">📉</span><span class="nav-num">M7</span><span class="nav-label">Regression</span></a>
+<a class="nav-item " href="07_classification_knn.html" data-slug="07_classification_knn"><span class="nav-emoji">🎯</span><span class="nav-num">M8</span><span class="nav-label">Classification &amp; KNN</span></a>
+<a class="nav-item " href="08_evaluation_cv_gridsearch.html" data-slug="08_evaluation_cv_gridsearch"><span class="nav-emoji">🔍</span><span class="nav-num">M9</span><span class="nav-label">Evaluation, CV &amp; Grid Search</span></a>
+<a class="nav-item " href="09_trees_ensembles_boosting.html" data-slug="09_trees_ensembles_boosting"><span class="nav-emoji">🌳</span><span class="nav-num">M10</span><span class="nav-label">Trees, Ensembles &amp; Boosting</span></a>
+<a class="nav-item " href="10_clustering_pca.html" data-slug="10_clustering_pca"><span class="nav-emoji">🔮</span><span class="nav-num">M11</span><span class="nav-label">Clustering &amp; PCA</span></a>
+<a class="nav-item " href="11_neural_networks_intro.html" data-slug="11_neural_networks_intro"><span class="nav-emoji">🧠</span><span class="nav-num">M12</span><span class="nav-label">Neural Networks Intro</span></a>
+<a class="nav-item " href="12_job_readiness_interview_prep.html" data-slug="12_job_readiness_interview_prep"><span class="nav-emoji">💼</span><span class="nav-num">M13</span><span class="nav-label">Job Readiness &amp; Interviews</span></a>
+<a class="nav-item " href="13_sql_for_data_science.html" data-slug="13_sql_for_data_science"><span class="nav-emoji">🗄️</span><span class="nav-num">M14</span><span class="nav-label">SQL for Data Science</span></a>
+<a class="nav-item " href="14_apis_web_scraping.html" data-slug="14_apis_web_scraping"><span class="nav-emoji">🕸️</span><span class="nav-num">M15</span><span class="nav-label">APIs &amp; Web Scraping</span></a>
+<a class="nav-item " href="15_probability_combinatorics_bayes.html" data-slug="15_probability_combinatorics_bayes"><span class="nav-emoji">🎲</span><span class="nav-num">M16</span><span class="nav-label">Probability, Combinatorics, Bayes</span></a>
+<a class="nav-item " href="16_ab_testing_anova_power.html" data-slug="16_ab_testing_anova_power"><span class="nav-emoji">🧪</span><span class="nav-num">M17</span><span class="nav-label">A/B Testing, ANOVA &amp; Power</span></a>
+<a class="nav-item " href="17_oop_linear_algebra_calculus.html" data-slug="17_oop_linear_algebra_calculus"><span class="nav-emoji">➗</span><span class="nav-num">M18</span><span class="nav-label">OOP, Linear Algebra &amp; Calculus</span></a>
+<a class="nav-item " href="18_time_series.html" data-slug="18_time_series"><span class="nav-emoji">⏳</span><span class="nav-num">M19</span><span class="nav-label">Time Series</span></a>
+<a class="nav-item " href="19_nlp_recommendation_systems.html" data-slug="19_nlp_recommendation_systems"><span class="nav-emoji">💬</span><span class="nav-num">M20</span><span class="nav-label">NLP &amp; Recommender Systems</span></a>
+<a class="nav-item " href="20_bash_git.html" data-slug="20_bash_git"><span class="nav-emoji">🐚</span><span class="nav-num">M21</span><span class="nav-label">Bash &amp; Git</span></a>
+<a class="nav-item " href="21_bigdata_spark.html" data-slug="21_bigdata_spark"><span class="nav-emoji">⚡</span><span class="nav-num">M22</span><span class="nav-label">Big Data &amp; Spark</span></a>
+<a class="nav-item " href="22_aws_deployment_mlops.html" data-slug="22_aws_deployment_mlops"><span class="nav-emoji">☁️</span><span class="nav-num">M23</span><span class="nav-label">AWS Deployment &amp; MLOps</span></a>
+  </nav>
+</aside>
+<main id="content">
+  <div class="lesson-wrap">
+    <div class="crumb">Module 1</div>
+    <div class="intro"><p>In <strong>Module 0</strong> you learned plain Python: variables, lists, loops, functions. That's
+perfect for a <em>few</em> values. But data science means <em>millions</em> of numbers, and plain
+Python lists are too slow and clumsy for that. Enter <strong>NumPy</strong> — the library that
+makes number-crunching fast and easy. Almost every other tool (pandas, scikit-learn,
+matplotlib) is built on top of it, so this is bedrock.</p>
+<p>By the end you'll understand, and be able to explain simply:
+- what a NumPy <strong>array</strong> is and why it beats a plain list for numbers
+- <strong>vectorization</strong> — doing maths on a whole column at once (and why it's fast)
+- <strong>boolean masking</strong> — filtering data with a yes/no test
+- <strong>broadcasting</strong> — combining differently-shaped arrays
+- the <strong>axis</strong> argument (the classic beginner confusion — we'll make it obvious)</p>
+<blockquote>
+<p>Same teaching rhythm as Module 0: 🌱 plain English → 🔤 code line-by-line →
+🎓 go deeper → ✅ takeaway.</p>
+</blockquote></div>
+<h2>1.1 What is an array, and why not just a list?</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>A <strong>NumPy array</strong> is like a Python <strong>list</strong>, but with two superpowers:
+1. Every item is the <strong>same type</strong> (all numbers), packed tightly in memory.
+2. You can do maths on the <strong>whole thing at once</strong> — <code>prices * 1.16</code> adds 16% VAT to
+   <em>every</em> price in one line, no loop needed.</p>
+<p>Analogy: a Python list is a <strong>mixed drawer</strong> (socks, keys, a phone) — flexible but
+slow to search. A NumPy array is a <strong>loaded ammo clip</strong> — all identical rounds,
+lined up, ready to fire together. That uniformity is what makes it fast.</p>
+<p>We import NumPy with its universal nickname <code>np</code> (everyone writes <code>np</code>).</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">import numpy as np                       # load NumPy, nickname it &#x27;np&#x27;
+
+prices_list = [100, 200, 300]            # a plain Python list
+prices = np.array([100, 200, 300])       # the same numbers as a NumPy array
+
+print(&quot;list :&quot;, prices_list)
+print(&quot;array:&quot;, prices)
+
+# The magic: maths on the WHOLE array at once (no loop!)
+print(&quot;with 16% VAT:&quot;, prices * 1.16)
+print(&quot;all doubled  :&quot;, prices * 2)</code></pre><div class="outputs"><pre class="out stream">list : [100, 200, 300]
+array: [100 200 300]
+with 16% VAT: [116. 232. 348.]
+all doubled  : [200 400 600]
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>import numpy as np</code> → load the toolbox, call it <code>np</code>.</li>
+<li><code>np.array([100, 200, 300])</code> → build an array from a list of numbers.</li>
+<li><code>prices * 1.16</code> → multiply <strong>every</strong> element by 1.16 in one go → the VAT-inclusive
+  prices. With a plain list, <code>[100,200,300] * 1.16</code> would <strong>error</strong> — lists don't do
+  maths like that. This "do it to everything at once" is the whole point of NumPy.</li>
+</ul></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<h2>1.2 Why arrays are FAST — 'vectorization'</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>"<strong>Vectorization</strong>" is a fancy word for a simple idea: <strong>do the operation on the
+whole array at once</strong>, instead of looping item by item. NumPy then runs that loop
+in fast, pre-compiled code under the hood (written in the C language) rather than in
+slower Python.</p>
+<p>Analogy: paying 1,000 people one-by-one at a counter (a Python loop) vs sending one
+bank instruction that pays all 1,000 at once (vectorized). Same result — wildly
+different speed. Let's <em>measure</em> it.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">import time
+n = 1_000_000                                  # one million numbers
+
+py_list = list(range(n))
+t0 = time.perf_counter()
+squared_py = [x * x for x in py_list]          # plain Python: loop, square each
+t1 = time.perf_counter()
+
+arr = np.arange(n)                             # np.arange = array version of range
+t2 = time.perf_counter()
+squared_np = arr ** 2                          # vectorized: square the WHOLE array
+t3 = time.perf_counter()
+
+print(f&quot;Python loop     : {t1 - t0:.4f} seconds&quot;)
+print(f&quot;NumPy vectorized: {t3 - t2:.4f} seconds&quot;)
+print(f&quot;NumPy was about {(t1 - t0) / (t3 - t2):.0f}x faster&quot;)</code></pre><div class="outputs"><pre class="out stream">Python loop     : 0.8962 seconds
+NumPy vectorized: 0.1062 seconds
+NumPy was about 8x faster
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>np.arange(n)</code> → like <code>range(n)</code> from Module 0, but produces an <strong>array</strong> of
+  <code>0..n-1</code> instead of a plain range.</li>
+<li><code>[x * x for x in py_list]</code> → the Python way: a loop that squares each number
+  (this is a <em>list comprehension</em> — a compact loop).</li>
+<li><code>arr ** 2</code> → the NumPy way: <code>**</code> means "to the power of", so this squares <strong>every</strong>
+  element at once. <code>** 2</code> = squared.</li>
+<li><code>time.perf_counter()</code> → a stopwatch; we subtract start from end to time each way.</li>
+</ul></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p>Why is plain Python slow here? In a Python list, each number is a full Python
+<em>object</em> carrying extra baggage (its type, a reference count, etc.), and every <code>*</code>
+goes through the interpreter one value at a time. NumPy instead stores the numbers
+as a single tight block of one type (its <strong>dtype</strong>) and runs the multiply loop in
+compiled C. Rule of thumb you'll live by: <strong>if you're writing a <code>for</code> loop over a
+NumPy array or a pandas column, pause — there's almost always a faster vectorized
+way.</strong></p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>1.3 Making arrays; checking <code>shape</code> and <code>dtype</code></h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Arrays can be 1-D (a single row of numbers), 2-D (a grid — rows and columns, like a
+spreadsheet), or more. Two things you'll check <em>constantly</em>:
+- <strong><code>.shape</code></strong> — how big it is along each dimension, e.g. <code>(3, 2)</code> = 3 rows, 2 columns.
+- <strong><code>.dtype</code></strong> — the type of every element (like <code>int64</code> or <code>float64</code>).</p>
+<p>Knowing an array's shape is like knowing a room's dimensions before buying a carpet
+— it prevents almost every "sizes don't match" error later.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">a = np.array([1, 2, 3])                    # 1-D: just a row of 3 numbers
+b = np.array([[1.0, 2.0],                  # 2-D: 2 rows, 2 columns (a grid)
+              [3.0, 4.0]])
+zeros = np.zeros((2, 3))                   # a 2x3 grid filled with 0.0
+ones  = np.ones(4)                         # four 1.0s
+
+rng = np.random.default_rng(0)             # a random-number generator (seed 0 = repeatable)
+randoms = rng.normal(0, 1, size=(2, 2))    # 2x2 of random &#x27;normal&#x27; numbers
+
+for name, x in [(&quot;a&quot;, a), (&quot;b&quot;, b), (&quot;zeros&quot;, zeros), (&quot;randoms&quot;, randoms)]:
+    print(f&quot;{name:8s} shape={x.shape}  dtype={x.dtype}&quot;)</code></pre><div class="outputs"><pre class="out stream">a        shape=(3,)  dtype=int64
+b        shape=(2, 2)  dtype=float64
+zeros    shape=(2, 3)  dtype=float64
+randoms  shape=(2, 2)  dtype=float64
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>np.array([[...],[...]])</code> → nested lists make a 2-D array (a grid).</li>
+<li><code>np.zeros((2, 3))</code> → a grid of zeros; the <code>(2, 3)</code> is the shape you want.</li>
+<li><code>np.random.default_rng(0)</code> → make a random generator. The <code>0</code> is a <strong>seed</strong>: it
+  makes the "random" numbers the <em>same every run</em>, so your work is reproducible.</li>
+<li><code>rng.normal(0, 1, size=(2,2))</code> → 4 random numbers from a bell curve centred at 0.</li>
+<li><code>x.shape</code> / <code>x.dtype</code> → report the size and element type of each array.</li>
+</ul></div>
+<div class="callout warn"><div class="callout-h">Watch out</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>1.4 Indexing &amp; slicing — and the 'view vs copy' trap</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Getting items out of an array works like lists from Module 0: positions start at
+<strong>0</strong>, and <code>start:stop</code> grabs a slice (stop is <em>not</em> included).</p>
+<p>But here's a surprise beginners get bitten by: slicing a NumPy array gives you a
+<strong>view</strong> — a <em>window</em> onto the <em>same</em> memory, not a fresh copy. So if you change the
+window, you change the original too! To get an independent copy, call <code>.copy()</code>.</p>
+<p>Analogy: a view is a <strong>live security-camera feed</strong> of a room — draw on the feed and
+you're really drawing in the room. <code>.copy()</code> is a <strong>photograph</strong> — scribble on it and
+the room is untouched.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">base = np.arange(10)              # array 0,1,2,...,9
+print(&quot;base       :&quot;, base)
+print(&quot;base[0]    :&quot;, base[0])    # first item (index 0)
+print(&quot;base[2:5]  :&quot;, base[2:5])  # positions 2,3,4  (5 is NOT included)
+
+window = base[2:5]                # this is a VIEW into base
+window[:] = 99                    # overwrite the window...
+print(&quot;base after editing view:&quot;, base)   # ...and base changed too!
+
+safe = base[2:5].copy()           # a real, independent COPY
+safe[:] = -1
+print(&quot;base after editing copy:&quot;, base)    # base is untouched this time</code></pre><div class="outputs"><pre class="out stream">base       : [0 1 2 3 4 5 6 7 8 9]
+base[0]    : 0
+base[2:5]  : [2 3 4]
+base after editing view: [ 0  1 99 99 99  5  6  7  8  9]
+base after editing copy: [ 0  1 99 99 99  5  6  7  8  9]
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>base[0]</code> → first element. <code>base[2:5]</code> → elements at 2, 3, 4 (the <code>stop</code> index 5
+  is excluded — a Python rule worth memorising).</li>
+<li><code>window = base[2:5]</code> → <code>window</code> is a <strong>view</strong>, sharing memory with <code>base</code>.</li>
+<li><code>window[:] = 99</code> → <code>[:]</code> means "all elements of window"; setting it to 99 writes
+  <em>through</em> the view into <code>base</code>, so <code>base</code> changes too.</li>
+<li><code>.copy()</code> → makes a detached copy; editing <code>safe</code> leaves <code>base</code> alone.</li>
+</ul></div>
+<div class="callout warn"><div class="callout-h">Watch out</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>1.5 Boolean masking — filtering with a yes/no test</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>This is the tool you'll use <em>most</em> for cleaning and exploring data. The idea:
+1. Write a <strong>condition</strong> on the array (like <code>data &gt; 0</code>). NumPy checks it for every
+   element and returns an array of <code>True</code>/<code>False</code> — a <strong>mask</strong>.
+2. Put that mask in the square brackets to <strong>keep only the <code>True</code> items</strong>.</p>
+<p>Analogy: shine a filter over your data — everything that passes the test stays,
+everything else is hidden. "Give me only the positive numbers" becomes one line.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">data = np.array([12, -3, 7, 0, -8, 21, 5])
+
+mask = data &gt; 0                       # a True/False for each element
+print(&quot;the mask      :&quot;, mask)
+print(&quot;positives only:&quot;, data[mask])  # keep only where mask is True
+print(&quot;count positive:&quot;, mask.sum())  # True counts as 1, so sum = how many True
+print(&quot;any negative? :&quot;, (data &lt; 0).any())   # is at least one negative?
+print(&quot;all positive? :&quot;, (data &gt; 0).all())   # are they ALL positive?
+
+# Combine conditions with &amp; (and), | (or), ~ (not) — wrap each in ( ):
+print(&quot;between 0 and 10:&quot;, data[(data &gt; 0) &amp; (data &lt; 10)])</code></pre><div class="outputs"><pre class="out stream">the mask      : [ True False  True False False  True  True]
+positives only: [12  7 21  5]
+count positive: 4
+any negative? : True
+all positive? : False
+between 0 and 10: [7 5]
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>data &gt; 0</code> → compare every element to 0 → an array like <code>[True, False, True, ...]</code>.</li>
+<li><code>data[mask]</code> → indexing with the mask keeps only the <code>True</code> positions.</li>
+<li><code>mask.sum()</code> → since <code>True==1</code> and <code>False==0</code>, summing a mask <strong>counts</strong> the Trues.</li>
+<li><code>.any()</code> / <code>.all()</code> → "is any True?" / "are all True?".</li>
+<li><code>(data &gt; 0) &amp; (data &lt; 10)</code> → two tests joined with <code>&amp;</code> ("and"); keeps numbers that
+  are <em>both</em> positive <em>and</em> under 10.</li>
+</ul></div>
+<div class="callout warn"><div class="callout-h">Watch out</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<h2>1.6 Broadcasting — combining different-shaped arrays</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p><strong>Broadcasting</strong> is NumPy automatically "stretching" a smaller array so it lines up
+with a bigger one — so you can, say, subtract one number from every element, or
+subtract a row of column-averages from every row of a grid, without writing loops.</p>
+<p>Analogy: a single <strong>rubber stamp</strong> (the small array) pressed across a whole sheet of
+paper (the big array). NumPy repeats the small one to fit, <em>conceptually</em>, without
+actually copying the data (so it stays fast).</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">X = np.array([[1.0, 2.0, 3.0],
+              [4.0, 5.0, 6.0],
+              [7.0, 8.0, 9.0]])
+
+col_means = X.mean(axis=0)          # average of each column -&gt; [4, 5, 6]
+print(&quot;column means:&quot;, col_means)
+
+centered = X - col_means            # subtract that row of means from EVERY row
+print(&quot;centered:\n&quot;, centered)
+print(&quot;new column means (~0):&quot;, centered.mean(axis=0).round(10))</code></pre><div class="outputs"><pre class="out stream">column means: [4. 5. 6.]
+centered:
+ [[-3. -3. -3.]
+ [ 0.  0.  0.]
+ [ 3.  3.  3.]]
+new column means (~0): [0. 0. 0.]
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>X.mean(axis=0)</code> → the mean <strong>down each column</strong> (more on <code>axis</code> in 1.7) → shape
+  <code>(3,)</code>, one number per column.</li>
+<li><code>X - col_means</code> → <code>X</code> is 3x3, <code>col_means</code> is length 3. Broadcasting lines the
+  length-3 row up against <strong>each</strong> of the 3 rows and subtracts — "centre" every
+  column on 0.</li>
+<li>The new column means are essentially 0, confirming each column was recentred.</li>
+</ul></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p>This exact pattern — subtract the mean, then divide by the standard deviation — <strong>is
+what <code>StandardScaler</code> does</strong> in scikit-learn (you'll meet it in the scaling module).
+So you're not learning trivia; you're seeing the machinery inside a tool you'll use
+for real models.</p>
+<p>Broadcasting rule (for later): two dimensions are compatible when they're <strong>equal</strong>,
+or <strong>one of them is 1</strong>. NumPy stretches the size-1 dimension to match.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">col_std = X.std(axis=0)                     # spread of each column
+standardized = (X - col_means) / col_std     # centre, then scale — &#x27;standardizing&#x27;
+print(&quot;standardized:\n&quot;, standardized.round(3))
+print(&quot;means ~0:&quot;, standardized.mean(axis=0).round(10))
+print(&quot;stds  ~1:&quot;, standardized.std(axis=0).round(10))</code></pre><div class="outputs"><pre class="out stream">standardized:
+ [[-1.225 -1.225 -1.225]
+ [ 0.     0.     0.   ]
+ [ 1.225  1.225  1.225]]
+means ~0: [0. 0. 0.]
+stds  ~1: [1. 1. 1.]
+</pre></div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>1.7 The <code>axis</code> argument — the #1 confusion, made simple</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>When you sum or average a 2-D array (a grid), you must say <strong>which direction</strong> to
+squash. That direction is the <strong><code>axis</code></strong>:
+- <code>axis=0</code> → squash <strong>down the rows</strong> → you get <strong>one value per column</strong>.
+- <code>axis=1</code> → squash <strong>across the columns</strong> → you get <strong>one value per row</strong>.</p>
+<p>The simplest memory trick: <strong><code>axis</code> is the dimension that disappears.</strong> If your grid
+is <code>(2 rows, 3 cols)</code> and you sum with <code>axis=0</code>, the 2 rows collapse away and you're
+left with 3 numbers (one per column).</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">M = np.array([[1, 2, 3],
+              [4, 5, 6]])
+print(&quot;M shape:&quot;, M.shape)                       # (2, 3)  -&gt; 2 rows, 3 cols
+print(&quot;sum axis=0 (down rows -&gt; per column):&quot;, M.sum(axis=0))  # [5, 7, 9]
+print(&quot;sum axis=1 (across cols -&gt; per row) :&quot;, M.sum(axis=1))  # [6, 15]
+print(&quot;sum with no axis (everything)       :&quot;, M.sum())         # 21</code></pre><div class="outputs"><pre class="out stream">M shape: (2, 3)
+sum axis=0 (down rows -&gt; per column): [5 7 9]
+sum axis=1 (across cols -&gt; per row) : [ 6 15]
+sum with no axis (everything)       : 21
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>M.sum(axis=0)</code> → collapse the 2 rows → 3 column-totals <code>[1+4, 2+5, 3+6] = [5,7,9]</code>.</li>
+<li><code>M.sum(axis=1)</code> → collapse the 3 columns → 2 row-totals <code>[1+2+3, 4+5+6] = [6,15]</code>.</li>
+<li><code>M.sum()</code> → no axis given → add up everything → <code>21</code>.
+Say it out loud: "axis=0 goes down the columns, axis=1 goes along the rows."</li>
+</ul></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>1.8 Reshaping, and what <code>-1</code> means</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p><strong>Reshaping</strong> re-arranges the same numbers into a new grid shape (the total count
+must stay the same — you can't fit 12 numbers into a 3x5 grid). You'll do this often
+because scikit-learn wants your features as a 2-D grid.</p>
+<p>The special value <strong><code>-1</code></strong> means <em>"you (NumPy) work out this dimension for me"</em> — handy
+when you know you want, say, one column, but don't want to count the rows by hand.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">v = np.arange(12)                    # 0..11  (12 numbers)
+print(&quot;original shape:&quot;, v.shape)    # (12,)
+
+print(&quot;as 3x4:\n&quot;, v.reshape(3, 4))  # same 12 numbers, arranged 3 rows x 4 cols
+
+col = v.reshape(-1, 1)               # -1 =&gt; &quot;figure out the rows&quot;; 1 =&gt; one column
+print(&quot;as a single column, first 4 rows:\n&quot;, col[:4], &quot;...&quot;)</code></pre><div class="outputs"><pre class="out stream">original shape: (12,)
+as 3x4:
+ [[ 0  1  2  3]
+ [ 4  5  6  7]
+ [ 8  9 10 11]]
+as a single column, first 4 rows:
+ [[0]
+ [1]
+ [2]
+ [3]] ...
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>v.reshape(3, 4)</code> → lay the 12 numbers out as 3 rows of 4 (3x4 = 12 ✓).</li>
+<li><code>v.reshape(-1, 1)</code> → "one column, and NumPy figures out it needs 12 rows". Result
+  shape <code>(12, 1)</code> — a tall single column.</li>
+</ul></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p><code>reshape(-1, 1)</code> shows up all the time with scikit-learn, because models expect the
+feature matrix <code>X</code> to be <strong>2-D</strong>: shape <code>(n_samples, n_features)</code> = (rows of data,
+columns of features). If you pass a 1-D array you'll get an error like <em>"Expected 2D
+array, got 1D array instead"</em> — the fix is exactly <code>.reshape(-1, 1)</code>. Now that error
+will never confuse you.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>1.9 A few Python-with-NumPy idioms worth knowing</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>These compact patterns appear in real code and interviews. They're just tidy ways to
+build lists, label things, and format numbers nicely. Skim, then reuse.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># List comprehension — build a list in one readable line (a compact for-loop):
+squares = [x**2 for x in range(6)]
+print(&quot;squares:&quot;, squares)
+
+# enumerate — loop with the position number handy:
+names = [&quot;Ann&quot;, &quot;Ben&quot;, &quot;Cid&quot;]
+for i, name in enumerate(names):
+    print(i, name)
+
+# zip — loop over two lists side by side (pairs):
+scores = [90, 75, 88]
+for name, score in zip(names, scores):
+    print(name, &quot;scored&quot;, score)
+
+# f-string formatting — clean reports (:.2% shows a percentage with 2 decimals):
+acc = 0.8072
+print(f&quot;accuracy = {acc:.2%}&quot;)     # -&gt; accuracy = 80.72%</code></pre><div class="outputs"><pre class="out stream">squares: [0, 1, 4, 9, 16, 25]
+0 Ann
+1 Ben
+2 Cid
+Ann scored 90
+Ben scored 75
+Cid scored 88
+accuracy = 80.72%
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>[x**2 for x in range(6)]</code> → a <strong>list comprehension</strong>: build <code>[0,1,4,9,16,25]</code> in
+  one line instead of a multi-line loop.</li>
+<li><code>enumerate(names)</code> → gives <code>(0,'Ann'), (1,'Ben'), ...</code> so you get the index too.</li>
+<li><code>zip(names, scores)</code> → pairs them up: <code>('Ann',90), ('Ben',75), ...</code>.</li>
+<li><code>f"...{acc:.2%}"</code> → an <strong>f-string</strong>: drop a variable straight into text; <code>:.2%</code>
+  formats it as a percentage with 2 decimals.</li>
+</ul></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>1.10 Practice (do these before Module 2)</h2>
+<ol>
+<li>Make a <code>5x5</code> array of random integers 0–9 with seed 7. Print its <strong>column
+   means</strong> and its <strong>row maxima</strong>.</li>
+<li>From <code>np.arange(20)</code>, keep values that are divisible by 3 <strong>and</strong> greater than 5,
+   using one boolean mask.</li>
+<li>Given a <code>(4, 3)</code> array, subtract each <strong>row's</strong> mean from that row (hint: you'll
+   need <code>reshape(-1, 1)</code> so the row-means broadcast correctly).</li>
+<li>In one sentence, explain to a friend why editing a slice can change the original.</li>
+</ol>
+<div class="codecell"><pre class="code"><code class="language-python"># Scratch space — try the exercises here before peeking anywhere.
+rng = np.random.default_rng(7)
+grid = rng.integers(0, 10, size=(5, 5))
+print(grid)
+print(&quot;col means :&quot;, grid.mean(axis=0).round(2))
+print(&quot;row maxima:&quot;, grid.max(axis=1))</code></pre><div class="outputs"><pre class="out stream">[[9 6 6 8 5]
+ [7 8 2 0 3]
+ [2 8 9 0 4]
+ [8 1 7 1 4]
+ [8 3 3 2 7]]
+col means : [6.8 5.2 5.4 2.2 4.6]
+row maxima: [9 8 9 8 8]
+</pre></div></div>
+<div class="callout interview"><div class="callout-h">Say this in an interview</div></div>
+<p>loops, so I avoid Python loops over data. I'm fluent with boolean masking for
+filtering, broadcasting for shape-aligned maths, and I keep <code>axis</code> straight —
+axis 0 collapses rows to give per-column results."</p>
+<h2>Summary — what you can now do</h2>
+<ul>
+<li>Build <strong>arrays</strong> and check their <strong><code>shape</code></strong> and <strong><code>dtype</code></strong>.</li>
+<li>Use <strong>vectorization</strong> (whole-array maths) instead of slow loops.</li>
+<li><strong>Slice</strong> arrays, and remember slices are <strong>views</strong> (use <code>.copy()</code> to detach).</li>
+<li><strong>Filter</strong> with boolean <strong>masks</strong> (<code>&amp;</code>, <code>|</code>, <code>~</code>, with parentheses).</li>
+<li><strong>Broadcast</strong> to combine different shapes (the guts of standardizing data).</li>
+<li>Keep <strong><code>axis</code></strong> straight (0 = per column, 1 = per row).</li>
+<li><strong>Reshape</strong> data, including <code>reshape(-1, 1)</code> for scikit-learn.</li>
+</ul>
+<p>Next: <strong>Module 2 — Pandas</strong>, where these ideas power real spreadsheet-style data.</p>
+    <div class="lesson-nav">
+      <a class="pn prev" href="0_absolute_basics_python.html">← Absolute Basics: Python from Zero</a>
+      <a class="pn next" href="02_pandas.html">Pandas: Spreadsheets in Python →</a>
+    </div>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 02 — Data Cleaning (the unglamorous skill that pays) — DS Bridging Bootcamp</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle menu">☰</button>
+<aside id="sidebar">
+  <a class="brand" href="../index.html">
+    <span class="brand-logo">🚀</span>
+    <span class="brand-text">DS Bridging<br><small>Bootcamp</small></span>
+  </a>
+  <div class="search-box">
+    <input id="search" type="search" placeholder="Search lessons…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <nav id="nav">
+    <a class="nav-item " href="0_absolute_basics_python.html" data-slug="0_absolute_basics_python"><span class="nav-emoji">🐣</span><span class="nav-num">M0</span><span class="nav-label">Absolute Basics: Python from Zero</span></a>
+<a class="nav-item " href="01_numpy.html" data-slug="01_numpy"><span class="nav-emoji">🔢</span><span class="nav-num">M1</span><span class="nav-label">NumPy: Fast Arrays</span></a>
+<a class="nav-item " href="02_pandas.html" data-slug="02_pandas"><span class="nav-emoji">🐼</span><span class="nav-num">M2</span><span class="nav-label">Pandas: Spreadsheets in Python</span></a>
+<a class="nav-item active" href="02_data_cleaning.html" data-slug="02_data_cleaning"><span class="nav-emoji">🧹</span><span class="nav-num">M3</span><span class="nav-label">Data Cleaning</span></a>
+<a class="nav-item " href="03_eda_visualization.html" data-slug="03_eda_visualization"><span class="nav-emoji">📊</span><span class="nav-num">M4</span><span class="nav-label">EDA &amp; Visualization</span></a>
+<a class="nav-item " href="04_statistics_probability.html" data-slug="04_statistics_probability"><span class="nav-emoji">📈</span><span class="nav-num">M5</span><span class="nav-label">Statistics &amp; Probability</span></a>
+<a class="nav-item " href="05_feature_engineering_scaling.html" data-slug="05_feature_engineering_scaling"><span class="nav-emoji">⚙️</span><span class="nav-num">M6</span><span class="nav-label">Feature Engineering &amp; Scaling</span></a>
+<a class="nav-item " href="06_regression.html" data-slug="06_regression"><span class="nav-emoji">📉</span><span class="nav-num">M7</span><span class="nav-label">Regression</span></a>
+<a class="nav-item " href="07_classification_knn.html" data-slug="07_classification_knn"><span class="nav-emoji">🎯</span><span class="nav-num">M8</span><span class="nav-label">Classification &amp; KNN</span></a>
+<a class="nav-item " href="08_evaluation_cv_gridsearch.html" data-slug="08_evaluation_cv_gridsearch"><span class="nav-emoji">🔍</span><span class="nav-num">M9</span><span class="nav-label">Evaluation, CV &amp; Grid Search</span></a>
+<a class="nav-item " href="09_trees_ensembles_boosting.html" data-slug="09_trees_ensembles_boosting"><span class="nav-emoji">🌳</span><span class="nav-num">M10</span><span class="nav-label">Trees, Ensembles &amp; Boosting</span></a>
+<a class="nav-item " href="10_clustering_pca.html" data-slug="10_clustering_pca"><span class="nav-emoji">🔮</span><span class="nav-num">M11</span><span class="nav-label">Clustering &amp; PCA</span></a>
+<a class="nav-item " href="11_neural_networks_intro.html" data-slug="11_neural_networks_intro"><span class="nav-emoji">🧠</span><span class="nav-num">M12</span><span class="nav-label">Neural Networks Intro</span></a>
+<a class="nav-item " href="12_job_readiness_interview_prep.html" data-slug="12_job_readiness_interview_prep"><span class="nav-emoji">💼</span><span class="nav-num">M13</span><span class="nav-label">Job Readiness &amp; Interviews</span></a>
+<a class="nav-item " href="13_sql_for_data_science.html" data-slug="13_sql_for_data_science"><span class="nav-emoji">🗄️</span><span class="nav-num">M14</span><span class="nav-label">SQL for Data Science</span></a>
+<a class="nav-item " href="14_apis_web_scraping.html" data-slug="14_apis_web_scraping"><span class="nav-emoji">🕸️</span><span class="nav-num">M15</span><span class="nav-label">APIs &amp; Web Scraping</span></a>
+<a class="nav-item " href="15_probability_combinatorics_bayes.html" data-slug="15_probability_combinatorics_bayes"><span class="nav-emoji">🎲</span><span class="nav-num">M16</span><span class="nav-label">Probability, Combinatorics, Bayes</span></a>
+<a class="nav-item " href="16_ab_testing_anova_power.html" data-slug="16_ab_testing_anova_power"><span class="nav-emoji">🧪</span><span class="nav-num">M17</span><span class="nav-label">A/B Testing, ANOVA &amp; Power</span></a>
+<a class="nav-item " href="17_oop_linear_algebra_calculus.html" data-slug="17_oop_linear_algebra_calculus"><span class="nav-emoji">➗</span><span class="nav-num">M18</span><span class="nav-label">OOP, Linear Algebra &amp; Calculus</span></a>
+<a class="nav-item " href="18_time_series.html" data-slug="18_time_series"><span class="nav-emoji">⏳</span><span class="nav-num">M19</span><span class="nav-label">Time Series</span></a>
+<a class="nav-item " href="19_nlp_recommendation_systems.html" data-slug="19_nlp_recommendation_systems"><span class="nav-emoji">💬</span><span class="nav-num">M20</span><span class="nav-label">NLP &amp; Recommender Systems</span></a>
+<a class="nav-item " href="20_bash_git.html" data-slug="20_bash_git"><span class="nav-emoji">🐚</span><span class="nav-num">M21</span><span class="nav-label">Bash &amp; Git</span></a>
+<a class="nav-item " href="21_bigdata_spark.html" data-slug="21_bigdata_spark"><span class="nav-emoji">⚡</span><span class="nav-num">M22</span><span class="nav-label">Big Data &amp; Spark</span></a>
+<a class="nav-item " href="22_aws_deployment_mlops.html" data-slug="22_aws_deployment_mlops"><span class="nav-emoji">☁️</span><span class="nav-num">M23</span><span class="nav-label">AWS Deployment &amp; MLOps</span></a>
+  </nav>
+</aside>
+<main id="content">
+  <div class="lesson-wrap">
+    <div class="crumb">Module 3</div>
+    <div class="intro"><p>Models are easy to swap. <strong>Clean data is the moat.</strong> Interviewers probe cleaning
+hard because it separates people who ran a tutorial from people who've handled
+real data. We'll clean <code>customers.csv</code> end-to-end and, crucially, <strong>justify every
+decision</strong> — because "why did you drop those rows?" is a real interview question.</p>
+<p>We cover, precisely:
+1. Missing data — the three mechanisms (MCAR / MAR / MNAR) and what to <em>do</em>.
+2. Wrong dtypes — numbers-as-strings, dates-as-strings.
+3. Duplicates — exact and key-based.
+4. Categorical noise — whitespace, casing, typos.
+5. Outliers — detect with IQR &amp; z-score, and decide keep/cap/drop.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">import numpy as np
+import pandas as pd
+
+df = pd.read_csv(&quot;../data/customers.csv&quot;)
+print(&quot;shape:&quot;, df.shape)
+df.info()</code></pre><div class="outputs"><pre class="out stream">shape: (508, 9)
+&lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;
+RangeIndex: 508 entries, 0 to 507
+Data columns (total 9 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   customer_id    508 non-null    int64  
+ 1   age            488 non-null    float64
+ 2   income         485 non-null    float64
+ 3   city           508 non-null    object 
+ 4   plan           508 non-null    object 
+ 5   tenure_months  508 non-null    int64  
+ 6   monthly_spend  508 non-null    float64
+ 7   support_calls  508 non-null    int64  
+ 8   churn          508 non-null    int64  
+dtypes: float64(3), int64(4), object(2)
+memory usage: 35.8+ KB
+</pre></div></div>
+<h2>2.1 A cleaning philosophy (say this in interviews)</h2>
+<blockquote><p>"I never mutate the raw file. I keep the original, work on a copy, and record
+every transformation so the pipeline is <strong>reproducible</strong> and <strong>auditable</strong>.
+For each issue I ask: <em>what caused it</em>, <em>what's the risk of each fix</em>, and
+<em>does the fix leak information from the target?</em>"</p></blockquote>
+<p>That mindset alone makes you sound senior.</p>
+<div class="codecell"><pre class="code"><code class="language-python">raw = df.copy()          # keep the untouched original
+clean = df.copy()        # we transform this one</code></pre></div>
+<h2>2.2 Duplicates — remove noise before you measure it</h2>
+<p>There are two kinds:
+- <strong>Exact duplicates</strong>: entire rows repeated (data pipeline glitch).
+- <strong>Key duplicates</strong>: same entity id appears twice (business-logic issue).</p>
+<p>We planted 8 exact duplicates. But note: <code>customer_id</code> should be unique, so we
+dedupe on that key too.</p>
+<div class="codecell"><pre class="code"><code class="language-python">print(&quot;exact duplicate rows:&quot;, clean.duplicated().sum())
+clean = clean.drop_duplicates()
+print(&quot;after dropping exact dupes:&quot;, clean.shape)
+
+print(&quot;duplicate customer_id:&quot;, clean.duplicated(subset=&#x27;customer_id&#x27;).sum())
+clean = clean.drop_duplicates(subset=&quot;customer_id&quot;, keep=&quot;first&quot;)
+print(&quot;after dedup on key:&quot;, clean.shape)</code></pre><div class="outputs"><pre class="out stream">exact duplicate rows: 8
+after dropping exact dupes: (500, 9)
+duplicate customer_id: 0
+after dedup on key: (500, 9)
+</pre></div></div>
+<p><strong>Takeaway:</strong> dedupe <em>before</em> computing statistics; otherwise repeated rows bias
+your means and inflate counts. Always state which key defines a unique row.</p>
+<h2>2.3 Categorical noise — standardize text keys</h2>
+<p><code>city</code> has leading/trailing spaces and inconsistent casing (<code>NAIROBI</code>, <code>nairobi</code>).
+To software, <code>"Nairobi"</code> and <code>" NAIROBI "</code> are <em>different categories</em> — this
+silently breaks group-bys, joins, and one-hot encoding.</p>
+<div class="codecell"><pre class="code"><code class="language-python">print(&quot;BEFORE — raw unique cities:&quot;)
+print(sorted(clean[&quot;city&quot;].unique().tolist()))
+
+clean[&quot;city&quot;] = clean[&quot;city&quot;].str.strip().str.title()
+
+print(&quot;\nAFTER — standardized cities:&quot;)
+print(sorted(clean[&quot;city&quot;].unique().tolist()))</code></pre><div class="outputs"><pre class="out stream">BEFORE — raw unique cities:
+[&#x27; Kisumu &#x27;, &#x27; Mombasa &#x27;, &#x27; Nairobi &#x27;, &#x27; Nakuru &#x27;, &#x27;ELDORET&#x27;, &#x27;Eldoret&#x27;, &#x27;KISUMU&#x27;, &#x27;Kisumu&#x27;, &#x27;MOMBASA&#x27;, &#x27;Mombasa&#x27;, &#x27;NAIROBI&#x27;, &#x27;NAKURU&#x27;, &#x27;Nairobi&#x27;, &#x27;Nakuru&#x27;]
+
+AFTER — standardized cities:
+[&#x27;Eldoret&#x27;, &#x27;Kisumu&#x27;, &#x27;Mombasa&#x27;, &#x27;Nairobi&#x27;, &#x27;Nakuru&#x27;]
+</pre></div></div>
+<p><strong>Takeaway:</strong> <code>.str.strip().str.title()</code> (or <code>.lower()</code>) is a cheap fix that
+prevents a whole class of silent bugs. For real typos (e.g. "Nairoby"), you'd map
+them explicitly or use fuzzy matching — but never guess silently.</p>
+<h2>2.4 Wrong dtypes — make types match meaning</h2>
+<p>Check <code>info()</code>: are numbers stored as numbers, categories as <code>category</code>, dates as
+<code>datetime</code>? Wrong types block math and waste memory. Here <code>income</code> became float
+(because of the injected <code>NaN</code>), which is <em>correct</em>. We convert <code>plan</code> to an
+ordered category to encode its natural order.</p>
+<div class="codecell"><pre class="code"><code class="language-python">plan_type = pd.CategoricalDtype(categories=[&quot;Basic&quot;, &quot;Standard&quot;, &quot;Premium&quot;],
+                                ordered=True)
+clean[&quot;plan&quot;] = clean[&quot;plan&quot;].astype(plan_type)
+print(clean[&quot;plan&quot;].dtype)
+# Ordered categories allow comparisons:
+print(&quot;rows with plan &gt; Basic:&quot;, (clean[&quot;plan&quot;] &gt; &quot;Basic&quot;).sum())
+
+# Safe numeric coercion pattern (turns bad strings into NaN instead of crashing):
+clean[&quot;income&quot;] = pd.to_numeric(clean[&quot;income&quot;], errors=&quot;coerce&quot;)
+print(&quot;income dtype:&quot;, clean[&quot;income&quot;].dtype)</code></pre><div class="outputs"><pre class="out stream">category
+rows with plan &gt; Basic: 251
+income dtype: float64
+</pre></div></div>
+<h2>2.4b Renaming columns — clean, consistent names save hours</h2>
+<p>Messy column names (<code>"Customer ID"</code>, <code>"Monthly  Charges"</code>, mixed case, spaces)
+break dot-access (<code>df.Customer ID</code> is a syntax error) and make joins fragile.
+A senior habit: <strong>snake_case everything, once, up front.</strong></p>
+<p>Three tools:
+- <code>df.rename(columns={...})</code> — rename <em>specific</em> columns explicitly (safest, readable).
+- <code>df.columns = [...]</code> — replace <em>all</em> names at once (use when standardizing wholesale).
+- A vectorized string clean — programmatic, scales to 200 columns.</p>
+<p><code>rename</code> also takes <code>index=</code> to rename rows, and <code>inplace=True</code> (we avoid inplace —
+returning a new frame is clearer and chains better).</p>
+<div class="codecell"><pre class="code"><code class="language-python"># Simulate messy names so you see the fix (real files look like this):
+messy = clean.copy()
+messy.columns = [&quot;Customer ID&quot;, &quot;Age &quot;, &quot;Plan&quot;, &quot;Monthly  Charges&quot;,
+                 &quot;City&quot;, &quot;Income&quot;, &quot;Churn&quot;, &quot;income_was_missing&quot;,
+                 &quot;income_capped&quot;][:len(messy.columns)]
+print(&quot;BEFORE:&quot;, list(messy.columns))
+
+# (1) Explicit rename of just the columns you care about:
+messy = messy.rename(columns={&quot;Customer ID&quot;: &quot;customer_id&quot;,
+                              &quot;Monthly  Charges&quot;: &quot;monthly_charges&quot;})
+
+# (2) Programmatic standardization of ALL names -&gt; snake_case:
+messy.columns = (messy.columns
+                 .str.strip()          # kill leading/trailing spaces
+                 .str.lower()          # case-insensitive
+                 .str.replace(r&quot;\s+&quot;, &quot;_&quot;, regex=True))  # collapse spaces -&gt; _
+print(&quot;AFTER: &quot;, list(messy.columns))</code></pre><div class="outputs"><pre class="out stream">BEFORE: [&#x27;Customer ID&#x27;, &#x27;Age &#x27;, &#x27;Plan&#x27;, &#x27;Monthly  Charges&#x27;, &#x27;City&#x27;, &#x27;Income&#x27;, &#x27;Churn&#x27;, &#x27;income_was_missing&#x27;, &#x27;income_capped&#x27;]
+AFTER:  [&#x27;customer_id&#x27;, &#x27;age&#x27;, &#x27;plan&#x27;, &#x27;monthly_charges&#x27;, &#x27;city&#x27;, &#x27;income&#x27;, &#x27;churn&#x27;, &#x27;income_was_missing&#x27;, &#x27;income_capped&#x27;]
+</pre></div></div>
+<p><strong>Takeaway:</strong> do this immediately after loading. Every downstream line
+(<code>df.customer_id</code>, merges, <code>groupby</code>) becomes predictable. <code>str.replace(regex=True)</code>
+with <code>\s+</code> handles single <em>and</em> double spaces in one shot.</p>
+<h2>2.4c Datetimes — the column type that unlocks time-based analysis</h2>
+<p>Dates arrive as <strong>strings</strong> (<code>"2023-07-15"</code>, <code>"15/07/2023"</code>). As strings you
+<em>cannot</em> subtract them, sort them chronologically, or extract the month. You must
+parse them into real <code>datetime64</code> with <code>pd.to_datetime</code>. Then the <code>.dt</code> accessor
+gives you year/month/day/weekday/etc. — the raw material for seasonality features.</p>
+<p>Key arguments:
+- <code>errors="coerce"</code> → unparseable values become <code>NaT</code> (missing) instead of crashing.
+- <code>format="..."</code> → give the exact format when you know it (faster + avoids ambiguity
+  like month-vs-day). <code>dayfirst=True</code> for <code>DD/MM/YYYY</code> data.</p>
+<div class="codecell"><pre class="code"><code class="language-python"># customers.csv has no date, so we attach a realistic &#x27;signup_date&#x27; to teach parsing.
+rng = np.random.default_rng(0)
+n = len(clean)
+raw_dates = pd.to_datetime(&quot;2022-01-01&quot;) + pd.to_timedelta(
+    rng.integers(0, 730, size=n), unit=&quot;D&quot;)
+# Store as messy strings, exactly like a real CSV would:
+clean[&quot;signup_date&quot;] = raw_dates.strftime(&quot;%Y-%m-%d&quot;)
+print(&quot;dtype as loaded (string!):&quot;, clean[&quot;signup_date&quot;].dtype)
+print(clean[&quot;signup_date&quot;].head(3).tolist())
+
+# Parse to real datetime:
+clean[&quot;signup_date&quot;] = pd.to_datetime(clean[&quot;signup_date&quot;], errors=&quot;coerce&quot;)
+print(&quot;dtype after to_datetime:&quot;, clean[&quot;signup_date&quot;].dtype)</code></pre><div class="outputs"><pre class="out stream">dtype as loaded (string!): object
+[&#x27;2023-09-13&#x27;, &#x27;2023-04-10&#x27;, &#x27;2023-01-09&#x27;]
+dtype after to_datetime: datetime64[ns]
+</pre></div></div>
+<div class="codecell"><pre class="code"><code class="language-python"># The .dt accessor: pull calendar parts out of a datetime column (vectorized).
+clean[&quot;signup_year&quot;]    = clean[&quot;signup_date&quot;].dt.year
+clean[&quot;signup_month&quot;]   = clean[&quot;signup_date&quot;].dt.month
+clean[&quot;signup_weekday&quot;] = clean[&quot;signup_date&quot;].dt.day_name()
+clean[&quot;days_as_member&quot;] = (pd.Timestamp(&quot;2024-01-01&quot;) - clean[&quot;signup_date&quot;]).dt.days
+
+print(clean[[&quot;signup_date&quot;, &quot;signup_year&quot;, &quot;signup_month&quot;,
+             &quot;signup_weekday&quot;, &quot;days_as_member&quot;]].head())</code></pre><div class="outputs"><pre class="out stream">  signup_date  signup_year  signup_month signup_weekday  days_as_member
+0  2023-09-13         2023             9      Wednesday             110
+1  2023-04-10         2023             4         Monday             266
+2  2023-01-09         2023             1         Monday             357
+3  2022-07-16         2022             7       Saturday             534
+4  2022-08-13         2022             8       Saturday             506
+</pre></div></div>
+<p><strong>Why this matters:</strong> <code>days_as_member</code> (a <em>duration</em>) is often far more predictive
+than the raw date. <code>signup_month</code>/<code>weekday</code> capture <strong>seasonality</strong>. You can only
+compute these once the column is a true datetime — which is exactly why parsing is
+step one of any time-aware cleaning. (Full time-series modeling: Module 18.)</p>
+<p><strong>Interview line:</strong> <em>"Strings that look like dates are a trap — I parse with
+<code>to_datetime(errors='coerce')</code>, verify no unexpected <code>NaT</code>, then derive durations
+and calendar features via <code>.dt</code>."</em></p>
+<h2>2.5 Missing data — the part everyone gets wrong</h2>
+<p>First, <strong>quantify</strong> it. Then diagnose the <strong>mechanism</strong>, because the mechanism
+dictates the honest fix.</p>
+<ul>
+<li><strong>MCAR</strong> (Missing Completely At Random): missingness unrelated to anything.
+  Dropping is safe-ish but wasteful.</li>
+<li><strong>MAR</strong> (Missing At Random): missingness depends on <em>other observed</em> columns.
+  Imputation using those columns is defensible.</li>
+<li><strong>MNAR</strong> (Missing Not At Random): missingness depends on the <em>unobserved value
+  itself</em> (e.g. high earners hide income). Dangerous — may need a "missing"
+  indicator or domain handling.</li>
+</ul>
+<div class="codecell"><pre class="code"><code class="language-python">miss = clean.isna().sum()
+miss_pct = (clean.isna().mean() * 100).round(1)
+print(pd.DataFrame({&quot;missing&quot;: miss, &quot;pct&quot;: miss_pct})[miss &gt; 0])</code></pre><div class="outputs"><pre class="out stream">        missing  pct
+age          20  4.0
+income       23  4.6
+</pre></div></div>
+<div class="codecell"><pre class="code"><code class="language-python"># Diagnose: is income-missingness related to plan? (we built it as MAR on Premium)
+tmp = clean.copy()
+tmp[&quot;income_missing&quot;] = tmp[&quot;income&quot;].isna()
+print(&quot;share of income missing, by plan:&quot;)
+print(tmp.groupby(&quot;plan&quot;, observed=True)[&quot;income_missing&quot;].mean().round(3))</code></pre><div class="outputs"><pre class="out stream">share of income missing, by plan:
+plan
+Basic       0.000
+Standard    0.000
+Premium     0.242
+Name: income_missing, dtype: float64
+</pre></div></div>
+<p>The missing rate is far higher for <code>Premium</code> → this is <strong>MAR</strong> (depends on the
+observed <code>plan</code>). So a <strong>group-wise median imputation by plan</strong> is honest: we fill
+using the most similar customers. We ALSO add a <code>income_was_missing</code> flag, because
+the fact that it was missing can itself be predictive.</p>
+<div class="codecell"><pre class="code"><code class="language-python">clean[&quot;income_was_missing&quot;] = clean[&quot;income&quot;].isna().astype(int)
+
+# group-wise median (robust to the income outlier) imputation
+clean[&quot;income&quot;] = clean.groupby(&quot;plan&quot;, observed=True)[&quot;income&quot;] \
+                       .transform(lambda s: s.fillna(s.median()))
+
+# age missingness looked random (MCAR-ish) -&gt; simple median is fine
+clean[&quot;age&quot;] = clean[&quot;age&quot;].fillna(clean[&quot;age&quot;].median())
+
+print(&quot;remaining missing:\n&quot;, clean.isna().sum()[clean.isna().sum() &gt; 0]
+      if clean.isna().sum().sum() else &quot;none — all filled&quot;)</code></pre><div class="outputs"><pre class="out stream">remaining missing:
+ none — all filled
+</pre></div></div>
+<p><strong>Why median, not mean?</strong> <code>income</code> is right-skewed and has an outlier; the mean is
+dragged upward, the <strong>median is robust</strong>. Choosing median here shows you
+understand your data, not just <code>fillna</code>.</p>
+<p><strong>Leakage warning:</strong> never impute using the <em>target</em> column, and (strictly) fit
+imputation statistics on the <strong>training set only</strong>, then apply to test. In a real
+pipeline we'd use <code>SimpleImputer</code> inside a <code>Pipeline</code> (Module 08) so test data
+can't peek at training stats.</p>
+<h2>2.6 Outliers — detect, then <em>decide</em> (don't auto-delete)</h2>
+<p>Two standard detectors:
+- <strong>Z-score</strong>: how many std devs from the mean. Assumes roughly normal; itself
+  sensitive to outliers (mean/std get distorted).
+- <strong>IQR rule</strong>: flag points below <code>Q1 - 1.5*IQR</code> or above <code>Q3 + 1.5*IQR</code>. Robust,
+  distribution-free — the safer default.</p>
+<div class="codecell"><pre class="code"><code class="language-python">def iqr_bounds(s, k=1.5):
+    q1, q3 = s.quantile(0.25), s.quantile(0.75)
+    iqr = q3 - q1
+    return q1 - k * iqr, q3 + k * iqr
+
+low, high = iqr_bounds(clean[&quot;income&quot;])
+outliers = clean[(clean[&quot;income&quot;] &lt; low) | (clean[&quot;income&quot;] &gt; high)]
+print(f&quot;IQR bounds for income: [{low:,.0f}, {high:,.0f}]&quot;)
+print(&quot;income outliers flagged:&quot;, len(outliers))
+print(outliers[[&quot;customer_id&quot;, &quot;plan&quot;, &quot;income&quot;]].head())</code></pre><div class="outputs"><pre class="out stream">IQR bounds for income: [-9,879, 109,551]
+income outliers flagged: 26
+    customer_id      plan      income
+0             1     Basic  5000000.00
+6             7     Basic   164424.62
+19           20     Basic   110687.75
+53           54  Standard   135609.76
+85           86     Basic   133072.35
+</pre></div></div>
+<p>Now the judgment call. Options:
+1. <strong>Keep</strong> — if it's a real, meaningful extreme (a genuine high-net-worth client).
+2. <strong>Cap / winsorize</strong> — clip to the bound, keeping the row but taming its leverage.
+3. <strong>Drop</strong> — only if you're confident it's an error (e.g. impossible value).</p>
+<p>Our planted value (5,000,000) is implausibly large vs the rest → likely a data
+error. We'll <strong>cap</strong> it rather than drop, to keep the customer while limiting
+distortion. We document the decision.</p>
+<div class="codecell"><pre class="code"><code class="language-python">clean[&quot;income_capped&quot;] = clean[&quot;income&quot;].clip(lower=low, upper=high)
+print(&quot;max income before cap:&quot;, clean[&quot;income&quot;].max())
+print(&quot;max income after  cap:&quot;, clean[&quot;income_capped&quot;].max().round(0))</code></pre><div class="outputs"><pre class="out stream">max income before cap: 5000000.0
+max income after  cap: 109551.0
+</pre></div></div>
+<p><strong>Interview line:</strong> <em>"I don't delete outliers reflexively. I check whether it's an
+error or a real extreme, quantify its leverage, and choose keep/cap/drop with a
+written rationale. For skewed money data I lean on IQR and robust statistics."</em></p>
+<h2>2.7 Final validation — prove the data is clean</h2>
+<div class="codecell"><pre class="code"><code class="language-python">assert clean.duplicated().sum() == 0, &quot;still have exact dupes&quot;
+assert clean[&quot;customer_id&quot;].is_unique, &quot;customer_id not unique&quot;
+assert clean.isna().sum().sum() == 0, &quot;still have missing values&quot;
+assert clean[&quot;city&quot;].str.strip().eq(clean[&quot;city&quot;]).all(), &quot;whitespace remains&quot;
+
+print(&quot;ALL CLEANING CHECKS PASSED ✅&quot;)
+print(&quot;final shape:&quot;, clean.shape)
+clean.to_csv(&quot;../data/customers_clean.csv&quot;, index=False)
+print(&quot;saved data/customers_clean.csv&quot;)</code></pre><div class="outputs"><pre class="out stream">ALL CLEANING CHECKS PASSED ✅
+final shape: (500, 16)
+</pre><pre class="out stream">saved data/customers_clean.csv
+</pre></div></div>
+<h2>2.8 Mini-exercises</h2>
+<ol>
+<li>Re-diagnose <code>age</code> missingness: is it related to <code>plan</code> or <code>city</code>? Was median
+   imputation justified?</li>
+<li>Try <strong>mean</strong> imputation for income and compare the resulting distribution to
+   the median version (plot histograms in Module 03). Which shifts more?</li>
+<li>Change the IQR multiplier <code>k</code> from 1.5 to 3.0. How many outliers now? What does
+   <code>k</code> control conceptually?</li>
+<li>Write a one-paragraph "data cleaning report" for this dataset as if handing it
+   to a teammate.</li>
+</ol>
+<h2>Summary — the cleaning checklist you can recite</h2>
+<ol>
+<li><strong>Copy</strong> the raw; never mutate it.</li>
+<li><strong>Duplicates</strong>: drop exact, then dedupe on the business key.</li>
+<li><strong>Text/categoricals</strong>: strip + normalize case; map real typos explicitly.</li>
+<li><strong>Dtypes</strong>: make types match meaning (numeric, category, datetime).</li>
+<li><strong>Missing</strong>: quantify → diagnose MCAR/MAR/MNAR → impute honestly (+ a missing
+   flag); fit stats on train only (no leakage).</li>
+<li><strong>Outliers</strong>: detect with IQR/z-score, then <strong>decide</strong> keep/cap/drop with reasons.</li>
+<li><strong>Validate</strong> with assertions; save a clean artifact.</li>
+</ol>
+<p>Next: <strong>Module 03 — EDA &amp; Visualization</strong>, where clean data starts telling stories.</p>
+    <div class="lesson-nav">
+      <a class="pn prev" href="02_pandas.html">← Pandas: Spreadsheets in Python</a>
+      <a class="pn next" href="03_eda_visualization.html">EDA &amp; Visualization →</a>
+    </div>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

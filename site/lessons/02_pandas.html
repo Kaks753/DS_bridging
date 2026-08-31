@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 2 — Pandas: Spreadsheets in Python — DS Bridging Bootcamp</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle menu">☰</button>
+<aside id="sidebar">
+  <a class="brand" href="../index.html">
+    <span class="brand-logo">🚀</span>
+    <span class="brand-text">DS Bridging<br><small>Bootcamp</small></span>
+  </a>
+  <div class="search-box">
+    <input id="search" type="search" placeholder="Search lessons…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <nav id="nav">
+    <a class="nav-item " href="0_absolute_basics_python.html" data-slug="0_absolute_basics_python"><span class="nav-emoji">🐣</span><span class="nav-num">M0</span><span class="nav-label">Absolute Basics: Python from Zero</span></a>
+<a class="nav-item " href="01_numpy.html" data-slug="01_numpy"><span class="nav-emoji">🔢</span><span class="nav-num">M1</span><span class="nav-label">NumPy: Fast Arrays</span></a>
+<a class="nav-item active" href="02_pandas.html" data-slug="02_pandas"><span class="nav-emoji">🐼</span><span class="nav-num">M2</span><span class="nav-label">Pandas: Spreadsheets in Python</span></a>
+<a class="nav-item " href="02_data_cleaning.html" data-slug="02_data_cleaning"><span class="nav-emoji">🧹</span><span class="nav-num">M3</span><span class="nav-label">Data Cleaning</span></a>
+<a class="nav-item " href="03_eda_visualization.html" data-slug="03_eda_visualization"><span class="nav-emoji">📊</span><span class="nav-num">M4</span><span class="nav-label">EDA &amp; Visualization</span></a>
+<a class="nav-item " href="04_statistics_probability.html" data-slug="04_statistics_probability"><span class="nav-emoji">📈</span><span class="nav-num">M5</span><span class="nav-label">Statistics &amp; Probability</span></a>
+<a class="nav-item " href="05_feature_engineering_scaling.html" data-slug="05_feature_engineering_scaling"><span class="nav-emoji">⚙️</span><span class="nav-num">M6</span><span class="nav-label">Feature Engineering &amp; Scaling</span></a>
+<a class="nav-item " href="06_regression.html" data-slug="06_regression"><span class="nav-emoji">📉</span><span class="nav-num">M7</span><span class="nav-label">Regression</span></a>
+<a class="nav-item " href="07_classification_knn.html" data-slug="07_classification_knn"><span class="nav-emoji">🎯</span><span class="nav-num">M8</span><span class="nav-label">Classification &amp; KNN</span></a>
+<a class="nav-item " href="08_evaluation_cv_gridsearch.html" data-slug="08_evaluation_cv_gridsearch"><span class="nav-emoji">🔍</span><span class="nav-num">M9</span><span class="nav-label">Evaluation, CV &amp; Grid Search</span></a>
+<a class="nav-item " href="09_trees_ensembles_boosting.html" data-slug="09_trees_ensembles_boosting"><span class="nav-emoji">🌳</span><span class="nav-num">M10</span><span class="nav-label">Trees, Ensembles &amp; Boosting</span></a>
+<a class="nav-item " href="10_clustering_pca.html" data-slug="10_clustering_pca"><span class="nav-emoji">🔮</span><span class="nav-num">M11</span><span class="nav-label">Clustering &amp; PCA</span></a>
+<a class="nav-item " href="11_neural_networks_intro.html" data-slug="11_neural_networks_intro"><span class="nav-emoji">🧠</span><span class="nav-num">M12</span><span class="nav-label">Neural Networks Intro</span></a>
+<a class="nav-item " href="12_job_readiness_interview_prep.html" data-slug="12_job_readiness_interview_prep"><span class="nav-emoji">💼</span><span class="nav-num">M13</span><span class="nav-label">Job Readiness &amp; Interviews</span></a>
+<a class="nav-item " href="13_sql_for_data_science.html" data-slug="13_sql_for_data_science"><span class="nav-emoji">🗄️</span><span class="nav-num">M14</span><span class="nav-label">SQL for Data Science</span></a>
+<a class="nav-item " href="14_apis_web_scraping.html" data-slug="14_apis_web_scraping"><span class="nav-emoji">🕸️</span><span class="nav-num">M15</span><span class="nav-label">APIs &amp; Web Scraping</span></a>
+<a class="nav-item " href="15_probability_combinatorics_bayes.html" data-slug="15_probability_combinatorics_bayes"><span class="nav-emoji">🎲</span><span class="nav-num">M16</span><span class="nav-label">Probability, Combinatorics, Bayes</span></a>
+<a class="nav-item " href="16_ab_testing_anova_power.html" data-slug="16_ab_testing_anova_power"><span class="nav-emoji">🧪</span><span class="nav-num">M17</span><span class="nav-label">A/B Testing, ANOVA &amp; Power</span></a>
+<a class="nav-item " href="17_oop_linear_algebra_calculus.html" data-slug="17_oop_linear_algebra_calculus"><span class="nav-emoji">➗</span><span class="nav-num">M18</span><span class="nav-label">OOP, Linear Algebra &amp; Calculus</span></a>
+<a class="nav-item " href="18_time_series.html" data-slug="18_time_series"><span class="nav-emoji">⏳</span><span class="nav-num">M19</span><span class="nav-label">Time Series</span></a>
+<a class="nav-item " href="19_nlp_recommendation_systems.html" data-slug="19_nlp_recommendation_systems"><span class="nav-emoji">💬</span><span class="nav-num">M20</span><span class="nav-label">NLP &amp; Recommender Systems</span></a>
+<a class="nav-item " href="20_bash_git.html" data-slug="20_bash_git"><span class="nav-emoji">🐚</span><span class="nav-num">M21</span><span class="nav-label">Bash &amp; Git</span></a>
+<a class="nav-item " href="21_bigdata_spark.html" data-slug="21_bigdata_spark"><span class="nav-emoji">⚡</span><span class="nav-num">M22</span><span class="nav-label">Big Data &amp; Spark</span></a>
+<a class="nav-item " href="22_aws_deployment_mlops.html" data-slug="22_aws_deployment_mlops"><span class="nav-emoji">☁️</span><span class="nav-num">M23</span><span class="nav-label">AWS Deployment &amp; MLOps</span></a>
+  </nav>
+</aside>
+<main id="content">
+  <div class="lesson-wrap">
+    <div class="crumb">Module 2</div>
+    <div class="intro"><p><strong>Pandas</strong> is where a data scientist spends most of the day. If NumPy (Module 1) is
+fast maths on numbers, <strong>pandas is a smart spreadsheet you control with code</strong> — with
+named columns, mixed types (text <em>and</em> numbers), and one-line tools for filtering,
+grouping, joining, and reshaping tables. Get fluent here and cleaning + exploring
+data feels easy; stay shaky and everything is a fight. So we go slow and clear.</p>
+<p>By the end you'll comfortably do, and <em>explain</em>:
+- the two objects: <strong>Series</strong> (one column) and <strong>DataFrame</strong> (a whole table)
+- the <strong>index</strong> (row labels) and why it matters
+- <strong>selecting</strong> columns/rows with <code>.loc</code> and <code>.iloc</code>
+- <strong>filtering</strong> rows with conditions
+- <strong>creating</strong> new columns (the fast, vectorized way)
+- <strong>groupby</strong> (the split–apply–combine pattern — the heart of analysis)
+- <strong>merge</strong> (joining tables) and <strong>pivot/melt</strong> (reshaping)</p>
+<blockquote>
+<p>Rhythm as always: 🌱 plain English → 🔤 code line-by-line → 🎓 go deeper → ✅ takeaway.</p>
+</blockquote></div>
+<h2>2.1 The two objects: Series and DataFrame</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Two words you'll hear forever:
+- A <strong>Series</strong> is <strong>one column</strong> of data — a list of values, each with a <strong>label</strong>
+  (the index) down the side.
+- A <strong>DataFrame</strong> is a <strong>whole table</strong> — many Series (columns) stacked side by side,
+  sharing the same row labels.</p>
+<p>Analogy: a Series is a <strong>single column</strong> in Excel; a DataFrame is the <strong>entire
+sheet</strong>. The <strong>index</strong> is like the row numbers on the left of Excel — but in pandas
+those labels can be anything (names, dates), and pandas uses them to <em>line data up
+automatically</em>.</p>
+<p>We import pandas as <code>pd</code> (the universal nickname), and NumPy as <code>np</code>.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">import numpy as np
+import pandas as pd
+
+# A Series: three scores, labelled a/b/c
+s = pd.Series([10, 20, 30], index=[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;], name=&quot;score&quot;)
+print(s)
+print(&quot;\nthe labels (index):&quot;, list(s.index))
+print(&quot;the raw values    :&quot;, s.values, &quot;  &lt;- a NumPy array underneath&quot;)</code></pre><div class="outputs"><pre class="out stream">a    10
+b    20
+c    30
+Name: score, dtype: int64
+
+the labels (index): [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;]
+the raw values    : [10 20 30]   &lt;- a NumPy array underneath
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>pd.Series([10,20,30], index=[...], name="score")</code> → make one column: values
+  <code>10,20,30</code>, row-labels <code>a,b,c</code>, and a column name <code>score</code>.</li>
+<li><code>s.index</code> → the row labels. <code>s.values</code> → the plain numbers (a NumPy array — pandas
+  is built <em>on</em> NumPy, so Module 1 wasn't wasted!).</li>
+</ul></div>
+<div class="codecell"><pre class="code"><code class="language-python"># &#x27;Automatic alignment&#x27;: maths lines up by LABEL, not by position.
+s1 = pd.Series({&quot;a&quot;: 1, &quot;b&quot;: 2, &quot;c&quot;: 3})
+s2 = pd.Series({&quot;b&quot;: 10, &quot;c&quot;: 20, &quot;d&quot;: 30})
+print(s1 + s2)     # only b and c exist in BOTH -&gt; a and d become NaN</code></pre><div class="outputs"><pre class="out stream">a     NaN
+b    12.0
+c    23.0
+d     NaN
+dtype: float64
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>s1 + s2</code> → pandas matches labels: <code>b</code> (2+10=12) and <code>c</code> (3+20=23) add up. But <code>a</code>
+  is only in <code>s1</code> and <code>d</code> only in <code>s2</code>, so there's nothing to add → the result is
+  <code>NaN</code> ("Not a Number" = missing).</li>
+</ul></div>
+<div class="callout warn"><div class="callout-h">Watch out</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>2.2 Loading a real (messy) dataset &amp; first look</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Almost always your data lives in a <strong>CSV file</strong> (comma-separated values — a plain-text
+spreadsheet). <code>pd.read_csv</code> loads it into a DataFrame in one line.</p>
+<p>The <strong>first thing</strong> any pro does with a new dataset is <em>look at it</em> three ways:
+<code>.head()</code> (peek at rows), <code>.info()</code> (columns, types, missing counts), and
+<code>.describe()</code> (number summaries). We planted mess in this file on purpose — let's see
+if the summaries reveal it.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">df = pd.read_csv(&quot;../data/customers.csv&quot;)   # load the CSV into a DataFrame
+print(&quot;shape (rows, columns):&quot;, df.shape)
+df.head()                                    # show the first 5 rows</code></pre><div class="outputs"><pre class="out stream">shape (rows, columns): (508, 9)
+</pre><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+      <th>age</th>
+      <th>income</th>
+      <th>city</th>
+      <th>plan</th>
+      <th>tenure_months</th>
+      <th>monthly_spend</th>
+      <th>support_calls</th>
+      <th>churn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>38.0</td>
+      <td>5000000.00</td>
+      <td>Kisumu</td>
+      <td>Basic</td>
+      <td>14</td>
+      <td>186.65</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>25.0</td>
+      <td>76695.05</td>
+      <td>Nakuru</td>
+      <td>Basic</td>
+      <td>46</td>
+      <td>76.83</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>NaN</td>
+      <td>34209.54</td>
+      <td>Nairobi</td>
+      <td>Basic</td>
+      <td>29</td>
+      <td>37.36</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>44.0</td>
+      <td>23126.82</td>
+      <td>Mombasa</td>
+      <td>Premium</td>
+      <td>25</td>
+      <td>23.34</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>18.0</td>
+      <td>11133.74</td>
+      <td>NAIROBI</td>
+      <td>Basic</td>
+      <td>50</td>
+      <td>12.17</td>
+      <td>4</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="codecell"><pre class="code"><code class="language-python">df.info()      # each column&#x27;s type + how many non-missing values it has</code></pre><div class="outputs"><pre class="out stream">&lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;
+RangeIndex: 508 entries, 0 to 507
+Data columns (total 9 columns):
+ #   Column         Non-Null Count  Dtype  
+---  ------         --------------  -----  
+ 0   customer_id    508 non-null    int64  
+ 1   age            488 non-null    float64
+ 2   income         485 non-null    float64
+ 3   city           508 non-null    object 
+ 4   plan           508 non-null    object 
+ 5   tenure_months  508 non-null    int64  
+ 6   monthly_spend  508 non-null    float64
+ 7   support_calls  508 non-null    int64  
+ 8   churn          508 non-null    int64  
+dtypes: float64(3), int64(4), object(2)
+memory usage: 35.8+ KB
+</pre></div></div>
+<div class="codecell"><pre class="code"><code class="language-python">df.describe()  # count/mean/std/min/quartiles/max for NUMERIC columns</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+      <th>age</th>
+      <th>income</th>
+      <th>tenure_months</th>
+      <th>monthly_spend</th>
+      <th>support_calls</th>
+      <th>churn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>508.000000</td>
+      <td>488.000000</td>
+      <td>4.850000e+02</td>
+      <td>508.000000</td>
+      <td>508.000000</td>
+      <td>508.000000</td>
+      <td>508.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>250.631890</td>
+      <td>35.016393</td>
+      <td>6.464815e+04</td>
+      <td>34.931102</td>
+      <td>68.869941</td>
+      <td>1.484252</td>
+      <td>0.316929</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>145.013243</td>
+      <td>9.407921</td>
+      <td>2.263545e+05</td>
+      <td>20.444401</td>
+      <td>46.850177</td>
+      <td>1.258403</td>
+      <td>0.465738</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>18.000000</td>
+      <td>7.909290e+03</td>
+      <td>1.000000</td>
+      <td>5.840000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>124.750000</td>
+      <td>28.000000</td>
+      <td>3.420954e+04</td>
+      <td>17.000000</td>
+      <td>38.317500</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>251.500000</td>
+      <td>35.000000</td>
+      <td>4.930228e+04</td>
+      <td>33.000000</td>
+      <td>56.575000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>375.250000</td>
+      <td>41.000000</td>
+      <td>6.723779e+04</td>
+      <td>53.000000</td>
+      <td>85.825000</td>
+      <td>2.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>500.000000</td>
+      <td>64.000000</td>
+      <td>5.000000e+06</td>
+      <td>71.000000</td>
+      <td>427.550000</td>
+      <td>7.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>pd.read_csv("../data/customers.csv")</code> → read the file (the <code>../</code> means "go up one
+  folder from <code>notebooks/</code> to find the <code>data/</code> folder").</li>
+<li><code>df.shape</code> → <code>(rows, columns)</code>.</li>
+<li><code>df.head()</code> → first 5 rows — a quick eyeball.</li>
+<li><code>df.info()</code> → lists every column, its type, and its non-missing count. If a column
+  shows fewer non-null values than the row count, it has <strong>missing data</strong>.</li>
+<li><code>df.describe()</code> → summary numbers. Compare the <code>max</code> to the <code>75%</code> value: if <code>max</code>
+  is wildly bigger, you likely have an <strong>outlier</strong>.</li>
+</ul></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p>Reading these summaries is a <em>skill</em>, not a formality. Here <code>income</code> will show fewer
+non-null values than the total rows (missing data), and its <code>max</code> will dwarf the 75%
+quartile (that planted outlier of 5,000,000). You just <em>diagnosed two data problems
+without any charts</em> — purely by letting the summaries talk. That habit is what
+separates people who "know pandas" from people who <em>understand data</em>.</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>2.3 Selecting columns and rows — <code>.loc</code> vs <code>.iloc</code></h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Two ways to grab a slice of a table, and beginners mix them up:
+- <strong><code>.loc</code></strong> selects by <strong>label</strong> (the <em>name</em> of a row/column).
+- <strong><code>.iloc</code></strong> selects by <strong>integer position</strong> (the <em>number</em>, starting at 0 — like
+  Module 0's list indexing).</p>
+<p>Memory hook: <strong><code>.loc</code> = Label</strong>, <strong><code>.iloc</code> = Integer</strong> (the <code>i</code> is for integer). Also:
+<code>df["age"]</code> gives one column (a Series); <code>df[["age","city"]]</code> (a <em>list</em> inside) gives
+a smaller DataFrame.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">print(type(df[&quot;age&quot;]))            # one column -&gt; a Series
+print(type(df[[&quot;age&quot;, &quot;city&quot;]]))  # a list of columns -&gt; a DataFrame
+
+# .loc = by label:
+print(&quot;\n.loc  row label 0, chosen columns:&quot;)
+print(df.loc[0, [&quot;age&quot;, &quot;plan&quot;, &quot;churn&quot;]])
+
+# .iloc = by position:
+print(&quot;\n.iloc  first 3 rows, first 3 columns:&quot;)
+print(df.iloc[0:3, 0:3])</code></pre><div class="outputs"><pre class="out stream">&lt;class &#x27;pandas.core.series.Series&#x27;&gt;
+&lt;class &#x27;pandas.core.frame.DataFrame&#x27;&gt;
+
+.loc  row label 0, chosen columns:
+age       38.0
+plan     Basic
+churn        0
+Name: 0, dtype: object
+
+.iloc  first 3 rows, first 3 columns:
+   customer_id   age      income
+0            1  38.0  5000000.00
+1            2  25.0    76695.05
+2            3   NaN    34209.54
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>df["age"]</code> → the <code>age</code> column as a Series.</li>
+<li><code>df[["age","city"]]</code> → the double brackets pass a <em>list</em> of column names → a
+  2-column DataFrame.</li>
+<li><code>df.loc[0, ["age","plan","churn"]]</code> → by <strong>label</strong>: row labelled <code>0</code>, and those
+  three named columns.</li>
+<li><code>df.iloc[0:3, 0:3]</code> → by <strong>position</strong>: rows 0,1,2 and columns 0,1,2 (the <code>3</code> stop
+  is excluded, as with NumPy/lists).</li>
+</ul></div>
+<div class="callout warn"><div class="callout-h">Watch out</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>2.4 Filtering rows with conditions</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Filtering = "keep only the rows that match a rule". It's the same <strong>boolean mask</strong>
+idea from NumPy (Module 1.5): write a condition, pandas checks it for every row and
+returns True/False, then you keep the True rows.</p>
+<p>Example rule: <em>"only Premium customers"</em> → <code>df[df["plan"] == "Premium"]</code>.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">premium = df[df[&quot;plan&quot;] == &quot;Premium&quot;]        # keep rows where plan is Premium
+print(&quot;Premium customers:&quot;, len(premium))
+
+# Two rules at once: use &amp; (and), | (or), ~ (not), each in parentheses
+high_risk = df[(df[&quot;support_calls&quot;] &gt;= 3) &amp; (df[&quot;tenure_months&quot;] &lt; 12)]
+print(&quot;High-risk (&gt;=3 calls AND &lt;12 months):&quot;, len(high_risk))
+
+# &#x27;isin&#x27; checks membership in a list of allowed values
+coastal = df[df[&quot;city&quot;].str.strip().str.title().isin([&quot;Mombasa&quot;])]
+print(&quot;Mombasa (after tidying the text):&quot;, len(coastal))</code></pre><div class="outputs"><pre class="out stream">Premium customers: 95
+High-risk (&gt;=3 calls AND &lt;12 months): 10
+Mombasa (after tidying the text): 102
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>df["plan"] == "Premium"</code> → a True/False for every row; <code>df[...]</code> keeps the Trues.</li>
+<li><code>(A) &amp; (B)</code> → both rules must hold; note the parentheses (required!) and <code>&amp;</code> for
+  "and" (not the word <code>and</code>), exactly like NumPy.</li>
+<li><code>.str.strip().str.title()</code> → clean the text first: <code>.str.strip()</code> removes stray
+  spaces, <code>.str.title()</code> fixes capitalisation, so <code>" mombasa "</code> matches <code>"Mombasa"</code>.</li>
+<li><code>.isin([...])</code> → keep rows whose value is in the given list.</li>
+</ul></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<h2>2.5 Creating new columns — the fast (vectorized) way</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>You'll constantly build new columns from existing ones (e.g. spend-per-month). Do it
+the <strong>vectorized</strong> way — an expression on whole columns — which is fast and clean.
+Only fall back to a slow row-by-row <code>.apply</code> when a rule truly can't be written as a
+column expression.</p>
+<p>Three everyday tools:
+- plain arithmetic on columns → <code>df["a"] / df["b"]</code>
+- <code>np.where(condition, x, y)</code> → "if condition then x else y", for the whole column
+- <code>.map(dictionary)</code> → translate categories into numbers/labels</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># 1) arithmetic on whole columns (vectorized)
+df[&quot;spend_per_month_ratio&quot;] = df[&quot;monthly_spend&quot;] / (df[&quot;tenure_months&quot;] + 1)
+
+# 2) a conditional column with NO loop: if calls&gt;=3 -&gt; &#x27;high&#x27; else &#x27;normal&#x27;
+df[&quot;risk_flag&quot;] = np.where(df[&quot;support_calls&quot;] &gt;= 3, &quot;high&quot;, &quot;normal&quot;)
+
+# 3) translate plan text -&gt; a rank number with a dictionary
+plan_rank = {&quot;Basic&quot;: 0, &quot;Standard&quot;: 1, &quot;Premium&quot;: 2}
+df[&quot;plan_rank&quot;] = df[&quot;plan&quot;].map(plan_rank)
+
+df[[&quot;monthly_spend&quot;, &quot;tenure_months&quot;, &quot;spend_per_month_ratio&quot;,
+    &quot;support_calls&quot;, &quot;risk_flag&quot;, &quot;plan&quot;, &quot;plan_rank&quot;]].head()</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>monthly_spend</th>
+      <th>tenure_months</th>
+      <th>spend_per_month_ratio</th>
+      <th>support_calls</th>
+      <th>risk_flag</th>
+      <th>plan</th>
+      <th>plan_rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>186.65</td>
+      <td>14</td>
+      <td>12.443333</td>
+      <td>1</td>
+      <td>normal</td>
+      <td>Basic</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>76.83</td>
+      <td>46</td>
+      <td>1.634681</td>
+      <td>1</td>
+      <td>normal</td>
+      <td>Basic</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>37.36</td>
+      <td>29</td>
+      <td>1.245333</td>
+      <td>1</td>
+      <td>normal</td>
+      <td>Basic</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23.34</td>
+      <td>25</td>
+      <td>0.897692</td>
+      <td>0</td>
+      <td>normal</td>
+      <td>Premium</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>12.17</td>
+      <td>50</td>
+      <td>0.238627</td>
+      <td>4</td>
+      <td>high</td>
+      <td>Basic</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>df["monthly_spend"] / (df["tenure_months"] + 1)</code> → divides the two columns
+  element-by-element (the <code>+1</code> avoids dividing by zero for brand-new customers).</li>
+<li><code>np.where(df["support_calls"] &gt;= 3, "high", "normal")</code> → for each row: if calls ≥ 3
+  put "high", else "normal" — all at once, no loop.</li>
+<li><code>df["plan"].map(plan_rank)</code> → look each plan up in the dictionary and swap in its
+  number (Basic→0, etc.).</li>
+</ul></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p>Why avoid <code>.apply</code> with a Python function when you can? Because <code>.apply</code> runs your
+function <strong>row by row in slow Python</strong>, while vectorized ops and <code>np.where</code>/<code>.map</code>
+run in fast compiled code — often 10–100x quicker on big data. Reserve <code>.apply</code> for
+genuinely awkward logic that spans several columns with no clean vectorized form:</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># A rule that mixes columns awkwardly -&gt; .apply on each row (axis=1) is justified.
+def segment(row):
+    if row[&quot;plan&quot;] == &quot;Premium&quot; and row[&quot;support_calls&quot;] == 0:
+        return &quot;loyal_premium&quot;
+    if row[&quot;support_calls&quot;] &gt;= 3:
+        return &quot;at_risk&quot;
+    return &quot;standard&quot;
+
+df[&quot;segment&quot;] = df.apply(segment, axis=1)   # axis=1 =&gt; feed one ROW at a time
+print(df[&quot;segment&quot;].value_counts())          # count how many in each segment</code></pre><div class="outputs"><pre class="out stream">segment
+standard         396
+at_risk           92
+loyal_premium     20
+Name: count, dtype: int64
+</pre></div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>2.6 GroupBy — split, apply, combine (the heart of analysis)</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p><strong>GroupBy</strong> answers questions like <em>"what's the average spend </em><em>per plan</em><em>?"</em> or
+<em>"the churn rate </em><em>per city</em><em>?"</em>. It works in three steps, called
+<strong>split–apply–combine</strong>:
+1. <strong>Split</strong> the rows into groups (one per plan).
+2. <strong>Apply</strong> a calculation to each group (e.g. average).
+3. <strong>Combine</strong> the answers into a small result table.</p>
+<p>Analogy: sort a pile of receipts into stacks by shop (split), total each stack
+(apply), then write the totals in a summary (combine).</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">summary = (
+    df.groupby(&quot;plan&quot;)                              # 1) split rows by plan
+      .agg(customers=(&quot;customer_id&quot;, &quot;count&quot;),      # 2) apply: count customers,
+           avg_spend=(&quot;monthly_spend&quot;, &quot;mean&quot;),     #           average spend,
+           churn_rate=(&quot;churn&quot;, &quot;mean&quot;))            #           average churn
+      .sort_values(&quot;churn_rate&quot;, ascending=False)   # 3) combine + sort
+)
+summary.round(3)</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customers</th>
+      <th>avg_spend</th>
+      <th>churn_rate</th>
+    </tr>
+    <tr>
+      <th>plan</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Basic</th>
+      <td>252</td>
+      <td>68.167</td>
+      <td>0.409</td>
+    </tr>
+    <tr>
+      <th>Premium</th>
+      <td>95</td>
+      <td>63.584</td>
+      <td>0.242</td>
+    </tr>
+    <tr>
+      <th>Standard</th>
+      <td>161</td>
+      <td>73.089</td>
+      <td>0.217</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>df.groupby("plan")</code> → make one group per distinct plan.</li>
+<li><code>.agg(name=(column, function))</code> → for each group compute: <code>count</code> of customer_id,
+  <code>mean</code> of monthly_spend, <code>mean</code> of churn. Each line names the output column.</li>
+<li><code>.sort_values("churn_rate", ascending=False)</code> → show worst-churn plan first.</li>
+</ul></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p>A trick worth memorising: <strong>the mean of a 0/1 column is a rate/proportion.</strong> <code>churn</code>
+is 1 for churned, 0 for stayed, so <code>mean(churn)</code> = the fraction who churned = the
+<strong>churn rate</strong>. This lets you compute "% who did X" with a plain <code>mean</code>. You can also
+group by <em>two</em> keys for a cross-table:</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># churn rate broken down by plan AND risk_flag -&gt; a tidy cross-table
+two_way = df.groupby([&quot;plan&quot;, &quot;risk_flag&quot;])[&quot;churn&quot;].mean().unstack().round(3)
+two_way</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>risk_flag</th>
+      <th>high</th>
+      <th>normal</th>
+    </tr>
+    <tr>
+      <th>plan</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Basic</th>
+      <td>0.653</td>
+      <td>0.350</td>
+    </tr>
+    <tr>
+      <th>Premium</th>
+      <td>0.400</td>
+      <td>0.212</td>
+    </tr>
+    <tr>
+      <th>Standard</th>
+      <td>0.357</td>
+      <td>0.188</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<h2>2.7 Joining tables with <code>merge</code></h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Real projects have <strong>several</strong> tables that you stitch together on a shared column (a
+"key"). <code>merge</code> is pandas' version of joining. Two questions to always ask:
+1. <strong>On which key</strong> do the tables match? (here: <code>city</code>)
+2. <strong>Which join type</strong>? The common ones:
+   - <strong>inner</strong> — keep only rows whose key exists in <em>both</em> tables.
+   - <strong>left</strong> — keep <em>all</em> left-table rows; fill missing right-side values with NaN.</p>
+<p>Analogy: <code>merge</code> is looking up extra info in a second address book by matching names.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># a small lookup table: a discount for each city
+discounts = pd.DataFrame({
+    &quot;city&quot;: [&quot;Nairobi&quot;, &quot;Mombasa&quot;, &quot;Kisumu&quot;, &quot;Nakuru&quot;, &quot;Eldoret&quot;],
+    &quot;discount_pct&quot;: [5, 8, 6, 4, 7],
+})
+
+df[&quot;city&quot;] = df[&quot;city&quot;].str.strip().str.title()   # tidy keys so they match
+
+merged = df.merge(discounts, on=&quot;city&quot;, how=&quot;left&quot;)
+print(&quot;rows before:&quot;, len(df), &quot; | rows after left-merge:&quot;, len(merged))
+merged[[&quot;city&quot;, &quot;discount_pct&quot;]].drop_duplicates().sort_values(&quot;city&quot;)</code></pre><div class="outputs"><pre class="out stream">rows before: 508  | rows after left-merge: 508
+</pre><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>city</th>
+      <th>discount_pct</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>13</th>
+      <td>Eldoret</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>Kisumu</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Mombasa</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Nairobi</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Nakuru</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>df.merge(discounts, on="city", how="left")</code> → attach <code>discount_pct</code> to each
+  customer by matching on <code>city</code>; <code>how="left"</code> keeps every customer even if a city
+  had no discount listed (those get NaN).</li>
+<li>We tidy <code>city</code> text first so <code>" nairobi "</code> matches <code>"Nairobi"</code> in the lookup.</li>
+<li>We print <code>len()</code> before and after as a sanity check.</li>
+</ul></div>
+<div class="callout warn"><div class="callout-h">Watch out</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>2.8 Reshaping: wide ↔ long (pivot / melt)</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>The same data can be laid out two ways:
+- <strong>Wide</strong>: one row per thing, many columns — nice for a human to read in a report.
+- <strong>Long ('tidy')</strong>: one row per observation — what charts and models prefer.</p>
+<p><code>pivot_table</code> turns long → wide (and can average along the way); <code>melt</code> turns wide →
+long. You'll flip between them a lot.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># WIDE: average spend, plan as rows, risk_flag as columns
+wide = df.pivot_table(index=&quot;plan&quot;, columns=&quot;risk_flag&quot;,
+                      values=&quot;monthly_spend&quot;, aggfunc=&quot;mean&quot;).round(1)
+print(&quot;WIDE (avg spend, plan x risk):&quot;)
+print(wide)
+
+# LONG: unpivot it back to one-row-per-observation
+long = wide.reset_index().melt(id_vars=&quot;plan&quot;,
+                               var_name=&quot;risk_flag&quot;, value_name=&quot;avg_spend&quot;)
+print(&quot;\nLONG (tidy) form:&quot;)
+print(long)</code></pre><div class="outputs"><pre class="out stream">WIDE (avg spend, plan x risk):
+risk_flag  high  normal
+plan                   
+Basic      64.3    69.1
+Premium    68.7    62.6
+Standard   69.2    73.9
+
+LONG (tidy) form:
+       plan risk_flag  avg_spend
+0     Basic      high       64.3
+1   Premium      high       68.7
+2  Standard      high       69.2
+3     Basic    normal       69.1
+4   Premium    normal       62.6
+5  Standard    normal       73.9
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>pivot_table(index="plan", columns="risk_flag", values="monthly_spend",
+  aggfunc="mean")</code> → build a grid: one row per plan, one column per risk level, each
+  cell = average spend for that combo.</li>
+<li><code>melt(id_vars="plan", ...)</code> → collapse those risk columns back into two tidy
+  columns: <code>risk_flag</code> (which one) and <code>avg_spend</code> (the value).</li>
+</ul></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>2.9 Quick wins: sorting, top-N, value counts</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>A few tiny commands you'll reach for daily: <code>nlargest</code> (top rows by a column),
+<code>sort_values</code> (order a table), and <code>value_counts</code> (how many of each category — the
+fastest way to understand a text column).</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">print(&quot;Top 5 spenders:&quot;)
+print(df.nlargest(5, &quot;monthly_spend&quot;)[[&quot;customer_id&quot;, &quot;plan&quot;, &quot;monthly_spend&quot;]])
+
+print(&quot;\nCity distribution (as proportions):&quot;)
+print(df[&quot;city&quot;].value_counts(normalize=True).round(3))</code></pre><div class="outputs"><pre class="out stream">Top 5 spenders:
+     customer_id      plan  monthly_spend
+346          347  Standard         427.55
+53            54  Standard         244.80
+6              7     Basic         242.23
+253          254     Basic         237.17
+150          151   Premium         236.80
+
+City distribution (as proportions):
+city
+Nairobi    0.413
+Mombasa    0.201
+Nakuru     0.144
+Kisumu     0.138
+Eldoret    0.104
+Name: proportion, dtype: float64
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>df.nlargest(5, "monthly_spend")</code> → the 5 rows with the highest spend.</li>
+<li><code>df["city"].value_counts()</code> → count rows per city; <code>normalize=True</code> turns counts
+  into proportions (fractions that sum to 1).</li>
+</ul></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<h2>2.10 Practice (do these before Module 3)</h2>
+<ol>
+<li>Average <strong>income per city</strong>, ignoring missing values — which city is highest?
+   (Hint: <code>df.groupby("city")["income"].mean()</code>.)</li>
+<li>Add a column <code>is_loyal</code> = 1 if <code>tenure_months &gt; 36</code> else 0, the <strong>vectorized</strong> way.</li>
+<li>Make a pivot table of <strong>churn rate by city × plan</strong> — which cell is worst?</li>
+<li>In your own words, explain <code>.loc</code> vs <code>.iloc</code>, and why chained assignment is risky.</li>
+</ol>
+<div class="codecell"><pre class="code"><code class="language-python"># Scratch space — try first, then check.
+print(df.groupby(&quot;city&quot;)[&quot;income&quot;].mean().round(0).sort_values(ascending=False))
+df[&quot;is_loyal&quot;] = (df[&quot;tenure_months&quot;] &gt; 36).astype(int)
+print(&quot;\nloyal customers:&quot;, df[&quot;is_loyal&quot;].sum())</code></pre><div class="outputs"><pre class="out stream">city
+Kisumu     128162.0
+Eldoret     57459.0
+Nakuru      54736.0
+Nairobi     54104.0
+Mombasa     53486.0
+Name: income, dtype: float64
+
+loyal customers: 232
+</pre></div></div>
+<div class="callout interview"><div class="callout-h">Say this in an interview</div></div>
+<p>index. I select with .loc (labels) and .iloc (positions), filter with boolean masks,
+build columns vectorized rather than with .apply, and I think in split–apply–combine
+for groupby. On merges I always sanity-check the row count before and after."</p>
+<h2>Summary — your pandas fluency checklist</h2>
+<ul>
+<li><strong>Series</strong> = one labelled column; <strong>DataFrame</strong> = a table; the <strong>index aligns</strong> data.</li>
+<li>First moves on any dataset: <strong><code>.head()</code>, <code>.info()</code>, <code>.describe()</code></strong>.</li>
+<li><strong><code>.loc</code></strong> = labels, <strong><code>.iloc</code></strong> = positions; assign through a single <code>.loc</code>.</li>
+<li><strong>Filter</strong> with boolean masks (<code>&amp;</code>, <code>|</code>, <code>~</code>, parentheses).</li>
+<li>Build columns <strong>vectorized</strong> / <code>np.where</code> / <code>.map</code>; <code>.apply</code> only when forced.</li>
+<li><strong>GroupBy = split–apply–combine</strong>; mean of a 0/1 column = a rate.</li>
+<li>Choose the right <strong>merge</strong> and <strong>check row counts</strong>.</li>
+<li><strong>pivot_table</strong> = long→wide, <strong>melt</strong> = wide→long.</li>
+</ul>
+<p>Next: <strong>Module 3 — Data Cleaning</strong>, where we fix every problem in this messy dataset.</p>
+    <div class="lesson-nav">
+      <a class="pn prev" href="01_numpy.html">← NumPy: Fast Arrays</a>
+      <a class="pn next" href="02_data_cleaning.html">Data Cleaning →</a>
+    </div>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>
