@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ds-bridging-git-main-kaks-projects-9849c6b4.vercel.app/sitemap.xml

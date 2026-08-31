@@ -4,7 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Module 22 — Big Data &amp; Apache Spark (PySpark) — DS Bridging Bootcamp</title>
-<meta name="description" content="Data science from zero to job-ready — every idea in plain English, then the code, then the deep why.">
+<meta name="description" content="Scale out with PySpark when data won&#x27;t fit RAM.">
+<link rel="canonical" href="https://ds-bridging-git-main-kaks-projects-9849c6b4.vercel.app/lessons/22_bigdata_spark.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DS Bridging Bootcamp">
+<meta property="og:title" content="Module 22 — Big Data &amp; Apache Spark (PySpark) — Module 22 · DS Bridging Bootcamp">
+<meta property="og:description" content="Scale out with PySpark when data won&#x27;t fit RAM.">
+<meta property="og:url" content="https://ds-bridging-git-main-kaks-projects-9849c6b4.vercel.app/lessons/22_bigdata_spark.html">
+<meta property="og:image" content="https://ds-bridging-git-main-kaks-projects-9849c6b4.vercel.app/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Module 22 — Big Data &amp; Apache Spark (PySpark) — Module 22 · DS Bridging Bootcamp">
+<meta name="twitter:description" content="Scale out with PySpark when data won&#x27;t fit RAM.">
+<meta name="twitter:image" content="https://ds-bridging-git-main-kaks-projects-9849c6b4.vercel.app/assets/og-cover.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='9' y='12' width='3.2' height='26' rx='1.4' fill='%237c5cff'/%3E%3Crect x='35.8' y='7' width='3.2' height='31' rx='1.4' fill='%234dd0e1'/%3E%3Cpath d='M4 34 L44 27' stroke='%237c5cff' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M10.6 13 C18 26, 30 22, 37.4 8.5' stroke='%234dd0e1' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="/assets/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
@@ -20,6 +33,10 @@
   <div class="search-box">
     <input id="search" type="search" placeholder="Search lessons…" autocomplete="off">
     <div id="search-results"></div>
+  </div>
+  <div id="progress" class="progress" data-total="24" hidden>
+    <div class="progress-bar"><span id="progress-fill"></span></div>
+    <div class="progress-label"><span id="progress-count">0</span> / 24 visited</div>
   </div>
   <nav id="nav">
     <details class="nav-phase"><summary class="nav-phase-h">Phase 0 · Foundations</summary><div class="nav-phase-items"><a class="nav-item " href="/lessons/0_absolute_basics_python.html" data-slug="0_absolute_basics_python"><span class="nav-emoji">🐣</span><span class="nav-num">M0</span><span class="nav-label">Absolute Basics: Python from Zero</span></a>

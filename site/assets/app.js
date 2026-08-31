@@ -72,6 +72,22 @@
     if (prog[c.getAttribute('data-slug')]) c.classList.add('done');
   });
 
+  // ---- aggregate progress counter (sidebar) ----
+  var pbox = document.getElementById('progress');
+  if (pbox) {
+    var total = parseInt(pbox.getAttribute('data-total'), 10) || 0;
+    var done = Object.keys(getProgress()).filter(function (k) { return prog[k]; }).length;
+    if (total > 0) {
+      var pct = Math.round((done / total) * 100);
+      var fill = document.getElementById('progress-fill');
+      var count = document.getElementById('progress-count');
+      if (fill) fill.style.width = pct + '%';
+      if (count) count.textContent = done;
+      pbox.hidden = false;                 // only reveal once we have counts
+      pbox.setAttribute('title', done + ' of ' + total + ' modules visited (' + pct + '%)');
+    }
+  }
+
   // ---- search ----
   var input = document.getElementById('search');
   var results = document.getElementById('search-results');

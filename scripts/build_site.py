@@ -17,6 +17,7 @@ No external Python deps beyond the stdlib + `markdown` (fallback to a tiny
 converter if markdown isn't installed).
 """
 import json, os, re, html, sys
+import datetime as _dt
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -32,6 +33,16 @@ ASSETS = SITE / "assets"
 GH_OWNER = "Kaks753"
 GH_REPO = "DS_bridging"
 GH_BRANCH = "main"
+
+# --- Public site config (used for canonical URLs, Open Graph, sitemap) ------
+# Override with SITE_URL=https://your-domain when you move to a custom domain.
+SITE_URL = os.environ.get(
+    "SITE_URL",
+    "https://ds-bridging-git-main-kaks-projects-9849c6b4.vercel.app",
+).rstrip("/")
+SITE_NAME = "DS Bridging Bootcamp"
+# OG preview image lives in the repo's assets and is generated below.
+OG_IMAGE = f"{SITE_URL}/assets/og-cover.png"
 
 # --- brand logo (inline SVG "bridge" mark) ----------------------------------
 # A suspension bridge from a low bank up to a high bank = "bridging" into DS.
@@ -67,6 +78,29 @@ FAVICON = (
     "%3Cpath d='M10.6 13 C18 26, 30 22, 37.4 8.5' stroke='%234dd0e1' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E"
     "%3C/svg%3E"
 )
+
+def head_meta(page_title, description, canonical_path, og_type="website"):
+    """Shared <head> block: canonical + Open Graph + Twitter Card meta.
+    canonical_path is the site-absolute path, e.g. '/' or '/lessons/x.html'."""
+    url = SITE_URL + canonical_path
+    t = html.escape(page_title)
+    d = html.escape(description)
+    return (
+        f'<meta name="description" content="{d}">\n'
+        f'<link rel="canonical" href="{url}">\n'
+        f'<meta property="og:type" content="{og_type}">\n'
+        f'<meta property="og:site_name" content="{SITE_NAME}">\n'
+        f'<meta property="og:title" content="{t}">\n'
+        f'<meta property="og:description" content="{d}">\n'
+        f'<meta property="og:url" content="{url}">\n'
+        f'<meta property="og:image" content="{OG_IMAGE}">\n'
+        f'<meta property="og:image:width" content="1200">\n'
+        f'<meta property="og:image:height" content="630">\n'
+        f'<meta name="twitter:card" content="summary_large_image">\n'
+        f'<meta name="twitter:title" content="{t}">\n'
+        f'<meta name="twitter:description" content="{d}">\n'
+        f'<meta name="twitter:image" content="{OG_IMAGE}">'
+    )
 
 def colab_url(stem):
     return (f"https://colab.research.google.com/github/{GH_OWNER}/{GH_REPO}"
@@ -409,7 +443,7 @@ def page_shell(title, body, active_slug, prev_link, next_link, module_num, stem)
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)} — DS Bridging Bootcamp</title>
-<meta name="description" content="Data science from zero to job-ready — every idea in plain English, then the code, then the deep why.">
+{head_meta(f"{title} — Module {module_num} · {SITE_NAME}", meta_for(stem)[0] or "Data science from zero to job-ready — every idea in plain English, then the code, then the deep why.", f"/lessons/{active_slug}.html", og_type="article")}
 <link rel="icon" href="{FAVICON}">
 <link rel="stylesheet" href="/assets/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
@@ -425,6 +459,10 @@ def page_shell(title, body, active_slug, prev_link, next_link, module_num, stem)
   <div class="search-box">
     <input id="search" type="search" placeholder="Search lessons…" autocomplete="off">
     <div id="search-results"></div>
+  </div>
+  <div id="progress" class="progress" data-total="{len(MODULES)}" hidden>
+    <div class="progress-bar"><span id="progress-fill"></span></div>
+    <div class="progress-label"><span id="progress-count">0</span> / {len(MODULES)} visited</div>
   </div>
   <nav id="nav">
     {sidebar_html(active_slug)}
@@ -459,7 +497,7 @@ def copy_static_assets():
     causing 404s and an unstyled page."""
     import shutil
     ASSETS.mkdir(parents=True, exist_ok=True)
-    for name in ("style.css", "app.js"):
+    for name in ("style.css", "app.js", "og-cover.png"):
         src = SRC_ASSETS / name
         if src.exists():
             shutil.copy2(src, ASSETS / name)
@@ -511,7 +549,27 @@ def build():
 
     (ASSETS / "search-index.json").write_text(json.dumps(search_index, ensure_ascii=False))
     build_index(built)
-    print(f"Built {len(built)} lesson pages + index.html")
+    write_seo_files(built)
+    print(f"Built {len(built)} lesson pages + index.html + sitemap/robots")
+
+def write_seo_files(built):
+    """robots.txt + sitemap.xml so search engines discover all lesson pages."""
+    urls = [(SITE_URL + "/", "1.0")]
+    for slug, *_ in built:
+        urls.append((f"{SITE_URL}/lessons/{slug}.html", "0.8"))
+    today = _dt.date.today().isoformat()
+    entries = "\n".join(
+        f"  <url><loc>{u}</loc><lastmod>{today}</lastmod>"
+        f"<changefreq>monthly</changefreq><priority>{p}</priority></url>"
+        for u, p in urls
+    )
+    sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+               f"{entries}\n</urlset>\n")
+    (SITE / "sitemap.xml").write_text(sitemap)
+    (SITE / "robots.txt").write_text(
+        "User-agent: *\nAllow: /\n\n" f"Sitemap: {SITE_URL}/sitemap.xml\n"
+    )
 
 def _card(built_by_idx, i):
     slug, title, emoji, num, label = built_by_idx[i]
@@ -532,6 +590,36 @@ def _card(built_by_idx, i):
         f'<div class="card-tags">{tags_html}</div>'
         f'<span class="card-go">Open lesson →</span></a>'
     )
+
+def course_jsonld(built):
+    """Google-friendly Course structured data (rich snippets)."""
+    modules = []
+    for slug, title, emoji, num, label in built:
+        modules.append({
+            "@type": "Course",
+            "name": f"Module {num}: {label}",
+            "url": f"{SITE_URL}/lessons/{slug}.html",
+            "description": meta_for(MODULES[int(num)][0])[0] if num.isdigit() else label,
+        })
+    data = {
+        "@context": "https://schema.org",
+        "@type": "Course",
+        "name": SITE_NAME,
+        "description": ("A free data science bootcamp from absolute zero to job-ready — "
+                        "every idea in plain English, then the code, then the deep why."),
+        "url": SITE_URL + "/",
+        "inLanguage": "en",
+        "isAccessibleForFree": True,
+        "provider": {"@type": "Organization", "name": SITE_NAME, "url": SITE_URL + "/"},
+        "author": {"@type": "Person", "name": "Stephen Muema"},
+        "hasCourseInstance": {
+            "@type": "CourseInstance",
+            "courseMode": "online",
+            "courseWorkload": "PT20H",
+        },
+        "hasPart": modules,
+    }
+    return json.dumps(data, ensure_ascii=False)
 
 def build_index(built):
     # index-aligned lookup (built preserves MODULES order)
@@ -557,9 +645,10 @@ def build_index(built):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DS Bridging Bootcamp — Learn Data Science from Zero</title>
-<meta name="description" content="A free {total}-module data science bootcamp: from absolute zero to job-ready. Every idea in plain English, then the code, then the deep why.">
+{head_meta("DS Bridging Bootcamp — Learn Data Science from Zero", f"A free {total}-module data science bootcamp: from absolute zero to job-ready. Every idea in plain English, then the code, then the deep why.", "/")}
 <link rel="icon" href="{FAVICON}">
 <link rel="stylesheet" href="/assets/style.css">
+<script type="application/ld+json">{course_jsonld(built)}</script>
 </head>
 <body class="home">
 
