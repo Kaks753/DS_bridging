@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 20 — NLP &amp; Recommendation Systems — DS Bridging Bootcamp</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+<div id="sidebar-overlay"></div>
+<aside id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-logo">🚀</span>
+    <span class="brand-text">DS Bridging<br><small>Bootcamp</small></span>
+  </a>
+  <div class="search-box">
+    <input id="search" type="search" placeholder="Search lessons…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <nav id="nav">
+    <a class="nav-item " href="/lessons/0_absolute_basics_python.html" data-slug="0_absolute_basics_python"><span class="nav-emoji">🐣</span><span class="nav-num">M0</span><span class="nav-label">Absolute Basics: Python from Zero</span></a>
+<a class="nav-item " href="/lessons/01_numpy.html" data-slug="01_numpy"><span class="nav-emoji">🔢</span><span class="nav-num">M1</span><span class="nav-label">NumPy: Fast Arrays</span></a>
+<a class="nav-item " href="/lessons/02_pandas.html" data-slug="02_pandas"><span class="nav-emoji">🐼</span><span class="nav-num">M2</span><span class="nav-label">Pandas: Spreadsheets in Python</span></a>
+<a class="nav-item " href="/lessons/03_data_cleaning.html" data-slug="03_data_cleaning"><span class="nav-emoji">🧹</span><span class="nav-num">M3</span><span class="nav-label">Data Cleaning</span></a>
+<a class="nav-item " href="/lessons/04_eda_visualization.html" data-slug="04_eda_visualization"><span class="nav-emoji">📊</span><span class="nav-num">M4</span><span class="nav-label">EDA &amp; Visualization</span></a>
+<a class="nav-item " href="/lessons/05_statistics_probability.html" data-slug="05_statistics_probability"><span class="nav-emoji">📈</span><span class="nav-num">M5</span><span class="nav-label">Statistics &amp; Probability</span></a>
+<a class="nav-item " href="/lessons/06_feature_engineering_scaling.html" data-slug="06_feature_engineering_scaling"><span class="nav-emoji">⚙️</span><span class="nav-num">M6</span><span class="nav-label">Feature Engineering &amp; Scaling</span></a>
+<a class="nav-item " href="/lessons/07_regression.html" data-slug="07_regression"><span class="nav-emoji">📉</span><span class="nav-num">M7</span><span class="nav-label">Regression</span></a>
+<a class="nav-item " href="/lessons/08_classification_knn.html" data-slug="08_classification_knn"><span class="nav-emoji">🎯</span><span class="nav-num">M8</span><span class="nav-label">Classification &amp; KNN</span></a>
+<a class="nav-item " href="/lessons/09_evaluation_cv_gridsearch.html" data-slug="09_evaluation_cv_gridsearch"><span class="nav-emoji">🔍</span><span class="nav-num">M9</span><span class="nav-label">Evaluation, CV &amp; Grid Search</span></a>
+<a class="nav-item " href="/lessons/10_trees_ensembles_boosting.html" data-slug="10_trees_ensembles_boosting"><span class="nav-emoji">🌳</span><span class="nav-num">M10</span><span class="nav-label">Trees, Ensembles &amp; Boosting</span></a>
+<a class="nav-item " href="/lessons/11_clustering_pca.html" data-slug="11_clustering_pca"><span class="nav-emoji">🔮</span><span class="nav-num">M11</span><span class="nav-label">Clustering &amp; PCA</span></a>
+<a class="nav-item " href="/lessons/12_neural_networks_intro.html" data-slug="12_neural_networks_intro"><span class="nav-emoji">🧠</span><span class="nav-num">M12</span><span class="nav-label">Neural Networks Intro</span></a>
+<a class="nav-item " href="/lessons/13_job_readiness_interview_prep.html" data-slug="13_job_readiness_interview_prep"><span class="nav-emoji">💼</span><span class="nav-num">M13</span><span class="nav-label">Job Readiness &amp; Interviews</span></a>
+<a class="nav-item " href="/lessons/14_sql_for_data_science.html" data-slug="14_sql_for_data_science"><span class="nav-emoji">🗄️</span><span class="nav-num">M14</span><span class="nav-label">SQL for Data Science</span></a>
+<a class="nav-item " href="/lessons/15_apis_web_scraping.html" data-slug="15_apis_web_scraping"><span class="nav-emoji">🕸️</span><span class="nav-num">M15</span><span class="nav-label">APIs &amp; Web Scraping</span></a>
+<a class="nav-item " href="/lessons/16_probability_combinatorics_bayes.html" data-slug="16_probability_combinatorics_bayes"><span class="nav-emoji">🎲</span><span class="nav-num">M16</span><span class="nav-label">Probability, Combinatorics, Bayes</span></a>
+<a class="nav-item " href="/lessons/17_ab_testing_anova_power.html" data-slug="17_ab_testing_anova_power"><span class="nav-emoji">🧪</span><span class="nav-num">M17</span><span class="nav-label">A/B Testing, ANOVA &amp; Power</span></a>
+<a class="nav-item " href="/lessons/18_oop_linear_algebra_calculus.html" data-slug="18_oop_linear_algebra_calculus"><span class="nav-emoji">➗</span><span class="nav-num">M18</span><span class="nav-label">OOP, Linear Algebra &amp; Calculus</span></a>
+<a class="nav-item " href="/lessons/19_time_series.html" data-slug="19_time_series"><span class="nav-emoji">⏳</span><span class="nav-num">M19</span><span class="nav-label">Time Series</span></a>
+<a class="nav-item active" href="/lessons/20_nlp_recommendation_systems.html" data-slug="20_nlp_recommendation_systems"><span class="nav-emoji">💬</span><span class="nav-num">M20</span><span class="nav-label">NLP &amp; Recommender Systems</span></a>
+<a class="nav-item " href="/lessons/21_bash_git.html" data-slug="21_bash_git"><span class="nav-emoji">🐚</span><span class="nav-num">M21</span><span class="nav-label">Bash &amp; Git</span></a>
+<a class="nav-item " href="/lessons/22_bigdata_spark.html" data-slug="22_bigdata_spark"><span class="nav-emoji">⚡</span><span class="nav-num">M22</span><span class="nav-label">Big Data &amp; Spark</span></a>
+<a class="nav-item " href="/lessons/23_aws_deployment_mlops.html" data-slug="23_aws_deployment_mlops"><span class="nav-emoji">☁️</span><span class="nav-num">M23</span><span class="nav-label">AWS Deployment &amp; MLOps</span></a>
+  </nav>
+</aside>
+<main id="content">
+  <div class="lesson-wrap">
+    <div class="crumb">Module 20</div>
+    <div class="runbar"><span class="runbar-label">▶ Run this lesson yourself:</span><a class="runbtn colab" href="https://colab.research.google.com/github/Kaks753/DS_bridging/blob/main/notebooks/20_nlp_recommendation_systems.ipynb" target="_blank" rel="noopener">Open in Colab</a><a class="runbtn gh" href="https://github.com/Kaks753/DS_bridging/blob/main/notebooks/20_nlp_recommendation_systems.ipynb" target="_blank" rel="noopener">View on GitHub</a><span class="runbar-hint">In Colab, press <kbd>Shift</kbd>+<kbd>Enter</kbd> to run each cell.</span></div>
+    <div class="intro"><p>Two high-impact applied areas that power real products: a Twitter sentiment analyzer
+(NLP) and a document-search engine (TF-IDF + clustering). We build both from the ground
+up so you can explain the machinery, not just call a library.</p>
+<p><strong>What you'll be able to do by the end:</strong>
+- Run the NLP preprocessing pipeline (clean, tokenize, stopwords, stem/lemmatize).
+- Turn text into numbers with <strong>Bag-of-Words</strong> and <strong>TF-IDF</strong>.
+- Use <strong>N-grams</strong> so "not good" ≠ "good", and <strong>cosine similarity</strong> for search.
+- Build a working <strong>sentiment classifier</strong>.
+- Explain <strong>content-based</strong> vs <strong>collaborative filtering</strong> recommenders.</p></div>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Computers only do math on numbers, but language is messy words. NLP (Natural Language
+Processing) is the art of turning text into numbers <em>without throwing away the meaning</em>,
+then doing normal machine learning on those numbers. Recommendation systems are a
+close cousin: they turn "who liked what" into numbers and use similarity to suggest the
+next thing. Both boil down to: <strong>represent as vectors, then compare with similarity.</strong></p></div>
+<div class="codecell"><pre class="code"><code class="language-python">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_theme(style=&quot;whitegrid&quot;)
+print(&quot;Tools ready.&quot;)</code></pre><div class="outputs"><pre class="out stream">Tools ready.
+</pre></div></div>
+<h2>20.1 Why text needs special handling</h2>
+<p>The NLP pipeline turns raw strings into clean tokens before we vectorize:
+1. <strong>Lowercase &amp; clean</strong> — strip URLs, @mentions, punctuation.
+2. <strong>Tokenize</strong> — split into words (tokens).
+3. <strong>Remove stopwords</strong> — drop low-information words ("the", "is", "and").
+4. <strong>Stem / lemmatize</strong> — collapse variants ("running" -&gt; "run").
+5. <strong>Vectorize</strong> — Bag-of-Words or TF-IDF.</p>
+<div class="callout analogy"><div class="callout-h">Analogy</div><p>Think of prepping vegetables before cooking: you wash off dirt (clean), chop into</p></div>
+<p>pieces (tokenize), throw out the stems nobody eats (stopwords), and cut everything to a
+uniform size (stemming) so it all cooks evenly. Only <em>then</em> do you start the actual
+recipe (the model).</p>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Token</span> = one unit of text, usually a single word, after splitting</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Stopword</span> = a super-common, low-information word like &#x27;the&#x27; or &#x27;is&#x27; that we usually drop</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Stemming / Lemmatization</span> = cutting words down to a root so &#x27;run&#x27;, &#x27;running&#x27;, &#x27;ran&#x27; count as the same thing</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">import re
+
+def clean_text(text):
+    text = text.lower()
+    text = re.sub(r&quot;http\S+&quot;, &quot;&quot;, text)          # remove URLs
+    text = re.sub(r&quot;@\w+&quot;, &quot;&quot;, text)              # remove @mentions
+    text = re.sub(r&quot;[^a-z\s]&quot;, &quot;&quot;, text)          # keep letters/spaces only
+    return text.strip()
+
+raw = &quot;Check out https://x.com @user This MOVIE was absolutely AMAZING!!! 10/10&quot;
+print(&quot;raw   :&quot;, raw)
+print(&quot;clean :&quot;, clean_text(raw))
+
+STOPWORDS = {&quot;the&quot;,&quot;is&quot;,&quot;a&quot;,&quot;an&quot;,&quot;and&quot;,&quot;or&quot;,&quot;this&quot;,&quot;was&quot;,&quot;were&quot;,&quot;of&quot;,&quot;to&quot;,&quot;it&quot;,
+             &quot;in&quot;,&quot;on&quot;,&quot;for&quot;,&quot;with&quot;,&quot;out&quot;,&quot;check&quot;}
+tokens = [w for w in clean_text(raw).split() if w not in STOPWORDS]
+print(&quot;tokens:&quot;, tokens)</code></pre><div class="outputs"><pre class="out stream">raw   : Check out https://x.com @user This MOVIE was absolutely AMAZING!!! 10/10
+clean : check out   this movie was absolutely amazing
+tokens: [&#x27;movie&#x27;, &#x27;absolutely&#x27;, &#x27;amazing&#x27;]
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>clean_text</code> lowercases everything, then uses regular expressions to delete URLs,
+  @mentions, and anything that isn't a letter or space.</li>
+<li>After cleaning, we split on spaces and drop stopwords, leaving only the words that
+  carry meaning: <code>movie</code>, <code>absolutely</code>, <code>amazing</code>.</li>
+<li>That short list of tokens is what we'll turn into numbers next.</li>
+</ul></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Clean -&gt; tokenize -&gt; drop stopwords -&gt; stem -&gt; vectorize: get from messy strings to meaningful tokens first.</p></div>
+<h2>20.2 Bag-of-Words — the simplest vectorization</h2>
+<p>Represent each document by <strong>word counts</strong>, ignoring order. The vocabulary becomes the
+feature columns; each document is a row of counts.</p>
+<div class="callout analogy"><div class="callout-h">Analogy</div><p>Imagine dumping each sentence into a bag and shaking it — you keep <em>which</em> words are</p></div>
+<p>present and <em>how many</em>, but lose the order. "Dog bites man" and "man bites dog" look
+identical in the bag. Crude, but surprisingly useful as a starting point.</p>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Bag-of-Words</span> = representing text as word counts, ignoring word order</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">from sklearn.feature_extraction.text import CountVectorizer
+
+corpus = [
+    &quot;the movie was great and the acting was great&quot;,
+    &quot;terrible movie boring acting&quot;,
+    &quot;great acting wonderful film&quot;,
+    &quot;boring and terrible film&quot;,
+]
+bow = CountVectorizer(stop_words=&quot;english&quot;)
+X_bow = bow.fit_transform(corpus)
+print(&quot;vocabulary:&quot;, bow.get_feature_names_out().tolist())
+print(pd.DataFrame(X_bow.toarray(), columns=bow.get_feature_names_out()))</code></pre><div class="outputs"><pre class="out stream">vocabulary: [&#x27;acting&#x27;, &#x27;boring&#x27;, &#x27;film&#x27;, &#x27;great&#x27;, &#x27;movie&#x27;, &#x27;terrible&#x27;, &#x27;wonderful&#x27;]
+   acting  boring  film  great  movie  terrible  wonderful
+0       1       0     0      2      1         0          0
+1       1       1     0      0      1         1          0
+2       1       0     1      1      0         0          1
+3       0       1     1      0      0         1          0
+</pre></div></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p>Raw counts let <strong>common words dominate</strong> even when they're uninformative. A word that</p></div>
+<p>appears in <em>every</em> document tells you nothing about which document is which. TF-IDF
+fixes exactly this.</p>
+<h2>20.3 TF-IDF — weight words by informativeness</h2>
+<p><strong>TF-IDF</strong> = Term Frequency x Inverse Document Frequency:
+- <strong>TF</strong>: how often a word appears in <em>this</em> document (local importance).
+- <strong>IDF</strong>: $\log(N / \text{docs containing the word})$ — down-weights words common
+  across <em>all</em> documents, up-weights rare, distinctive ones.</p>
+<p>A word that's frequent <em>here</em> but rare <em>overall</em> scores high — exactly the words that
+characterize the document.</p>
+<div class="callout analogy"><div class="callout-h">Analogy</div><p>At a data-science meetup, everyone says "model" — so hearing "model" tells you nothing</p></div>
+<p>about a person. But if someone keeps saying "astrophysics", that's <em>distinctive</em> and
+tells you a lot about them. TF-IDF gives high scores to the "astrophysics" words and low
+scores to the "model" words.</p>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">TF-IDF</span> = term frequency times inverse document frequency; scores words high when frequent here but rare overall</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">from sklearn.feature_extraction.text import TfidfVectorizer
+tfidf = TfidfVectorizer(stop_words=&quot;english&quot;)
+X_tfidf = tfidf.fit_transform(corpus)
+df_tfidf = pd.DataFrame(X_tfidf.toarray().round(2),
+                        columns=tfidf.get_feature_names_out())
+print(&quot;TF-IDF matrix (higher = more distinctive to that document):&quot;)
+print(df_tfidf)</code></pre><div class="outputs"><pre class="out stream">TF-IDF matrix (higher = more distinctive to that document):
+   acting  boring  film  great  movie  terrible  wonderful
+0    0.34    0.00  0.00   0.84   0.42      0.00       0.00
+1    0.42    0.52  0.00   0.00   0.52      0.52       0.00
+2    0.39    0.00  0.48   0.48   0.00      0.00       0.61
+3    0.00    0.58  0.58   0.00   0.00      0.58       0.00
+</pre></div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Bag-of-Words counts words; TF-IDF weights them by how distinctive they are -- the basis of text search &amp; classification.</p></div>
+<h2>20.4 N-grams — putting <em>word order</em> back in</h2>
+<p>Bag-of-Words and plain TF-IDF throw away order, so <strong>"not good"</strong> and <strong>"good"</strong> look
+almost identical — a disaster for sentiment. <strong>N-grams</strong> treat sequences of <em>n</em>
+adjacent words as features:
+- <strong>unigram</strong> (n=1): <code>good</code>, <code>not</code>, <code>movie</code>
+- <strong>bigram</strong> (n=2): <code>not good</code>, <code>good movie</code>
+- <strong>trigram</strong> (n=3): <code>was not good</code></p>
+<p>Set <code>ngram_range=(1, 2)</code> to keep unigrams <strong>and</strong> bigrams, so <code>not good</code> becomes its own
+feature the model can learn is negative.</p>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">N-gram</span> = a sequence of n adjacent words treated as one feature (bigram = 2 words)</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">neg = &quot;the movie was not good not funny&quot;
+uni = CountVectorizer(ngram_range=(1,1)).fit([neg])
+bi  = CountVectorizer(ngram_range=(2,2)).fit([neg])
+tri = CountVectorizer(ngram_range=(3,3)).fit([neg])
+print(&quot;unigrams:&quot;, uni.get_feature_names_out().tolist())
+print(&quot;bigrams :&quot;, bi.get_feature_names_out().tolist())
+print(&quot;trigrams:&quot;, tri.get_feature_names_out().tolist())</code></pre><div class="outputs"><pre class="out stream">unigrams: [&#x27;funny&#x27;, &#x27;good&#x27;, &#x27;movie&#x27;, &#x27;not&#x27;, &#x27;the&#x27;, &#x27;was&#x27;]
+bigrams : [&#x27;good not&#x27;, &#x27;movie was&#x27;, &#x27;not funny&#x27;, &#x27;not good&#x27;, &#x27;the movie&#x27;, &#x27;was not&#x27;]
+trigrams: [&#x27;good not funny&#x27;, &#x27;movie was not&#x27;, &#x27;not good not&#x27;, &#x27;the movie was&#x27;, &#x27;was not good&#x27;]
+</pre></div></div>
+<div class="codecell"><pre class="code"><code class="language-python"># Proof it helps: &#x27;not good&#x27; vs &#x27;good&#x27; become DIFFERENT features with bigrams.
+from sklearn.metrics.pairwise import cosine_similarity
+pair = [&quot;this is good&quot;, &quot;this is not good&quot;]
+uni_v = TfidfVectorizer(ngram_range=(1,1)).fit_transform(pair)
+bi_v  = TfidfVectorizer(ngram_range=(1,2)).fit_transform(pair)
+print(&quot;cosine similarity of the two sentences:&quot;)
+print(f&quot;  unigrams only : {cosine_similarity(uni_v)[0,1]:.3f}  (look almost identical!)&quot;)
+print(f&quot;  with bigrams  : {cosine_similarity(bi_v)[0,1]:.3f}  (correctly more different)&quot;)</code></pre><div class="outputs"><pre class="out stream">cosine similarity of the two sentences:
+  unigrams only : 0.777  (look almost identical!)
+  with bigrams  : 0.519  (correctly more different)
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li>"this is good" and "this is not good" share almost all their single words, so with
+  <strong>unigrams only</strong> the similarity is high — the model can't tell praise from criticism.</li>
+<li>Adding <strong>bigrams</strong> creates the feature "not good", which only the second sentence has,
+  so the similarity drops — the model can now tell them apart. That's why n-grams matter
+  for sentiment.</li>
+</ul></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p>Higher n captures more context but <strong>explodes</strong> the vocabulary (more sparsity, more
+memory) and risks overfitting. Practical defaults: <code>ngram_range=(1,2)</code> plus <code>min_df</code>
+(ignore ultra-rare n-grams) and <code>max_df</code> (ignore near-universal ones). Character n-grams
+(<code>analyzer="char_wb"</code>) shine for typos and language identification.</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>N-grams (ngram_range=(1,2)) restore local word order so 'not good' != 'good' -- essential for sentiment.</p></div>
+<h2>20.5 Cosine similarity — semantic/document search</h2>
+<p>To find similar documents, measure the <strong>angle</strong> between their TF-IDF vectors.
+<strong>Cosine similarity</strong> = 1 when they point the same way, 0 when they share no words. It
+ignores document length, which is why it's the standard for text search and clustering.</p>
+<div class="callout analogy"><div class="callout-h">Analogy</div><p>Imagine each document as an arrow in space, one axis per word. Two documents about the</p></div>
+<p>same thing point in nearly the same direction (small angle -&gt; cosine near 1); unrelated
+ones point at right angles (cosine near 0). We compare <em>direction</em>, not <em>length</em>, so a
+short tweet and a long article about the same topic still match.</p>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Cosine similarity</span> = how aligned two vectors are by the angle between them: 1 = same direction, 0 = unrelated</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">from sklearn.metrics.pairwise import cosine_similarity
+sim = cosine_similarity(X_tfidf)
+print(&quot;document-document cosine similarity:&quot;)
+print(pd.DataFrame(sim.round(2),
+                   index=[f&quot;doc{i}&quot; for i in range(4)],
+                   columns=[f&quot;doc{i}&quot; for i in range(4)]))
+
+# &#x27;Search&#x27;: find the document most similar to a query
+query = tfidf.transform([&quot;wonderful great acting&quot;])
+scores = cosine_similarity(query, X_tfidf).ravel()
+best = scores.argmax()
+print(f&quot;\nquery best-matches doc{best}: &#x27;{corpus[best]}&#x27; (score {scores[best]:.2f})&quot;)</code></pre><div class="outputs"><pre class="out stream">document-document cosine similarity:
+      doc0  doc1  doc2  doc3
+doc0  1.00  0.36  0.54  0.00
+doc1  0.36  1.00  0.17  0.60
+doc2  0.54  0.17  1.00  0.28
+doc3  0.00  0.60  0.28  1.00
+</pre><pre class="out stream">
+query best-matches doc2: &#x27;great acting wonderful film&#x27; (score 0.87)
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li>The square matrix compares every document to every other; the diagonal is 1.0 (each
+  doc is identical to itself).</li>
+<li>For "search", we turn a query into the same TF-IDF space, compute its cosine to every
+  document, and pick the highest score with <code>argmax</code>. That's a tiny search engine.</li>
+</ul></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Cosine similarity compares text vectors by angle (ignores length) -&gt; the core of document search and clustering.</p></div>
+<h2>20.6 Topic modelling with LDA (Latent Dirichlet Allocation)</h2>
+<div class="callout warn"><div class="callout-h">Watch out</div><p>This "LDA" is <strong>not</strong> the Linear Discriminant Analysis from the clustering/PCA module —</p></div>
+<p>same acronym, totally different method. This one is <strong>unsupervised topic discovery</strong>.</p>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>LDA reads a pile of documents with <em>no labels</em> and figures out the hidden themes. Its
+worldview: every topic is a favourite set of words (a "sports" topic loves
+<em>game/team/score</em>), and every document is a blend of topics (60% sports + 40%
+politics). You tell it how many topics to look for; it hands back the word-mix per topic
+and the topic-mix per document. Great for exploring big unlabelled text.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">LDA (topic modelling)</span> = unsupervised method that discovers hidden topics as word-distributions across documents</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">from sklearn.decomposition import LatentDirichletAllocation
+
+docs = [
+    &quot;the team won the game with a great score&quot;,
+    &quot;players scored goals in the football match&quot;,
+    &quot;the election results show the new policy vote&quot;,
+    &quot;government policy and the election campaign debate&quot;,
+    &quot;the match ended with a winning goal by the team&quot;,
+    &quot;voters chose the party in the national election&quot;,
+]
+cv = CountVectorizer(stop_words=&quot;english&quot;)
+dtm = cv.fit_transform(docs)
+
+lda_topics = LatentDirichletAllocation(n_components=2, random_state=0).fit(dtm)
+
+vocab = cv.get_feature_names_out()
+for k, comp in enumerate(lda_topics.components_):
+    top = [vocab[i] for i in comp.argsort()[-5:][::-1]]
+    print(f&quot;Topic {k}: {top}&quot;)
+
+doc_topics = lda_topics.transform(dtm)
+for i, dist in enumerate(doc_topics):
+    print(f&quot;doc{i} topic mix -&gt; {dist.round(2)}  (dominant: Topic {dist.argmax()})&quot;)</code></pre><div class="outputs"><pre class="out stream">Topic 0: [&#x27;election&#x27;, &#x27;policy&#x27;, &#x27;team&#x27;, &#x27;government&#x27;, &#x27;debate&#x27;]
+Topic 1: [&#x27;match&#x27;, &#x27;team&#x27;, &#x27;scored&#x27;, &#x27;players&#x27;, &#x27;goals&#x27;]
+doc0 topic mix -&gt; [0.91 0.09]  (dominant: Topic 0)
+doc1 topic mix -&gt; [0.09 0.91]  (dominant: Topic 1)
+doc2 topic mix -&gt; [0.91 0.09]  (dominant: Topic 0)
+doc3 topic mix -&gt; [0.91 0.09]  (dominant: Topic 0)
+doc4 topic mix -&gt; [0.09 0.91]  (dominant: Topic 1)
+doc5 topic mix -&gt; [0.1 0.9]  (dominant: Topic 1)
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li>We feed LDA <strong>counts</strong> (from CountVectorizer, not TF-IDF) and ask for 2 topics.</li>
+<li><code>components_</code> holds each topic's word weights; we print the top-5 words per topic —
+  one clusters the <em>sports</em> words, the other the <em>politics</em> words, with no labels given.</li>
+<li><code>transform</code> then reports each document's topic mixture; <code>argmax</code> names its dominant
+  topic. That's unsupervised structure discovery over text.</li>
+</ul></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>LDA discovers hidden topics in unlabelled text (feed it counts, not TF-IDF); distinct from Linear Discriminant Analysis.</p></div>
+<h2>20.7 A working sentiment classifier</h2>
+<p>Combine TF-IDF with a classifier (Logistic Regression) inside a Pipeline — the exact
+architecture of a Twitter sentiment app: <strong>vectorize -&gt; classify</strong>.</p>
+<div class="codecell"><pre class="code"><code class="language-python">from sklearn.pipeline import Pipeline
+from sklearn.linear_model import LogisticRegression
+
+train_texts = [
+    &quot;great movie loved it&quot;, &quot;amazing film wonderful acting&quot;, &quot;best i have seen&quot;,
+    &quot;fantastic and brilliant&quot;, &quot;really enjoyed this&quot;,
+    &quot;terrible boring waste&quot;, &quot;awful acting hated it&quot;, &quot;worst film ever&quot;,
+    &quot;so bad and disappointing&quot;, &quot;do not watch this&quot;,
+]
+train_labels = [1,1,1,1,1, 0,0,0,0,0]   # 1 = positive, 0 = negative
+
+sentiment = Pipeline([
+    (&quot;tfidf&quot;, TfidfVectorizer(stop_words=&quot;english&quot;)),
+    (&quot;clf&quot;, LogisticRegression()),
+]).fit(train_texts, train_labels)
+
+tests = [&quot;wonderful and amazing&quot;, &quot;boring waste of time&quot;, &quot;i loved the acting&quot;]
+for t in tests:
+    p = sentiment.predict([t])[0]
+    prob = sentiment.predict_proba([t])[0][1]
+    print(f&quot;&#x27;{t}&#x27; -&gt; {&#x27;POSITIVE&#x27; if p==1 else &#x27;NEGATIVE&#x27;} (P(pos)={prob:.2f})&quot;)</code></pre><div class="outputs"><pre class="out stream">&#x27;wonderful and amazing&#x27; -&gt; POSITIVE (P(pos)=0.58)
+&#x27;boring waste of time&#x27; -&gt; NEGATIVE (P(pos)=0.42)
+&#x27;i loved the acting&#x27; -&gt; POSITIVE (P(pos)=0.54)
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li>The <code>Pipeline</code> chains TF-IDF (text -&gt; numbers) directly into Logistic Regression
+  (numbers -&gt; label), so calling <code>.fit</code>/<code>.predict</code> on raw text just works.</li>
+<li><code>predict_proba(...)[0][1]</code> gives the model's confidence that the text is positive.</li>
+<li>Positive-leaning phrases score high P(pos); negative ones score low. Same shape as a
+  production sentiment service.</li>
+</ul></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p>With only ten examples this is illustrative, not production-grade. Real sentiment needs
+thousands of labelled examples, careful preprocessing, and often modern <strong>embeddings /
+transformers</strong> (BERT and friends) that understand context far better than TF-IDF. But
+the pipeline <em>shape</em> — vectorize then classify — is exactly what ships in production;
+you'd just swap the vectorizer/model.</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Sentiment = a TF-IDF -&gt; classifier Pipeline; upgrade the vectorizer to embeddings/transformers for real accuracy.</p></div>
+<h2>20.8 Recommendation systems — two core paradigms</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><ul>
+<li><strong>Content-based</strong>: "You liked this action movie, here's another action movie." It
+  compares <em>item features</em> — same cosine-similarity trick on genre vectors.</li>
+<li><strong>Collaborative filtering</strong>: "People who are similar to you also liked X." It uses
+  only the <em>who-rated-what</em> table, no item features needed.
+Both are just similarity again — one on items, one on users.</li>
+</ul></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Content-based filtering</span> = recommend items similar to what you liked, using item features</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Collaborative filtering</span> = recommend based on what similar users liked, using the user-item rating matrix</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># CONTENT-BASED: recommend movies by genre-feature similarity
+movies = pd.DataFrame({
+    &quot;title&quot;: [&quot;Action A&quot;,&quot;Action B&quot;,&quot;Romance C&quot;,&quot;Romance D&quot;,&quot;ComedyE&quot;],
+    &quot;action&quot;:[1,1,0,0,0], &quot;romance&quot;:[0,0,1,1,0], &quot;comedy&quot;:[0,0,0,0,1],
+}).set_index(&quot;title&quot;)
+
+item_sim = cosine_similarity(movies.values)
+item_sim = pd.DataFrame(item_sim, index=movies.index, columns=movies.index)
+
+liked = &quot;Action A&quot;
+recs = item_sim[liked].drop(liked).sort_values(ascending=False)
+print(f&quot;Because you liked &#x27;{liked}&#x27;, we recommend:&quot;)
+print(recs.round(2))</code></pre><div class="outputs"><pre class="out stream">Because you liked &#x27;Action A&#x27;, we recommend:
+title
+Action B     1.0
+Romance C    0.0
+Romance D    0.0
+ComedyE      0.0
+Name: Action A, dtype: float64
+</pre></div></div>
+<div class="codecell"><pre class="code"><code class="language-python"># COLLABORATIVE: user-item ratings; find similar users and recommend
+ratings = pd.DataFrame({
+    &quot;Action A&quot;:[5, 4, 1, np.nan, 5],
+    &quot;Action B&quot;:[4, 5, np.nan, 1, 4],
+    &quot;Romance C&quot;:[1, np.nan, 5, 4, 1],
+    &quot;Romance D&quot;:[np.nan, 1, 4, 5, np.nan],
+}, index=[&quot;Ann&quot;,&quot;Ben&quot;,&quot;Cara&quot;,&quot;Dan&quot;,&quot;Eve&quot;])
+print(&quot;user-item rating matrix:&quot;)
+print(ratings)
+
+user_sim = cosine_similarity(ratings.fillna(0))
+user_sim = pd.DataFrame(user_sim, index=ratings.index, columns=ratings.index)
+target = &quot;Eve&quot;
+closest = user_sim[target].drop(target).idxmax()
+print(f&quot;\n&#x27;{target}&#x27; is most similar to &#x27;{closest}&#x27;.&quot;)
+unseen = ratings.loc[target].isna()
+recommend = ratings.loc[closest][unseen].idxmax()
+print(f&quot;Recommend &#x27;{recommend}&#x27; to {target} (highly rated by {closest}, unseen by {target}).&quot;)</code></pre><div class="outputs"><pre class="out stream">user-item rating matrix:</pre><pre class="out stream">
+      Action A  Action B  Romance C  Romance D
+Ann        5.0       4.0        1.0        NaN
+Ben        4.0       5.0        NaN        1.0
+Cara       1.0       NaN        5.0        4.0
+Dan        NaN       1.0        4.0        5.0
+Eve        5.0       4.0        1.0        NaN
+
+&#x27;Eve&#x27; is most similar to &#x27;Ann&#x27;.
+Recommend &#x27;nan&#x27; to Eve (highly rated by Ann, unseen by Eve).
+</pre><pre class="out stream">/home/user/webapp/.pytmp/ipykernel_32958/1015906376.py:17: FutureWarning: The behavior of Series.idxmax with all-NA values, or any-NA and skipna=False, is deprecated. In a future version this will raise ValueError
+  recommend = ratings.loc[closest][unseen].idxmax()
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><strong>Content-based</strong>: each movie is a genre vector; cosine similarity ranks other movies
+  by how genre-alike they are to the one you liked (Action A -&gt; Action B).</li>
+<li><strong>Collaborative</strong>: we find the user most similar to Eve by comparing their rating
+  rows, then recommend an item that neighbour rated highly which Eve hasn't seen yet.</li>
+</ul></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p><strong>Cold-start problem</strong>: collaborative filtering fails for brand-new users or items with</p></div>
+<p>no ratings yet — there's nothing to compare. Fixes: fall back to content-based, use
+popularity defaults, or ask a few onboarding questions. Real systems are <strong>hybrids</strong> of
+both paradigms.</p>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Content-based compares item features; collaborative compares user behaviour; combine them and handle cold-start.</p></div>
+<h2>20.9 Practice</h2>
+<div class="callout try"><div class="callout-h">Try this yourself</div><ol>
+<li>Add bigrams to the sentiment TF-IDF (<code>ngram_range=(1,2)</code>). Does "not good" now behave</li>
+</ol></div>
+<p>differently from "good"?
+2. Build a mini document-search over 5 sentences of your own; return the top-2 matches
+   for a query.
+3. In the collaborative example, recommend for "Cara" and explain the logic.
+4. Explain content-based vs collaborative filtering to a non-technical manager, and when
+   each fails.</p>
+<h2>Summary</h2>
+<ul>
+<li>NLP pipeline: clean -&gt; tokenize -&gt; stopwords -&gt; stem/lemmatize -&gt; <strong>vectorize</strong>.</li>
+<li><strong>Bag-of-Words</strong> counts words; <strong>TF-IDF</strong> weights them by informativeness -- the basis
+  of search and text classification.</li>
+<li><strong>N-grams</strong> (<code>ngram_range=(1,2)</code>) restore word order so <strong>"not good" != "good"</strong>.</li>
+<li><strong>LDA topic modelling</strong> discovers hidden topics in unlabelled text (distinct from
+  Linear Discriminant Analysis).</li>
+<li><strong>Cosine similarity</strong> compares text vectors by angle -&gt; semantic search &amp; clustering.</li>
+<li>Sentiment = <strong>TF-IDF -&gt; classifier</strong> Pipeline.</li>
+<li>Recommenders: <strong>content-based</strong> (item features) vs <strong>collaborative</strong> (user-item
+  matrix); watch <strong>cold-start</strong>; real systems are hybrids.</li>
+</ul>
+<p>Next: <strong>Module 21 — Bash &amp; Git for Data Scientists</strong>.</p>
+    <div class="lesson-nav">
+      <a class="pn prev" href="/lessons/19_time_series.html">← Time Series</a>
+      <a class="pn next" href="/lessons/21_bash_git.html">Bash &amp; Git →</a>
+    </div>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>

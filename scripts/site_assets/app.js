@@ -1,12 +1,39 @@
 /* DS Bridging Bootcamp — client JS: search, progress, mobile menu */
 (function () {
-  // ---- mobile menu ----
+  // ---- mobile menu (off-canvas sidebar + dimming overlay) ----
   var toggle = document.getElementById('menu-toggle');
   var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('sidebar-overlay');
   if (toggle && sidebar) {
-    toggle.addEventListener('click', function () { sidebar.classList.toggle('open'); });
+    function openMenu() {
+      sidebar.classList.add('open');
+      if (overlay) overlay.classList.add('show');
+      document.body.classList.add('menu-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.innerHTML = '\u2715'; // ✕
+    }
+    function closeMenu() {
+      sidebar.classList.remove('open');
+      if (overlay) overlay.classList.remove('show');
+      document.body.classList.remove('menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.innerHTML = '\u2630'; // ☰
+    }
+    toggle.setAttribute('aria-label', 'Toggle navigation menu');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.addEventListener('click', function () {
+      if (sidebar.classList.contains('open')) closeMenu(); else openMenu();
+    });
+    if (overlay) overlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeMenu();
+    });
     document.querySelectorAll('.nav-item').forEach(function (a) {
-      a.addEventListener('click', function () { sidebar.classList.remove('open'); });
+      a.addEventListener('click', closeMenu);
+    });
+    // if the viewport grows back to desktop, make sure the menu state resets
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 900) closeMenu();
     });
   }
 

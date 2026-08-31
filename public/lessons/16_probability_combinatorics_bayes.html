@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 16 — Probability, Combinatorics &amp; Bayes — DS Bridging Bootcamp</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+<div id="sidebar-overlay"></div>
+<aside id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-logo">🚀</span>
+    <span class="brand-text">DS Bridging<br><small>Bootcamp</small></span>
+  </a>
+  <div class="search-box">
+    <input id="search" type="search" placeholder="Search lessons…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <nav id="nav">
+    <a class="nav-item " href="/lessons/0_absolute_basics_python.html" data-slug="0_absolute_basics_python"><span class="nav-emoji">🐣</span><span class="nav-num">M0</span><span class="nav-label">Absolute Basics: Python from Zero</span></a>
+<a class="nav-item " href="/lessons/01_numpy.html" data-slug="01_numpy"><span class="nav-emoji">🔢</span><span class="nav-num">M1</span><span class="nav-label">NumPy: Fast Arrays</span></a>
+<a class="nav-item " href="/lessons/02_pandas.html" data-slug="02_pandas"><span class="nav-emoji">🐼</span><span class="nav-num">M2</span><span class="nav-label">Pandas: Spreadsheets in Python</span></a>
+<a class="nav-item " href="/lessons/03_data_cleaning.html" data-slug="03_data_cleaning"><span class="nav-emoji">🧹</span><span class="nav-num">M3</span><span class="nav-label">Data Cleaning</span></a>
+<a class="nav-item " href="/lessons/04_eda_visualization.html" data-slug="04_eda_visualization"><span class="nav-emoji">📊</span><span class="nav-num">M4</span><span class="nav-label">EDA &amp; Visualization</span></a>
+<a class="nav-item " href="/lessons/05_statistics_probability.html" data-slug="05_statistics_probability"><span class="nav-emoji">📈</span><span class="nav-num">M5</span><span class="nav-label">Statistics &amp; Probability</span></a>
+<a class="nav-item " href="/lessons/06_feature_engineering_scaling.html" data-slug="06_feature_engineering_scaling"><span class="nav-emoji">⚙️</span><span class="nav-num">M6</span><span class="nav-label">Feature Engineering &amp; Scaling</span></a>
+<a class="nav-item " href="/lessons/07_regression.html" data-slug="07_regression"><span class="nav-emoji">📉</span><span class="nav-num">M7</span><span class="nav-label">Regression</span></a>
+<a class="nav-item " href="/lessons/08_classification_knn.html" data-slug="08_classification_knn"><span class="nav-emoji">🎯</span><span class="nav-num">M8</span><span class="nav-label">Classification &amp; KNN</span></a>
+<a class="nav-item " href="/lessons/09_evaluation_cv_gridsearch.html" data-slug="09_evaluation_cv_gridsearch"><span class="nav-emoji">🔍</span><span class="nav-num">M9</span><span class="nav-label">Evaluation, CV &amp; Grid Search</span></a>
+<a class="nav-item " href="/lessons/10_trees_ensembles_boosting.html" data-slug="10_trees_ensembles_boosting"><span class="nav-emoji">🌳</span><span class="nav-num">M10</span><span class="nav-label">Trees, Ensembles &amp; Boosting</span></a>
+<a class="nav-item " href="/lessons/11_clustering_pca.html" data-slug="11_clustering_pca"><span class="nav-emoji">🔮</span><span class="nav-num">M11</span><span class="nav-label">Clustering &amp; PCA</span></a>
+<a class="nav-item " href="/lessons/12_neural_networks_intro.html" data-slug="12_neural_networks_intro"><span class="nav-emoji">🧠</span><span class="nav-num">M12</span><span class="nav-label">Neural Networks Intro</span></a>
+<a class="nav-item " href="/lessons/13_job_readiness_interview_prep.html" data-slug="13_job_readiness_interview_prep"><span class="nav-emoji">💼</span><span class="nav-num">M13</span><span class="nav-label">Job Readiness &amp; Interviews</span></a>
+<a class="nav-item " href="/lessons/14_sql_for_data_science.html" data-slug="14_sql_for_data_science"><span class="nav-emoji">🗄️</span><span class="nav-num">M14</span><span class="nav-label">SQL for Data Science</span></a>
+<a class="nav-item " href="/lessons/15_apis_web_scraping.html" data-slug="15_apis_web_scraping"><span class="nav-emoji">🕸️</span><span class="nav-num">M15</span><span class="nav-label">APIs &amp; Web Scraping</span></a>
+<a class="nav-item active" href="/lessons/16_probability_combinatorics_bayes.html" data-slug="16_probability_combinatorics_bayes"><span class="nav-emoji">🎲</span><span class="nav-num">M16</span><span class="nav-label">Probability, Combinatorics, Bayes</span></a>
+<a class="nav-item " href="/lessons/17_ab_testing_anova_power.html" data-slug="17_ab_testing_anova_power"><span class="nav-emoji">🧪</span><span class="nav-num">M17</span><span class="nav-label">A/B Testing, ANOVA &amp; Power</span></a>
+<a class="nav-item " href="/lessons/18_oop_linear_algebra_calculus.html" data-slug="18_oop_linear_algebra_calculus"><span class="nav-emoji">➗</span><span class="nav-num">M18</span><span class="nav-label">OOP, Linear Algebra &amp; Calculus</span></a>
+<a class="nav-item " href="/lessons/19_time_series.html" data-slug="19_time_series"><span class="nav-emoji">⏳</span><span class="nav-num">M19</span><span class="nav-label">Time Series</span></a>
+<a class="nav-item " href="/lessons/20_nlp_recommendation_systems.html" data-slug="20_nlp_recommendation_systems"><span class="nav-emoji">💬</span><span class="nav-num">M20</span><span class="nav-label">NLP &amp; Recommender Systems</span></a>
+<a class="nav-item " href="/lessons/21_bash_git.html" data-slug="21_bash_git"><span class="nav-emoji">🐚</span><span class="nav-num">M21</span><span class="nav-label">Bash &amp; Git</span></a>
+<a class="nav-item " href="/lessons/22_bigdata_spark.html" data-slug="22_bigdata_spark"><span class="nav-emoji">⚡</span><span class="nav-num">M22</span><span class="nav-label">Big Data &amp; Spark</span></a>
+<a class="nav-item " href="/lessons/23_aws_deployment_mlops.html" data-slug="23_aws_deployment_mlops"><span class="nav-emoji">☁️</span><span class="nav-num">M23</span><span class="nav-label">AWS Deployment &amp; MLOps</span></a>
+  </nav>
+</aside>
+<main id="content">
+  <div class="lesson-wrap">
+    <div class="crumb">Module 16</div>
+    <div class="runbar"><span class="runbar-label">▶ Run this lesson yourself:</span><a class="runbtn colab" href="https://colab.research.google.com/github/Kaks753/DS_bridging/blob/main/notebooks/16_probability_combinatorics_bayes.ipynb" target="_blank" rel="noopener">Open in Colab</a><a class="runbtn gh" href="https://github.com/Kaks753/DS_bridging/blob/main/notebooks/16_probability_combinatorics_bayes.ipynb" target="_blank" rel="noopener">View on GitHub</a><span class="runbar-hint">In Colab, press <kbd>Shift</kbd>+<kbd>Enter</kbd> to run each cell.</span></div>
+    <div class="intro"><p>Probability is the <strong>language of uncertainty</strong> — the foundation under every
+statistical test and every ML model. As a Math grad this is home turf; here we make
+it <strong>computational and intuitive</strong>, then build up to <strong>Bayes' theorem</strong> and the
+<strong>Naive Bayes classifier</strong> that powers spam filters and sentiment apps.</p>
+<p><strong>What you'll be able to do by the end:</strong>
+- Count arrangements the right way (permutations vs combinations).
+- Apply the probability rules without mixing up <em>exclusive</em> and <em>independent</em>.
+- Update a belief with evidence using <strong>Bayes' theorem</strong> (and explain the famous
+  medical-test paradox out loud).
+- Build a <strong>Naive Bayes</strong> spam classifier — first by hand, then with scikit-learn.</p></div>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Probability is just a number between 0 and 1 that says <em>how sure</em> we are something
+happens. 0 = "no chance", 1 = "certain", 0.5 = "coin flip".</p>
+<p>Everything else in this module is bookkeeping: <strong>counting</strong> how many ways things can
+happen, and <strong>updating</strong> our number when new information arrives. That's it. If you
+can keep a tally and do a little arithmetic, you can do probability.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from math import factorial, comb, perm
+sns.set_theme(style=&quot;whitegrid&quot;)
+rng = np.random.default_rng(0)
+print(&quot;Tools ready.&quot;)</code></pre><div class="outputs"><pre class="out stream">Tools ready.
+</pre></div></div>
+<h2>16.1 Counting — permutations vs combinations</h2>
+<p>Before we can compute a probability, we often need to count <em>how many outcomes are
+possible</em>. Two words trip everyone up:</p>
+<div class="callout analogy"><div class="callout-h">Analogy</div><p>Think of a race with 8 runners.</p></div>
+<ul>
+<li><strong>Permutation</strong> = handing out <strong>gold, silver, bronze</strong>. Order matters — 1st place
+  is different from 3rd place.</li>
+<li><strong>Combination</strong> = picking <strong>3 runners for a random drug test</strong>. Order doesn't
+  matter — the same 3 people is the same group no matter who you name first.</li>
+</ul>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Permutation</span> = an arrangement where ORDER matters (gold/silver/bronze)</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Combination</span> = a selection where order does NOT matter (a committee of 3)</p></div>
+<p>The formulas:</p>
+<p>$$ \text{Permutations: } P(n,r) = \frac{n!}{(n-r)!} \qquad
+   \text{Combinations: } C(n,r) = \binom{n}{r} = \frac{n!}{r!\,(n-r)!} $$</p>
+<p>The only difference is the extra <code>r!</code> on the bottom for combinations — it <em>divides
+out</em> the orderings we don't want to count.</p>
+<div class="codecell"><pre class="code"><code class="language-python">print(&quot;Ways to rank top-3 of 8 runners (order matters):&quot;, perm(8, 3))
+print(&quot;Ways to pick a 3-person committee from 8 (order doesn&#x27;t):&quot;, comb(8, 3))
+print(&quot;Distinct 5-card poker hands from 52:&quot;, comb(52, 5))
+
+# Verify by brute force on a small case (proof, not faith)
+import itertools
+items = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;]
+print(&quot;\nperm(4,2) =&quot;, perm(4,2), &quot;==&quot;, len(list(itertools.permutations(items, 2))))
+print(&quot;comb(4,2) =&quot;, comb(4,2), &quot;==&quot;, len(list(itertools.combinations(items, 2))))</code></pre><div class="outputs"><pre class="out stream">Ways to rank top-3 of 8 runners (order matters): 336
+Ways to pick a 3-person committee from 8 (order doesn&#x27;t): 56
+Distinct 5-card poker hands from 52: 2598960
+
+perm(4,2) = 12 == 12
+comb(4,2) = 6 == 6
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>perm(8, 3)</code> = 336: gold/silver/bronze from 8 runners.</li>
+<li><code>comb(8, 3)</code> = 56: a 3-person group from 8. Fewer, because we stopped
+  double-counting the same group in different orders.</li>
+<li><code>comb(52, 5)</code> = 2,598,960: every possible poker hand.</li>
+<li>The <code>itertools</code> lines <em>literally list out</em> every arrangement/selection for 4 items
+  and count them — the counts match the formulas exactly. That's our proof.</li>
+</ul></div>
+<h3>✏️ Worked example (by hand): a 3-person committee from 8</h3>
+<p>Let's grind <code>C(8,3)</code> on paper so the formula stops being magic.</p>
+<p>$$ C(8,3) = \frac{8!}{3!\,(8-3)!} = \frac{8!}{3!\,5!} $$</p>
+<p>Expand only what we need (cancel the <code>5!</code>):</p>
+<p>$$ = \frac{8 \times 7 \times 6 \times \cancel{5!}}{(3 \times 2 \times 1)\times \cancel{5!}}
+   = \frac{8 \times 7 \times 6}{6} = \frac{336}{6} = 56 $$</p>
+<p>So there are <strong>56</strong> possible committees. Notice the top (<code>8×7×6 = 336</code>) is exactly the
+<em>permutation</em> count — and dividing by <code>3! = 6</code> removes the orderings. That's the whole
+idea in one line.</p>
+<div class="codecell"><pre class="code"><code class="language-python"># Confirm the by-hand arithmetic step by step
+top = 8 * 7 * 6            # this is perm(8,3)
+bottom = 3 * 2 * 1         # this is 3!
+print(&quot;top (8x7x6) =&quot;, top, &quot; == perm(8,3)?&quot;, top == perm(8, 3))
+print(&quot;bottom (3!) =&quot;, bottom)
+print(&quot;C(8,3) = top / bottom =&quot;, top // bottom, &quot; == comb(8,3)?&quot;, top // bottom == comb(8, 3))</code></pre><div class="outputs"><pre class="out stream">top (8x7x6) = 336  == perm(8,3)? True
+bottom (3!) = 6
+C(8,3) = top / bottom = 56  == comb(8,3)? True
+</pre></div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Order matters -&gt; permutation; order doesn't -&gt; combination (divide by r! to kill the orderings).</p></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div><p>Compute C(52,5) by hand as (52x51x50x49x48)/5! and check it equals 2,598,960.</p></div>
+<h2>16.2 The probability rules</h2>
+<p>Four rules cover almost everything. Don't memorize symbols — learn the <em>stories</em>.</p>
+<div class="callout plain"><div class="callout-h">In plain English</div><ul>
+<li><strong>Complement</strong>: the chance something <em>doesn't</em> happen = 1 minus the chance it does.
+  ("If there's a 30% chance of rain, there's a 70% chance of no rain.")</li>
+<li><strong>Addition</strong> (the word <em>OR</em>): chance that A <strong>or</strong> B happens. Add them — but if they
+  can overlap, <em>subtract the overlap once</em> so you don't count it twice.</li>
+<li><strong>Multiplication</strong> (the word <em>AND</em>): chance that A <strong>and</strong> B both happen. Multiply.</li>
+<li><strong>Conditional</strong> (the word <em>GIVEN</em>): chance of A <em>given</em> B already happened. It
+  narrows the world down to only the cases where B is true.</li>
+</ul></div>
+<p>The formal versions:</p>
+<ul>
+<li>Complement: $P(\text{not }A) = 1 - P(A)$</li>
+<li>Addition: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$</li>
+<li>Multiplication: $P(A \cap B) = P(A)\,P(B\mid A)$; if <strong>independent</strong>, $= P(A)\,P(B)$</li>
+<li>Conditional: $P(A \mid B) = \dfrac{P(A \cap B)}{P(B)}$</li>
+</ul>
+<div class="callout warn"><div class="callout-h">Watch out</div><p><strong>Mutually exclusive is NOT the same as independent</strong> — the #1 interview trap here.</p></div>
+<ul>
+<li><em>Mutually exclusive</em> = they <strong>can't both happen</strong> (rolling a 2 and a 5 on one die).
+  So P(both) = 0.</li>
+<li><em>Independent</em> = one <strong>doesn't affect</strong> the other (two separate coin flips).
+If two events are mutually exclusive and both possible, they are actually
+<em>dependent</em> — knowing one happened tells you the other definitely didn't.</li>
+</ul>
+<div class="codecell"><pre class="code"><code class="language-python"># Simulate a fair die to confirm P(even OR &gt;4) via the addition rule
+rolls = rng.integers(1, 7, size=200_000)
+p_even = np.mean(rolls % 2 == 0)
+p_gt4  = np.mean(rolls &gt; 4)
+p_both = np.mean((rolls % 2 == 0) &amp; (rolls &gt; 4))     # only {6}
+p_union_sim = np.mean((rolls % 2 == 0) | (rolls &gt; 4))
+p_union_formula = p_even + p_gt4 - p_both
+print(f&quot;P(even)={p_even:.3f}  P(&gt;4)={p_gt4:.3f}  P(both=6)={p_both:.3f}&quot;)
+print(f&quot;P(even OR &gt;4): simulated={p_union_sim:.3f}, formula={p_union_formula:.3f}&quot;)</code></pre><div class="outputs"><pre class="out stream">P(even)=0.497  P(&gt;4)=0.333  P(both=6)=0.166
+P(even OR &gt;4): simulated=0.664, formula=0.664
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li>We roll a die 200,000 times and just count.</li>
+<li><code>p_even</code> ~ 0.5 (three of six faces), <code>p_gt4</code> ~ 0.333 (faces 5,6).</li>
+<li><code>p_both</code> ~ 0.167 = only the <strong>6</strong> is both even AND &gt;4.</li>
+<li>The addition rule says P(even OR &gt;4) = 0.5 + 0.333 - 0.167 = 0.667. The simulation
+  agrees. We subtracted the 6 once because adding the two groups counted it twice.</li>
+</ul></div>
+<h3>✏️ Worked example (by hand): P(at least one 6 in 4 rolls)</h3>
+<p>"At least one" is the classic flag to <strong>use the complement</strong> — it's far easier to
+count the <em>one</em> way it fails (no sixes at all) than the many ways it succeeds.</p>
+<p>Chance a single roll is <strong>not</strong> a six: $\frac{5}{6}$.
+Four independent rolls all miss (multiplication rule for independent events):</p>
+<p>$$ P(\text{no six in 4}) = \left(\frac{5}{6}\right)^4 = \frac{625}{1296} \approx 0.482 $$</p>
+<p>Therefore:</p>
+<p>$$ P(\text{at least one six}) = 1 - 0.482 = 0.518 \approx 51.8\% $$</p>
+<p>Slightly better than a coin flip — a famous gambling result (the <em>Chevalier de Méré</em>
+problem that helped launch probability theory).</p>
+<div class="codecell"><pre class="code"><code class="language-python">p_no_six_one = 5/6
+p_no_six_four = p_no_six_one ** 4
+p_at_least_one = 1 - p_no_six_four
+print(f&quot;P(no six in 4) = (5/6)^4 = {p_no_six_four:.4f}&quot;)
+print(f&quot;P(at least one six) = {p_at_least_one:.4f}&quot;)
+
+# Verify by simulation
+sims = rng.integers(1, 7, size=(1_000_000, 4))
+got_a_six = (sims == 6).any(axis=1).mean()
+print(f&quot;simulated P(at least one six) = {got_a_six:.4f}&quot;)</code></pre><div class="outputs"><pre class="out stream">P(no six in 4) = (5/6)^4 = 0.4823
+P(at least one six) = 0.5177
+simulated P(at least one six) = 0.5177
+</pre></div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>For 'at least one', flip to the complement: 1 - P(none). Multiply independent misses.</p></div>
+<h2>16.3 Conditional probability &amp; Bayes' theorem</h2>
+<p><strong>Conditional probability</strong> narrows the world: $P(A\mid B)$ is "among only the cases
+where B is true, how often is A also true?"</p>
+<p><strong>Bayes' theorem</strong> lets us <em>flip</em> a conditional — go from $P(E\mid H)$ (which we can
+measure) to $P(H\mid E)$ (which we actually want):</p>
+<p>$$ P(H \mid E) = \frac{P(E \mid H)\, P(H)}{P(E)} $$</p>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Bayes is just <strong>updating a hunch with evidence</strong>, the way a good detective works.
+- <strong>Prior</strong> <code>P(H)</code> = how much you believed the theory <em>before</em> seeing the clue.
+- <strong>Likelihood</strong> <code>P(E|H)</code> = how well the theory <em>explains</em> the clue.
+- <strong>Posterior</strong> <code>P(H|E)</code> = your updated belief <em>after</em> the clue.
+You start with a guess, see data, and revise. Do it again with the next clue. That's
+literally how learning works.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Prior</span> = your belief BEFORE seeing the evidence</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Likelihood</span> = how well a hypothesis explains the observed evidence</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Posterior</span> = your UPDATED belief after combining prior and evidence</p></div>
+<h3>The medical-test paradox (why base rates matter)</h3>
+<p>A disease affects <strong>1%</strong> of people. A test is <strong>99% sensitive</strong> ($P(+\mid\text{sick})=0.99$)
+and <strong>95% specific</strong> ($P(-\mid\text{healthy})=0.95$, so a 5% false-positive rate). You
+test <strong>positive</strong>. What's the chance you actually have the disease? Most people
+blurt "99%". The real answer is shockingly lower — because the disease is <em>rare</em>.</p>
+<h3>✏️ Worked example (by hand): the positive test</h3>
+<p>Imagine <strong>10,000 people</strong> (round numbers make the paradox obvious):</p>
+<table>
+<thead>
+<tr>
+<th>Group</th>
+<th>Count</th>
+<th>Test positive</th>
+<th>Positives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sick</strong> (1%)</td>
+<td>100</td>
+<td>99% of them</td>
+<td>~<strong>99</strong></td>
+</tr>
+<tr>
+<td><strong>Healthy</strong> (99%)</td>
+<td>9,900</td>
+<td>5% of them</td>
+<td>~<strong>495</strong></td>
+</tr>
+<tr>
+<td><strong>Total positives</strong></td>
+<td></td>
+<td></td>
+<td><strong>594</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Now: of the 594 people who test positive, only <strong>99</strong> are truly sick.</p>
+<p>$$ P(\text{sick} \mid +) = \frac{99}{594} \approx 0.167 = 16.7\% $$</p>
+<p>Even after a positive result from a "99% accurate" test, there's only about a <strong>1-in-6</strong>
+chance you're actually sick — because the 495 <em>false positives</em> from the huge healthy
+group swamp the 99 true positives. <strong>Base rates dominate.</strong></p>
+<div class="codecell"><pre class="code"><code class="language-python">p_disease = 0.01
+p_pos_given_disease = 0.99        # sensitivity
+p_pos_given_healthy = 0.05        # 1 - specificity
+
+# Bayes, matching the table above
+num = p_pos_given_disease * p_disease
+den = num + p_pos_given_healthy * (1 - p_disease)
+posterior = num / den
+print(f&quot;P(disease | positive) = {posterior:.3f}  (~{posterior*100:.0f}%)&quot;)
+
+# The table version, spelled out on 10,000 people
+sick_pos    = 10000 * p_disease * p_pos_given_disease
+healthy_pos = 10000 * (1 - p_disease) * p_pos_given_healthy
+print(f&quot;sick &amp; positive   ~ {sick_pos:.0f}&quot;)
+print(f&quot;healthy &amp; positive ~ {healthy_pos:.0f}&quot;)
+print(f&quot;P(sick | +) = {sick_pos:.0f}/{sick_pos+healthy_pos:.0f} = {sick_pos/(sick_pos+healthy_pos):.3f}&quot;)
+
+# Confirm by simulating 1,000,000 people
+N = 1_000_000
+has = rng.random(N) &lt; p_disease
+tests_pos = np.where(has,
+                     rng.random(N) &lt; p_pos_given_disease,
+                     rng.random(N) &lt; p_pos_given_healthy)
+sim = has[tests_pos].mean()
+print(f&quot;\nsimulated P(disease | positive) = {sim:.3f}&quot;)</code></pre><div class="outputs"><pre class="out stream">P(disease | positive) = 0.167  (~17%)
+sick &amp; positive   ~ 99
+healthy &amp; positive ~ 495
+P(sick | +) = 99/594 = 0.167
+</pre><pre class="out stream">
+simulated P(disease | positive) = 0.167
+</pre></div></div>
+<div class="callout interview"><div class="callout-h">Say this in an interview</div><p>"A 99%-accurate test on a 1%-prevalence disease is still wrong most of the time it</p></div>
+<p>fires, because false positives from the large healthy majority outnumber true
+positives. That's base-rate neglect — and it's exactly why we track precision and
+recall instead of raw accuracy on imbalanced problems."</p>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Bayes turns a prior into a posterior using the likelihood; with rare events, base rates rule.</p></div>
+<h2>16.4 Naive Bayes — Bayes turned into a classifier</h2>
+<p>To classify, we want $P(\text{class}\mid \text{features})$. Bayes gives:</p>
+<p>$$ P(y \mid x_1,\dots,x_n) \;\propto\; P(y)\prod_i P(x_i \mid y) $$</p>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>"Naive Bayes" sounds intimidating but it's just Bayes with one shortcut: pretend the
+features don't interact. For spam detection, that means we treat each word as its own
+independent little clue, multiply all the clues together, and see whether "spam" or
+"ham" wins. The assumption is technically wrong (words <em>do</em> relate), yet it works
+astonishingly well for text — and it's fast and needs very little data.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Naive Bayes</span> = a classifier that multiplies per-feature probabilities, pretending features are independent given the class</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Laplace smoothing</span> = adding 1 to every count so an unseen word can&#x27;t zero out the whole prediction</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># Naive Bayes FROM SCRATCH on a tiny spam problem (word-presence features)
+docs = [
+    (&quot;win money now&quot;, 1), (&quot;cheap money offer&quot;, 1), (&quot;win free prize&quot;, 1),
+    (&quot;meeting at noon&quot;, 0), (&quot;project deadline today&quot;, 0), (&quot;lunch meeting notes&quot;, 0),
+]  # 1 = spam, 0 = ham
+vocab = sorted(set(w for text, _ in docs for w in text.split()))
+
+def word_vector(text):
+    words = set(text.split())
+    return np.array([1 if w in words else 0 for w in vocab])
+
+X = np.array([word_vector(t) for t, _ in docs])
+y = np.array([lab for _, lab in docs])
+
+p_spam = y.mean(); p_ham = 1 - p_spam
+def likelihoods(cls):
+    subset = X[y == cls]
+    return (subset.sum(0) + 1) / (len(subset) + 2)   # +1/+2 = Laplace smoothing
+
+lik_spam, lik_ham = likelihoods(1), likelihoods(0)
+
+def predict(text):
+    v = word_vector(text)
+    log_spam = np.log(p_spam) + np.sum(np.log(np.where(v==1, lik_spam, 1-lik_spam)))
+    log_ham  = np.log(p_ham)  + np.sum(np.log(np.where(v==1, lik_ham,  1-lik_ham)))
+    return &quot;SPAM&quot; if log_spam &gt; log_ham else &quot;HAM&quot;
+
+for msg in [&quot;win free money&quot;, &quot;project meeting today&quot;, &quot;cheap prize now&quot;]:
+    print(f&quot;&#x27;{msg}&#x27;  -&gt; {predict(msg)}&quot;)</code></pre><div class="outputs"><pre class="out stream">&#x27;win free money&#x27;  -&gt; SPAM
+&#x27;project meeting today&#x27;  -&gt; HAM
+&#x27;cheap prize now&#x27;  -&gt; SPAM
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li>We build a vocabulary of every word seen, then turn each message into a 0/1 vector
+  ("does this word appear?").</li>
+<li><code>p_spam</code> / <code>p_ham</code> are the <strong>priors</strong> — half the training set is spam.</li>
+<li><code>likelihoods()</code> counts how often each word shows up in each class, with <code>+1</code>
+  smoothing so a word never gets probability 0.</li>
+<li><code>predict()</code> adds up <strong>log</strong>-probabilities (logs turn fragile multiplication into
+  stable addition) and picks whichever class scores higher.</li>
+<li>Result: spammy words tip messages to SPAM, work words tip them to HAM.</li>
+</ul></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p>Without <strong>Laplace smoothing</strong> (the <code>+1</code>), any word never seen in a class gets</p></div>
+<p>probability 0 — and a single 0 multiplied into the product zeroes <em>everything</em>,
+letting one unseen word veto the whole prediction. Interviewers love to probe this.</p>
+<div class="codecell"><pre class="code"><code class="language-python"># The professional version: same idea, scaled up with scikit-learn
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+texts  = [t for t, _ in docs]
+labels = [l for _, l in docs]
+vec = CountVectorizer()
+Xc = vec.fit_transform(texts)
+model = MultinomialNB().fit(Xc, labels)
+
+tests = [&quot;win money prize&quot;, &quot;deadline meeting notes&quot;]
+for t, p in zip(tests, model.predict(vec.transform(tests))):
+    print(f&quot;&#x27;{t}&#x27; -&gt; {&#x27;SPAM&#x27; if p==1 else &#x27;HAM&#x27;}&quot;)</code></pre><div class="outputs"><pre class="out stream">&#x27;win money prize&#x27; -&gt; SPAM
+&#x27;deadline meeting notes&#x27; -&gt; HAM
+</pre></div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Naive Bayes multiplies per-word probabilities with a prior; add Laplace smoothing so unseen words can't zero the product.</p></div>
+<h2>16.5 Distributions you should name on sight</h2>
+<p>A <strong>distribution</strong> is the shape describing how likely each value is. Recognizing the
+right one tells you which model and test to reach for.</p>
+<div class="callout plain"><div class="callout-h">In plain English</div><ul>
+<li><strong>Bernoulli / Binomial</strong> — yes/no trials. "Out of 10 emails, how many get clicked?"</li>
+<li><strong>Poisson</strong> — counts of rare events in a window. "How many support calls per hour?"</li>
+<li><strong>Normal (Gaussian)</strong> — the bell curve. Averages of lots of things drift toward it.</li>
+<li><strong>Uniform</strong> — every outcome equally likely (a fair die).</li>
+<li><strong>Exponential</strong> — waiting time until the next event. Right-skewed (long tail).</li>
+</ul></div>
+<div class="codecell"><pre class="code"><code class="language-python">fig, ax = plt.subplots(1, 3, figsize=(13, 3.5))
+sns.histplot(rng.binomial(10, 0.3, 5000), ax=ax[0], discrete=True); ax[0].set_title(&quot;Binomial(10, 0.3)&quot;)
+sns.histplot(rng.poisson(2.0, 5000), ax=ax[1], discrete=True); ax[1].set_title(&quot;Poisson(2)&quot;)
+sns.histplot(rng.exponential(2.0, 5000), ax=ax[2]); ax[2].set_title(&quot;Exponential(2)&quot;)
+plt.tight_layout(); plt.show()</code></pre><div class="outputs"><img class="out img" src="data:image/png;base64,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hw/r4YcfVpcuXTR58mSFhoZq8uTJjnzxpz/9yVHsGz16tJ599lk9++yzl33q6ezZs1q3bp06dOigiRMnasyYMTp16pRGjBhR4jXR7t27JanU13pXynuRkZFcK3kpHhOGV7v33nudPgcEBGjOnDnq0qVLqbZv0aKF5syZ4/h85swZrV+/Xo899pgk6ccff9TGjRs1aNAgzZ49W1LByLjatWtr1apV+ve//+0YbSFJqampevvttxUdHS2poBg1fPhwTZs2TR999JHq168vSQoNDdX06dP15ZdfFjtqodAbb7zhVOD661//quHDh+uVV17RX/7yl8tul5KSIknFzuNRWidOnJCfn5/q1KnjtDwgIEBhYWH67bffXNqnJNWtW7fIurp165Z6n6tXr9bzzz/v+NypUyfNnTu3SLtq1arpmmuuUXJycpljBYCqrPAiLScnR998842WLFmioKAgRUREaMaMGaXOaxf7/PPP9Yc//MExdURxtm3bpjvvvFOTJ092LBs5cqTj97m5uXruuefUrFkzrVmzxvF40x//+Efdf//9evXVV53mNDp//rzi4uL00EMPSSqY6uL222/X+vXrHSPXf/31V2VnZ5c65yUkJMjPz099+vQpsq5hw4aSCkayN2vWrFT7AwBfdOl1mFRwnfD999/L399ff//73zVgwADNmzdPjz/+uJ588km1atWq2HnH09PTlZiYqBo1akgqKFCNHz9ea9eu1bBhw8old3z11Vdat26dnnvuOf35z392bBsTE6MRI0Zo06ZNTstTU1O1Zs0atW/fXlLBI7Y33XSTNmzYoEmTJqlhw4Zq3769Xn/9dXXu3PmK13hSwfXgZ5995vT48J133qm4uDi9/vrrTteolyrLtd6ZM2e0bt06tW/fXldffXWR9Q0bNqQY6KUoBsKrTZ8+XeHh4ZIK7ni89957mjp1qqpXr67evXuXuP3gwYOdPrdv316ffPKJzp49qxo1ajjeTPy3v/3Nqd19992nVatWadu2bU4XTU2bNnUUAiWpTZs2kgoezyosBF68/MiRI1dMFBcXAjMzM5Wbm6sOHTpox44dyszMVM2aNYvdrvCuXEhIyOVPvgTZ2dny9/cvdl1gYKDTnbqy7FMqfs6MwMBAx53DkvTt21etWrXSqVOntHXrVp08efKy8YSGhjr6AwB8xaUXadddd52ee+45x2iC0ua1i4WEhOjYsWPas2ePWrdufdk23333nY4fP6569eoVWb93716dPHlSY8aMcZrnqFu3boqIiNDnn3/udEEnFVzEXeyPf/yj3nvvPcfnM2fOOI5dkvfff1/r16/XiBEj1Lhx42Ljl0TeAIASXHwdVqjwrbaS1KxZM40bN07PP/+89u/fr9OnTzvNGX6x2267zVEIlKRbbrlFdevW1bZt2zRs2LByyR2bNm1SzZo11aVLF506dcqxvGXLlgoODtauXbucioFNmzZ1FAIlqXbt2goPDy/y6G1p+fn5OeY6t9lsysjIkM1mU6tWrYpMJ3WpM2fOqFq1aiXOiW6z2TRx4kRlZGRo2rRpxbYJCQlRdna2rFZrqV8whqqBYiC8WuvWrZ0eOe3Xr59uu+02zZo1S926dStxotaLC3TShYuA9PR01ahRQ0ePHpXZbC7yVqy6desqJCRER48edVp+7bXXOn0uLNZdc801TssLk92lQ9ov9fXXX2vRokX69ttvi8xleKViYCF35jwKCgoqMjy+0Pnz50s172Bx+5RUZF6qsu7zuuuuc8yH0a9fP02bNk1/+9vftGnTpiL7sNvtvB0LgM8pvEjz8/PTVVddpfDwcJnNZn3yySdlymsXGzlypL744gsNGjRI119/vbp06aJ+/frpj3/8o6PNxIkTNXnyZHXr1k0tW7bUTTfdpNtuu80x4u6XX36RpCIXkJIUERGhr7/+2mlZYGCgateu7bQsNDS0yHxOUsk576uvvtKTTz6p2NjYEh+JJm8AwJVdeh1WnOHDh+vDDz/Unj179Mgjj6hp06bFtrv++uudPptMJl1//fWOnFQeuePw4cPKzMy87IszTp486fT50uu84vZZVhs3btSqVauUmprqdN3lztNdF3v66af1r3/9S3//+9+LPJpdqDB3kve8D8VA+BSz2ayYmBitXr1ahw8f1h/+8IcS2xfn0guK0n45Xvwm29Isv9KFy08//aR7771XERERjvkC/f39tW3bNr366qtXnG+wcD6IkoqNV1K3bl3l5+fr5MmTTo8K5+Tk6MyZM8UOMy/NPqWCx4UvTagnTpy47EiTkvTp00dr167Vl19+qRtvvNFpXUZGRpH/YACAtyvpIs2V//Q3adJEmzZt0ueff65//etf2rx5s95880099NBDjhEZ8fHxjlH2O3fu1MqVK5WQkKBFixbppptuKvMxL5c/LxYWFibpyjnvxx9/1AMPPOB4zLm4kSmSHBd1xc2rBAAomyNHjujw4cOSpAMHDlTYcUuTO2w2m+rUqaPnnnuu2PWXFhNLs8+y+Oc//6nJkyerV69eGj58uOrUqSM/Pz8tX768xNGGYWFhysvLczzNVpzFixfrzTff1KOPPqrbbrvtsvvKyMiQxWJxaaAHKjdeIAKfU/iWqKysLLf3dd1118lmszmSWKHff/9dGRkZRd7W5EmfffaZcnJytGzZMg0ePFg33XSTOnfuXKov6oiICEkFb410VYsWLSQVPNJ1sb1798pms1327lJp9vn99987LT9+/LiOHTvm0j6lC48fZ2ZmOi3Py8vTr7/+etmJewHA17ib14KDgxUfH6+5c+dq69at6tatm1566SWdP3/e0ebqq6/WX/7yFy1dulRbtmxRWFiYXnrpJUkXRuSnpqYW2XdqamqREfulce211yooKOiyOe+nn37SiBEjVLt2bSUkJFzxsarCfZA3AMA9NptNkydPVo0aNTR69Gh98MEH2rx5c7FtL81Jdrtdhw8fduSk8sgdjRo10pkzZ9SuXTt17ty5yC9XrkvKcqPt448/VsOGDbV48WLddtttuvHGG9W5c2enfHo5JV3rrVmzRosWLdI999xT7ByNF/v5558d+4N3oRgIn5Kbm6udO3fK39/fI/+RLxzF8Nprrzktf+WVV5zWl4fCu08Xjx7MzMzUu+++W+K29erV07XXXlukkFcWHTt2VFhYmN566y2n5W+99ZYsFou6detW5n3+4Q9/UEREhNauXeso2hbu02Qy6ZZbbnEsy8zM1KFDh5wKfBfP53Gx9evXy2QyFXmTZHJyss6fP+80jyMA+DJ38tql8+gFBASoSZMmstvtys3NVX5+fpGbMnXq1NHVV1/tmB6iVatWqlOnjt5++22nKSO2bdumQ4cOuZRb/P391apVq2Jz3okTJ3TffffJZDJp5cqVRUZ6XOq///2vatasWeKTBQCAK3vllVe0e/duzZo1Sw8//LCio6M1c+bMYv8//3//939Oc4dv2rRJJ06cUNeuXSWVT+6Ii4tTfn6+li5dWmRdXl6eS09YFc65d2kuLE5x13rfffedvv322xK3Lby2KS7vJSYmavbs2frzn/+sJ554osR9/fDDD2rXrl2J7VD18JgwvNr27dsdb1M6deqU3n//faWlpWnUqFGXHTJdFjfccINuv/12vfPOO8rIyNCf/vQnff/999q4caN69ep12UnWPaFLly7y9/fX6NGjNXjwYJ07d07r1q1TnTp1HG/lvZKePXvqk08+KTJn3tGjR/XPf/5T0oUEUpgE69ev7xhGHhQUpHHjxmnWrFkaN26cbrzxRn311Vd67733NGHCBMdjWZK0a9cuDRs2TGPGjNHYsWOvGNfjjz+uBx54QPfdd5/69u2rAwcOaM2aNRo0aJBTAfeTTz7RE088oblz52rAgAGSpGXLlumbb77RjTfeqPr16+vMmTPavHmzvv/+ew0dOrTI48BffPGFLBaLOnfuXGJ/AYAvcCevDR8+XFdddZXatWunOnXqKCUlRW+88YZuuukm1ahRQxkZGbrpppvUp08f3XDDDQoODtYXX3yh77//3vF2YX9/f02cOFFPPPGE/vrXv6pv3746efKkVq9ereuuu67Yt1OWRs+ePTV//vwij0yNGDFCR44c0YgRI/T11187zSt11VVXqUuXLk77+eKLL9S9e3fmTgKAElx8HXaxdu3aKScnRy+++KIGDBigHj16SJLmzZun2267TU899ZRefPFFp21CQ0N19913a8CAATp58qRee+01XX/99brzzjsllU/u6NChg+666y4tX75c+/btc1x7paWladOmTXryySedBiqURosWLeTn56eEhARlZmYqICBAHTt2dJpyqVC3bt20efNmPfTQQ+rWrZt+/vlnvf3222ratGmJT7g1bNhQzZo1U1JSkgYOHOhYvmfPHj3++OMKCwtTp06dnF6YIhX82RTO4SsVXAueOXNGPXv2LNN5omqgGAivtnDhQsfvAwMDFRERoZkzZxZ5S7A7Zs+erQYNGmjjxo369NNPddVVV+n+++/XmDFjPHaM4kRERGjhwoVasGCB/v73v+uqq67SkCFDVLt2bU2ZMqXE7e+44w698cYb+vrrr53efPXzzz8XScCFnzt06OA0p8Rf/vIX+fv7a9WqVfrss8907bXX6oknntA999zjtH1hwiqcE/BKunfvrsWLF2vx4sV6+umnVbt2bd1///166KGHSty2W7duOnLkiN59912dPn1aAQEBat68uebOnavbb7+9SPtNmzbp5ptv9khhGAC8hat57a677tL777+vV155RVlZWbrmmms0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" alt="chart"></div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Match the variable to its distribution (yes/no -&gt; Binomial, rare counts -&gt; Poisson, waiting time -&gt; Exponential) to pick the right test/model.</p></div>
+<h2>16.6 Practice</h2>
+<div class="callout try"><div class="callout-h">Try this yourself</div><ol>
+<li>Rework the medical test with <strong>10%</strong> prevalence. Does the posterior go up or down?</li>
+</ol></div>
+<p>Explain via the table (more truly-sick people, so fewer false positives dominate).
+2. Add the word "free" to a ham message in the scratch Naive Bayes — does the
+   prediction flip? Check the <code>lik_spam</code> vs <code>lik_ham</code> for "free".
+3. In one sentence, explain why "naive" independence is usually wrong but still
+   useful.</p>
+<h2>Summary</h2>
+<ul>
+<li><strong>Permutations</strong> (order matters) vs <strong>combinations</strong> (order doesn't) — divide by
+  <code>r!</code> to remove orderings. Use <code>math.perm</code> / <code>math.comb</code>.</li>
+<li>Probability rules: <strong>complement</strong> (1 - P), <strong>addition</strong> (subtract the overlap),
+  <strong>multiplication</strong> (conditional in general). <strong>Mutually exclusive ≠ independent.</strong></li>
+<li>For <strong>"at least one"</strong>, use the complement.</li>
+<li><strong>Bayes</strong> turns a <strong>prior</strong> into a <strong>posterior</strong> via the <strong>likelihood</strong>; with rare
+  events, <strong>base rates dominate</strong> (medical-test paradox = same logic as imbalanced ML).</li>
+<li><strong>Naive Bayes</strong>: $P(y)\prod P(x_i\mid y)$, conditional independence, <strong>Laplace
+  smoothing</strong>; fast, strong text baseline.</li>
+<li>Recognize Bernoulli/Binomial, Poisson, Normal, Uniform, Exponential on sight.</li>
+</ul>
+<p>Next: <strong>Module 17 — A/B Testing, ANOVA &amp; Statistical Power</strong> (proving what <em>causes</em> what).</p>
+    <div class="lesson-nav">
+      <a class="pn prev" href="/lessons/15_apis_web_scraping.html">← APIs &amp; Web Scraping</a>
+      <a class="pn next" href="/lessons/17_ab_testing_anova_power.html">A/B Testing, ANOVA &amp; Power →</a>
+    </div>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>

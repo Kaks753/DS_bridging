@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 21 — Bash &amp; Git for Data Scientists — DS Bridging Bootcamp</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+<div id="sidebar-overlay"></div>
+<aside id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-logo">🚀</span>
+    <span class="brand-text">DS Bridging<br><small>Bootcamp</small></span>
+  </a>
+  <div class="search-box">
+    <input id="search" type="search" placeholder="Search lessons…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <nav id="nav">
+    <a class="nav-item " href="/lessons/0_absolute_basics_python.html" data-slug="0_absolute_basics_python"><span class="nav-emoji">🐣</span><span class="nav-num">M0</span><span class="nav-label">Absolute Basics: Python from Zero</span></a>
+<a class="nav-item " href="/lessons/01_numpy.html" data-slug="01_numpy"><span class="nav-emoji">🔢</span><span class="nav-num">M1</span><span class="nav-label">NumPy: Fast Arrays</span></a>
+<a class="nav-item " href="/lessons/02_pandas.html" data-slug="02_pandas"><span class="nav-emoji">🐼</span><span class="nav-num">M2</span><span class="nav-label">Pandas: Spreadsheets in Python</span></a>
+<a class="nav-item " href="/lessons/03_data_cleaning.html" data-slug="03_data_cleaning"><span class="nav-emoji">🧹</span><span class="nav-num">M3</span><span class="nav-label">Data Cleaning</span></a>
+<a class="nav-item " href="/lessons/04_eda_visualization.html" data-slug="04_eda_visualization"><span class="nav-emoji">📊</span><span class="nav-num">M4</span><span class="nav-label">EDA &amp; Visualization</span></a>
+<a class="nav-item " href="/lessons/05_statistics_probability.html" data-slug="05_statistics_probability"><span class="nav-emoji">📈</span><span class="nav-num">M5</span><span class="nav-label">Statistics &amp; Probability</span></a>
+<a class="nav-item " href="/lessons/06_feature_engineering_scaling.html" data-slug="06_feature_engineering_scaling"><span class="nav-emoji">⚙️</span><span class="nav-num">M6</span><span class="nav-label">Feature Engineering &amp; Scaling</span></a>
+<a class="nav-item " href="/lessons/07_regression.html" data-slug="07_regression"><span class="nav-emoji">📉</span><span class="nav-num">M7</span><span class="nav-label">Regression</span></a>
+<a class="nav-item " href="/lessons/08_classification_knn.html" data-slug="08_classification_knn"><span class="nav-emoji">🎯</span><span class="nav-num">M8</span><span class="nav-label">Classification &amp; KNN</span></a>
+<a class="nav-item " href="/lessons/09_evaluation_cv_gridsearch.html" data-slug="09_evaluation_cv_gridsearch"><span class="nav-emoji">🔍</span><span class="nav-num">M9</span><span class="nav-label">Evaluation, CV &amp; Grid Search</span></a>
+<a class="nav-item " href="/lessons/10_trees_ensembles_boosting.html" data-slug="10_trees_ensembles_boosting"><span class="nav-emoji">🌳</span><span class="nav-num">M10</span><span class="nav-label">Trees, Ensembles &amp; Boosting</span></a>
+<a class="nav-item " href="/lessons/11_clustering_pca.html" data-slug="11_clustering_pca"><span class="nav-emoji">🔮</span><span class="nav-num">M11</span><span class="nav-label">Clustering &amp; PCA</span></a>
+<a class="nav-item " href="/lessons/12_neural_networks_intro.html" data-slug="12_neural_networks_intro"><span class="nav-emoji">🧠</span><span class="nav-num">M12</span><span class="nav-label">Neural Networks Intro</span></a>
+<a class="nav-item " href="/lessons/13_job_readiness_interview_prep.html" data-slug="13_job_readiness_interview_prep"><span class="nav-emoji">💼</span><span class="nav-num">M13</span><span class="nav-label">Job Readiness &amp; Interviews</span></a>
+<a class="nav-item " href="/lessons/14_sql_for_data_science.html" data-slug="14_sql_for_data_science"><span class="nav-emoji">🗄️</span><span class="nav-num">M14</span><span class="nav-label">SQL for Data Science</span></a>
+<a class="nav-item " href="/lessons/15_apis_web_scraping.html" data-slug="15_apis_web_scraping"><span class="nav-emoji">🕸️</span><span class="nav-num">M15</span><span class="nav-label">APIs &amp; Web Scraping</span></a>
+<a class="nav-item " href="/lessons/16_probability_combinatorics_bayes.html" data-slug="16_probability_combinatorics_bayes"><span class="nav-emoji">🎲</span><span class="nav-num">M16</span><span class="nav-label">Probability, Combinatorics, Bayes</span></a>
+<a class="nav-item " href="/lessons/17_ab_testing_anova_power.html" data-slug="17_ab_testing_anova_power"><span class="nav-emoji">🧪</span><span class="nav-num">M17</span><span class="nav-label">A/B Testing, ANOVA &amp; Power</span></a>
+<a class="nav-item " href="/lessons/18_oop_linear_algebra_calculus.html" data-slug="18_oop_linear_algebra_calculus"><span class="nav-emoji">➗</span><span class="nav-num">M18</span><span class="nav-label">OOP, Linear Algebra &amp; Calculus</span></a>
+<a class="nav-item " href="/lessons/19_time_series.html" data-slug="19_time_series"><span class="nav-emoji">⏳</span><span class="nav-num">M19</span><span class="nav-label">Time Series</span></a>
+<a class="nav-item " href="/lessons/20_nlp_recommendation_systems.html" data-slug="20_nlp_recommendation_systems"><span class="nav-emoji">💬</span><span class="nav-num">M20</span><span class="nav-label">NLP &amp; Recommender Systems</span></a>
+<a class="nav-item active" href="/lessons/21_bash_git.html" data-slug="21_bash_git"><span class="nav-emoji">🐚</span><span class="nav-num">M21</span><span class="nav-label">Bash &amp; Git</span></a>
+<a class="nav-item " href="/lessons/22_bigdata_spark.html" data-slug="22_bigdata_spark"><span class="nav-emoji">⚡</span><span class="nav-num">M22</span><span class="nav-label">Big Data &amp; Spark</span></a>
+<a class="nav-item " href="/lessons/23_aws_deployment_mlops.html" data-slug="23_aws_deployment_mlops"><span class="nav-emoji">☁️</span><span class="nav-num">M23</span><span class="nav-label">AWS Deployment &amp; MLOps</span></a>
+  </nav>
+</aside>
+<main id="content">
+  <div class="lesson-wrap">
+    <div class="crumb">Module 21</div>
+    <div class="runbar"><span class="runbar-label">▶ Run this lesson yourself:</span><a class="runbtn colab" href="https://colab.research.google.com/github/Kaks753/DS_bridging/blob/main/notebooks/21_bash_git.ipynb" target="_blank" rel="noopener">Open in Colab</a><a class="runbtn gh" href="https://github.com/Kaks753/DS_bridging/blob/main/notebooks/21_bash_git.ipynb" target="_blank" rel="noopener">View on GitHub</a><span class="runbar-hint">In Colab, press <kbd>Shift</kbd>+<kbd>Enter</kbd> to run each cell.</span></div>
+    <div class="intro"><p>These aren't "data science" per se, but you'll use them <strong>every single day</strong>, and they
+show up in interviews and take-home reviews. This module is hands-on: every command
+below actually runs inside a throwaway sandbox directory so you see real output —
+nothing to memorize blind.</p>
+<p><strong>What you'll be able to do by the end:</strong>
+- Navigate and <em>wrangle files from the command line</em> (often faster than opening Python
+  to peek at a 5 GB CSV).
+- Explain Git's mental model — working dir -&gt; staging -&gt; commit -&gt; remote — fluently.
+- Run the everyday Git loop: pull, branch, commit small, push, open a PR.</p></div>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Two tools, one plain description each:
+- <strong>Bash</strong> is the text-based way to boss your computer around — type a short command,
+  it does a job (list files, peek inside a huge file, filter rows) instantly.
+- <strong>Git</strong> is a <em>save-game system for code</em>: it takes snapshots so you can experiment
+  fearlessly, rewind mistakes, and work alongside teammates without overwriting each
+  other.
+You'll touch both constantly, so a little fluency here pays off forever.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">import subprocess, os, tempfile, textwrap
+
+# A tiny helper so every cell shows the command AND its output.
+def sh(cmd, cwd=None):
+    print(f&quot;$ {cmd}&quot;)
+    r = subprocess.run(cmd, shell=True, cwd=cwd,
+                       capture_output=True, text=True, executable=&quot;/bin/bash&quot;)
+    out = (r.stdout or &quot;&quot;) + (r.stderr or &quot;&quot;)
+    print(out.rstrip() if out.strip() else &quot;(no output)&quot;)
+    return out
+
+# Work in an isolated temp directory so we never touch the real repo.
+SANDBOX = tempfile.mkdtemp(prefix=&quot;m21_&quot;)
+print(&quot;sandbox:&quot;, SANDBOX)</code></pre><div class="outputs"><pre class="out stream">sandbox: /home/user/webapp/.pytmp/m21_nem2ya3t
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>sh(cmd)</code> runs a shell command from Python and prints both the command and its
+  output, so the notebook is fully reproducible.</li>
+<li><code>SANDBOX</code> is a throwaway folder — everything we do happens there, never in your real
+  project. In real life you'd type these straight into a terminal.</li>
+</ul></div>
+<h2>21.1 Bash navigation &amp; inspection — the commands you'll actually type</h2>
+<p>A handful of commands cover 90% of daily use.</p>
+<div class="callout analogy"><div class="callout-h">Analogy</div><p>The terminal is like giving directions to an extremely fast, extremely literal</p></div>
+<p>assistant. "Where am I?" (<code>pwd</code>), "show me what's here" (<code>ls</code>), "make a folder"
+(<code>mkdir</code>), "go in there" (<code>cd</code>). It does exactly what you say, instantly — which is why
+it's faster than clicking through folders once you know the words.</p>
+<div class="codecell"><pre class="code"><code class="language-python">sh(&quot;pwd&quot;)                          # where am I?
+sh(&quot;mkdir -p project/data project/src &amp;&amp; ls -R project&quot;, cwd=SANDBOX)  # make dirs
+sh(&quot;echo &#x27;hello from bash&#x27; &gt; project/notes.txt&quot;, cwd=SANDBOX)          # write file
+sh(&quot;cat project/notes.txt&quot;, cwd=SANDBOX)                               # read file</code></pre><div class="outputs"><pre class="out stream">$ pwd
+/home/user/webapp/notebooks
+$ mkdir -p project/data project/src &amp;&amp; ls -R project
+project:
+data
+src
+
+project/data:
+
+project/src:
+$ echo &#x27;hello from bash&#x27; &gt; project/notes.txt
+(no output)
+$ cat project/notes.txt
+hello from bash
+</pre><pre class="out result">&#x27;hello from bash\n&#x27;</pre></div></div>
+<p><strong>The navigation core:</strong>
+- <code>pwd</code> — print working directory. <code>cd</code> — change directory (<code>cd ..</code> = up one level).
+- <code>ls -la</code> — list <em>all</em> files (incl. hidden) with details. <code>mkdir -p a/b/c</code> — make
+  nested dirs. <code>rm -r dir</code> — remove recursively (<strong>careful, no undo</strong>).
+- <code>cp src dst</code>, <code>mv src dst</code> — copy / move (move = rename).
+- <code>cat</code> (whole file), <code>head -n 5</code> (first 5 lines), <code>tail -n 5</code> (last 5), <code>less</code>
+  (scroll).</p>
+<div class="callout warn"><div class="callout-h">Watch out</div><p><code>rm -r</code> deletes permanently -- there's no Recycle Bin. Double-check the path before you hit Enter, especially with wildcards like <code>rm -r *</code>.</p></div>
+<h2>21.2 Inspecting data files from the shell (a real DS superpower)</h2>
+<p>Before loading a giant CSV into pandas, <em>peek</em> at it from the shell — instant, no
+memory cost.</p>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Opening a 5 GB CSV in pandas can freeze your laptop. But you often just want to know:
+what do the columns look like, how many rows, what values are in one column? The shell
+answers all three in under a second without loading the file into memory. That's a
+genuine edge in interviews and on the job.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">csv = textwrap.dedent(&#x27;&#x27;&#x27;\
+    id,city,plan,income
+    1,Nairobi,Premium,92000
+    2,Nairobi,Basic,41000
+    3,Mombasa,Standard,55000
+    4,Mombasa,Premium,120000
+    5,Kisumu,Basic,38000
+    6,Nairobi,Standard,60000
+&#x27;&#x27;&#x27;)
+open(os.path.join(SANDBOX, &quot;customers.csv&quot;), &quot;w&quot;).write(csv)
+
+sh(&quot;head -n 3 customers.csv&quot;, cwd=SANDBOX)        # first rows (incl. header)
+sh(&quot;wc -l customers.csv&quot;, cwd=SANDBOX)            # count lines (rows+header)
+sh(&quot;cut -d, -f2 customers.csv | tail -n +2 | sort | uniq -c&quot;, cwd=SANDBOX)  # value counts of &#x27;city&#x27;!</code></pre><div class="outputs"><pre class="out stream">$ head -n 3 customers.csv
+id,city,plan,income
+1,Nairobi,Premium,92000
+2,Nairobi,Basic,41000
+$ wc -l customers.csv
+7 customers.csv
+$ cut -d, -f2 customers.csv | tail -n +2 | sort | uniq -c
+      1 Kisumu
+      2 Mombasa
+      3 Nairobi
+</pre><pre class="out result">&#x27;      1 Kisumu\n      2 Mombasa\n      3 Nairobi\n&#x27;</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>head</code>/<code>tail</code> glimpse the top/bottom without loading the whole file.</li>
+<li><code>wc -l</code> counts rows in milliseconds, even for a 50 GB file.</li>
+<li>The last line is the clever one: <code>cut -d, -f2</code> pulls column 2 (comma-delimited),
+  <code>tail -n +2</code> drops the header, <code>sort | uniq -c</code> counts each distinct value — a
+  <code>value_counts()</code> straight from the shell. Chaining small tools with <code>|</code> (a "pipe") is
+  the whole Unix philosophy.</li>
+</ul></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Pipe (|)</span> = sends the output of one command straight into the next, letting you chain small tools</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">sh(&quot;grep Premium customers.csv&quot;, cwd=SANDBOX)                 # filter rows
+sh(&quot;awk -F, &#x27;NR&gt;1 {sum+=$4} END {print \&quot;total income:\&quot;, sum}&#x27; customers.csv&quot;,
+   cwd=SANDBOX)                                               # sum a column with awk</code></pre><div class="outputs"><pre class="out stream">$ grep Premium customers.csv
+1,Nairobi,Premium,92000
+4,Mombasa,Premium,120000
+$ awk -F, &#x27;NR&gt;1 {sum+=$4} END {print &quot;total income:&quot;, sum}&#x27; customers.csv
+total income: 406000
+</pre><pre class="out result">&#x27;total income: 406000\n&#x27;</pre></div></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p><code>grep</code> = pattern search across lines; <code>awk</code> = a tiny column-processing language (<code>-F,</code>
+sets the comma delimiter, <code>$4</code> is the 4th field, <code>NR&gt;1</code> skips the header). You don't
+need to master <code>awk</code>, but being able to filter and sum columns without opening Python is
+a real productivity edge. Other must-knows: <code>chmod +x script.sh</code> (make executable),
+<code>./script.sh</code> (run), <code>export VAR=value</code> (set an env var), and
+<code>python script.py &gt; log.txt 2&gt;&amp;1 &amp;</code> (run in the background, capturing output).</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>head/tail/wc/cut/grep/awk + pipes let you inspect and summarize huge files instantly, before Python ever loads them.</p></div>
+<h2>21.3 Git — the mental model first (this is what interviews test)</h2>
+<p>Git tracks <strong>snapshots</strong> of your project. A file lives in one of four "places":</p>
+<pre><code> working directory  --git add--&gt;  staging area  --git commit--&gt;  local repo  --git push--&gt;  remote (GitHub)
+   (your edits)                    (marked to save)              (history)                  (shared)
+</code></pre>
+<div class="callout analogy"><div class="callout-h">Analogy</div><p>Think of packing a shipping box:</p></div>
+<ul>
+<li><strong>Working directory</strong> = your desk, covered in stuff you're editing.</li>
+<li><strong>Staging area</strong> = the box you're carefully choosing what to put in (<code>git add</code>).</li>
+<li><strong>Local repo</strong> = you seal and label the box, saving a snapshot (<code>git commit</code>).</li>
+<li><strong>Remote (GitHub)</strong> = you ship the box to the shared warehouse (<code>git push</code>).
+Staging is the key insight: it lets you pack <em>only some</em> changes into this commit and
+leave the rest for later.</li>
+</ul>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Staging area (index)</span> = the set of changes you&#x27;ve marked (git add) to include in the next commit</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Commit</span> = a saved snapshot of your project at a point in time, with a message</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Remote</span> = the shared copy of the repo on GitHub/GitLab that teammates pull from and push to</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">repo = os.path.join(SANDBOX, &quot;demo_repo&quot;)
+os.makedirs(repo, exist_ok=True)
+
+sh(&quot;git init -q&quot;, cwd=repo)                                   # start a repo
+sh(&quot;git config user.email &#x27;you@example.com&#x27;&quot;, cwd=repo)       # identity (once)
+sh(&quot;git config user.name &#x27;DS Learner&#x27;&quot;, cwd=repo)
+sh(&quot;git branch -m main&quot;, cwd=repo)                            # name default branch &#x27;main&#x27;
+sh(&quot;git status&quot;, cwd=repo)</code></pre><div class="outputs"><pre class="out stream">$ git init -q
+(no output)
+$ git config user.email &#x27;you@example.com&#x27;
+(no output)
+$ git config user.name &#x27;DS Learner&#x27;
+(no output)
+$ git branch -m main
+(no output)
+$ git status
+On branch main
+
+No commits yet
+
+nothing to commit (create/copy files and use &quot;git add&quot; to track)
+</pre><pre class="out result">&#x27;On branch main\n\nNo commits yet\n\nnothing to commit (create/copy files and use &quot;git add&quot; to track)\n&#x27;</pre></div></div>
+<div class="codecell"><pre class="code"><code class="language-python"># 1) Create a file (it&#x27;s UNTRACKED in the working directory)
+open(os.path.join(repo, &quot;analysis.py&quot;), &quot;w&quot;).write(&quot;print(&#x27;v1&#x27;)\n&quot;)
+sh(&quot;git status --short&quot;, cwd=repo)          # &#x27;??&#x27; = untracked
+
+# 2) STAGE it
+sh(&quot;git add analysis.py&quot;, cwd=repo)
+sh(&quot;git status --short&quot;, cwd=repo)          # &#x27;A&#x27; = staged/added
+
+# 3) COMMIT it (snapshot saved to local history)
+sh(&quot;git commit -q -m &#x27;Add analysis script (v1)&#x27;&quot;, cwd=repo)
+sh(&quot;git log --oneline&quot;, cwd=repo)</code></pre><div class="outputs"><pre class="out stream">$ git status --short
+</pre><pre class="out stream">?? analysis.py
+$ git add analysis.py
+(no output)
+$ git status --short
+A  analysis.py
+$ git commit -q -m &#x27;Add analysis script (v1)&#x27;
+(no output)
+$ git log --oneline
+1273cec Add analysis script (v1)
+</pre><pre class="out result">&#x27;1273cec Add analysis script (v1)\n&#x27;</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li>Creating <code>analysis.py</code> leaves it <strong>untracked</strong> (<code>??</code>) — Git sees it but isn't
+  watching it yet.</li>
+<li><code>git add</code> moves it into staging (<code>A</code> = added).</li>
+<li><code>git commit</code> seals the snapshot into history; <code>git log --oneline</code> shows the saved
+  commit with its message. That three-step add -&gt; commit is the heartbeat of Git.</li>
+</ul></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p><strong>Commit-message hygiene</strong> is a quiet signal of seniority: write imperative, specific
+messages — <code>Add income outlier capping</code>, not <code>stuff</code>. Many teams follow <strong>Conventional
+Commits</strong>: <code>feat:</code> (new feature), <code>fix:</code> (bug fix), <code>docs:</code>, <code>refactor:</code>, <code>test:</code>.
+Good messages turn <code>git log</code> into a readable changelog.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># Change the file, then see WHAT changed with git diff
+open(os.path.join(repo, &quot;analysis.py&quot;), &quot;w&quot;).write(&quot;print(&#x27;v2 - added feature&#x27;)\n&quot;)
+sh(&quot;git diff&quot;, cwd=repo)                     # unstaged changes vs last commit
+sh(&quot;git add -A &amp;&amp; git commit -q -m &#x27;feat: update analysis to v2&#x27;&quot;, cwd=repo)
+sh(&quot;git log --oneline&quot;, cwd=repo)</code></pre><div class="outputs"><pre class="out stream">$ git diff
+diff --git a/analysis.py b/analysis.py
+index e59f059..7aa7115 100644
+--- a/analysis.py
++++ b/analysis.py
+@@ -1 +1 @@
+-print(&#x27;v1&#x27;)
++print(&#x27;v2 - added feature&#x27;)
+$ git add -A &amp;&amp; git commit -q -m &#x27;feat: update analysis to v2&#x27;
+(no output)
+$ git log --oneline
+</pre><pre class="out stream">415fcc4 feat: update analysis to v2
+1273cec Add analysis script (v1)
+</pre><pre class="out result">&#x27;415fcc4 feat: update analysis to v2\n1273cec Add analysis script (v1)\n&#x27;</pre></div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Git flow: edit (working dir) -&gt; git add (staging) -&gt; git commit (local repo) -&gt; git push (remote). Staging lets you pack exactly the right changes.</p></div>
+<h2>21.4 Branching &amp; merging — work without breaking <code>main</code></h2>
+<p>A <strong>branch</strong> is an independent line of work. You build a feature on its own branch, then
+<strong>merge</strong> it into <code>main</code> when it's ready — the basis of <strong>pull requests</strong>.</p>
+<div class="callout analogy"><div class="callout-h">Analogy</div><p>A branch is like writing a chapter in a <em>copy</em> of the manuscript. The published book</p></div>
+<p>(<code>main</code>) stays clean and readable while you experiment. When your chapter is polished,
+you fold it back in (merge). If it flops, you just throw the copy away — the book was
+never at risk.</p>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Branch</span> = an independent line of work that keeps experiments off the stable main branch</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Merge</span> = combining another branch&#x27;s changes into your current branch</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># Create and switch to a feature branch
+sh(&quot;git checkout -q -b feature/add-readme&quot;, cwd=repo)   # -b = create + switch
+sh(&quot;git branch&quot;, cwd=repo)                              # &#x27;*&#x27; marks current branch
+
+open(os.path.join(repo, &quot;README.md&quot;), &quot;w&quot;).write(&quot;# Demo Project\nAnalysis code.\n&quot;)
+sh(&quot;git add README.md &amp;&amp; git commit -q -m &#x27;docs: add README&#x27;&quot;, cwd=repo)
+
+# Switch back to main and MERGE the feature in
+sh(&quot;git checkout -q main&quot;, cwd=repo)
+sh(&quot;git merge -q feature/add-readme&quot;, cwd=repo)
+sh(&quot;git log --oneline --graph --all&quot;, cwd=repo)
+sh(&quot;ls&quot;, cwd=repo)                                      # README.md is now on main</code></pre><div class="outputs"><pre class="out stream">$ git checkout -q -b feature/add-readme
+</pre><pre class="out stream">(no output)
+$ git branch
+* feature/add-readme
+  main
+$ git add README.md &amp;&amp; git commit -q -m &#x27;docs: add README&#x27;
+(no output)
+$ git checkout -q main
+(no output)
+$ git merge -q feature/add-readme
+(no output)
+$ git log --oneline --graph --all
+* 099bb9c docs: add README
+* 415fcc4 feat: update analysis to v2
+* 1273cec Add analysis script (v1)
+$ ls
+README.md
+analysis.py
+</pre><pre class="out result">&#x27;README.md\nanalysis.py\n&#x27;</pre></div></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p><strong>Merge conflicts</strong> happen when two branches change the <em>same lines</em>. Git marks them</p></div>
+<p>with <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>; you edit to keep the right version, then <code>git add</code>
++ <code>git commit</code>. Don't panic — conflicts are normal, local, and fixable.</p>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Branch to isolate work, commit on the branch, then merge into main; conflicts are just same-line clashes you resolve by hand.</p></div>
+<h2>21.5 <code>.gitignore</code> — never commit junk (or secrets!)</h2>
+<p>Some files should <strong>never</strong> be tracked: large data, notebook checkpoints, virtual envs,
+and — critically — <strong>credentials</strong>. A <code>.gitignore</code> tells Git to skip them.</p>
+<div class="callout warn"><div class="callout-h">Watch out</div><p>Leaking an API key or password to a public repo is a classic, costly mistake -- bots scan GitHub for them within minutes. A <code>.gitignore</code> for secrets is non-negotiable.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">gitignore = textwrap.dedent(&#x27;&#x27;&#x27;\
+    # data &amp; artifacts
+    data/*.csv
+    *.parquet
+    # python
+    __pycache__/
+    *.pyc
+    .venv/
+    # notebooks
+    .ipynb_checkpoints/
+    # secrets -- NEVER commit these
+    .env
+    *.key
+    credentials.json
+&#x27;&#x27;&#x27;)
+open(os.path.join(repo, &quot;.gitignore&quot;), &quot;w&quot;).write(gitignore)
+
+# Prove it works: create an ignored file and a tracked one
+open(os.path.join(repo, &quot;.env&quot;), &quot;w&quot;).write(&quot;API_KEY=super-secret\n&quot;)
+open(os.path.join(repo, &quot;keep.py&quot;), &quot;w&quot;).write(&quot;x = 1\n&quot;)
+
+sh(&quot;git add -A &amp;&amp; git status --short&quot;, cwd=repo)   # .env is absent -&gt; correctly ignored!</code></pre><div class="outputs"><pre class="out stream">$ git add -A &amp;&amp; git status --short
+</pre><pre class="out stream">A  .gitignore
+A  keep.py
+</pre><pre class="out result">&#x27;A  .gitignore\nA  keep.py\n&#x27;</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li>The <code>.gitignore</code> lists patterns Git should skip: bulky data, caches, virtual envs, and
+  secret files like <code>.env</code>.</li>
+<li>After <code>git add -A</code>, notice <code>.env</code> does <strong>not</strong> appear in <code>git status</code> — Git is
+  ignoring it, so your API key can't be committed by accident. <code>keep.py</code> shows up
+  normally. This one habit prevents a whole category of security incidents.</li>
+</ul></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>A .gitignore keeps data, caches, and especially secrets out of history -- set it up before your first commit.</p></div>
+<h2>21.6 The remote workflow (GitHub) — the loop you'll run daily</h2>
+<p>No network here, but this is the exact cycle on a real project:</p>
+<pre><code class="language-bash">git clone https://github.com/you/project.git   # get the repo (once)
+# ... edit files ...
+git pull                       # get teammates' latest changes FIRST
+git add -A                     # stage your changes
+git commit -m &quot;feat: add churn model&quot;
+git push                       # publish to GitHub
+# then open a Pull Request on GitHub for review + merge to main
+</code></pre>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>The daily rhythm: <strong>pull</strong> first (grab everyone's latest so you don't clash), work on a
+<strong>branch</strong>, <strong>commit</strong> in small logical chunks with clear messages, <strong>push</strong>, then open
+a <strong>Pull Request</strong> so a teammate reviews before it merges into <code>main</code>. Never push
+straight to <code>main</code> on a team, and never commit secrets or huge data.</p></div>
+<div class="callout interview"><div class="callout-h">Say this in an interview</div><p>"My loop is pull, branch, commit in small logical chunks, push, open a PR. Git's three</p></div>
+<p>areas — working directory, staging, and the repo — let me stage exactly what belongs in
+each commit, and branches keep experiments off main until they're reviewed."</p>
+<div class="codecell"><pre class="code"><code class="language-python"># Tidy up the sandbox
+import shutil
+shutil.rmtree(SANDBOX, ignore_errors=True)
+print(&quot;cleaned up sandbox -- none of this touched your real repo.&quot;)</code></pre><div class="outputs"><pre class="out stream">cleaned up sandbox -- none of this touched your real repo.
+</pre></div></div>
+<h2>21.7 Practice</h2>
+<div class="callout try"><div class="callout-h">Try this yourself</div><ol>
+<li>From the shell, count how many customers are on the <code>Premium</code> plan using only <code>grep</code></li>
+</ol></div>
+<ul>
+<li><code>wc -l</code>.
+2. Initialize a repo, make three commits, then show the history as a graph
+   (<code>git log --oneline --graph</code>).
+3. Create a branch, add a file, merge it into <code>main</code>, then delete the branch
+   (<code>git branch -d name</code>).
+4. Write a <code>.gitignore</code> for a Python DS project and explain each entry.
+5. Explain the difference between <code>git fetch</code> and <code>git pull</code> in one sentence.</li>
+</ul>
+<h2>Summary</h2>
+<ul>
+<li><strong>Bash</strong>: <code>pwd/cd/ls/mkdir/cp/mv/rm</code>, plus the data-peeking crew
+  <code>head/tail/wc/cut/grep/awk</code> and pipes <code>|</code> — inspect huge files without Python.</li>
+<li><strong>Git model</strong>: working dir -&gt; <code>add</code> -&gt; staging -&gt; <code>commit</code> -&gt; local repo -&gt; <code>push</code> -&gt;
+  remote. Branches isolate work; merges/PRs combine it.</li>
+<li>Core loop: <strong>pull -&gt; branch -&gt; commit small -&gt; push -&gt; PR</strong>.</li>
+<li><strong><code>.gitignore</code></strong> keeps junk and <strong>secrets</strong> out of history — a security must.</li>
+</ul>
+<p>Next: <strong>Module 22 — Big Data &amp; Spark</strong>.</p>
+    <div class="lesson-nav">
+      <a class="pn prev" href="/lessons/20_nlp_recommendation_systems.html">← NLP &amp; Recommender Systems</a>
+      <a class="pn next" href="/lessons/22_bigdata_spark.html">Big Data &amp; Spark →</a>
+    </div>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>

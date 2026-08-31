@@ -24,57 +24,83 @@ shows the **math intuition**, runs on **realistic messy data**, and ends with
 
 ---
 
+## Learning website (read on any device)
+
+The notebooks are also published as a **static learning website** — every lesson
+rendered as a clean, colour-coded page with the 4-layer callouts, a searchable
+sidebar, and **"Open in Colab" / "View on GitHub"** run badges so you can execute
+any lesson for real in one click.
+
+- **Build it locally:** `python scripts/build_site.py` → output in `site/`
+  (serve with `python -m http.server` inside `site/`).
+- **Deploy:** the site is built into `public/` for **Vercel**
+  (`SITE_OUT=public python scripts/build_site.py`). Deployment is left to you —
+  no tokens are stored in this repo.
+- **Fully mobile-responsive:** tested at 320 / 360 / 414 px with **zero horizontal
+  overflow** — readable on the smallest phones. The sidebar collapses into an
+  off-canvas menu (☰) with a dimming overlay; code blocks and wide tables scroll
+  sideways inside their own box instead of stretching the page; headings scale
+  fluidly with `clamp()`.
+
+---
+
 ## Curriculum
+
+**24 modules, numbered 0–23.** Every lesson is written in the **4-layer teaching
+style**: 🌱 *plain English* first → 🔤 *reading the code* line-by-line → 🎓 *go deeper*
+(the rigorous why) → ✅ *takeaway* + 🗣️ *say-this-in-an-interview*. Math-heavy modules
+also include **by-hand worked examples** you can check against the code.
 
 | # | Module | You will *own* |
 |---|--------|----------------|
-| 00 | Python + NumPy foundations | vectorization, broadcasting, why loops are slow |
-| 01 | Pandas deep dive | indexing, groupby, merge, reshape, `apply` vs vectorized |
-| 02 | Data cleaning | missing data (MCAR/MAR/MNAR), dtypes, duplicates, outliers |
-| 03 | EDA + visualization | asking questions with data, matplotlib/seaborn, storytelling |
-| 04 | Statistics & probability | distributions, CLT, hypothesis tests, p-values, confidence intervals |
-| 05 | Feature engineering & scaling | skewness, encoding, Standard/MinMax/Robust, leakage |
-| 06 | Regression | linear regression from scratch + sklearn, assumptions, metrics |
-| 07 | Classification + KNN | logistic regression, KNN, decision boundaries, imbalance |
-| 08 | Evaluation, CV & tuning | train/val/test, k-fold, GridSearch, the right metric |
-| 09 | Trees, ensembles & boosting | decision trees, Random Forest, XGBoost, bias–variance |
-| 10 | Unsupervised: clustering & PCA | KMeans, silhouette, PCA math + intuition |
-| 11 | Neural networks intro | neurons, activations, backprop intuition, a tiny net |
-| 12 | Job readiness | how to *talk* DS, project narratives, interview Q&A |
-| 13 | SQL for data science | execution order, JOINs, subqueries, CTEs, window functions |
-| 14 | APIs & web scraping | requests, JSON, status codes, BeautifulSoup, ethics |
-| 15 | Probability, combinatorics & Bayes | counting, Bayes' theorem, Naive Bayes classifier |
-| 16 | A/B testing, ANOVA & power | experiments, z/t-tests, ANOVA+Tukey, power analysis |
-| 17 | OOP + linear algebra & calculus | classes, sklearn estimator pattern, eigen/PCA, gradient descent |
-| 18 | Time series & forecasting | decomposition, stationarity, ARIMA/SARIMA, MAPE |
-| 19 | NLP & recommendation systems | TF-IDF, **n-grams/bigrams**, cosine similarity, sentiment, **LDA topics**, content/collaborative |
-| 20 | Bash & Git for data science | shell file-wrangling (`grep/cut/awk/pipes`), the git model, branching, `.gitignore` |
-| 21 | Big Data & Apache Spark | scale-out, partitions, lazy eval, PySpark DataFrames, Spark SQL, when *not* to use it |
-| 22 | Deployment & MLOps | serialize (joblib), serving API, Docker, the AWS map, drift monitoring |
+| 0  | **Absolute Basics: Python from Zero** | what code/a notebook/a "cell" is, variables, data types, dicts, `if`/`for`, functions, imports, reading errors |
+| 1  | NumPy: fast arrays | vectorization, broadcasting, why loops are slow |
+| 2  | Pandas: spreadsheets in Python | indexing, groupby, merge, reshape, renaming, datetime parsing, `apply` vs vectorized |
+| 3  | Data cleaning | missing data (MCAR/MAR/MNAR), dtypes, duplicates, outliers |
+| 4  | EDA + visualization | asking questions with data, matplotlib/seaborn, storytelling |
+| 5  | Statistics & probability | distributions, CLT, hypothesis tests, p-values, confidence intervals |
+| 6  | Feature engineering & scaling | skewness, encoding, Standard/MinMax/Robust/MaxAbs/Normalizer/Quantile/Power, leakage |
+| 7  | Regression | linear regression from scratch + sklearn, assumptions, metrics |
+| 8  | Classification + KNN | logistic regression, KNN (metrics/weights/regression), decision boundaries, imbalance |
+| 9  | Evaluation, CV & tuning | train/val/test, k-fold, GridSearch, the right metric |
+| 10 | Trees, ensembles & boosting | decision trees, Random Forest, XGBoost, bias–variance |
+| 11 | Clustering & PCA | KMeans, silhouette, hierarchical/DBSCAN/GMM, PCA math + intuition |
+| 12 | Neural networks intro | neurons, activations, backprop intuition, a tiny net |
+| 13 | Job readiness | how to *talk* DS, project narratives, interview Q&A |
+| 14 | SQL for data science | execution order, JOINs, subqueries, CTEs, window functions |
+| 15 | APIs & web scraping | requests, JSON, status codes, BeautifulSoup, ethics |
+| 16 | Probability, combinatorics & Bayes | counting, Bayes' theorem, Naive Bayes classifier (+ by-hand examples) |
+| 17 | A/B testing, ANOVA & power | experiments, z/t-tests, ANOVA+Tukey, power analysis (+ by-hand t-test) |
+| 18 | OOP + linear algebra & calculus | classes, sklearn estimator pattern, eigen/PCA, gradient descent (+ worked examples) |
+| 19 | Time series & forecasting | decomposition, stationarity, ARIMA/SARIMA, MAPE |
+| 20 | NLP & recommendation systems | TF-IDF, **n-grams/bigrams**, cosine similarity, sentiment, **LDA topics**, content/collaborative |
+| 21 | Bash & Git for data science | shell file-wrangling (`grep/cut/awk/pipes`), the git model, branching, `.gitignore` |
+| 22 | Big Data & Apache Spark | scale-out, partitions, lazy eval, PySpark DataFrames, Spark SQL, when *not* to use it |
+| 23 | AWS Deployment & MLOps | serialize (joblib), serving API, Docker, the AWS map, drift monitoring |
 
-> **Modules 00–12** are the core ML spine; **13–19** fill in the full
-> Moringa/Flatiron syllabus (SQL, APIs/scraping, probability & Bayes, A/B testing,
-> OOP/linear-algebra/calculus, time series, NLP & recommenders); **20–22** add the
-> engineering/production track (Bash/Git, Spark/Big Data, AWS deployment & MLOps).
-> Nothing crucial is left out.
+> **Module 0** starts from *absolute* zero (no assumptions). **Modules 1–13** are the
+> core ML spine; **14–20** fill in the full Moringa/Flatiron syllabus (SQL, APIs/scraping,
+> probability & Bayes, A/B testing, OOP/linear-algebra/calculus, time series, NLP &
+> recommenders); **21–23** add the engineering/production track (Bash/Git, Spark/Big
+> Data, AWS deployment & MLOps). Nothing crucial is left out.
 
-**Deepened in this pass (per your checklist):** column **renaming** + **datetime
-parsing** (`to_datetime`/`.dt`) in M02; **all** scalers — Standard/MinMax/Robust/
-**MaxAbs**/**Normalizer**/**Quantile**/Power — in M05; KNN **distance metrics**,
-**weights**, **regression**, and the **curse of dimensionality** in M07;
-**hierarchical (dendrogram)**, **DBSCAN**, **GMM**, and **LDA vs PCA** in M10;
-**specificity** added to the metrics vocabulary in M07; **n-grams** + **LDA topic
-modeling** in M19.
+**Deepened throughout:** column **renaming** + **datetime parsing** (`to_datetime`/`.dt`)
+in M2; **all** scalers — Standard/MinMax/Robust/**MaxAbs**/**Normalizer**/**Quantile**/
+Power — in M6; KNN **distance metrics**, **weights**, **regression**, and the **curse of
+dimensionality** in M8; **hierarchical (dendrogram)**, **DBSCAN**, **GMM**, and **LDA vs
+PCA** in M11; **specificity** added to the metrics vocabulary in M8; **n-grams** + **LDA
+topic modeling** in M20; **by-hand worked examples** in M16 (Bayes), M17 (t-test) and
+M18 (dot product, eigenvalues, gradient step).
 
 ### Coverage vs the official 40-topic Data Science syllabus
 
 | Phase | Official topics | Where it's covered here |
 |---|---|---|
-| **1** | Python, Pandas, cleaning, **SQL**, **APIs**, **web scraping** | M00–M02, **M13**, **M14** |
-| **2** | Probability, distributions, CLT/CI, hypothesis tests, **ANOVA/power**, **A/B testing**, **Bayes**, linear regression | M04, **M15**, **M16**, M06 |
-| **3** | **OOP**+sklearn, **linear algebra/calculus**, ML fundamentals, logistic, class metrics, trees, KNN, **Naive Bayes**, tuning/pipelines, ensembles | **M17**, M05–M09, M15 |
-| **4** | PCA, **LDA**, clustering (KMeans/**hierarchical**/**DBSCAN**/**GMM**), **time series**, **NLP**, **recommenders**, neural nets, tuning | M10, **M18**, **M19**, M11 |
-| **Infra / Production** | **Bash/Git**, **Big Data/Spark**, **AWS deployment & MLOps** | **M20**, **M21**, **M22** |
+| **1** | Python, Pandas, cleaning, **SQL**, **APIs**, **web scraping** | M0–M3, **M14**, **M15** |
+| **2** | Probability, distributions, CLT/CI, hypothesis tests, **ANOVA/power**, **A/B testing**, **Bayes**, linear regression | M5, **M16**, **M17**, M7 |
+| **3** | **OOP**+sklearn, **linear algebra/calculus**, ML fundamentals, logistic, class metrics, trees, KNN, **Naive Bayes**, tuning/pipelines, ensembles | **M18**, M6–M10, M16 |
+| **4** | PCA, **LDA**, clustering (KMeans/**hierarchical**/**DBSCAN**/**GMM**), **time series**, **NLP**, **recommenders**, neural nets, tuning | M11, **M19**, **M20**, M12 |
+| **Infra / Production** | **Bash/Git**, **Big Data/Spark**, **AWS deployment & MLOps** | **M21**, **M22**, **M23** |
 
 *Every topic across all four phases — plus the infrastructure/production track — is
 now covered with runnable, verified notebooks.*

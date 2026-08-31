@@ -226,30 +226,30 @@ def parse_notebook(path):
 # Order matters — this drives the sidebar, prev/next, and the landing grid.
 # (file stem, short label for the sidebar, emoji)
 MODULES = [
-    ("0_absolute_basics_python",      "Absolute Basics: Python from Zero", "🐣"),
-    ("01_numpy",                       "NumPy: Fast Arrays",               "🔢"),
-    ("02_pandas",                      "Pandas: Spreadsheets in Python",   "🐼"),
-    ("02_data_cleaning",               "Data Cleaning",                    "🧹"),
-    ("03_eda_visualization",           "EDA & Visualization",              "📊"),
-    ("04_statistics_probability",      "Statistics & Probability",         "📈"),
-    ("05_feature_engineering_scaling", "Feature Engineering & Scaling",    "⚙️"),
-    ("06_regression",                  "Regression",                       "📉"),
-    ("07_classification_knn",          "Classification & KNN",             "🎯"),
-    ("08_evaluation_cv_gridsearch",    "Evaluation, CV & Grid Search",     "🔍"),
-    ("09_trees_ensembles_boosting",    "Trees, Ensembles & Boosting",      "🌳"),
-    ("10_clustering_pca",              "Clustering & PCA",                 "🔮"),
-    ("11_neural_networks_intro",       "Neural Networks Intro",            "🧠"),
-    ("12_job_readiness_interview_prep","Job Readiness & Interviews",       "💼"),
-    ("13_sql_for_data_science",        "SQL for Data Science",             "🗄️"),
-    ("14_apis_web_scraping",           "APIs & Web Scraping",              "🕸️"),
-    ("15_probability_combinatorics_bayes","Probability, Combinatorics, Bayes","🎲"),
-    ("16_ab_testing_anova_power",      "A/B Testing, ANOVA & Power",       "🧪"),
-    ("17_oop_linear_algebra_calculus", "OOP, Linear Algebra & Calculus",   "➗"),
-    ("18_time_series",                 "Time Series",                      "⏳"),
-    ("19_nlp_recommendation_systems",  "NLP & Recommender Systems",        "💬"),
-    ("20_bash_git",                    "Bash & Git",                       "🐚"),
-    ("21_bigdata_spark",               "Big Data & Spark",                 "⚡"),
-    ("22_aws_deployment_mlops",        "AWS Deployment & MLOps",           "☁️"),
+    ("0_absolute_basics_python",           "Absolute Basics: Python from Zero", "🐣"),
+    ("01_numpy",                            "NumPy: Fast Arrays",                "🔢"),
+    ("02_pandas",                           "Pandas: Spreadsheets in Python",    "🐼"),
+    ("03_data_cleaning",                    "Data Cleaning",                     "🧹"),
+    ("04_eda_visualization",                "EDA & Visualization",               "📊"),
+    ("05_statistics_probability",           "Statistics & Probability",          "📈"),
+    ("06_feature_engineering_scaling",      "Feature Engineering & Scaling",     "⚙️"),
+    ("07_regression",                       "Regression",                        "📉"),
+    ("08_classification_knn",               "Classification & KNN",              "🎯"),
+    ("09_evaluation_cv_gridsearch",         "Evaluation, CV & Grid Search",      "🔍"),
+    ("10_trees_ensembles_boosting",         "Trees, Ensembles & Boosting",       "🌳"),
+    ("11_clustering_pca",                   "Clustering & PCA",                  "🔮"),
+    ("12_neural_networks_intro",            "Neural Networks Intro",             "🧠"),
+    ("13_job_readiness_interview_prep",     "Job Readiness & Interviews",        "💼"),
+    ("14_sql_for_data_science",             "SQL for Data Science",              "🗄️"),
+    ("15_apis_web_scraping",                "APIs & Web Scraping",               "🕸️"),
+    ("16_probability_combinatorics_bayes",  "Probability, Combinatorics, Bayes", "🎲"),
+    ("17_ab_testing_anova_power",           "A/B Testing, ANOVA & Power",        "🧪"),
+    ("18_oop_linear_algebra_calculus",      "OOP, Linear Algebra & Calculus",    "➗"),
+    ("19_time_series",                      "Time Series",                       "⏳"),
+    ("20_nlp_recommendation_systems",       "NLP & Recommender Systems",         "💬"),
+    ("21_bash_git",                         "Bash & Git",                        "🐚"),
+    ("22_bigdata_spark",                    "Big Data & Spark",                  "⚡"),
+    ("23_aws_deployment_mlops",             "AWS Deployment & MLOps",            "☁️"),
 ]
 
 def slug_for(stem):
@@ -295,7 +295,8 @@ def page_shell(title, body, active_slug, prev_link, next_link, module_num, stem)
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 </head>
 <body>
-<button id="menu-toggle" aria-label="Toggle menu">☰</button>
+<button id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+<div id="sidebar-overlay"></div>
 <aside id="sidebar">
   <a class="brand" href="/index.html">
     <span class="brand-logo">🚀</span>
@@ -343,6 +344,11 @@ def copy_static_assets():
             print(f"WARNING: missing source asset {src}")
 
 def build():
+    import shutil
+    # Start from a clean lessons/ dir so renamed/renumbered modules never leave
+    # stale pages behind (which would otherwise ship dead links to Vercel).
+    if LESSONS.exists():
+        shutil.rmtree(LESSONS)
     LESSONS.mkdir(parents=True, exist_ok=True)
     ASSETS.mkdir(parents=True, exist_ok=True)
     copy_static_assets()

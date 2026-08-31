@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 22 — Big Data &amp; Apache Spark (PySpark) — DS Bridging Bootcamp</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+<div id="sidebar-overlay"></div>
+<aside id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-logo">🚀</span>
+    <span class="brand-text">DS Bridging<br><small>Bootcamp</small></span>
+  </a>
+  <div class="search-box">
+    <input id="search" type="search" placeholder="Search lessons…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <nav id="nav">
+    <a class="nav-item " href="/lessons/0_absolute_basics_python.html" data-slug="0_absolute_basics_python"><span class="nav-emoji">🐣</span><span class="nav-num">M0</span><span class="nav-label">Absolute Basics: Python from Zero</span></a>
+<a class="nav-item " href="/lessons/01_numpy.html" data-slug="01_numpy"><span class="nav-emoji">🔢</span><span class="nav-num">M1</span><span class="nav-label">NumPy: Fast Arrays</span></a>
+<a class="nav-item " href="/lessons/02_pandas.html" data-slug="02_pandas"><span class="nav-emoji">🐼</span><span class="nav-num">M2</span><span class="nav-label">Pandas: Spreadsheets in Python</span></a>
+<a class="nav-item " href="/lessons/03_data_cleaning.html" data-slug="03_data_cleaning"><span class="nav-emoji">🧹</span><span class="nav-num">M3</span><span class="nav-label">Data Cleaning</span></a>
+<a class="nav-item " href="/lessons/04_eda_visualization.html" data-slug="04_eda_visualization"><span class="nav-emoji">📊</span><span class="nav-num">M4</span><span class="nav-label">EDA &amp; Visualization</span></a>
+<a class="nav-item " href="/lessons/05_statistics_probability.html" data-slug="05_statistics_probability"><span class="nav-emoji">📈</span><span class="nav-num">M5</span><span class="nav-label">Statistics &amp; Probability</span></a>
+<a class="nav-item " href="/lessons/06_feature_engineering_scaling.html" data-slug="06_feature_engineering_scaling"><span class="nav-emoji">⚙️</span><span class="nav-num">M6</span><span class="nav-label">Feature Engineering &amp; Scaling</span></a>
+<a class="nav-item " href="/lessons/07_regression.html" data-slug="07_regression"><span class="nav-emoji">📉</span><span class="nav-num">M7</span><span class="nav-label">Regression</span></a>
+<a class="nav-item " href="/lessons/08_classification_knn.html" data-slug="08_classification_knn"><span class="nav-emoji">🎯</span><span class="nav-num">M8</span><span class="nav-label">Classification &amp; KNN</span></a>
+<a class="nav-item " href="/lessons/09_evaluation_cv_gridsearch.html" data-slug="09_evaluation_cv_gridsearch"><span class="nav-emoji">🔍</span><span class="nav-num">M9</span><span class="nav-label">Evaluation, CV &amp; Grid Search</span></a>
+<a class="nav-item " href="/lessons/10_trees_ensembles_boosting.html" data-slug="10_trees_ensembles_boosting"><span class="nav-emoji">🌳</span><span class="nav-num">M10</span><span class="nav-label">Trees, Ensembles &amp; Boosting</span></a>
+<a class="nav-item " href="/lessons/11_clustering_pca.html" data-slug="11_clustering_pca"><span class="nav-emoji">🔮</span><span class="nav-num">M11</span><span class="nav-label">Clustering &amp; PCA</span></a>
+<a class="nav-item " href="/lessons/12_neural_networks_intro.html" data-slug="12_neural_networks_intro"><span class="nav-emoji">🧠</span><span class="nav-num">M12</span><span class="nav-label">Neural Networks Intro</span></a>
+<a class="nav-item " href="/lessons/13_job_readiness_interview_prep.html" data-slug="13_job_readiness_interview_prep"><span class="nav-emoji">💼</span><span class="nav-num">M13</span><span class="nav-label">Job Readiness &amp; Interviews</span></a>
+<a class="nav-item " href="/lessons/14_sql_for_data_science.html" data-slug="14_sql_for_data_science"><span class="nav-emoji">🗄️</span><span class="nav-num">M14</span><span class="nav-label">SQL for Data Science</span></a>
+<a class="nav-item " href="/lessons/15_apis_web_scraping.html" data-slug="15_apis_web_scraping"><span class="nav-emoji">🕸️</span><span class="nav-num">M15</span><span class="nav-label">APIs &amp; Web Scraping</span></a>
+<a class="nav-item " href="/lessons/16_probability_combinatorics_bayes.html" data-slug="16_probability_combinatorics_bayes"><span class="nav-emoji">🎲</span><span class="nav-num">M16</span><span class="nav-label">Probability, Combinatorics, Bayes</span></a>
+<a class="nav-item " href="/lessons/17_ab_testing_anova_power.html" data-slug="17_ab_testing_anova_power"><span class="nav-emoji">🧪</span><span class="nav-num">M17</span><span class="nav-label">A/B Testing, ANOVA &amp; Power</span></a>
+<a class="nav-item " href="/lessons/18_oop_linear_algebra_calculus.html" data-slug="18_oop_linear_algebra_calculus"><span class="nav-emoji">➗</span><span class="nav-num">M18</span><span class="nav-label">OOP, Linear Algebra &amp; Calculus</span></a>
+<a class="nav-item " href="/lessons/19_time_series.html" data-slug="19_time_series"><span class="nav-emoji">⏳</span><span class="nav-num">M19</span><span class="nav-label">Time Series</span></a>
+<a class="nav-item " href="/lessons/20_nlp_recommendation_systems.html" data-slug="20_nlp_recommendation_systems"><span class="nav-emoji">💬</span><span class="nav-num">M20</span><span class="nav-label">NLP &amp; Recommender Systems</span></a>
+<a class="nav-item " href="/lessons/21_bash_git.html" data-slug="21_bash_git"><span class="nav-emoji">🐚</span><span class="nav-num">M21</span><span class="nav-label">Bash &amp; Git</span></a>
+<a class="nav-item active" href="/lessons/22_bigdata_spark.html" data-slug="22_bigdata_spark"><span class="nav-emoji">⚡</span><span class="nav-num">M22</span><span class="nav-label">Big Data &amp; Spark</span></a>
+<a class="nav-item " href="/lessons/23_aws_deployment_mlops.html" data-slug="23_aws_deployment_mlops"><span class="nav-emoji">☁️</span><span class="nav-num">M23</span><span class="nav-label">AWS Deployment &amp; MLOps</span></a>
+  </nav>
+</aside>
+<main id="content">
+  <div class="lesson-wrap">
+    <div class="crumb">Module 22</div>
+    <div class="runbar"><span class="runbar-label">▶ Run this lesson yourself:</span><a class="runbtn colab" href="https://colab.research.google.com/github/Kaks753/DS_bridging/blob/main/notebooks/22_bigdata_spark.ipynb" target="_blank" rel="noopener">Open in Colab</a><a class="runbtn gh" href="https://github.com/Kaks753/DS_bridging/blob/main/notebooks/22_bigdata_spark.ipynb" target="_blank" rel="noopener">View on GitHub</a><span class="runbar-hint">In Colab, press <kbd>Shift</kbd>+<kbd>Enter</kbd> to run each cell.</span></div>
+    <div class="intro"><p>When a dataset no longer fits in one machine's RAM, pandas stops working and you reach
+for a <strong>distributed</strong> engine. <strong>Apache Spark</strong> is the industry standard. This module
+teaches <em>why</em> big-data tools exist, the mental model (lazy, distributed, partitioned),
+and the <strong>PySpark DataFrame API</strong> — which deliberately mirrors pandas and SQL so your
+existing skills transfer.</p>
+<p><strong>What you'll be able to do by the end:</strong>
+- Explain vertical vs horizontal scaling and why Spark exists.
+- Use Spark's core ideas: DataFrame, partitions, lazy evaluation,
+  transformations vs actions.
+- Do real work in PySpark: select/filter, <code>groupBy</code>, joins, window functions, SQL.
+- Judge when Spark is <em>overkill</em> (most jobs fit on one big machine!).</p></div>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>"Big data" just means the data is too big for one computer's memory. Two fixes: buy a
+<em>bigger</em> computer (only goes so far), or split the work across <em>many</em> computers working
+at once. Spark is the manager that coordinates that team of computers — chopping the
+data into pieces, handing a piece to each worker, and gluing the results back together.
+The good news: the Spark code looks almost exactly like pandas and SQL you already know.</p></div>
+<blockquote><p><strong>Honesty note:</strong> this notebook runs Spark in <strong>local mode</strong> (one JVM pretending to
+be a cluster) so every cell executes and you see real output. The <em>code is identical</em>
+on a 500-node cluster — you'd only change the <code>master</code> URL and read from S3/HDFS. If
+Spark can't start here, the notebook automatically falls back to a pandas illustration
+so it still runs.</p></blockquote>
+<h2>22.1 Why "big data" tools exist — two ways to scale</h2>
+<div class="callout analogy"><div class="callout-h">Analogy</div><p>You need to move a mountain of sand. <strong>Scaling up</strong> = buy one gigantic truck — fast to</p></div>
+<p>organize, but there's a limit to how big a truck you can buy, and the biggest ones cost
+a fortune. <strong>Scaling out</strong> = hire 100 people with wheelbarrows working in parallel —
+cheaper and almost unlimited, but now you need a <em>foreman</em> to divide the work and
+combine it. Spark is that foreman for data.</p>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Vertical scaling (scale up)</span> = buy a bigger single machine (more RAM/CPU); simple but has a hard ceiling</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Horizontal scaling (scale out)</span> = split work across many machines running in parallel; cheaper and near-unlimited</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Partition</span> = a chunk of the data that one worker processes; parallelism = many partitions at once</p></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p>Spark keeps data <strong>partitioned</strong> across the cluster's memory and runs the same operation
+on every partition in parallel, then combines the results. The core trick is <em>bringing
+the computation to the data, in parallel</em>, rather than pulling all the data to one place.
+That's why it can chew through terabytes that would never fit in a single machine's RAM.</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Scale up = bigger box (limited); scale out = many boxes in parallel (Spark). Spark partitions data and computes on each chunk simultaneously.</p></div>
+<h2>22.2 Spark's mental model (the concepts interviewers probe)</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><ul>
+<li><strong>Driver + Executors</strong>: the <em>driver</em> is you/your program planning the work; the
+  <em>executors</em> are the workers doing it in parallel.</li>
+<li><strong>DataFrame</strong>: a distributed table with named columns — the modern API, and it looks
+  just like pandas.</li>
+<li><strong>Lazy evaluation</strong>: this is the big one. When you write <code>filter</code>, <code>select</code>,
+  <code>groupBy</code>, Spark doesn't <em>do</em> anything yet — it just writes down the recipe. Only when
+  you call an <strong>action</strong> (<code>show</code>, <code>count</code>, <code>collect</code>, <code>write</code>) does it actually cook.</li>
+</ul></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Transformation</span> = a lazy operation (select/filter/groupBy) that adds a step to the plan but doesn&#x27;t run yet</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Action</span> = an eager operation (show/count/collect/write) that forces Spark to actually execute the plan</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Lazy evaluation</span> = building up a plan without running it, so Spark can optimize the whole chain before executing</p></div>
+<div class="callout interview"><div class="callout-h">Say this in an interview</div><p>"Transformations are lazy and return a new DataFrame; actions are eager and force</p></div>
+<p>computation. Spark builds a DAG of transformations and only executes when an action is
+called — which lets it optimize the whole chain and avoid wasted work."</p>
+<div class="codecell"><pre class="code"><code class="language-python"># Try to start a real local Spark session. Fall back to pandas if unavailable.
+SPARK_OK = False
+try:
+    from pyspark.sql import SparkSession, functions as F, Window
+    spark = (SparkSession.builder
+             .master(&quot;local[2]&quot;)                 # 2 local &#x27;executors&#x27;
+             .appName(&quot;bootcamp-m22&quot;)
+             .config(&quot;spark.ui.enabled&quot;, &quot;false&quot;)
+             .config(&quot;spark.sql.shuffle.partitions&quot;, &quot;4&quot;)
+             .getOrCreate())
+    spark.sparkContext.setLogLevel(&quot;ERROR&quot;)
+    SPARK_OK = True
+    print(&quot;Spark version:&quot;, spark.version)
+    print(&quot;default parallelism (cores):&quot;, spark.sparkContext.defaultParallelism)
+except Exception as e:
+    print(&quot;Spark unavailable, using pandas fallback. Reason:&quot;, type(e).__name__)</code></pre><div class="outputs"><pre class="out stream">WARNING: Using incubator modules: jdk.incubator.vector
+</pre><pre class="out stream">Using Spark&#x27;s default log4j profile: org/apache/spark/log4j2-defaults.properties
+26/08/31 11:34:14 WARN Utils: Your hostname, sandbox.local, resolves to a loopback address: 127.0.1.1, but we couldn&#x27;t find any external IP address!
+26/08/31 11:34:14 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+</pre><pre class="out stream">Using Spark&#x27;s default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to &quot;WARN&quot;.
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+</pre><pre class="out stream">26/08/31 11:34:16 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+</pre><pre class="out stream">Spark version: 4.2.0
+default parallelism (cores): 2
+</pre></div></div>
+<h2>22.3 Create a Spark DataFrame &amp; inspect it</h2>
+<p>The API feels like pandas + SQL. Notice <code>show()</code> is an <strong>action</strong> — that's the line
+that actually runs the job.</p>
+<div class="codecell"><pre class="code"><code class="language-python">if SPARK_OK:
+    data = [
+        (&quot;Ann&quot;,  &quot;Nairobi&quot;,  &quot;Premium&quot;,  92000, 3),
+        (&quot;Ben&quot;,  &quot;Nairobi&quot;,  &quot;Basic&quot;,    41000, 0),
+        (&quot;Cara&quot;, &quot;Mombasa&quot;,  &quot;Standard&quot;, 55000, 5),
+        (&quot;Dan&quot;,  &quot;Mombasa&quot;,  &quot;Premium&quot;,  120000, 1),
+        (&quot;Eve&quot;,  &quot;Kisumu&quot;,   &quot;Basic&quot;,    38000, 6),
+        (&quot;Fay&quot;,  &quot;Nairobi&quot;,  &quot;Standard&quot;, 60000, 2),
+    ]
+    cols = [&quot;name&quot;, &quot;city&quot;, &quot;plan&quot;, &quot;income&quot;, &quot;support_calls&quot;]
+    sdf = spark.createDataFrame(data, cols)
+    sdf.printSchema()
+    sdf.show()
+    print(&quot;num partitions:&quot;, sdf.rdd.getNumPartitions())
+else:
+    import pandas as pd
+    sdf = pd.DataFrame([
+        (&quot;Ann&quot;,&quot;Nairobi&quot;,&quot;Premium&quot;,92000,3),(&quot;Ben&quot;,&quot;Nairobi&quot;,&quot;Basic&quot;,41000,0),
+        (&quot;Cara&quot;,&quot;Mombasa&quot;,&quot;Standard&quot;,55000,5),(&quot;Dan&quot;,&quot;Mombasa&quot;,&quot;Premium&quot;,120000,1),
+        (&quot;Eve&quot;,&quot;Kisumu&quot;,&quot;Basic&quot;,38000,6),(&quot;Fay&quot;,&quot;Nairobi&quot;,&quot;Standard&quot;,60000,2)],
+        columns=[&quot;name&quot;,&quot;city&quot;,&quot;plan&quot;,&quot;income&quot;,&quot;support_calls&quot;])
+    print(sdf)</code></pre><div class="outputs"><pre class="out stream">root
+ |-- name: string (nullable = true)
+ |-- city: string (nullable = true)
+ |-- plan: string (nullable = true)
+ |-- income: long (nullable = true)
+ |-- support_calls: long (nullable = true)
+
+</pre><pre class="out stream">[Stage 0:&gt;                                                          (0 + 1) / 1]</pre><pre class="out stream">                                                                                </pre><pre class="out stream">+----+-------+--------+------+-------------+
+|name|   city|    plan|income|support_calls|
++----+-------+--------+------+-------------+
+| Ann|Nairobi| Premium| 92000|            3|
+| Ben|Nairobi|   Basic| 41000|            0|
+|Cara|Mombasa|Standard| 55000|            5|
+| Dan|Mombasa| Premium|120000|            1|
+| Eve| Kisumu|   Basic| 38000|            6|
+| Fay|Nairobi|Standard| 60000|            2|
++----+-------+--------+------+-------------+
+
+num partitions: 2
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>createDataFrame(data, cols)</code> builds a distributed table from rows + column names.</li>
+<li><code>printSchema()</code> shows the column types (like <code>df.dtypes</code> in pandas).</li>
+<li><code>show()</code> is the <strong>action</strong> that triggers the job and prints the table.</li>
+<li><code>getNumPartitions()</code> reveals how many chunks the data is split into — that's how much
+  parallelism is available.</li>
+</ul></div>
+<h2>22.4 select / filter / withColumn — transformations (lazy)</h2>
+<p>Everything here is a <strong>transformation</strong> — no computation happens until the <code>show()</code>
+action fires.</p>
+<div class="codecell"><pre class="code"><code class="language-python">if SPARK_OK:
+    result = (sdf
+              .filter(F.col(&quot;income&quot;) &gt; 50000)             # WHERE
+              .withColumn(&quot;income_k&quot;, F.round(F.col(&quot;income&quot;)/1000, 1))  # new col
+              .select(&quot;name&quot;, &quot;city&quot;, &quot;plan&quot;, &quot;income_k&quot;)) # projection
+    result.show()   # &lt;-- ACTION: this is what triggers the job
+else:
+    r = sdf[sdf.income &gt; 50000].copy()
+    r[&quot;income_k&quot;] = (r[&quot;income&quot;]/1000).round(1)
+    print(r[[&quot;name&quot;,&quot;city&quot;,&quot;plan&quot;,&quot;income_k&quot;]])</code></pre><div class="outputs"><pre class="out stream">+----+-------+--------+--------+
+|name|   city|    plan|income_k|
++----+-------+--------+--------+
+| Ann|Nairobi| Premium|    92.0|
+|Cara|Mombasa|Standard|    55.0|
+| Dan|Mombasa| Premium|   120.0|
+| Fay|Nairobi|Standard|    60.0|
++----+-------+--------+--------+
+
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>filter</code> = SQL's WHERE (keep rows where income &gt; 50000).</li>
+<li><code>withColumn</code> adds a computed column (income in thousands).</li>
+<li><code>select</code> picks the columns to keep.</li>
+<li>All three are lazy — Spark just records them. The final <code>show()</code> is the action that
+  runs the whole chain at once.</li>
+</ul></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>select/filter/withColumn are lazy transformations; nothing computes until an action like show() runs the recorded plan.</p></div>
+<h2>22.5 groupBy + aggregate — distributed split-apply-combine</h2>
+<p><code>groupBy().agg()</code> is the distributed version of pandas <code>groupby</code>.</p>
+<div class="callout analogy"><div class="callout-h">Analogy</div><p>To count customers per city across 100 machines, Spark first has to make sure all the</p></div>
+<p>"Nairobi" rows end up on the <em>same</em> worker before counting — that reshuffling of rows
+across the network is called a <strong>shuffle</strong>, and it's the slow, expensive part of big-data
+jobs. Half of Spark tuning is just "how do I do fewer shuffles?"</p>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Shuffle</span> = moving rows across machines so each group&#x27;s rows land together; the expensive part of a distributed job</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">if SPARK_OK:
+    (sdf.groupBy(&quot;city&quot;)
+        .agg(F.count(&quot;*&quot;).alias(&quot;customers&quot;),
+             F.round(F.avg(&quot;income&quot;), 0).alias(&quot;avg_income&quot;),
+             F.max(&quot;support_calls&quot;).alias(&quot;max_calls&quot;))
+        .orderBy(F.col(&quot;customers&quot;).desc())
+        .show())
+else:
+    g = (sdf.groupby(&quot;city&quot;)
+            .agg(customers=(&quot;name&quot;,&quot;count&quot;),
+                 avg_income=(&quot;income&quot;,&quot;mean&quot;),
+                 max_calls=(&quot;support_calls&quot;,&quot;max&quot;))
+            .sort_values(&quot;customers&quot;, ascending=False))
+    print(g.round(0))</code></pre><div class="outputs"><pre class="out stream">+-------+---------+----------+---------+
+|   city|customers|avg_income|max_calls|
++-------+---------+----------+---------+
+|Nairobi|        3|   64333.0|        3|
+|Mombasa|        2|   87500.0|        5|
+| Kisumu|        1|   38000.0|        6|
++-------+---------+----------+---------+
+
+</pre></div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>groupBy().agg() is distributed split-apply-combine; it triggers a shuffle, so minimizing shuffles is core to Spark performance.</p></div>
+<h2>22.6 Joins &amp; window functions</h2>
+<p>These work just like SQL. A <strong>window function</strong> computes across a group <em>without
+collapsing rows</em> — e.g. rank customers by income <em>within</em> each city.</p>
+<div class="codecell"><pre class="code"><code class="language-python">if SPARK_OK:
+    plans = spark.createDataFrame(
+        [(&quot;Basic&quot;, 10), (&quot;Standard&quot;, 25), (&quot;Premium&quot;, 60)],
+        [&quot;plan&quot;, &quot;monthly_fee&quot;])
+
+    joined = sdf.join(plans, on=&quot;plan&quot;, how=&quot;left&quot;)   # enrich with plan fee
+
+    w = Window.partitionBy(&quot;city&quot;).orderBy(F.col(&quot;income&quot;).desc())
+    ranked = joined.withColumn(&quot;income_rank_in_city&quot;, F.rank().over(w))
+    ranked.select(&quot;name&quot;,&quot;city&quot;,&quot;plan&quot;,&quot;income&quot;,&quot;monthly_fee&quot;,
+                  &quot;income_rank_in_city&quot;).orderBy(&quot;city&quot;,&quot;income_rank_in_city&quot;).show()
+else:
+    plans = {&quot;Basic&quot;:10,&quot;Standard&quot;:25,&quot;Premium&quot;:60}
+    j = sdf.copy(); j[&quot;monthly_fee&quot;] = j[&quot;plan&quot;].map(plans)
+    j[&quot;income_rank_in_city&quot;] = (j.groupby(&quot;city&quot;)[&quot;income&quot;]
+                                 .rank(ascending=False, method=&quot;min&quot;).astype(int))
+    print(j.sort_values([&quot;city&quot;,&quot;income_rank_in_city&quot;])
+            [[&quot;name&quot;,&quot;city&quot;,&quot;plan&quot;,&quot;income&quot;,&quot;monthly_fee&quot;,&quot;income_rank_in_city&quot;]])</code></pre><div class="outputs"><pre class="out stream">[Stage 11:&gt;                                                         (0 + 1) / 1]</pre><pre class="out stream">[Stage 15:&gt;                                                         (0 + 1) / 1]</pre><pre class="out stream">[Stage 15:==========================================================(1 + 0) / 1]                                                                                </pre><pre class="out stream">+----+-------+--------+------+-----------+-------------------+
+|name|   city|    plan|income|monthly_fee|income_rank_in_city|
++----+-------+--------+------+-----------+-------------------+
+| Eve| Kisumu|   Basic| 38000|         10|                  1|
+| Dan|Mombasa| Premium|120000|         60|                  1|
+|Cara|Mombasa|Standard| 55000|         25|                  2|
+| Ann|Nairobi| Premium| 92000|         60|                  1|
+| Fay|Nairobi|Standard| 60000|         25|                  2|
+| Ben|Nairobi|   Basic| 41000|         10|                  3|
++----+-------+--------+------+-----------+-------------------+
+
+</pre></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>join(plans, on="plan", how="left")</code> enriches each customer with their plan's fee —
+  identical idea to a SQL LEFT JOIN.</li>
+<li><code>Window.partitionBy("city").orderBy(income desc)</code> defines "within each city, ordered
+  by income"; <code>F.rank().over(w)</code> then ranks customers <em>inside</em> their city without
+  merging rows. Your SQL window-function knowledge transfers directly.</li>
+</ul></div>
+<h2>22.7 Spark SQL — write plain SQL over a DataFrame</h2>
+<p>Register the DataFrame as a temp view and query it with SQL. Many teams do 90% of their
+Spark work this way — your SQL transfers directly to petabytes.</p>
+<div class="codecell"><pre class="code"><code class="language-python">if SPARK_OK:
+    sdf.createOrReplaceTempView(&quot;customers&quot;)
+    spark.sql(&#x27;&#x27;&#x27;
+        SELECT plan,
+               COUNT(*)            AS n,
+               ROUND(AVG(income))  AS avg_income
+        FROM customers
+        GROUP BY plan
+        ORDER BY avg_income DESC
+    &#x27;&#x27;&#x27;).show()
+else:
+    print(sdf.groupby(&quot;plan&quot;)
+             .agg(n=(&quot;name&quot;,&quot;count&quot;), avg_income=(&quot;income&quot;,&quot;mean&quot;))
+             .sort_values(&quot;avg_income&quot;, ascending=False).round(0))</code></pre><div class="outputs"><pre class="out stream">[Stage 16:&gt;                                                         (0 + 2) / 2]</pre><pre class="out stream">[Stage 16:=============================&gt;                            (1 + 1) / 2]</pre><pre class="out stream">[Stage 18:&gt;                                                         (0 + 0) / 1][Stage 18:&gt;                                                         (0 + 1) / 1]</pre><pre class="out stream">+--------+---+----------+
+|    plan|  n|avg_income|
++--------+---+----------+
+| Premium|  2|  106000.0|
+|Standard|  2|   57500.0|
+|   Basic|  2|   39500.0|
++--------+---+----------+
+
+</pre><pre class="out stream">                                                                                </pre></div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>createOrReplaceTempView + spark.sql lets you run ordinary SQL at petabyte scale -- your SQL skills carry straight over.</p></div>
+<h2>22.8 Lazy evaluation, made visible with <code>explain()</code></h2>
+<p><code>explain()</code> prints the plan Spark will run. Because transformations are lazy, Spark sees
+the <em>whole</em> chain and optimizes it (e.g. pushing filters down to read less data). That's
+why you chain transformations and call an action once, rather than forcing computation
+repeatedly.</p>
+<div class="codecell"><pre class="code"><code class="language-python">if SPARK_OK:
+    plan = (sdf.filter(F.col(&quot;income&quot;) &gt; 40000)
+               .groupBy(&quot;city&quot;).count())
+    plan.explain()          # shows the optimized physical plan (still lazy!)
+    print(&quot;\n--- now the ACTION runs it ---&quot;)
+    plan.show()
+else:
+    print(&quot;(explain() is Spark-specific; pandas is eager so there is no plan.)&quot;)</code></pre><div class="outputs"><pre class="out stream">== Physical Plan ==
+AdaptiveSparkPlan isFinalPlan=false
++- HashAggregate(keys=[city#1], functions=[count(1)])
+   +- Exchange hashpartitioning(city#1, 4), ENSURE_REQUIREMENTS, [plan_id=403]
+      +- HashAggregate(keys=[city#1], functions=[partial_count(1)])
+         +- Project [city#1]
+            +- Filter (isnotnull(income#3L) AND (income#3L &gt; 40000))
+               +- Scan ExistingRDD[name#0,city#1,plan#2,income#3L,support_calls#4L]
+
+
+
+--- now the ACTION runs it ---
+</pre><pre class="out stream">[Stage 19:&gt;                                                         (0 + 2) / 2]</pre><pre class="out stream">[Stage 19:=============================&gt;                            (1 + 1) / 2]</pre><pre class="out stream">[Stage 19:==========================================================(2 + 0) / 2]</pre><pre class="out stream">+-------+-----+
+|   city|count|
++-------+-----+
+|Nairobi|    3|
+|Mombasa|    2|
++-------+-----+
+
+</pre><pre class="out stream">                                                                                </pre></div></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p>Calling an action (like .count()) repeatedly in a loop re-runs the whole plan each time. Chain transformations and act once, or .cache() a reused DataFrame.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># Always release cluster resources when done.
+if SPARK_OK:
+    spark.stop()
+    print(&quot;Spark session stopped.&quot;)</code></pre><div class="outputs"><pre class="out stream">Spark session stopped.
+</pre></div></div>
+<h2>22.9 When NOT to use Spark (senior judgment)</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Spark isn't free — starting the cluster, shuffling data, and packaging it up all add
+overhead. If your data fits comfortably in one machine's RAM (roughly &lt; 10-50 GB),
+plain pandas — or the faster <strong>Polars</strong> / <strong>DuckDB</strong> — will beat Spark and be simpler.
+Reach for Spark only when data genuinely won't fit on one machine, you're already on a
+cluster (Databricks/EMR), or you need distributed ML/streaming.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">DuckDB / Polars</span> = modern single-machine engines that often outrun Spark up to ~100 GB with far less setup</p></div>
+<div class="callout interview"><div class="callout-h">Say this in an interview</div><p>"Big data isn't about using Spark — it's about <em>when</em> you need to scale out. I reach for</p></div>
+<p>Spark once data won't fit on one machine or I'm already on a cluster; below that,
+DuckDB/Polars are faster and simpler. Picking the right tool beats picking the trendiest."</p>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Don't over-reach: below single-machine memory, pandas/DuckDB/Polars win; use Spark only when you truly must scale out.</p></div>
+<h2>22.10 Practice</h2>
+<div class="callout try"><div class="callout-h">Try this yourself</div><ol>
+<li>Add a <code>withColumn</code> that flags high-risk customers (<code>support_calls &gt;= 4</code>), then</li>
+</ol></div>
+<p><code>groupBy</code> city to count them. Which parts were transformations vs the action?
+2. Rewrite the 22.5 aggregation as Spark SQL.
+3. Explain why calling <code>.count()</code> three times in a loop is slow, and how <code>.cache()</code> or
+   restructuring helps.
+4. Given a 5 GB CSV, argue for or against Spark vs DuckDB. What would you ask first?</p>
+<h2>Summary</h2>
+<ul>
+<li><strong>Scale up</strong> (bigger box) vs <strong>scale out</strong> (many boxes); Spark is for scaling out.</li>
+<li>Spark data is <strong>partitioned</strong> and processed in parallel by <strong>executors</strong> under a
+  <strong>driver</strong>.</li>
+<li><strong>DataFrame API</strong> ~ pandas + SQL; prefer it over raw RDDs.</li>
+<li><strong>Lazy</strong>: transformations build a plan; <strong>actions</strong> (<code>show/count/collect/write</code>)
+  trigger execution — chain transformations, act once. Watch out for <strong>shuffles</strong>.</li>
+<li><code>groupBy</code>, joins, window functions, and <strong>Spark SQL</strong> mirror what you already know —
+  your skills transfer to any scale.</li>
+<li><strong>Don't over-reach</strong>: below single-machine memory, pandas/DuckDB/Polars win.</li>
+</ul>
+<p>Next: <strong>Module 23 — AWS Deployment &amp; MLOps</strong> (getting a model out of the notebook and
+into production).</p>
+    <div class="lesson-nav">
+      <a class="pn prev" href="/lessons/21_bash_git.html">← Bash &amp; Git</a>
+      <a class="pn next" href="/lessons/23_aws_deployment_mlops.html">AWS Deployment &amp; MLOps →</a>
+    </div>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>

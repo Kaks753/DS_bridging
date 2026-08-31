@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 14 — SQL for Data Science — DS Bridging Bootcamp</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+<div id="sidebar-overlay"></div>
+<aside id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-logo">🚀</span>
+    <span class="brand-text">DS Bridging<br><small>Bootcamp</small></span>
+  </a>
+  <div class="search-box">
+    <input id="search" type="search" placeholder="Search lessons…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <nav id="nav">
+    <a class="nav-item " href="/lessons/0_absolute_basics_python.html" data-slug="0_absolute_basics_python"><span class="nav-emoji">🐣</span><span class="nav-num">M0</span><span class="nav-label">Absolute Basics: Python from Zero</span></a>
+<a class="nav-item " href="/lessons/01_numpy.html" data-slug="01_numpy"><span class="nav-emoji">🔢</span><span class="nav-num">M1</span><span class="nav-label">NumPy: Fast Arrays</span></a>
+<a class="nav-item " href="/lessons/02_pandas.html" data-slug="02_pandas"><span class="nav-emoji">🐼</span><span class="nav-num">M2</span><span class="nav-label">Pandas: Spreadsheets in Python</span></a>
+<a class="nav-item " href="/lessons/03_data_cleaning.html" data-slug="03_data_cleaning"><span class="nav-emoji">🧹</span><span class="nav-num">M3</span><span class="nav-label">Data Cleaning</span></a>
+<a class="nav-item " href="/lessons/04_eda_visualization.html" data-slug="04_eda_visualization"><span class="nav-emoji">📊</span><span class="nav-num">M4</span><span class="nav-label">EDA &amp; Visualization</span></a>
+<a class="nav-item " href="/lessons/05_statistics_probability.html" data-slug="05_statistics_probability"><span class="nav-emoji">📈</span><span class="nav-num">M5</span><span class="nav-label">Statistics &amp; Probability</span></a>
+<a class="nav-item " href="/lessons/06_feature_engineering_scaling.html" data-slug="06_feature_engineering_scaling"><span class="nav-emoji">⚙️</span><span class="nav-num">M6</span><span class="nav-label">Feature Engineering &amp; Scaling</span></a>
+<a class="nav-item " href="/lessons/07_regression.html" data-slug="07_regression"><span class="nav-emoji">📉</span><span class="nav-num">M7</span><span class="nav-label">Regression</span></a>
+<a class="nav-item " href="/lessons/08_classification_knn.html" data-slug="08_classification_knn"><span class="nav-emoji">🎯</span><span class="nav-num">M8</span><span class="nav-label">Classification &amp; KNN</span></a>
+<a class="nav-item " href="/lessons/09_evaluation_cv_gridsearch.html" data-slug="09_evaluation_cv_gridsearch"><span class="nav-emoji">🔍</span><span class="nav-num">M9</span><span class="nav-label">Evaluation, CV &amp; Grid Search</span></a>
+<a class="nav-item " href="/lessons/10_trees_ensembles_boosting.html" data-slug="10_trees_ensembles_boosting"><span class="nav-emoji">🌳</span><span class="nav-num">M10</span><span class="nav-label">Trees, Ensembles &amp; Boosting</span></a>
+<a class="nav-item " href="/lessons/11_clustering_pca.html" data-slug="11_clustering_pca"><span class="nav-emoji">🔮</span><span class="nav-num">M11</span><span class="nav-label">Clustering &amp; PCA</span></a>
+<a class="nav-item " href="/lessons/12_neural_networks_intro.html" data-slug="12_neural_networks_intro"><span class="nav-emoji">🧠</span><span class="nav-num">M12</span><span class="nav-label">Neural Networks Intro</span></a>
+<a class="nav-item " href="/lessons/13_job_readiness_interview_prep.html" data-slug="13_job_readiness_interview_prep"><span class="nav-emoji">💼</span><span class="nav-num">M13</span><span class="nav-label">Job Readiness &amp; Interviews</span></a>
+<a class="nav-item active" href="/lessons/14_sql_for_data_science.html" data-slug="14_sql_for_data_science"><span class="nav-emoji">🗄️</span><span class="nav-num">M14</span><span class="nav-label">SQL for Data Science</span></a>
+<a class="nav-item " href="/lessons/15_apis_web_scraping.html" data-slug="15_apis_web_scraping"><span class="nav-emoji">🕸️</span><span class="nav-num">M15</span><span class="nav-label">APIs &amp; Web Scraping</span></a>
+<a class="nav-item " href="/lessons/16_probability_combinatorics_bayes.html" data-slug="16_probability_combinatorics_bayes"><span class="nav-emoji">🎲</span><span class="nav-num">M16</span><span class="nav-label">Probability, Combinatorics, Bayes</span></a>
+<a class="nav-item " href="/lessons/17_ab_testing_anova_power.html" data-slug="17_ab_testing_anova_power"><span class="nav-emoji">🧪</span><span class="nav-num">M17</span><span class="nav-label">A/B Testing, ANOVA &amp; Power</span></a>
+<a class="nav-item " href="/lessons/18_oop_linear_algebra_calculus.html" data-slug="18_oop_linear_algebra_calculus"><span class="nav-emoji">➗</span><span class="nav-num">M18</span><span class="nav-label">OOP, Linear Algebra &amp; Calculus</span></a>
+<a class="nav-item " href="/lessons/19_time_series.html" data-slug="19_time_series"><span class="nav-emoji">⏳</span><span class="nav-num">M19</span><span class="nav-label">Time Series</span></a>
+<a class="nav-item " href="/lessons/20_nlp_recommendation_systems.html" data-slug="20_nlp_recommendation_systems"><span class="nav-emoji">💬</span><span class="nav-num">M20</span><span class="nav-label">NLP &amp; Recommender Systems</span></a>
+<a class="nav-item " href="/lessons/21_bash_git.html" data-slug="21_bash_git"><span class="nav-emoji">🐚</span><span class="nav-num">M21</span><span class="nav-label">Bash &amp; Git</span></a>
+<a class="nav-item " href="/lessons/22_bigdata_spark.html" data-slug="22_bigdata_spark"><span class="nav-emoji">⚡</span><span class="nav-num">M22</span><span class="nav-label">Big Data &amp; Spark</span></a>
+<a class="nav-item " href="/lessons/23_aws_deployment_mlops.html" data-slug="23_aws_deployment_mlops"><span class="nav-emoji">☁️</span><span class="nav-num">M23</span><span class="nav-label">AWS Deployment &amp; MLOps</span></a>
+  </nav>
+</aside>
+<main id="content">
+  <div class="lesson-wrap">
+    <div class="crumb">Module 14</div>
+    <div class="runbar"><span class="runbar-label">▶ Run this lesson yourself:</span><a class="runbtn colab" href="https://colab.research.google.com/github/Kaks753/DS_bridging/blob/main/notebooks/14_sql_for_data_science.ipynb" target="_blank" rel="noopener">Open in Colab</a><a class="runbtn gh" href="https://github.com/Kaks753/DS_bridging/blob/main/notebooks/14_sql_for_data_science.ipynb" target="_blank" rel="noopener">View on GitHub</a><span class="runbar-hint">In Colab, press <kbd>Shift</kbd>+<kbd>Enter</kbd> to run each cell.</span></div>
+    <div class="intro"><p>SQL is on your CV, and it's the <strong>#1 most-tested skill</strong> in data interviews after
+Python. Here's the reality of the job: data lives in databases, and you must fetch
+and shape it with SQL <em>before</em> pandas ever sees it. We'll use <strong>SQLite</strong> (built into
+Python — nothing to install) and load the customer data so every query below runs
+live and returns a real table.</p></div>
+<div class="callout analogy"><div class="callout-h">Analogy</div><p>A database is a giant, well-organised warehouse; SQL is the order form you hand the warehouse staff. You don't wander the aisles yourself (that's slow) — you write a precise request ('all Premium customers in Nairobi, sorted by spend') and they bring back exactly that.</p></div>
+<h2>14.1 Setup — a live database in memory</h2>
+<div class="codecell"><pre class="code"><code class="language-python">import sqlite3
+import pandas as pd
+
+# Load our CSVs into an in-memory SQLite database
+con = sqlite3.connect(&quot;:memory:&quot;)
+customers = pd.read_csv(&quot;../data/customers_clean.csv&quot;)
+customers.to_sql(&quot;customers&quot;, con, index=False, if_exists=&quot;replace&quot;)
+
+# A tiny lookup table so we can practise JOINs
+cities = pd.DataFrame({
+    &quot;city&quot;: [&quot;Nairobi&quot;, &quot;Mombasa&quot;, &quot;Kisumu&quot;, &quot;Nakuru&quot;, &quot;Eldoret&quot;],
+    &quot;region&quot;: [&quot;Central&quot;, &quot;Coast&quot;, &quot;Nyanza&quot;, &quot;Rift Valley&quot;, &quot;Rift Valley&quot;],
+    &quot;population_k&quot;: [4397, 1208, 610, 570, 475],
+})
+cities.to_sql(&quot;cities&quot;, con, index=False, if_exists=&quot;replace&quot;)
+
+def q(sql):
+    &quot;Run SQL and return a DataFrame (our little query helper).&quot;
+    return pd.read_sql_query(sql, con)
+
+print(&quot;tables:&quot;, q(&quot;SELECT name FROM sqlite_master WHERE type=&#x27;table&#x27;&quot;)[&quot;name&quot;].tolist())
+q(&quot;SELECT customer_id, age, city, plan, monthly_spend, churn FROM customers LIMIT 5&quot;)</code></pre><div class="outputs"><pre class="out stream">tables: [&#x27;customers&#x27;, &#x27;cities&#x27;]
+</pre><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+      <th>age</th>
+      <th>city</th>
+      <th>plan</th>
+      <th>monthly_spend</th>
+      <th>churn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>38.0</td>
+      <td>Kisumu</td>
+      <td>Basic</td>
+      <td>186.65</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>25.0</td>
+      <td>Nakuru</td>
+      <td>Basic</td>
+      <td>76.83</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>35.0</td>
+      <td>Nairobi</td>
+      <td>Basic</td>
+      <td>37.36</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>44.0</td>
+      <td>Mombasa</td>
+      <td>Premium</td>
+      <td>23.34</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>18.0</td>
+      <td>Nairobi</td>
+      <td>Basic</td>
+      <td>12.17</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li><code>sqlite3.connect(':memory:')</code> spins up a throwaway database that lives in RAM — perfect
+  for practice, gone when we close it.</li>
+<li><code>df.to_sql(...)</code> loads a DataFrame in as a table; our <code>q(...)</code> helper runs any SQL
+  string and hands back the result as a DataFrame so it prints nicely.</li>
+</ul></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">SQL</span> = Structured Query Language — the standard language for asking questions of databases</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">table</span> = a database&#x27;s rows-and-columns dataset, like a spreadsheet tab</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">query</span> = a single SQL request for data</p></div>
+<h2>14.2 The order you WRITE vs the order SQL RUNS</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>This one insight unlocks most SQL confusion. You WRITE a query as
+SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER BY … LIMIT. But SQL RUNS the
+clauses in a different logical order — it grabs the tables first and chooses the
+displayed columns almost last.</p></div>
+<p>SQL's logical execution order:
+1. <strong>FROM</strong> (+ JOIN) — get and combine the tables
+2. <strong>WHERE</strong> — filter individual <strong>rows</strong>
+3. <strong>GROUP BY</strong> — bucket rows into groups
+4. <strong>HAVING</strong> — filter <strong>groups</strong>
+5. <strong>SELECT</strong> — choose/compute the columns
+6. <strong>ORDER BY</strong> — sort
+7. <strong>LIMIT</strong> — cut</p>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p>Why does this matter? Because it explains two things beginners trip on: (1) you can't
+use a column ALIAS you defined in SELECT inside your WHERE clause — WHERE runs long
+before SELECT exists; and (2) HAVING, not WHERE, is where you filter on an aggregate
+like COUNT(*) &gt; 50, because aggregation (GROUP BY) hasn't happened yet when WHERE runs.
+Recite the execution order in an interview and a whole class of 'why doesn't this work?'
+questions answer themselves.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># WHERE filters rows BEFORE grouping
+q(&#x27;&#x27;&#x27;
+SELECT city, plan, monthly_spend
+FROM customers
+WHERE monthly_spend &gt; 100 AND plan = &#x27;Premium&#x27;
+ORDER BY monthly_spend DESC
+LIMIT 5
+&#x27;&#x27;&#x27;)</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>city</th>
+      <th>plan</th>
+      <th>monthly_spend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Nairobi</td>
+      <td>Premium</td>
+      <td>236.80</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Nairobi</td>
+      <td>Premium</td>
+      <td>202.72</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Mombasa</td>
+      <td>Premium</td>
+      <td>202.05</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Kisumu</td>
+      <td>Premium</td>
+      <td>186.77</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Nairobi</td>
+      <td>Premium</td>
+      <td>141.83</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<h2>14.3 Aggregation: GROUP BY, and WHERE vs HAVING</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Aggregation collapses many rows into a summary: count per plan, average spend per
+city. The key distinction — a classic interview trap — is WHERE filters individual
+ROWS (before grouping), while HAVING filters GROUPS (after aggregation).</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># Churn rate &amp; average spend per plan.
+# Neat trick: AVG of a 0/1 column IS the rate — same idea as in pandas.
+q(&#x27;&#x27;&#x27;
+SELECT plan,
+       COUNT(*)                     AS n_customers,
+       ROUND(AVG(monthly_spend), 2) AS avg_spend,
+       ROUND(AVG(churn), 3)         AS churn_rate
+FROM customers
+GROUP BY plan
+ORDER BY churn_rate DESC
+&#x27;&#x27;&#x27;)</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>plan</th>
+      <th>n_customers</th>
+      <th>avg_spend</th>
+      <th>churn_rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Basic</td>
+      <td>249</td>
+      <td>68.28</td>
+      <td>0.406</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Premium</td>
+      <td>95</td>
+      <td>63.58</td>
+      <td>0.242</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Standard</td>
+      <td>156</td>
+      <td>72.65</td>
+      <td>0.212</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="codecell"><pre class="code"><code class="language-python"># HAVING: keep only cities with more than 50 customers (a filter on the GROUP)
+q(&#x27;&#x27;&#x27;
+SELECT city, COUNT(*) AS n
+FROM customers
+GROUP BY city
+HAVING COUNT(*) &gt; 50
+ORDER BY n DESC
+&#x27;&#x27;&#x27;)</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>city</th>
+      <th>n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Nairobi</td>
+      <td>208</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Mombasa</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Nakuru</td>
+      <td>70</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Kisumu</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Eldoret</td>
+      <td>51</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>WHERE filters rows, HAVING filters groups. If your condition uses an aggregate (COUNT, AVG, SUM), it belongs in HAVING; if it's about a single row's raw value, it belongs in WHERE.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">GROUP BY</span> = bucket rows that share a value so you can aggregate within each bucket</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">aggregate function</span> = COUNT/SUM/AVG/MIN/MAX — collapses many rows into one summary number</p></div>
+<h2>14.4 JOINs — combining tables</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Real questions span tables. To attach each customer's region, we JOIN customers to
+cities. Every JOIN needs two answers: ON WHAT KEY do we match, and WHICH TYPE of
+join? INNER keeps only matched rows; LEFT keeps every left-table row and fills NULL
+where the right table has no match.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python">q(&#x27;&#x27;&#x27;
+SELECT c.customer_id, c.city, ci.region, c.plan, c.monthly_spend
+FROM customers AS c
+LEFT JOIN cities AS ci
+       ON c.city = ci.city
+LIMIT 5
+&#x27;&#x27;&#x27;)</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+      <th>city</th>
+      <th>region</th>
+      <th>plan</th>
+      <th>monthly_spend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Kisumu</td>
+      <td>Nyanza</td>
+      <td>Basic</td>
+      <td>186.65</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Nakuru</td>
+      <td>Rift Valley</td>
+      <td>Basic</td>
+      <td>76.83</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Nairobi</td>
+      <td>Central</td>
+      <td>Basic</td>
+      <td>37.36</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Mombasa</td>
+      <td>Coast</td>
+      <td>Premium</td>
+      <td>23.34</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Nairobi</td>
+      <td>Central</td>
+      <td>Basic</td>
+      <td>12.17</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="codecell"><pre class="code"><code class="language-python"># Aggregate AFTER joining: churn rate by region
+q(&#x27;&#x27;&#x27;
+SELECT ci.region,
+       COUNT(*)               AS n_customers,
+       ROUND(AVG(c.churn), 3) AS churn_rate
+FROM customers AS c
+LEFT JOIN cities AS ci ON c.city = ci.city
+GROUP BY ci.region
+ORDER BY churn_rate DESC
+&#x27;&#x27;&#x27;)</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>region</th>
+      <th>n_customers</th>
+      <th>churn_rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Nyanza</td>
+      <td>69</td>
+      <td>0.362</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Central</td>
+      <td>208</td>
+      <td>0.341</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Rift Valley</td>
+      <td>121</td>
+      <td>0.306</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Coast</td>
+      <td>102</td>
+      <td>0.235</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="callout interview"><div class="callout-h">Say this in an interview</div><p>Be ready to PREDICT ROW COUNTS: an INNER JOIN can only shrink or hold the row count</p></div>
+<p>(unmatched rows drop); a LEFT JOIN keeps all left rows but can GROW the total if a
+left row matches several right rows (a one-to-many join multiplies). 'How many rows
+does this join return?' is a favourite screen — reason it from the key's uniqueness.</p>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">JOIN</span> = combine rows from two tables based on a matching key column</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">INNER JOIN</span> = keep only rows that have a match in BOTH tables</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">LEFT JOIN</span> = keep every row from the left table; NULL-fill where the right has no match</p></div>
+<h2>14.5 Subqueries and CTEs — structuring complex logic</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>A subquery is a query nested inside another — handy for comparing rows against an
+aggregate (e.g. 'who spends above the overall average?'). A CTE (the WITH clause)
+does the same job but names the intermediate result, so complex logic reads
+top-to-bottom instead of nesting inside-out.</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># Subquery: customers spending above the overall average
+q(&#x27;&#x27;&#x27;
+SELECT customer_id, plan, monthly_spend
+FROM customers
+WHERE monthly_spend &gt; (SELECT AVG(monthly_spend) FROM customers)
+ORDER BY monthly_spend DESC
+LIMIT 5
+&#x27;&#x27;&#x27;)</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+      <th>plan</th>
+      <th>monthly_spend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>347</td>
+      <td>Standard</td>
+      <td>427.55</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>54</td>
+      <td>Standard</td>
+      <td>244.80</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7</td>
+      <td>Basic</td>
+      <td>242.23</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>254</td>
+      <td>Basic</td>
+      <td>237.17</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>151</td>
+      <td>Premium</td>
+      <td>236.80</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="codecell"><pre class="code"><code class="language-python"># CTE: same idea per PLAN, but readable top-to-bottom
+q(&#x27;&#x27;&#x27;
+WITH plan_stats AS (
+    SELECT plan, AVG(monthly_spend) AS plan_avg_spend
+    FROM customers
+    GROUP BY plan
+)
+SELECT c.customer_id, c.plan, c.monthly_spend,
+       ROUND(p.plan_avg_spend, 2)              AS plan_avg,
+       ROUND(c.monthly_spend - p.plan_avg_spend, 2) AS vs_plan_avg
+FROM customers AS c
+JOIN plan_stats AS p ON c.plan = p.plan
+ORDER BY vs_plan_avg DESC
+LIMIT 5
+&#x27;&#x27;&#x27;)</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+      <th>plan</th>
+      <th>monthly_spend</th>
+      <th>plan_avg</th>
+      <th>vs_plan_avg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>347</td>
+      <td>Standard</td>
+      <td>427.55</td>
+      <td>72.65</td>
+      <td>354.90</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>Basic</td>
+      <td>242.23</td>
+      <td>68.28</td>
+      <td>173.95</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>151</td>
+      <td>Premium</td>
+      <td>236.80</td>
+      <td>63.58</td>
+      <td>173.22</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>54</td>
+      <td>Standard</td>
+      <td>244.80</td>
+      <td>72.65</td>
+      <td>172.15</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>254</td>
+      <td>Basic</td>
+      <td>237.17</td>
+      <td>68.28</td>
+      <td>168.89</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="callout readcode"><div class="callout-h">Reading the code</div><ul>
+<li>The subquery <code>(SELECT AVG(monthly_spend) FROM customers)</code> computes one number that
+  the outer WHERE compares each row against.</li>
+<li>The CTE <code>plan_stats</code> is computed once, given a name, then JOINed like a table —
+  cleaner and reusable versus nesting the same subquery repeatedly.</li>
+</ul></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">subquery</span> = a query nested inside another query</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">CTE (WITH)</span> = a named intermediate result that makes multi-step queries readable</p></div>
+<h2>14.6 Window functions — the senior-level tool</h2>
+<div class="callout plain"><div class="callout-h">In plain English</div><p>Window functions are what separate a strong SQL candidate from an average one. They
+compute across a set of rows RELATED to the current row — but, unlike GROUP BY, they
+keep every row instead of collapsing them. Syntax:
+FUNC(...) OVER (PARTITION BY ... ORDER BY ...).</p></div>
+<div class="codecell"><pre class="code"><code class="language-python"># Rank customers by spend WITHIN each plan (top spender in a plan = rank 1)
+q(&#x27;&#x27;&#x27;
+SELECT customer_id, plan, monthly_spend,
+       RANK() OVER (PARTITION BY plan ORDER BY monthly_spend DESC) AS spend_rank
+FROM customers
+ORDER BY plan, spend_rank
+LIMIT 9
+&#x27;&#x27;&#x27;)</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+      <th>plan</th>
+      <th>monthly_spend</th>
+      <th>spend_rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>7</td>
+      <td>Basic</td>
+      <td>242.23</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>254</td>
+      <td>Basic</td>
+      <td>237.17</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>406</td>
+      <td>Basic</td>
+      <td>235.45</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>132</td>
+      <td>Basic</td>
+      <td>225.26</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>90</td>
+      <td>Basic</td>
+      <td>215.49</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>271</td>
+      <td>Basic</td>
+      <td>194.69</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>20</td>
+      <td>Basic</td>
+      <td>188.73</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1</td>
+      <td>Basic</td>
+      <td>186.65</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>25</td>
+      <td>Basic</td>
+      <td>183.64</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="codecell"><pre class="code"><code class="language-python"># Attach each plan&#x27;s average to EVERY row (no GROUP BY collapse) and compute the gap
+q(&#x27;&#x27;&#x27;
+SELECT customer_id, plan, monthly_spend,
+       ROUND(AVG(monthly_spend) OVER (PARTITION BY plan), 2) AS plan_avg,
+       ROUND(monthly_spend - AVG(monthly_spend) OVER (PARTITION BY plan), 2) AS diff
+FROM customers
+ORDER BY diff DESC
+LIMIT 5
+&#x27;&#x27;&#x27;)</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>customer_id</th>
+      <th>plan</th>
+      <th>monthly_spend</th>
+      <th>plan_avg</th>
+      <th>diff</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>347</td>
+      <td>Standard</td>
+      <td>427.55</td>
+      <td>72.65</td>
+      <td>354.90</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>Basic</td>
+      <td>242.23</td>
+      <td>68.28</td>
+      <td>173.95</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>151</td>
+      <td>Premium</td>
+      <td>236.80</td>
+      <td>63.58</td>
+      <td>173.22</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>54</td>
+      <td>Standard</td>
+      <td>244.80</td>
+      <td>72.65</td>
+      <td>172.15</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>254</td>
+      <td>Basic</td>
+      <td>237.17</td>
+      <td>68.28</td>
+      <td>168.89</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="callout deeper"><div class="callout-h">Go deeper</div><p>PARTITION BY is 'GROUP BY that doesn't collapse' — it defines the window each row's
+function looks across. The heavy hitters: ROW_NUMBER / RANK / DENSE_RANK for ranking
+within groups (RANK leaves gaps after ties, DENSE_RANK doesn't); SUM/AVG OVER for a
+group stat glued onto each row; and LAG / LEAD to reach the previous/next row — the
+key to period-over-period changes and churn diffs in time-series data. 'Give me the
+top-2 spenders per plan' is a canonical window-function question.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">window function</span> = computes over rows related to the current one WITHOUT collapsing them</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">PARTITION BY</span> = defines the group of rows a window function operates within</p></div>
+<h2>14.7 SQL ↔ pandas — two dialects of the same ideas</h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>SQL</th>
+<th>pandas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>filter rows</td>
+<td><code>WHERE x &gt; 5</code></td>
+<td><code>df[df.x &gt; 5]</code></td>
+</tr>
+<tr>
+<td>choose columns</td>
+<td><code>SELECT a, b</code></td>
+<td><code>df[["a","b"]]</code></td>
+</tr>
+<tr>
+<td>group + aggregate</td>
+<td><code>GROUP BY g</code> + <code>AVG()</code></td>
+<td><code>df.groupby("g").mean()</code></td>
+</tr>
+<tr>
+<td>join</td>
+<td><code>JOIN ... ON</code></td>
+<td><code>df.merge(other, on=...)</code></td>
+</tr>
+<tr>
+<td>sort</td>
+<td><code>ORDER BY x DESC</code></td>
+<td><code>df.sort_values("x", ascending=False)</code></td>
+</tr>
+<tr>
+<td>top-n</td>
+<td><code>LIMIT 5</code></td>
+<td><code>df.head(5)</code> / <code>nlargest</code></td>
+</tr>
+<tr>
+<td>distinct</td>
+<td><code>SELECT DISTINCT</code></td>
+<td><code>df.drop_duplicates()</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>SQL and pandas are the same ideas in two languages. Being fluent in BOTH — and able to say 'this GROUP BY is that .groupby()' — is exactly what data roles want.</p></div>
+<h2>14.8 Try it yourself</h2>
+<div class="codecell"><pre class="code"><code class="language-python"># Worked example of a common interview move: conditional aggregation (a pivot in SQL)
+q(&#x27;&#x27;&#x27;
+SELECT plan,
+       SUM(CASE WHEN churn = 1 THEN 1 ELSE 0 END) AS churned,
+       SUM(CASE WHEN churn = 0 THEN 1 ELSE 0 END) AS stayed
+FROM customers
+GROUP BY plan
+&#x27;&#x27;&#x27;)</code></pre><div class="outputs"><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>plan</th>
+      <th>churned</th>
+      <th>stayed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Basic</td>
+      <td>101</td>
+      <td>148</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Premium</td>
+      <td>23</td>
+      <td>72</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Standard</td>
+      <td>33</td>
+      <td>123</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div><p>Write the SQL, then check with q(...):</p></div>
+<ol>
+<li>Average income per region (join required), highest first.</li>
+<li>Customers whose tenure_months is above their OWN plan's average tenure (window or CTE).</li>
+<li>For each city, rank customers by monthly_spend; return only rank 1.</li>
+<li>Count churned vs stayed per plan as two columns — the SUM(CASE WHEN...) trick above.</li>
+</ol>
+<div class="codecell"><pre class="code"><code class="language-python">con.close()   # always close the connection when done
+print(&quot;connection closed — module complete&quot;)</code></pre><div class="outputs"><pre class="out stream">connection closed — module complete
+</pre></div></div>
+<h2>Summary</h2>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><ul>
+<li>SQL <strong>executes</strong> FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT.</li>
+</ul></div>
+<ul>
+<li><strong>WHERE</strong> filters rows; <strong>HAVING</strong> filters groups.</li>
+<li>Master all <strong>JOINs</strong> and be able to predict row counts.</li>
+<li><strong>Subqueries</strong> and <strong>CTEs</strong> structure complex logic; CTEs read cleaner.</li>
+<li><strong>Window functions</strong> (RANK, SUM() OVER, LAG/LEAD) aggregate WITHOUT collapsing rows — the skill that marks a strong candidate.</li>
+<li>SQL and pandas are two dialects of the same ideas.</li>
+</ul>
+<p>Next: <strong>Module 15 — APIs &amp; Web Scraping</strong> — getting data that isn't handed to you
+in a tidy CSV.</p>
+    <div class="lesson-nav">
+      <a class="pn prev" href="/lessons/13_job_readiness_interview_prep.html">← Job Readiness &amp; Interviews</a>
+      <a class="pn next" href="/lessons/15_apis_web_scraping.html">APIs &amp; Web Scraping →</a>
+    </div>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>
