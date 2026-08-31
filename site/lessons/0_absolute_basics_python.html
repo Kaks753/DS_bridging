@@ -89,9 +89,9 @@ print(&quot;Hello, Stephen! This line ran on the computer.&quot;)</code></pre><d
 </ul>
 <p>Press <strong>Shift+Enter</strong> on a code cell to run it. The line under the cell is the
 <strong>output</strong> — what the code produced.</p></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">cell</span> = one box in a notebook; either human text or runnable code</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">print()</span> = a command that displays a value on the screen</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>A notebook is a recipe of cells; code cells run top-to-bottom and show their results underneath.</p></div>
 <h2>0.2 Variables — labelled boxes that store values</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>A <strong>variable</strong> is a <strong>labelled box</strong> where you store a value so you can use it
 again later by its name. You <em>create</em> a variable with <code>=</code>, which means
@@ -121,10 +121,10 @@ updated age: 28
 <li><code>print("updated age:", age)</code> → <code>print</code> can show several things separated by
   commas; it prints them on one line with a space between.</li>
 </ul></div>
-<div class="callout warn"><div class="callout-h">Watch out</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
-<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p><code>=</code> is <strong>assignment</strong> (put value in box), not equality. To <em>test</em> if two things are equal you use <code>==</code> (double equals) — we'll see that in 0.5.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">variable</span> = a named box that stores a value you can reuse</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Create a variable with <code>name = value</code>; use the name later to get the value back.</p></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div><p>Make a variable <code>city = "Nairobi"</code> and print a sentence like <code>Stephen lives in Nairobi</code> using print with commas.</p></div>
 <h2>0.3 Data types — the main <em>kinds</em> of value</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>Every value has a <strong>type</strong> — what <em>kind</em> of thing it is. The four you'll use most:</p>
 <ul>
@@ -167,8 +167,8 @@ print(5 + 5)       # numbers get ADDED</code></pre><div class="outputs"><pre cla
 This is called <strong>casting</strong>. It matters constantly in data work: a CSV loads
 everything as text, so a column of ages arrives as strings like <code>"27"</code> and you must
 cast it to numbers before you can average it. (Module on cleaning covers this.)</p></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">data type</span> = the kind of a value: text (str), whole number (int), decimal (float), or True/False (bool)</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Know each value's type — text and numbers look alike but behave completely differently.</p></div>
 <h2>0.4 Lists and dictionaries — holding <em>many</em> things</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>So far one box held one value. Often you have <strong>many</strong> values. Two everyday
 containers:</p>
@@ -216,13 +216,13 @@ after adding plan: {&#x27;name&#x27;: &#x27;Stephen&#x27;, &#x27;age&#x27;: 27, 
 - <code>customer = { "name": "Stephen", ... }</code> → pairs of <code>key: value</code>.
 - <code>customer["city"]</code> → fetch the value stored under the key <code>"city"</code>.
 - <code>customer["plan"] = "Premium"</code> → add (or overwrite) the <code>"plan"</code> entry.</p></div>
-<div class="callout analogy"><div class="callout-h">Analogy</div></div>
-<div class="callout warn"><div class="callout-h">Watch out</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
-<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<div class="callout analogy"><div class="callout-h">Analogy</div><p>A <strong>list</strong> is a numbered row of lockers (open locker #0, #1, #2…). A <strong>dictionary</strong> is a set of labelled folders (open the folder called 'city'). Use a list when order matters; a dict when names matter.</p></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p>Indexing starts at <strong>0</strong>. In a 3-item list the valid positions are 0, 1, 2. Asking for <code>cities[3]</code> errors with 'list index out of range'.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">list</span> = an ordered collection accessed by position (index), written with [ ]</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">dictionary</span> = a collection accessed by name (key), written with { }</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">index</span> = the position number of an item in a list, starting at 0</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Lists = ordered, grab by number <code>[0]</code>; dictionaries = labelled, grab by name <code>["key"]</code>.</p></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div><p>Make a dict <code>car = {"make": "Toyota", "year": 2018}</code> and print just the year.</p></div>
 <h2>0.5 Making decisions — <code>if</code> / <code>elif</code> / <code>else</code></h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>Programs often need to <strong>choose</strong> what to do. <code>if</code> runs a block <strong>only when</strong> a
 condition is true. It reads like English:</p>
@@ -259,10 +259,10 @@ is 7 greater than 3? True
 <li><code>5 == 5</code> → double-equals <strong>asks</strong> "are these equal?" → <code>True</code>. (Single <code>=</code> would
   try to <em>assign</em> and error here.)</li>
 </ul></div>
-<div class="callout warn"><div class="callout-h">Watch out</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p><code>=</code> assigns, <code>==</code> compares. Mixing them up is the most common beginner error. Read <code>==</code> as the question 'are these the same?'.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">boolean</span> = a value that is either True or False</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">if statement</span> = code that runs only when a condition is True</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p><code>if/elif/else</code> picks a branch based on a True/False test; the indented lines are the branch.</p></div>
 <h2>0.6 Repeating work — the <code>for</code> loop</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>A <strong>loop</strong> does something <strong>once for each item</strong> in a collection — so you don't
 copy-paste the same line ten times. A <code>for</code> loop reads like:</p>
@@ -299,10 +299,10 @@ loops over data, because there's a faster "do it to the whole column at once" wa
 called <strong>vectorization</strong> (next module). But understanding the loop first is
 essential — it's the mental model of "do this for every item", and you'll still use
 loops constantly for non-data tasks (files, API calls, experiments).</p></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
-<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">for loop</span> = code that repeats once for each item in a collection</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">range(n)</span> = produces the numbers 0, 1, ..., n-1 — handy for looping n times</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>A <code>for</code> loop runs the same block once per item — 'for each row, do X'.</p></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div><p>Loop over <code>[10, 20, 30]</code> and print each number doubled.</p></div>
 <h2>0.7 Functions — reusable mini-machines</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>A <strong>function</strong> is a <strong>mini-machine</strong>: you feed it <strong>inputs</strong>, it does some work, and
 it hands back an <strong>output</strong>. You define it once, then reuse it forever — no copy-paste.</p>
@@ -335,11 +335,11 @@ area: 12
   <code>"Hello, Stephen"</code>, which <code>print</code> then shows.</li>
 <li><code>area_of_rectangle(4, 3)</code> → two inputs (<code>width=4</code>, <code>height=3</code>); returns <code>12</code>.</li>
 </ul></div>
-<div class="callout warn"><div class="callout-h">Watch out</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p><code>print</code> and <code>return</code> are different! <code>print</code> just <em>shows</em> something on screen. <code>return</code> <em>hands a value back</em> so other code can use it. A function that only prints gives you nothing to store in a variable.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">function</span> = a reusable mini-machine: inputs go in, an output comes back</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">argument</span> = an input value you pass into a function</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">return</span> = the keyword that sends a function&#x27;s result back to the caller</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Define once with <code>def</code>, reuse forever by calling it; <code>return</code> gives back the result.</p></div>
 <h2>0.8 Importing libraries — borrowing other people's code</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>You don't build everything yourself. A <strong>library</strong> is a toolbox of ready-made code
 someone else wrote. To use one you <strong>import</strong> it. Data science stands on a few:</p>
@@ -369,9 +369,9 @@ pi is about: 3.142
 <li><code>import numpy as np</code> → load NumPy but refer to it by the nickname <code>np</code>
   (everyone does this — you'll see <code>np.</code> everywhere).</li>
 </ul></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">library</span> = a toolbox of ready-made code you import to reuse</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">import</span> = the command that loads a library so you can use its tools</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p><code>import name</code> loads a toolbox; <code>import name as nick</code> gives it a short nickname you type instead.</p></div>
 <h2>0.9 Errors are normal — how to read them without panic</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>Every programmer — including seniors — sees errors constantly. An error is not a
 failure; it's Python <strong>telling you what confused it</strong>, and <em>where</em>. The trick is to
@@ -401,9 +401,9 @@ message      : list index out of range
 - <strong>IndentationError</strong> — your spacing is off (Python cares about indentation).</p>
 <p>Workflow: read the <strong>last line</strong>, note the <strong>line number</strong>, fix that one thing, re-run.
 Copy-pasting the error message into a search engine is a <em>normal, professional</em> move.</p></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">error / exception</span> = Python&#x27;s message telling you what confused it and where</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">traceback</span> = the full error report; read the LAST line first</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Errors are guidance, not failure — read the last line, fix that one thing, re-run.</p></div>
 <h2>0.10 Putting it together — a tiny real program</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>Let's combine <em>everything</em> from this module into one small, readable program: we'll
 store some customers, loop over them, make a decision for each, and use a function.
@@ -440,7 +440,7 @@ Cara -&gt; medium risk
 <li><code>risk_label(c["calls"])</code> → feed it into our function, store the returned word in
   <code>label</code>, then print it.</li>
 </ul></div>
-<div class="callout interview"><div class="callout-h">Say this in an interview</div></div>
+<div class="callout interview"><div class="callout-h">Say this in an interview</div><p>"I'm comfortable with the Python fundamentals — variables and types, lists and</p></div>
 <p>dicts, control flow with if/for, writing functions, and importing libraries — and I
 can read a traceback to debug. That's the base everything else builds on."</p>
 <h2>0.11 Practice (do these before moving on)</h2>

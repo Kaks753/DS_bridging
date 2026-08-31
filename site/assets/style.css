@@ -75,6 +75,7 @@ th{background:var(--panel2)}
 .callout.warn{border-left-color:var(--c-warn);background:var(--c-warn-bg)} .callout.warn .callout-h{color:var(--c-warn)}
 .callout.try{border-left-color:var(--c-try);background:var(--c-try-bg)} .callout.try .callout-h{color:var(--c-try)}
 .callout.jargon{border-left-color:var(--c-jargon);background:var(--c-jargon-bg)} .callout.jargon .callout-h{color:var(--c-jargon)}
+.jargon-term{font-weight:800;color:var(--ink);background:rgba(148,163,184,.18);padding:1px 7px;border-radius:6px}
 blockquote{border-left:4px solid var(--line);margin:1em 0;padding:.4em 1em;color:var(--muted);background:var(--panel)}
 
 /* ---------- code cells ---------- */

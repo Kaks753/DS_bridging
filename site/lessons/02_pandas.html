@@ -111,12 +111,12 @@ dtype: float64
   is only in <code>s1</code> and <code>d</code> only in <code>s2</code>, so there's nothing to add → the result is
   <code>NaN</code> ("Not a Number" = missing).</li>
 </ul></div>
-<div class="callout warn"><div class="callout-h">Watch out</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p>Unexpected <code>NaN</code>s after combining data usually mean the <strong>labels didn't match</strong>. This is the #1 surprise from pandas' auto-alignment — helpful when you want it, confusing when you don't.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">Series</span> = one labelled column of data</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">DataFrame</span> = a table: many columns (Series) sharing one row index</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">index</span> = the row labels of a Series/DataFrame</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">NaN</span> = &#x27;Not a Number&#x27; — pandas&#x27; marker for a missing value</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>A Series is one labelled column; a DataFrame is a full table; pandas lines data up by index label.</p></div>
 <h2>2.2 Loading a real (messy) dataset &amp; first look</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>Almost always your data lives in a <strong>CSV file</strong> (comma-separated values — a plain-text
 spreadsheet). <code>pd.read_csv</code> loads it into a DataFrame in one line.</p>
@@ -363,7 +363,7 @@ non-null values than the total rows (missing data), and its <code>max</code> wil
 quartile (that planted outlier of 5,000,000). You just <em>diagnosed two data problems
 without any charts</em> — purely by letting the summaries talk. That habit is what
 separates people who "know pandas" from people who <em>understand data</em>.</p></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>On any new dataset, always run <code>.head()</code>, <code>.info()</code>, <code>.describe()</code> first — they reveal missingness, wrong types, and outliers instantly.</p></div>
 <h2>2.3 Selecting columns and rows — <code>.loc</code> vs <code>.iloc</code></h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>Two ways to grab a slice of a table, and beginners mix them up:
 - <strong><code>.loc</code></strong> selects by <strong>label</strong> (the <em>name</em> of a row/column).
@@ -405,10 +405,10 @@ Name: 0, dtype: object
 <li><code>df.iloc[0:3, 0:3]</code> → by <strong>position</strong>: rows 0,1,2 and columns 0,1,2 (the <code>3</code> stop
   is excluded, as with NumPy/lists).</li>
 </ul></div>
-<div class="callout warn"><div class="callout-h">Watch out</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p>Avoid <strong>chained indexing</strong> like <code>df[df.age &gt; 30]["income"] = 0</code>. It quietly edits a <em>temporary copy</em> (the <code>SettingWithCopyWarning</code>) and your change may vanish. Always write it as ONE <code>.loc</code>: <code>df.loc[df.age &gt; 30, "income"] = 0</code>.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">.loc</span> = select rows/columns by their label (name)</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">.iloc</span> = select rows/columns by integer position (starting at 0)</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p><code>.loc</code> = by label, <code>.iloc</code> = by position; make assignments through a single <code>.loc[...]</code>.</p></div>
 <h2>2.4 Filtering rows with conditions</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>Filtering = "keep only the rows that match a rule". It's the same <strong>boolean mask</strong>
 idea from NumPy (Module 1.5): write a condition, pandas checks it for every row and
@@ -435,8 +435,8 @@ Mombasa (after tidying the text): 102
   spaces, <code>.str.title()</code> fixes capitalisation, so <code>" mombasa "</code> matches <code>"Mombasa"</code>.</li>
 <li><code>.isin([...])</code> → keep rows whose value is in the given list.</li>
 </ul></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
-<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Filter with a boolean condition inside <code>df[...]</code>; combine rules with <code>&amp;</code>, <code>|</code>, <code>~</code> and parentheses.</p></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div><p>Keep customers who are on <code>Basic</code> <strong>or</strong> have <code>support_calls == 0</code>, and print how many.</p></div>
 <h2>2.5 Creating new columns — the fast (vectorized) way</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>You'll constantly build new columns from existing ones (e.g. spend-per-month). Do it
 the <strong>vectorized</strong> way — an expression on whole columns — which is fast and clean.
@@ -565,9 +565,9 @@ at_risk           92
 loyal_premium     20
 Name: count, dtype: int64
 </pre></div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">vectorized (pandas)</span> = operating on whole columns at once (fast) instead of looping rows with .apply (slow)</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">np.where</span> = a vectorized if/else: np.where(condition, value_if_true, value_if_false)</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Build columns with vectorized maths, <code>np.where</code>, and <code>.map</code>; use <code>.apply(axis=1)</code> only for awkward multi-column rules.</p></div>
 <h2>2.6 GroupBy — split, apply, combine (the heart of analysis)</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p><strong>GroupBy</strong> answers questions like <em>"what's the average spend </em><em>per plan</em><em>?"</em> or
 <em>"the churn rate </em><em>per city</em><em>?"</em>. It works in three steps, called
@@ -693,9 +693,9 @@ two_way</code></pre><div class="outputs"><div class="out html"><div>
   </tbody>
 </table>
 </div></div></div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
-<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">groupby</span> = split rows into groups, apply a calculation to each, combine the results</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>GroupBy = split–apply–combine; and the mean of a 0/1 column is that event's rate.</p></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div><p>Group by <code>city</code> and compute the <strong>average income</strong> per city; sort highest first.</p></div>
 <h2>2.7 Joining tables with <code>merge</code></h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>Real projects have <strong>several</strong> tables that you stitch together on a shared column (a
 "key"). <code>merge</code> is pandas' version of joining. Two questions to always ask:
@@ -773,9 +773,9 @@ merged[[&quot;city&quot;, &quot;discount_pct&quot;]].drop_duplicates().sort_valu
 <li>We tidy <code>city</code> text first so <code>" nairobi "</code> matches <code>"Nairobi"</code> in the lookup.</li>
 <li>We print <code>len()</code> before and after as a sanity check.</li>
 </ul></div>
-<div class="callout warn"><div class="callout-h">Watch out</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p>A <code>left</code> merge should <strong>not</strong> change your row count — UNLESS the right table has duplicate keys, which makes rows <em>multiply</em>. Always compare <code>len()</code> before and after a merge; it catches a whole class of silent bugs.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">merge / join</span> = combine two tables by matching a shared key column</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Pick the key and the join type (inner vs left), then verify the row count didn't change unexpectedly.</p></div>
 <h2>2.8 Reshaping: wide ↔ long (pivot / melt)</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>The same data can be laid out two ways:
 - <strong>Wide</strong>: one row per thing, many columns — nice for a human to read in a report.
@@ -815,9 +815,9 @@ LONG (tidy) form:
 <li><code>melt(id_vars="plan", ...)</code> → collapse those risk columns back into two tidy
   columns: <code>risk_flag</code> (which one) and <code>avg_spend</code> (the value).</li>
 </ul></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">pivot_table</span> = reshape long → wide (rows×columns grid), optionally aggregating</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">melt</span> = reshape wide → long (one row per observation, the &#x27;tidy&#x27; shape)</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p><code>pivot_table</code> = long→wide (report-friendly); <code>melt</code> = wide→long (chart/model-friendly).</p></div>
 <h2>2.9 Quick wins: sorting, top-N, value counts</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>A few tiny commands you'll reach for daily: <code>nlargest</code> (top rows by a column),
 <code>sort_values</code> (order a table), and <code>value_counts</code> (how many of each category — the
@@ -848,7 +848,7 @@ Name: proportion, dtype: float64
 <li><code>df["city"].value_counts()</code> → count rows per city; <code>normalize=True</code> turns counts
   into proportions (fractions that sum to 1).</li>
 </ul></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p><code>value_counts()</code> is the quickest way to understand a categorical column; <code>nlargest</code>/<code>sort_values</code> order your data.</p></div>
 <h2>2.10 Practice (do these before Module 3)</h2>
 <ol>
 <li>Average <strong>income per city</strong>, ignoring missing values — which city is highest?
@@ -870,7 +870,7 @@ Name: income, dtype: float64
 
 loyal customers: 232
 </pre></div></div>
-<div class="callout interview"><div class="callout-h">Say this in an interview</div></div>
+<div class="callout interview"><div class="callout-h">Say this in an interview</div><p>"Pandas is my daily driver. A DataFrame is labelled columns that auto-align on the</p></div>
 <p>index. I select with .loc (labels) and .iloc (positions), filter with boolean masks,
 build columns vectorized rather than with .apply, and I think in split–apply–combine
 for groupby. On merges I always sanity-check the row count before and after."</p>

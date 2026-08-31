@@ -92,13 +92,34 @@ def render_markdown_cell(src):
             return
         chunk = "\n".join(buf)
         if mode == "quote":
-            inner = strip_blockquote(chunk)
+            inner = strip_blockquote(chunk).strip("\n")
             first = inner.strip().split("\n", 1)[0]
             cls, label = detect_layer(first)
-            if cls:
-                # drop the header line (emoji + bold label) from the body
-                body = inner.split("\n", 1)[1] if "\n" in inner else ""
-                body_html = md_to_html(body.strip())
+            jm = re.match(r"\s*📖\s*\*\*([^*]+)\*\*\s*=\s*(.*)$", first.strip()) if cls == "jargon" else None
+            if jm:
+                # Format: > 📖 **term** = definition  → keep BOTH term and def.
+                term, definition = jm.group(1).strip(), jm.group(2).strip()
+                blocks.append(
+                    f'<div class="callout jargon"><div class="callout-h">Jargon</div>'
+                    f'<p><span class="jargon-term">{html.escape(term)}</span> = '
+                    f'{html.escape(definition)}</p></div>'
+                )
+            elif cls:
+                rest = inner.split("\n", 1)[1] if "\n" in inner else ""
+                # Single-line callouts (Takeaway/Interview/Jargon) carry their
+                # text ON the header line after a — or =. Multi-line callouts
+                # (plain/readcode/deeper) put the body on the following lines.
+                inline = ""
+                # strip the leading emoji + **Bold label** from the first line,
+                # keeping whatever real text follows it.
+                m = re.match(r"\s*[^\w`*]*\*\*[^*]+\*\*\s*(.*)$", first)
+                if m:
+                    inline = m.group(1).strip()
+                    # drop a leading separator dash/equals if present
+                    inline = re.sub(r"^[—\-=:]\s*", "", inline)
+                body_src = (inline + ("\n\n" if inline and rest.strip() else "")
+                            + rest.strip()).strip()
+                body_html = md_to_html(body_src)
                 blocks.append(
                     f'<div class="callout {cls}"><div class="callout-h">'
                     f'{html.escape(label)}</div>{body_html}</div>'

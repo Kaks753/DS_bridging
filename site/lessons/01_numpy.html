@@ -95,10 +95,10 @@ all doubled  : [200 400 600]
   prices. With a plain list, <code>[100,200,300] * 1.16</code> would <strong>error</strong> — lists don't do
   maths like that. This "do it to everything at once" is the whole point of NumPy.</li>
 </ul></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
-<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">array</span> = NumPy&#x27;s list-like container where every item is the same type, allowing whole-array maths</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">np</span> = the standard nickname for NumPy (from `import numpy as np`)</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>A NumPy array holds same-typed numbers and lets you do maths on all of them at once.</p></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div><p>Make an array <code>[10, 20, 30]</code> and print it with 10% added to each value.</p></div>
 <h2>1.2 Why arrays are FAST — 'vectorization'</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>"<strong>Vectorization</strong>" is a fancy word for a simple idea: <strong>do the operation on the
 whole array at once</strong>, instead of looping item by item. NumPy then runs that loop
@@ -142,9 +142,9 @@ as a single tight block of one type (its <strong>dtype</strong>) and runs the mu
 compiled C. Rule of thumb you'll live by: <strong>if you're writing a <code>for</code> loop over a
 NumPy array or a pandas column, pause — there's almost always a faster vectorized
 way.</strong></p></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">vectorization</span> = doing an operation on a whole array at once instead of looping element by element</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">dtype</span> = the single data type of every element in an array (e.g. int64, float64)</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Vectorized whole-array maths is both shorter to write AND far faster than a Python loop.</p></div>
 <h2>1.3 Making arrays; checking <code>shape</code> and <code>dtype</code></h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>Arrays can be 1-D (a single row of numbers), 2-D (a grid — rows and columns, like a
 spreadsheet), or more. Two things you'll check <em>constantly</em>:
@@ -175,10 +175,10 @@ randoms  shape=(2, 2)  dtype=float64
 <li><code>rng.normal(0, 1, size=(2,2))</code> → 4 random numbers from a bell curve centred at 0.</li>
 <li><code>x.shape</code> / <code>x.dtype</code> → report the size and element type of each array.</li>
 </ul></div>
-<div class="callout warn"><div class="callout-h">Watch out</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p>Integer arrays can't hold <code>NaN</code> (the 'missing value' marker), because <code>NaN</code> is technically a <em>float</em>. So the moment a column gets a missing value it quietly turns into <code>float</code>. That's why a whole-number column often shows as <code>27.0</code> after cleaning — not a bug.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">shape</span> = the size of an array along each dimension, e.g. (rows, columns)</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">seed</span> = a fixed starting number that makes &#x27;random&#x27; results repeatable</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Always know an array's <code>.shape</code> and <code>.dtype</code> — they prevent most size/type bugs.</p></div>
 <h2>1.4 Indexing &amp; slicing — and the 'view vs copy' trap</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>Getting items out of an array works like lists from Module 0: positions start at
 <strong>0</strong>, and <code>start:stop</code> grabs a slice (stop is <em>not</em> included).</p>
@@ -213,10 +213,10 @@ base after editing copy: [ 0  1 99 99 99  5  6  7  8  9]
   <em>through</em> the view into <code>base</code>, so <code>base</code> changes too.</li>
 <li><code>.copy()</code> → makes a detached copy; editing <code>safe</code> leaves <code>base</code> alone.</li>
 </ul></div>
-<div class="callout warn"><div class="callout-h">Watch out</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p>If you slice an array (or a pandas column later) and then modify it, and the original changes unexpectedly — this view/copy behaviour is why. Add <code>.copy()</code> when you want to be safe. In pandas the same issue shows up as the famous <code>SettingWithCopyWarning</code>.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">view</span> = a slice that shares memory with the original array (editing it edits the original)</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">copy</span> = an independent duplicate; editing it does NOT affect the original</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Slices are live views into the same memory; use <code>.copy()</code> when you need an independent one.</p></div>
 <h2>1.5 Boolean masking — filtering with a yes/no test</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>This is the tool you'll use <em>most</em> for cleaning and exploring data. The idea:
 1. Write a <strong>condition</strong> on the array (like <code>data &gt; 0</code>). NumPy checks it for every
@@ -249,10 +249,10 @@ between 0 and 10: [7 5]
 <li><code>(data &gt; 0) &amp; (data &lt; 10)</code> → two tests joined with <code>&amp;</code> ("and"); keeps numbers that
   are <em>both</em> positive <em>and</em> under 10.</li>
 </ul></div>
-<div class="callout warn"><div class="callout-h">Watch out</div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
-<div class="callout try"><div class="callout-h">Try this yourself</div></div>
+<div class="callout warn"><div class="callout-h">Watch out</div><p>On arrays use <code>&amp;</code>, <code>|</code>, <code>~</code> — NOT the words <code>and</code>, <code>or</code>, <code>not</code> (those are for single True/False values, and error on arrays). Also wrap each condition in parentheses: <code>(a) &amp; (b)</code>, because <code>&amp;</code> otherwise binds too tightly.</p></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">boolean mask</span> = an array of True/False used to filter another array</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Make a True/False mask with a condition, then <code>array[mask]</code> keeps the matching items.</p></div>
+<div class="callout try"><div class="callout-h">Try this yourself</div><p>From <code>np.arange(20)</code>, keep only values that are even (hint: <code>x % 2 == 0</code>).</p></div>
 <h2>1.6 Broadcasting — combining different-shaped arrays</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p><strong>Broadcasting</strong> is NumPy automatically "stretching" a smaller array so it lines up
 with a bigger one — so you can, say, subtract one number from every element, or
@@ -301,8 +301,8 @@ print(&quot;stds  ~1:&quot;, standardized.std(axis=0).round(10))</code></pre><di
 means ~0: [0. 0. 0.]
 stds  ~1: [1. 1. 1.]
 </pre></div></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">broadcasting</span> = NumPy auto-stretching a smaller array to combine with a larger one</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>Broadcasting lets you combine different-shaped arrays (e.g. subtract column means from every row) with no loops.</p></div>
 <h2>1.7 The <code>axis</code> argument — the #1 confusion, made simple</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>When you sum or average a 2-D array (a grid), you must say <strong>which direction</strong> to
 squash. That direction is the <strong><code>axis</code></strong>:
@@ -327,8 +327,8 @@ sum with no axis (everything)       : 21
 <li><code>M.sum()</code> → no axis given → add up everything → <code>21</code>.
 Say it out loud: "axis=0 goes down the columns, axis=1 goes along the rows."</li>
 </ul></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">axis</span> = the direction to collapse in a 2-D array: 0 = down rows (per column), 1 = across columns (per row)</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p><code>axis=0</code> = per-column (rows collapse); <code>axis=1</code> = per-row (columns collapse). Axis = the dimension that vanishes.</p></div>
 <h2>1.8 Reshaping, and what <code>-1</code> means</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p><strong>Reshaping</strong> re-arranges the same numbers into a new grid shape (the total count
 must stay the same — you can't fit 12 numbers into a 3x5 grid). You'll do this often
@@ -362,8 +362,8 @@ feature matrix <code>X</code> to be <strong>2-D</strong>: shape <code>(n_samples
 columns of features). If you pass a 1-D array you'll get an error like <em>"Expected 2D
 array, got 1D array instead"</em> — the fix is exactly <code>.reshape(-1, 1)</code>. Now that error
 will never confuse you.</p></div>
-<div class="callout jargon"><div class="callout-h">Jargon</div></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout jargon"><div class="callout-h">Jargon</div><p><span class="jargon-term">reshape</span> = rearrange the same values into a new shape (total count must match)</p></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p><code>reshape</code> re-lays-out the same numbers; <code>-1</code> tells NumPy to compute that dimension; <code>reshape(-1,1)</code> makes a single column scikit-learn likes.</p></div>
 <h2>1.9 A few Python-with-NumPy idioms worth knowing</h2>
 <div class="callout plain"><div class="callout-h">In plain English</div><p>These compact patterns appear in real code and interviews. They're just tidy ways to
 build lists, label things, and format numbers nicely. Skim, then reuse.</p></div>
@@ -400,7 +400,7 @@ accuracy = 80.72%
 <li><code>f"...{acc:.2%}"</code> → an <strong>f-string</strong>: drop a variable straight into text; <code>:.2%</code>
   formats it as a percentage with 2 decimals.</li>
 </ul></div>
-<div class="callout takeaway"><div class="callout-h">Takeaway</div></div>
+<div class="callout takeaway"><div class="callout-h">Takeaway</div><p>List comprehensions, <code>enumerate</code>, <code>zip</code>, and f-strings make everyday data code short and readable.</p></div>
 <h2>1.10 Practice (do these before Module 2)</h2>
 <ol>
 <li>Make a <code>5x5</code> array of random integers 0–9 with seed 7. Print its <strong>column
@@ -424,7 +424,7 @@ print(&quot;row maxima:&quot;, grid.max(axis=1))</code></pre><div class="outputs
 col means : [6.8 5.2 5.4 2.2 4.6]
 row maxima: [9 8 9 8 8]
 </pre></div></div>
-<div class="callout interview"><div class="callout-h">Say this in an interview</div></div>
+<div class="callout interview"><div class="callout-h">Say this in an interview</div><p>"NumPy is fast because it stores one type in tight memory and runs vectorized C</p></div>
 <p>loops, so I avoid Python loops over data. I'm fluent with boolean masking for
 filtering, broadcasting for shape-aligned maths, and I keep <code>axis</code> straight —
 axis 0 collapses rows to give per-column results."</p>
