@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 22 — Deployment &amp; MLOps (getting the model OUT of the notebook) — DS Bridging Bootcamp</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle menu">☰</button>
+<aside id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-logo">🚀</span>
+    <span class="brand-text">DS Bridging<br><small>Bootcamp</small></span>
+  </a>
+  <div class="search-box">
+    <input id="search" type="search" placeholder="Search lessons…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <nav id="nav">
+    <a class="nav-item " href="/lessons/0_absolute_basics_python.html" data-slug="0_absolute_basics_python"><span class="nav-emoji">🐣</span><span class="nav-num">M0</span><span class="nav-label">Absolute Basics: Python from Zero</span></a>
+<a class="nav-item " href="/lessons/01_numpy.html" data-slug="01_numpy"><span class="nav-emoji">🔢</span><span class="nav-num">M1</span><span class="nav-label">NumPy: Fast Arrays</span></a>
+<a class="nav-item " href="/lessons/02_pandas.html" data-slug="02_pandas"><span class="nav-emoji">🐼</span><span class="nav-num">M2</span><span class="nav-label">Pandas: Spreadsheets in Python</span></a>
+<a class="nav-item " href="/lessons/02_data_cleaning.html" data-slug="02_data_cleaning"><span class="nav-emoji">🧹</span><span class="nav-num">M3</span><span class="nav-label">Data Cleaning</span></a>
+<a class="nav-item " href="/lessons/03_eda_visualization.html" data-slug="03_eda_visualization"><span class="nav-emoji">📊</span><span class="nav-num">M4</span><span class="nav-label">EDA &amp; Visualization</span></a>
+<a class="nav-item " href="/lessons/04_statistics_probability.html" data-slug="04_statistics_probability"><span class="nav-emoji">📈</span><span class="nav-num">M5</span><span class="nav-label">Statistics &amp; Probability</span></a>
+<a class="nav-item " href="/lessons/05_feature_engineering_scaling.html" data-slug="05_feature_engineering_scaling"><span class="nav-emoji">⚙️</span><span class="nav-num">M6</span><span class="nav-label">Feature Engineering &amp; Scaling</span></a>
+<a class="nav-item " href="/lessons/06_regression.html" data-slug="06_regression"><span class="nav-emoji">📉</span><span class="nav-num">M7</span><span class="nav-label">Regression</span></a>
+<a class="nav-item " href="/lessons/07_classification_knn.html" data-slug="07_classification_knn"><span class="nav-emoji">🎯</span><span class="nav-num">M8</span><span class="nav-label">Classification &amp; KNN</span></a>
+<a class="nav-item " href="/lessons/08_evaluation_cv_gridsearch.html" data-slug="08_evaluation_cv_gridsearch"><span class="nav-emoji">🔍</span><span class="nav-num">M9</span><span class="nav-label">Evaluation, CV &amp; Grid Search</span></a>
+<a class="nav-item " href="/lessons/09_trees_ensembles_boosting.html" data-slug="09_trees_ensembles_boosting"><span class="nav-emoji">🌳</span><span class="nav-num">M10</span><span class="nav-label">Trees, Ensembles &amp; Boosting</span></a>
+<a class="nav-item " href="/lessons/10_clustering_pca.html" data-slug="10_clustering_pca"><span class="nav-emoji">🔮</span><span class="nav-num">M11</span><span class="nav-label">Clustering &amp; PCA</span></a>
+<a class="nav-item " href="/lessons/11_neural_networks_intro.html" data-slug="11_neural_networks_intro"><span class="nav-emoji">🧠</span><span class="nav-num">M12</span><span class="nav-label">Neural Networks Intro</span></a>
+<a class="nav-item " href="/lessons/12_job_readiness_interview_prep.html" data-slug="12_job_readiness_interview_prep"><span class="nav-emoji">💼</span><span class="nav-num">M13</span><span class="nav-label">Job Readiness &amp; Interviews</span></a>
+<a class="nav-item " href="/lessons/13_sql_for_data_science.html" data-slug="13_sql_for_data_science"><span class="nav-emoji">🗄️</span><span class="nav-num">M14</span><span class="nav-label">SQL for Data Science</span></a>
+<a class="nav-item " href="/lessons/14_apis_web_scraping.html" data-slug="14_apis_web_scraping"><span class="nav-emoji">🕸️</span><span class="nav-num">M15</span><span class="nav-label">APIs &amp; Web Scraping</span></a>
+<a class="nav-item " href="/lessons/15_probability_combinatorics_bayes.html" data-slug="15_probability_combinatorics_bayes"><span class="nav-emoji">🎲</span><span class="nav-num">M16</span><span class="nav-label">Probability, Combinatorics, Bayes</span></a>
+<a class="nav-item " href="/lessons/16_ab_testing_anova_power.html" data-slug="16_ab_testing_anova_power"><span class="nav-emoji">🧪</span><span class="nav-num">M17</span><span class="nav-label">A/B Testing, ANOVA &amp; Power</span></a>
+<a class="nav-item " href="/lessons/17_oop_linear_algebra_calculus.html" data-slug="17_oop_linear_algebra_calculus"><span class="nav-emoji">➗</span><span class="nav-num">M18</span><span class="nav-label">OOP, Linear Algebra &amp; Calculus</span></a>
+<a class="nav-item " href="/lessons/18_time_series.html" data-slug="18_time_series"><span class="nav-emoji">⏳</span><span class="nav-num">M19</span><span class="nav-label">Time Series</span></a>
+<a class="nav-item " href="/lessons/19_nlp_recommendation_systems.html" data-slug="19_nlp_recommendation_systems"><span class="nav-emoji">💬</span><span class="nav-num">M20</span><span class="nav-label">NLP &amp; Recommender Systems</span></a>
+<a class="nav-item " href="/lessons/20_bash_git.html" data-slug="20_bash_git"><span class="nav-emoji">🐚</span><span class="nav-num">M21</span><span class="nav-label">Bash &amp; Git</span></a>
+<a class="nav-item " href="/lessons/21_bigdata_spark.html" data-slug="21_bigdata_spark"><span class="nav-emoji">⚡</span><span class="nav-num">M22</span><span class="nav-label">Big Data &amp; Spark</span></a>
+<a class="nav-item active" href="/lessons/22_aws_deployment_mlops.html" data-slug="22_aws_deployment_mlops"><span class="nav-emoji">☁️</span><span class="nav-num">M23</span><span class="nav-label">AWS Deployment &amp; MLOps</span></a>
+  </nav>
+</aside>
+<main id="content">
+  <div class="lesson-wrap">
+    <div class="crumb">Module 23</div>
+    <div class="runbar"><span class="runbar-label">▶ Run this lesson yourself:</span><a class="runbtn colab" href="https://colab.research.google.com/github/Kaks753/DS_bridging/blob/main/notebooks/22_aws_deployment_mlops.ipynb" target="_blank" rel="noopener">Open in Colab</a><a class="runbtn gh" href="https://github.com/Kaks753/DS_bridging/blob/main/notebooks/22_aws_deployment_mlops.ipynb" target="_blank" rel="noopener">View on GitHub</a><span class="runbar-hint">In Colab, press <kbd>Shift</kbd>+<kbd>Enter</kbd> to run each cell.</span></div>
+    <div class="intro"><p>A model that lives only in a notebook creates <strong>zero</strong> business value. This module
+closes the last mile: <strong>serialize → serve → containerize → deploy → monitor</strong>. We
+build a <em>real, runnable</em> local prediction service and explain exactly how each piece
+maps onto AWS — the cloud you'll most likely meet in interviews.</p>
+<p>Goals:
+- <strong>Persist</strong> a trained model with <code>joblib</code> (and why <em>not</em> pickle raw).
+- Wrap it in a <strong>prediction API</strong> (Flask/FastAPI shape) and <em>call it locally</em>.
+- <strong>Docker</strong> in one page: why containers, and a real <code>Dockerfile</code>.
+- The <strong>AWS map</strong>: S3, EC2, Lambda, ECR, SageMaker, API Gateway — what each does.
+- <strong>MLOps</strong>: reproducibility, CI/CD, monitoring, and <strong>data/concept drift</strong>.</p>
+<blockquote>
+<p>No AWS account or network is needed: we run the serving logic <strong>locally</strong> so every
+cell executes, then annotate precisely what changes in the cloud.</p>
+</blockquote></div>
+<div class="codecell"><pre class="code"><code class="language-python">import os, json, tempfile, numpy as np, pandas as pd
+import joblib
+from sklearn.datasets import make_classification
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
+ARTIFACTS = tempfile.mkdtemp(prefix=&quot;m22_&quot;)
+print(&quot;artifact dir:&quot;, ARTIFACTS)</code></pre><div class="outputs"><pre class="out stream">artifact dir: /home/user/webapp/.pytmp/m22_ulc5sd_8
+</pre></div></div>
+<h2>22.1 Train something worth deploying (a full Pipeline)</h2>
+<p>Deploy the <strong>whole Pipeline</strong> (preprocessing + model), never just the estimator. If
+you deploy only the model, you must re-implement scaling/encoding at serving time —
+a top source of <strong>training/serving skew</strong> bugs. The Pipeline guarantees the exact
+same transforms run in production as in training.</p>
+<div class="codecell"><pre class="code"><code class="language-python">X, y = make_classification(n_samples=1000, n_features=5, n_informative=3,
+                           random_state=42)
+feat_names = [f&quot;f{i}&quot; for i in range(5)]
+X = pd.DataFrame(X, columns=feat_names)
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = Pipeline([
+    (&quot;scaler&quot;, StandardScaler()),           # preprocessing travels WITH the model
+    (&quot;clf&quot;, LogisticRegression(max_iter=1000)),
+]).fit(X_tr, y_tr)
+
+print(&quot;test accuracy:&quot;, round(model.score(X_te, y_te), 3))</code></pre><div class="outputs"><pre class="out stream">test accuracy: 0.925
+</pre></div></div>
+<h2>22.2 Serialize the model — <code>joblib</code> (the sklearn standard)</h2>
+<p>Serialization saves the fitted object to disk so a <em>different</em> process (the API
+server) can load it without retraining. <code>joblib</code> is preferred over raw <code>pickle</code> for
+scikit-learn because it stores large NumPy arrays far more efficiently.</p>
+<p><strong>Production hygiene to state in interviews:</strong>
+- Version the artifact (<code>model_v3.joblib</code>) and log the training data + library
+  versions (a model is only reproducible with matching <code>scikit-learn</code>).
+- Security: only ever <code>joblib.load</code> files you <strong>trust</strong> (deserialization can execute
+  code). Never load an artifact from an untrusted source.</p>
+<div class="codecell"><pre class="code"><code class="language-python">model_path = os.path.join(ARTIFACTS, &quot;churn_model_v1.joblib&quot;)
+joblib.dump(model, model_path)
+print(&quot;saved:&quot;, os.path.basename(model_path),
+      f&quot;({os.path.getsize(model_path)} bytes)&quot;)
+
+# A fresh process would load it exactly like this:
+loaded = joblib.load(model_path)
+print(&quot;reloaded model predicts:&quot;, loaded.predict(X_te.iloc[:5]).tolist())
+
+# Save metadata alongside the model (crucial for reproducibility &amp; drift checks):
+import sklearn
+metadata = {
+    &quot;model_version&quot;: &quot;v1&quot;,
+    &quot;features&quot;: feat_names,
+    &quot;sklearn_version&quot;: sklearn.__version__,
+    &quot;train_rows&quot;: int(len(X_tr)),
+    &quot;test_accuracy&quot;: round(float(model.score(X_te, y_te)), 4),
+    &quot;train_feature_means&quot;: X_tr.mean().round(4).to_dict(),  # baseline for drift
+}
+json.dump(metadata, open(os.path.join(ARTIFACTS, &quot;metadata.json&quot;), &quot;w&quot;), indent=2)
+print(&quot;\nmetadata.json:&quot;); print(json.dumps(metadata, indent=2)[:400], &quot;...&quot;)</code></pre><div class="outputs"><pre class="out stream">saved: churn_model_v1.joblib (1761 bytes)
+reloaded model predicts: [0, 1, 0, 1, 1]
+
+metadata.json:
+{
+  &quot;model_version&quot;: &quot;v1&quot;,
+  &quot;features&quot;: [
+    &quot;f0&quot;,
+    &quot;f1&quot;,
+    &quot;f2&quot;,
+    &quot;f3&quot;,
+    &quot;f4&quot;
+  ],
+  &quot;sklearn_version&quot;: &quot;1.6.1&quot;,
+  &quot;train_rows&quot;: 800,
+  &quot;test_accuracy&quot;: 0.925,
+  &quot;train_feature_means&quot;: {
+    &quot;f0&quot;: 0.1889,
+    &quot;f1&quot;: -0.0086,
+    &quot;f2&quot;: 0.4649,
+    &quot;f3&quot;: -0.5327,
+    &quot;f4&quot;: 0.8238
+  }
+} ...
+</pre></div></div>
+<h2>22.3 Wrap it in a prediction API (Flask / FastAPI shape)</h2>
+<p>A model server exposes an HTTP <strong>endpoint</strong> (e.g. <code>POST /predict</code>) that accepts JSON
+features and returns a JSON prediction. Here's the real Flask app you'd deploy —
+we write it to a file so you can read it, then we <strong>run its core logic inline</strong> so
+this notebook executes without a running server.</p>
+<div class="codecell"><pre class="code"><code class="language-python">app_code = &#x27;&#x27;&#x27;\
+# app.py  -- a minimal model-serving API (Flask)
+import joblib, pandas as pd
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+MODEL = joblib.load(&quot;churn_model_v1.joblib&quot;)   # load ONCE at startup, not per request
+FEATURES = [&quot;f0&quot;, &quot;f1&quot;, &quot;f2&quot;, &quot;f3&quot;, &quot;f4&quot;]
+
+@app.route(&quot;/health&quot;)                          # liveness probe for load balancers
+def health():
+    return jsonify(status=&quot;ok&quot;)
+
+@app.route(&quot;/predict&quot;, methods=[&quot;POST&quot;])
+def predict():
+    payload = request.get_json()               # {&quot;f0&quot;:..., ..., &quot;f4&quot;:...}
+    X = pd.DataFrame([payload])[FEATURES]       # order features consistently
+    proba = float(MODEL.predict_proba(X)[0, 1])
+    return jsonify(prediction=int(proba &gt;= 0.5), probability=round(proba, 4))
+
+if __name__ == &quot;__main__&quot;:
+    app.run(host=&quot;0.0.0.0&quot;, port=8080)         # 0.0.0.0 so it&#x27;s reachable in a container
+&#x27;&#x27;&#x27;
+open(os.path.join(ARTIFACTS, &quot;app.py&quot;), &quot;w&quot;).write(app_code)
+print(app_code)</code></pre><div class="outputs"><pre class="out stream"># app.py  -- a minimal model-serving API (Flask)
+import joblib, pandas as pd
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+MODEL = joblib.load(&quot;churn_model_v1.joblib&quot;)   # load ONCE at startup, not per request
+FEATURES = [&quot;f0&quot;, &quot;f1&quot;, &quot;f2&quot;, &quot;f3&quot;, &quot;f4&quot;]
+
+@app.route(&quot;/health&quot;)                          # liveness probe for load balancers
+def health():
+    return jsonify(status=&quot;ok&quot;)
+
+@app.route(&quot;/predict&quot;, methods=[&quot;POST&quot;])
+def predict():
+    payload = request.get_json()               # {&quot;f0&quot;:..., ..., &quot;f4&quot;:...}
+    X = pd.DataFrame([payload])[FEATURES]       # order features consistently
+    proba = float(MODEL.predict_proba(X)[0, 1])
+    return jsonify(prediction=int(proba &gt;= 0.5), probability=round(proba, 4))
+
+if __name__ == &quot;__main__&quot;:
+    app.run(host=&quot;0.0.0.0&quot;, port=8080)         # 0.0.0.0 so it&#x27;s reachable in a container
+
+</pre></div></div>
+<div class="codecell"><pre class="code"><code class="language-python"># Run the SAME logic inline (no server needed) to prove the request/response cycle:
+def predict_endpoint(payload: dict, model, features):
+    &quot;Exactly what the Flask /predict route does, callable in-process.&quot;
+    X = pd.DataFrame([payload])[features]
+    proba = float(model.predict_proba(X)[0, 1])
+    return {&quot;prediction&quot;: int(proba &gt;= 0.5), &quot;probability&quot;: round(proba, 4)}
+
+incoming_json = {f: float(v) for f, v in zip(feat_names, X_te.iloc[0])}
+print(&quot;REQUEST  JSON:&quot;, json.dumps(incoming_json))
+print(&quot;RESPONSE JSON:&quot;, json.dumps(predict_endpoint(incoming_json, loaded, feat_names)))</code></pre><div class="outputs"><pre class="out stream">REQUEST  JSON: {&quot;f0&quot;: -0.10911311558082241, &quot;f1&quot;: -0.6011592913187642, &quot;f2&quot;: -0.038835767718248926, &quot;f3&quot;: -0.9586056446824868, &quot;f4&quot;: 1.2203243010303995}
+RESPONSE JSON: {&quot;prediction&quot;: 0, &quot;probability&quot;: 0.0907}
+</pre></div></div>
+<p><strong>FastAPI vs Flask:</strong> FastAPI adds automatic request <strong>validation</strong> (via Pydantic),
+async, and auto-generated docs — increasingly the default for ML APIs. Same shape:
+load model once at startup, define <code>/predict</code>, return JSON. For heavy traffic you'd
+run it behind <strong>gunicorn/uvicorn</strong> with multiple workers.</p>
+<h2>22.4 Docker — "it works on my machine" for everyone</h2>
+<p>A <strong>container</strong> packages your code + libraries + runtime into one portable image, so
+it runs identically on your laptop, a teammate's, and AWS. This solves dependency
+hell (the #1 deployment headache). The real <code>Dockerfile</code> for our API:</p>
+<div class="codecell"><pre class="code"><code class="language-python">dockerfile = &#x27;&#x27;&#x27;\
+# Dockerfile
+FROM python:3.11-slim                 # small, official base image
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt   # install deps
+COPY app.py churn_model_v1.joblib .   # code + the model artifact
+EXPOSE 8080
+CMD [&quot;gunicorn&quot;, &quot;-b&quot;, &quot;0.0.0.0:8080&quot;, &quot;-w&quot;, &quot;2&quot;, &quot;app:app&quot;]  # production server
+&#x27;&#x27;&#x27;
+open(os.path.join(ARTIFACTS, &quot;Dockerfile&quot;), &quot;w&quot;).write(dockerfile)
+print(dockerfile)
+print(&quot;Build &amp; run locally:&quot;)
+print(&quot;  docker build -t churn-api .&quot;)
+print(&quot;  docker run -p 8080:8080 churn-api&quot;)
+print(&quot;  curl -X POST localhost:8080/predict -H &#x27;Content-Type: application/json&#x27; \\\\&quot;)
+print(&quot;       -d &#x27;{\&quot;f0\&quot;:0.1,\&quot;f1\&quot;:-0.3,\&quot;f2\&quot;:1.2,\&quot;f3\&quot;:0.0,\&quot;f4\&quot;:-1.1}&#x27;&quot;)</code></pre><div class="outputs"><pre class="out stream"># Dockerfile
+FROM python:3.11-slim                 # small, official base image
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt   # install deps
+COPY app.py churn_model_v1.joblib .   # code + the model artifact
+EXPOSE 8080
+CMD [&quot;gunicorn&quot;, &quot;-b&quot;, &quot;0.0.0.0:8080&quot;, &quot;-w&quot;, &quot;2&quot;, &quot;app:app&quot;]  # production server
+
+Build &amp; run locally:
+  docker build -t churn-api .
+  docker run -p 8080:8080 churn-api
+  curl -X POST localhost:8080/predict -H &#x27;Content-Type: application/json&#x27; \\
+       -d &#x27;{&quot;f0&quot;:0.1,&quot;f1&quot;:-0.3,&quot;f2&quot;:1.2,&quot;f3&quot;:0.0,&quot;f4&quot;:-1.1}&#x27;
+</pre></div></div>
+<h2>22.5 The AWS map — what each service is <em>for</em></h2>
+<p>You don't need to memorize AWS, but you must speak the vocabulary. The essentials
+for a data scientist:</p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>One-line purpose</th>
+<th>DS use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>S3</strong></td>
+<td>object storage (buckets)</td>
+<td>store datasets, model artifacts, logs</td>
+</tr>
+<tr>
+<td><strong>EC2</strong></td>
+<td>virtual servers</td>
+<td>run training / a persistent API host</td>
+</tr>
+<tr>
+<td><strong>ECR</strong></td>
+<td>Docker image registry</td>
+<td>push your container image before deploy</td>
+</tr>
+<tr>
+<td><strong>Lambda</strong></td>
+<td>run code with <strong>no server</strong> (event-driven)</td>
+<td>cheap, bursty predictions</td>
+</tr>
+<tr>
+<td><strong>API Gateway</strong></td>
+<td>managed HTTP front door</td>
+<td>expose Lambda/containers as an API</td>
+</tr>
+<tr>
+<td><strong>SageMaker</strong></td>
+<td>end-to-end managed ML</td>
+<td>train, host <strong>endpoints</strong>, monitor, autoscale</td>
+</tr>
+<tr>
+<td><strong>ECS / Fargate</strong></td>
+<td>run containers (serverless)</td>
+<td>host the Docker API without managing EC2</td>
+</tr>
+<tr>
+<td><strong>IAM</strong></td>
+<td>permissions &amp; roles</td>
+<td>who/what can access which resource (security)</td>
+</tr>
+<tr>
+<td><strong>CloudWatch</strong></td>
+<td>logs &amp; metrics</td>
+<td>monitor latency, errors, custom drift metrics</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Two common deployment paths (name both):</strong>
+1. <strong>Container path:</strong> Docker image → push to <strong>ECR</strong> → run on <strong>ECS/Fargate</strong> (or
+   <strong>EKS</strong>) → front with <strong>API Gateway/ALB</strong>. Maximum control.
+2. <strong>Managed path:</strong> <strong>SageMaker</strong> — <code>model.deploy()</code> gives you a scalable HTTPS
+   <strong>endpoint</strong> with monitoring baked in. Less ops work.
+3. <strong>Serverless path:</strong> small model → <strong>Lambda</strong> + <strong>API Gateway</strong>. Pay per request,
+   scales to zero. Great for spiky, low-volume workloads.</p>
+<div class="codecell"><pre class="code"><code class="language-python"># Illustrate the S3 artifact convention (paths only — no real upload/network).
+bucket = &quot;s3://my-ml-artifacts&quot;
+print(&quot;Typical S3 layout for model artifacts:&quot;)
+for p in [&quot;models/churn/v1/churn_model_v1.joblib&quot;,
+          &quot;models/churn/v1/metadata.json&quot;,
+          &quot;data/raw/customers_2024-08.parquet&quot;,
+          &quot;logs/predictions/2024-08-24/*.jsonl&quot;]:
+    print(&quot; &quot;, f&quot;{bucket}/{p}&quot;)
+print(&quot;\n# boto3 (the AWS SDK) upload — pattern only:&quot;)
+print(&quot;import boto3; boto3.client(&#x27;s3&#x27;).upload_file(&quot;)
+print(&quot;    &#x27;churn_model_v1.joblib&#x27;, &#x27;my-ml-artifacts&#x27;,&quot;)
+print(&quot;    &#x27;models/churn/v1/churn_model_v1.joblib&#x27;)&quot;)</code></pre><div class="outputs"><pre class="out stream">Typical S3 layout for model artifacts:
+  s3://my-ml-artifacts/models/churn/v1/churn_model_v1.joblib
+  s3://my-ml-artifacts/models/churn/v1/metadata.json
+  s3://my-ml-artifacts/data/raw/customers_2024-08.parquet
+  s3://my-ml-artifacts/logs/predictions/2024-08-24/*.jsonl
+
+# boto3 (the AWS SDK) upload — pattern only:
+import boto3; boto3.client(&#x27;s3&#x27;).upload_file(
+    &#x27;churn_model_v1.joblib&#x27;, &#x27;my-ml-artifacts&#x27;,
+    &#x27;models/churn/v1/churn_model_v1.joblib&#x27;)
+</pre></div></div>
+<h2>22.6 MLOps — keeping a deployed model <em>healthy</em></h2>
+<p>Deployment isn't the finish line; models <strong>decay</strong> as the world changes. MLOps is the
+discipline of running ML reliably.</p>
+<p><strong>Pillars (mention these):</strong>
+- <strong>Reproducibility:</strong> pin library versions, seed randomness, version data + models
+  (tools: DVC, MLflow, Git). Anyone can rebuild the exact model.
+- <strong>CI/CD:</strong> automated tests + retraining + deploy on every change (GitHub Actions).
+- <strong>Monitoring:</strong> track latency, error rate, and <strong>prediction quality</strong> once true
+  labels arrive.
+- <strong>Drift detection:</strong> the big one below.</p>
+<h3>Data drift vs concept drift</h3>
+<ul>
+<li><strong>Data (covariate) drift:</strong> the <em>input distribution</em> shifts (e.g. a new customer
+  demographic). The model sees inputs unlike its training data.</li>
+<li><strong>Concept drift:</strong> the <em>relationship</em> between inputs and target changes (e.g. a
+  recession flips what predicts churn). Even the same inputs now mean something else.</li>
+</ul>
+<p>You detect data drift by comparing <strong>live feature stats to the training baseline</strong>
+(which is why we saved <code>train_feature_means</code> in the metadata). A large shift → alert
+→ investigate → maybe retrain.</p>
+<div class="codecell"><pre class="code"><code class="language-python"># Simple data-drift check: compare live feature means to the training baseline.
+baseline = pd.Series(metadata[&quot;train_feature_means&quot;])
+
+# Simulate a month of live traffic that has DRIFTED on f0 and f2:
+rng = np.random.default_rng(0)
+live = X_te.copy()
+live[&quot;f0&quot;] = live[&quot;f0&quot;] + 2.0     # a real shift
+live[&quot;f2&quot;] = live[&quot;f2&quot;] * 1.8     # scale change
+
+live_means = live.mean()
+drift = pd.DataFrame({
+    &quot;train_mean&quot;: baseline,
+    &quot;live_mean&quot;: live_means.round(4),
+    &quot;abs_shift&quot;: (live_means - baseline).abs().round(4),
+})
+drift[&quot;ALERT&quot;] = drift[&quot;abs_shift&quot;] &gt; 0.5     # simple threshold rule
+print(drift)
+print(&quot;\nFeatures flagged for drift:&quot;,
+      drift.index[drift[&quot;ALERT&quot;]].tolist(),
+      &quot;-&gt; investigate / consider retraining.&quot;)</code></pre><div class="outputs"><pre class="out stream">    train_mean  live_mean  abs_shift  ALERT
+f0      0.1889     2.2217     2.0328   True
+f1     -0.0086     0.0818     0.0904  False
+f2      0.4649     0.9915     0.5266   True
+f3     -0.5327    -0.3784     0.1543  False
+f4      0.8238     0.7028     0.1210  False
+
+Features flagged for drift: [&#x27;f0&#x27;, &#x27;f2&#x27;] -&gt; investigate / consider retraining.
+</pre></div></div>
+<p><strong>Production-grade tools:</strong> <code>evidently</code>, <code>whylogs</code>, or SageMaker <strong>Model Monitor</strong>
+do this with statistical tests (PSI, KS-test) and dashboards — but the <em>idea</em> is
+exactly the comparison above. Showing you understand <strong>why</strong> monitoring exists beats
+naming any tool.</p>
+<p><strong>Interview soundbite:</strong></p>
+<blockquote><p>"Shipping the model is the start, not the end. I serialize the full pipeline,
+serve it behind a versioned API in a container, and monitor input drift against a
+saved training baseline plus live accuracy once labels land — retraining when
+drift or performance degradation crosses a threshold."</p></blockquote>
+<div class="codecell"><pre class="code"><code class="language-python">import shutil
+shutil.rmtree(ARTIFACTS, ignore_errors=True)
+print(&quot;cleaned up temporary artifacts.&quot;)</code></pre><div class="outputs"><pre class="out stream">cleaned up temporary artifacts.
+</pre></div></div>
+<h2>22.7 Mini-exercises</h2>
+<ol>
+<li>Re-serialize the model as <code>v2</code> after retraining on more data; how would you roll
+   back to <code>v1</code> in production if <code>v2</code> underperforms?</li>
+<li>Convert the Flask app to <strong>FastAPI</strong> with a Pydantic request model that validates
+   the 5 features are floats.</li>
+<li>Write the <code>docker build</code> / <code>docker run</code> commands and explain what <code>-p 8080:8080</code>
+   does.</li>
+<li>Describe, for the churn model, one realistic <strong>data drift</strong> and one <strong>concept
+   drift</strong> scenario, and how you'd detect each.</li>
+<li>Which AWS path (container / SageMaker / Lambda) fits: (a) 5 requests/day,
+   (b) steady 1000 req/s, (c) a team already on SageMaker? Justify each.</li>
+</ol>
+<h2>Summary</h2>
+<ul>
+<li>Deploy the <strong>whole Pipeline</strong>; serialize with <strong>joblib</strong> + save <strong>metadata</strong>
+  (versions, feature baseline) for reproducibility and drift checks.</li>
+<li>Serve via a <strong><code>/predict</code> API</strong> (Flask/FastAPI): load model once, return JSON.</li>
+<li><strong>Docker</strong> makes it portable; the same image runs on your laptop and AWS.</li>
+<li><strong>AWS map:</strong> S3 (storage), EC2/ECS/Fargate (compute), ECR (images), Lambda+API
+  Gateway (serverless), <strong>SageMaker</strong> (managed endpoints), IAM (access), CloudWatch
+  (monitoring).</li>
+<li><strong>MLOps</strong> = reproducibility + CI/CD + monitoring + <strong>drift detection</strong> (data vs
+  concept). A model is a <em>living</em> system, not a one-off artifact.</li>
+</ul>
+<p><strong>This completes the bootcamp's engineering track.</strong> You can now take an idea from
+messy CSV → cleaned data → model → <em>deployed, monitored service</em> — and explain every
+step. That end-to-end story is exactly what turns interviews into offers.</p>
+    <div class="lesson-nav">
+      <a class="pn prev" href="/lessons/21_bigdata_spark.html">← Big Data &amp; Spark</a>
+      
+    </div>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>

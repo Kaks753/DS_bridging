@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module 14 — APIs &amp; Web Scraping (Phase 1: Topics 9–10) — DS Bridging Bootcamp</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+<button id="menu-toggle" aria-label="Toggle menu">☰</button>
+<aside id="sidebar">
+  <a class="brand" href="/index.html">
+    <span class="brand-logo">🚀</span>
+    <span class="brand-text">DS Bridging<br><small>Bootcamp</small></span>
+  </a>
+  <div class="search-box">
+    <input id="search" type="search" placeholder="Search lessons…" autocomplete="off">
+    <div id="search-results"></div>
+  </div>
+  <nav id="nav">
+    <a class="nav-item " href="/lessons/0_absolute_basics_python.html" data-slug="0_absolute_basics_python"><span class="nav-emoji">🐣</span><span class="nav-num">M0</span><span class="nav-label">Absolute Basics: Python from Zero</span></a>
+<a class="nav-item " href="/lessons/01_numpy.html" data-slug="01_numpy"><span class="nav-emoji">🔢</span><span class="nav-num">M1</span><span class="nav-label">NumPy: Fast Arrays</span></a>
+<a class="nav-item " href="/lessons/02_pandas.html" data-slug="02_pandas"><span class="nav-emoji">🐼</span><span class="nav-num">M2</span><span class="nav-label">Pandas: Spreadsheets in Python</span></a>
+<a class="nav-item " href="/lessons/02_data_cleaning.html" data-slug="02_data_cleaning"><span class="nav-emoji">🧹</span><span class="nav-num">M3</span><span class="nav-label">Data Cleaning</span></a>
+<a class="nav-item " href="/lessons/03_eda_visualization.html" data-slug="03_eda_visualization"><span class="nav-emoji">📊</span><span class="nav-num">M4</span><span class="nav-label">EDA &amp; Visualization</span></a>
+<a class="nav-item " href="/lessons/04_statistics_probability.html" data-slug="04_statistics_probability"><span class="nav-emoji">📈</span><span class="nav-num">M5</span><span class="nav-label">Statistics &amp; Probability</span></a>
+<a class="nav-item " href="/lessons/05_feature_engineering_scaling.html" data-slug="05_feature_engineering_scaling"><span class="nav-emoji">⚙️</span><span class="nav-num">M6</span><span class="nav-label">Feature Engineering &amp; Scaling</span></a>
+<a class="nav-item " href="/lessons/06_regression.html" data-slug="06_regression"><span class="nav-emoji">📉</span><span class="nav-num">M7</span><span class="nav-label">Regression</span></a>
+<a class="nav-item " href="/lessons/07_classification_knn.html" data-slug="07_classification_knn"><span class="nav-emoji">🎯</span><span class="nav-num">M8</span><span class="nav-label">Classification &amp; KNN</span></a>
+<a class="nav-item " href="/lessons/08_evaluation_cv_gridsearch.html" data-slug="08_evaluation_cv_gridsearch"><span class="nav-emoji">🔍</span><span class="nav-num">M9</span><span class="nav-label">Evaluation, CV &amp; Grid Search</span></a>
+<a class="nav-item " href="/lessons/09_trees_ensembles_boosting.html" data-slug="09_trees_ensembles_boosting"><span class="nav-emoji">🌳</span><span class="nav-num">M10</span><span class="nav-label">Trees, Ensembles &amp; Boosting</span></a>
+<a class="nav-item " href="/lessons/10_clustering_pca.html" data-slug="10_clustering_pca"><span class="nav-emoji">🔮</span><span class="nav-num">M11</span><span class="nav-label">Clustering &amp; PCA</span></a>
+<a class="nav-item " href="/lessons/11_neural_networks_intro.html" data-slug="11_neural_networks_intro"><span class="nav-emoji">🧠</span><span class="nav-num">M12</span><span class="nav-label">Neural Networks Intro</span></a>
+<a class="nav-item " href="/lessons/12_job_readiness_interview_prep.html" data-slug="12_job_readiness_interview_prep"><span class="nav-emoji">💼</span><span class="nav-num">M13</span><span class="nav-label">Job Readiness &amp; Interviews</span></a>
+<a class="nav-item " href="/lessons/13_sql_for_data_science.html" data-slug="13_sql_for_data_science"><span class="nav-emoji">🗄️</span><span class="nav-num">M14</span><span class="nav-label">SQL for Data Science</span></a>
+<a class="nav-item active" href="/lessons/14_apis_web_scraping.html" data-slug="14_apis_web_scraping"><span class="nav-emoji">🕸️</span><span class="nav-num">M15</span><span class="nav-label">APIs &amp; Web Scraping</span></a>
+<a class="nav-item " href="/lessons/15_probability_combinatorics_bayes.html" data-slug="15_probability_combinatorics_bayes"><span class="nav-emoji">🎲</span><span class="nav-num">M16</span><span class="nav-label">Probability, Combinatorics, Bayes</span></a>
+<a class="nav-item " href="/lessons/16_ab_testing_anova_power.html" data-slug="16_ab_testing_anova_power"><span class="nav-emoji">🧪</span><span class="nav-num">M17</span><span class="nav-label">A/B Testing, ANOVA &amp; Power</span></a>
+<a class="nav-item " href="/lessons/17_oop_linear_algebra_calculus.html" data-slug="17_oop_linear_algebra_calculus"><span class="nav-emoji">➗</span><span class="nav-num">M18</span><span class="nav-label">OOP, Linear Algebra &amp; Calculus</span></a>
+<a class="nav-item " href="/lessons/18_time_series.html" data-slug="18_time_series"><span class="nav-emoji">⏳</span><span class="nav-num">M19</span><span class="nav-label">Time Series</span></a>
+<a class="nav-item " href="/lessons/19_nlp_recommendation_systems.html" data-slug="19_nlp_recommendation_systems"><span class="nav-emoji">💬</span><span class="nav-num">M20</span><span class="nav-label">NLP &amp; Recommender Systems</span></a>
+<a class="nav-item " href="/lessons/20_bash_git.html" data-slug="20_bash_git"><span class="nav-emoji">🐚</span><span class="nav-num">M21</span><span class="nav-label">Bash &amp; Git</span></a>
+<a class="nav-item " href="/lessons/21_bigdata_spark.html" data-slug="21_bigdata_spark"><span class="nav-emoji">⚡</span><span class="nav-num">M22</span><span class="nav-label">Big Data &amp; Spark</span></a>
+<a class="nav-item " href="/lessons/22_aws_deployment_mlops.html" data-slug="22_aws_deployment_mlops"><span class="nav-emoji">☁️</span><span class="nav-num">M23</span><span class="nav-label">AWS Deployment &amp; MLOps</span></a>
+  </nav>
+</aside>
+<main id="content">
+  <div class="lesson-wrap">
+    <div class="crumb">Module 15</div>
+    <div class="runbar"><span class="runbar-label">▶ Run this lesson yourself:</span><a class="runbtn colab" href="https://colab.research.google.com/github/Kaks753/DS_bridging/blob/main/notebooks/14_apis_web_scraping.ipynb" target="_blank" rel="noopener">Open in Colab</a><a class="runbtn gh" href="https://github.com/Kaks753/DS_bridging/blob/main/notebooks/14_apis_web_scraping.ipynb" target="_blank" rel="noopener">View on GitHub</a><span class="runbar-hint">In Colab, press <kbd>Shift</kbd>+<kbd>Enter</kbd> to run each cell.</span></div>
+    <div class="intro"><p>Real data rarely arrives as a clean CSV. You fetch it from <strong>APIs</strong> (structured,
+preferred) or <strong>scrape</strong> it from web pages (last resort). Your Kenya Economic Pulse
+project pulled from the World Bank API — this module is the foundation under that.</p>
+<p>Goals:
+- What an API is; HTTP methods, status codes, JSON, params, headers, auth.
+- Use <code>requests</code> correctly (with error handling &amp; rate-limit awareness).
+- Parse HTML with <strong>BeautifulSoup</strong> (fully reproducible on a local page here).
+- Scrape <strong>ethically &amp; legally</strong> (robots.txt, ToS, throttling).
+- Turn messy responses into a tidy DataFrame.</p></div>
+<h2>14.1 What is an API?</h2>
+<p>An <strong>API</strong> (Application Programming Interface) lets your code request data from a
+server. A <strong>REST</strong> API works over HTTP:</p>
+<ul>
+<li><strong>GET</strong> — read data (most common for us). <strong>POST</strong> — send/create data.</li>
+<li>The server replies with a <strong>status code</strong> and (usually) a <strong>JSON</strong> body.</li>
+<li><strong>Status codes</strong>: <code>200</code> OK · <code>201</code> created · <code>400</code> bad request · <code>401/403</code>
+  auth problem · <code>404</code> not found · <code>429</code> too many requests (rate-limited) ·
+  <code>500</code> server error.</li>
+<li><strong>Query params</strong> refine the request (<code>?country=KE&amp;year=2020</code>); <strong>headers</strong> carry
+  metadata like an <strong>API key</strong> for auth.</li>
+</ul>
+<p>Think of it as a restaurant: you (client) order from a menu (endpoints), the
+kitchen (server) returns your dish (JSON).</p>
+<div class="codecell"><pre class="code"><code class="language-python">import requests
+import pandas as pd
+import json
+
+# We call a real, key-free public API (World Bank), but wrap it so the notebook
+# STILL RUNS if the sandbox has no internet — falling back to a saved sample.
+URL = &quot;https://api.worldbank.org/v2/country/KE/indicator/NY.GDP.MKTP.CD&quot;
+params = {&quot;format&quot;: &quot;json&quot;, &quot;date&quot;: &quot;2015:2020&quot;, &quot;per_page&quot;: 100}
+
+def safe_get(url, params=None, timeout=8):
+    try:
+        r = requests.get(url, params=params, timeout=timeout)
+        r.raise_for_status()          # raises on 4xx/5xx
+        return r.json(), r.status_code, True
+    except Exception as e:
+        print(f&quot;[offline fallback] network call failed ({type(e).__name__}); &quot;
+              f&quot;using embedded sample data.&quot;)
+        return None, None, False
+
+payload, status, online = safe_get(URL, params)
+print(&quot;online:&quot;, online, &quot;| status:&quot;, status)</code></pre><div class="outputs"><pre class="out stream">online: True | status: 200
+</pre></div></div>
+<div class="codecell"><pre class="code"><code class="language-python"># World Bank returns [metadata, data]. Provide a small embedded sample as fallback.
+sample = [
+    {&quot;date&quot;: &quot;2020&quot;, &quot;value&quot;: 100380000000},
+    {&quot;date&quot;: &quot;2019&quot;, &quot;value&quot;: 100550000000},
+    {&quot;date&quot;: &quot;2018&quot;, &quot;value&quot;: 92210000000},
+    {&quot;date&quot;: &quot;2017&quot;, &quot;value&quot;: 82040000000},
+    {&quot;date&quot;: &quot;2016&quot;, &quot;value&quot;: 74820000000},
+    {&quot;date&quot;: &quot;2015&quot;, &quot;value&quot;: 70120000000},
+]
+
+if online and isinstance(payload, list) and len(payload) == 2 and payload[1]:
+    records = payload[1]
+    rows = [{&quot;year&quot;: int(d[&quot;date&quot;]), &quot;gdp_usd&quot;: d[&quot;value&quot;]} for d in records
+            if d.get(&quot;value&quot;) is not None]
+else:
+    rows = [{&quot;year&quot;: int(d[&quot;date&quot;]), &quot;gdp_usd&quot;: d[&quot;value&quot;]} for d in sample]
+
+gdp = pd.DataFrame(rows).sort_values(&quot;year&quot;).reset_index(drop=True)
+gdp[&quot;gdp_usd_bn&quot;] = (gdp[&quot;gdp_usd&quot;] / 1e9).round(1)
+print(&quot;Kenya GDP (current US$) — tidy DataFrame from a JSON API:&quot;)
+gdp</code></pre><div class="outputs"><pre class="out stream">Kenya GDP (current US$) — tidy DataFrame from a JSON API:
+</pre><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>gdp_usd</th>
+      <th>gdp_usd_bn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2015</td>
+      <td>7.012045e+10</td>
+      <td>70.1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2016</td>
+      <td>7.481514e+10</td>
+      <td>74.8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2017</td>
+      <td>8.203651e+10</td>
+      <td>82.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018</td>
+      <td>9.220298e+10</td>
+      <td>92.2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2019</td>
+      <td>1.003784e+11</td>
+      <td>100.4</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2020</td>
+      <td>1.006575e+11</td>
+      <td>100.7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<p><strong>What just happened:</strong> we sent a GET with query params, checked the status, parsed
+JSON, and flattened the nested structure into a tidy DataFrame — the exact loop
+behind your Economic Pulse dashboard. Note the <strong>error handling</strong>: production code
+never assumes the network works.</p>
+<h2>14.2 Reading API docs (the real skill)</h2>
+<p>You'll spend more time reading docs than coding. For any API, find:
+1. <strong>Base URL</strong> and <strong>endpoints</strong> (what data is available).
+2. <strong>Auth</strong>: none / API key in header / OAuth token.
+3. <strong>Parameters</strong>: filtering, date ranges, fields.
+4. <strong>Pagination</strong>: how to get page 2, 3, … (<code>per_page</code>, <code>offset</code>, <code>cursor</code>).
+5. <strong>Rate limits</strong>: requests/min — respect them or get <code>429</code>.</p>
+<p>Pattern for a key + pagination (pseudocode you can adapt):</p>
+<pre><code class="language-python">headers = {&quot;Authorization&quot;: f&quot;Bearer {API_KEY}&quot;}
+all_rows, page = [], 1
+while True:
+    r = requests.get(url, params={&quot;page&quot;: page, &quot;per_page&quot;: 100}, headers=headers)
+    data = r.json()
+    if not data: break
+    all_rows.extend(data); page += 1
+    time.sleep(0.5)            # be polite: throttle between requests
+</code></pre>
+<h2>14.3 Web scraping with BeautifulSoup</h2>
+<p>When there's <strong>no API</strong>, you parse HTML. We use a local HTML string here so the
+lesson is 100% reproducible, but the parsing code is identical for a real
+<code>requests.get(url).text</code>.</p>
+<div class="codecell"><pre class="code"><code class="language-python">from bs4 import BeautifulSoup
+
+# Imagine this came from: html = requests.get(url).text
+html = &#x27;&#x27;&#x27;
+&lt;html&gt;&lt;body&gt;
+  &lt;h1&gt;Top Stocks&lt;/h1&gt;
+  &lt;table id=&quot;stocks&quot;&gt;
+    &lt;tr&gt;&lt;th&gt;Ticker&lt;/th&gt;&lt;th&gt;Price&lt;/th&gt;&lt;th&gt;Sector&lt;/th&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td class=&quot;tk&quot;&gt;SCOM&lt;/td&gt;&lt;td class=&quot;pr&quot;&gt;18.50&lt;/td&gt;&lt;td&gt;Telecom&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td class=&quot;tk&quot;&gt;EQTY&lt;/td&gt;&lt;td class=&quot;pr&quot;&gt;45.20&lt;/td&gt;&lt;td&gt;Banking&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td class=&quot;tk&quot;&gt;KCB&lt;/td&gt;&lt;td class=&quot;pr&quot;&gt;38.75&lt;/td&gt;&lt;td&gt;Banking&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td class=&quot;tk&quot;&gt;EABL&lt;/td&gt;&lt;td class=&quot;pr&quot;&gt;155.00&lt;/td&gt;&lt;td&gt;Consumer&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;a href=&quot;/page/2&quot;&gt;Next&lt;/a&gt;
+&lt;/body&gt;&lt;/html&gt;
+&#x27;&#x27;&#x27;
+
+soup = BeautifulSoup(html, &quot;html.parser&quot;)
+print(&quot;page title (h1):&quot;, soup.find(&quot;h1&quot;).text)
+print(&quot;the &#x27;Next&#x27; link:&quot;, soup.find(&quot;a&quot;)[&quot;href&quot;])</code></pre><div class="outputs"><pre class="out stream">page title (h1): Top Stocks
+the &#x27;Next&#x27; link: /page/2
+</pre></div></div>
+<div class="codecell"><pre class="code"><code class="language-python"># Extract the table into a DataFrame — the core scraping task
+rows = []
+for tr in soup.select(&quot;table#stocks tr&quot;)[1:]:      # skip header row
+    cells = tr.find_all(&quot;td&quot;)
+    rows.append({
+        &quot;ticker&quot;: cells[0].text.strip(),
+        &quot;price&quot;:  float(cells[1].text.strip()),
+        &quot;sector&quot;: cells[2].text.strip(),
+    })
+
+stocks = pd.DataFrame(rows)
+print(stocks)
+print(&quot;\naverage price by sector:&quot;)
+print(stocks.groupby(&quot;sector&quot;)[&quot;price&quot;].mean().round(2))</code></pre><div class="outputs"><pre class="out stream">  ticker   price    sector
+0   SCOM   18.50   Telecom
+1   EQTY   45.20   Banking
+2    KCB   38.75   Banking
+3   EABL  155.00  Consumer
+
+average price by sector:
+sector
+Banking      41.98
+Consumer    155.00
+Telecom      18.50
+Name: price, dtype: float64
+</pre></div></div>
+<p><strong>Selectors you'll use most:</strong>
+- <code>soup.find("tag")</code> — first match; <code>soup.find_all("tag")</code> — all matches.
+- <code>soup.select("css selector")</code> — powerful CSS querying (<code>#id</code>, <code>.class</code>, <code>a &gt; b</code>).
+- <code>.text</code> / <code>.get_text()</code> — the visible text; <code>element["attr"]</code> — an attribute.</p>
+<p><strong>Tip:</strong> many tables can be grabbed in one line with <code>pd.read_html(html)</code> — try it
+before hand-parsing.</p>
+<div class="codecell"><pre class="code"><code class="language-python"># pandas can often read HTML tables directly:
+tables = pd.read_html(html)          # returns a list of DataFrames
+print(&quot;pd.read_html found&quot;, len(tables), &quot;table(s):&quot;)
+tables[0]</code></pre><div class="outputs"><pre class="out stream">pd.read_html found 1 table(s):
+</pre><pre class="out stream">/tmp/ipykernel_4786/2163686717.py:2: FutureWarning: Passing literal html to &#x27;read_html&#x27; is deprecated and will be removed in a future version. To read from a literal string, wrap it in a &#x27;StringIO&#x27; object.
+  tables = pd.read_html(html)          # returns a list of DataFrames
+</pre><div class="out html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Ticker</th>
+      <th>Price</th>
+      <th>Sector</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SCOM</td>
+      <td>18.50</td>
+      <td>Telecom</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>EQTY</td>
+      <td>45.20</td>
+      <td>Banking</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>KCB</td>
+      <td>38.75</td>
+      <td>Banking</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>EABL</td>
+      <td>155.00</td>
+      <td>Consumer</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div></div>
+<h2>14.4 Scrape ethically and legally (say this in interviews)</h2>
+<ul>
+<li><strong>Check <code>robots.txt</code></strong> (<code>site.com/robots.txt</code>) and the site's <strong>Terms of
+  Service</strong> — some forbid scraping.</li>
+<li><strong>Throttle</strong>: add <code>time.sleep()</code>; never hammer a server (that's abusive and can
+  get you IP-banned).</li>
+<li><strong>Identify yourself</strong> with a <code>User-Agent</code> header; consider caching responses.</li>
+<li><strong>Prefer an API</strong> if one exists — it's more stable and permitted.</li>
+<li>Don't scrape <strong>personal/copyrighted</strong> data you have no right to use.</li>
+</ul>
+<blockquote><p>"I always check robots.txt and ToS, prefer an official API, throttle my requests,
+and cache results so I never re-hit a server unnecessarily."</p></blockquote>
+<h2>14.5 Mini-exercises</h2>
+<ol>
+<li>Modify <code>safe_get</code> to retry up to 3 times with a short <code>time.sleep</code> on failure.</li>
+<li>From the stocks table, scrape only <strong>Banking</strong> rows into a DataFrame.</li>
+<li>Given the <code>&lt;a href="/page/2"&gt;</code>, write the loop logic to follow pagination
+   (pseudocode is fine).</li>
+<li>Explain the difference between using an API and scraping, and when you'd choose
+   each.</li>
+</ol>
+<h2>Summary</h2>
+<ul>
+<li>APIs return structured <strong>JSON</strong>; use <code>requests.get(url, params, headers)</code>, check
+  <strong>status codes</strong>, and <strong>handle errors</strong>. Mind <strong>auth</strong>, <strong>pagination</strong>,
+  <strong>rate limits</strong>.</li>
+<li><strong>Scrape</strong> only when there's no API; parse with <strong>BeautifulSoup</strong> (<code>find</code>,
+  <code>select</code>) or <code>pd.read_html</code>; then tidy into a DataFrame.</li>
+<li>Always scrape <strong>ethically/legally</strong>: robots.txt, ToS, throttle, identify, cache.</li>
+</ul>
+<p>Next: <strong>Module 15 — Probability, Combinatorics &amp; Bayes</strong> (the math of uncertainty).</p>
+    <div class="lesson-nav">
+      <a class="pn prev" href="/lessons/13_sql_for_data_science.html">← SQL for Data Science</a>
+      <a class="pn next" href="/lessons/15_probability_combinatorics_bayes.html">Probability, Combinatorics, Bayes →</a>
+    </div>
+  </div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="/assets/app.js"></script>
+</body>
+</html>

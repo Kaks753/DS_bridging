@@ -21,7 +21,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 NB_DIR = ROOT / "notebooks"
-SITE = ROOT / "site"
+# Output dir is overridable so we can build both the local-preview `site/`
+# and the Vercel-served `public/` from one generator:
+#   SITE_OUT=public python3 scripts/build_site.py
+SITE = ROOT / os.environ.get("SITE_OUT", "site")
 LESSONS = SITE / "lessons"
 ASSETS = SITE / "assets"
 
@@ -324,9 +327,25 @@ def page_shell(title, body, active_slug, prev_link, next_link, module_num, stem)
 </html>"""
 
 # --- main build -------------------------------------------------------------
+SRC_ASSETS = Path(__file__).resolve().parent / "site_assets"  # canonical css/js
+
+def copy_static_assets():
+    """Copy the hand-written CSS/JS into the output assets/ dir.
+    Critical: without this a fresh build (e.g. Vercel) has no style.css/app.js,
+    causing 404s and an unstyled page."""
+    import shutil
+    ASSETS.mkdir(parents=True, exist_ok=True)
+    for name in ("style.css", "app.js"):
+        src = SRC_ASSETS / name
+        if src.exists():
+            shutil.copy2(src, ASSETS / name)
+        else:
+            print(f"WARNING: missing source asset {src}")
+
 def build():
     LESSONS.mkdir(parents=True, exist_ok=True)
     ASSETS.mkdir(parents=True, exist_ok=True)
+    copy_static_assets()
     search_index = []
     built = []
 

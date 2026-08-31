@@ -15,14 +15,21 @@ From the repo root:
 
 ```bash
 pip install markdown
-python3 scripts/build_site.py
+python3 scripts/build_site.py            # -> site/   (local preview)
+SITE_OUT=public python3 scripts/build_site.py   # -> public/ (Vercel serves this)
 ```
 
-This reads `notebooks/*.ipynb` and writes:
+This reads `notebooks/*.ipynb` and writes into the output dir:
 
-- `site/index.html` — landing page + module grid
-- `site/lessons/<module>.html` — one page per module
-- `site/assets/search-index.json` — client-side search index
+- `index.html` — landing page + module grid
+- `lessons/<module>.html` — one page per module
+- `assets/style.css`, `assets/app.js` — copied from `scripts/site_assets/`
+- `assets/search-index.json` — client-side search index
+
+> The generator **copies** `style.css`/`app.js` from `scripts/site_assets/`
+> into the output `assets/` on every build. (Editing those canonical files is
+> how you change the theme.) This copy step is what makes a clean Vercel
+> checkout render styled — without it the deploy 404s on the CSS.
 
 ## Preview locally
 
@@ -36,10 +43,15 @@ cd site && python3 -m http.server 8099
 > ⚠️ Never paste your Vercel token into chat. Log in locally instead.
 
 The **root** `vercel.json` tells Vercel this is a **pre-built static site**:
-it skips install/build and serves the committed `site/` folder as
+it skips install/build and serves the committed **`public/`** folder as
 `outputDirectory`. A root `.vercelignore` hides the Python files so Vercel
 does NOT mistake the repo for a Python app (that was the cause of the
 "No python entrypoint found" error).
+
+> ⚠️ If your Vercel **project dashboard** has an Output Directory or Root
+> Directory set from a previous import, it OVERRIDES `vercel.json`. In the
+> dashboard set: Framework = **Other**, Root Directory = **(empty)**,
+> Output Directory = **public**, Build Command = **(empty/override off)**.
 
 ### Option 1 — GitHub auto-deploy (easiest)
 1. Go to https://vercel.com/new and import `Kaks753/DS_bridging`.
