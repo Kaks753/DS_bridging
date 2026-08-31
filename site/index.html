@@ -4,27 +4,48 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DS Bridging Bootcamp — Learn Data Science from Zero</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
+<meta name="description" content="A free 24-module data science bootcamp: from absolute zero to job-ready. Every idea in plain English, then the code, then the deep why.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect x='9' y='12' width='3.2' height='26' rx='1.4' fill='%237c5cff'/%3E%3Crect x='35.8' y='7' width='3.2' height='31' rx='1.4' fill='%234dd0e1'/%3E%3Cpath d='M4 34 L44 27' stroke='%237c5cff' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M10.6 13 C18 26, 30 22, 37.4 8.5' stroke='%234dd0e1' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body class="home">
-<header class="hero">
+
+<nav class="topnav" id="topnav">
+  <a class="topnav-brand" href="#top"><svg class="logo" width="28" height="28" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#7c5cff"/><stop offset="1" stop-color="#4dd0e1"/></linearGradient></defs><rect x="9" y="12" width="3.2" height="26" rx="1.4" fill="url(#lg)"/><rect x="35.8" y="7" width="3.2" height="31" rx="1.4" fill="url(#lg)"/><path d="M4 34 L44 27" stroke="url(#lg)" stroke-width="3.2" stroke-linecap="round"/><path d="M10.6 13 C18 26, 30 22, 37.4 8.5" stroke="url(#lg)" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M15 20 L15 33 M20 22 L20 32 M25 22 L25 31 M30 20 L30 30" stroke="url(#lg)" stroke-width="1.2" opacity=".7"/></svg><span>DS Bridging</span></a>
+  <div class="topnav-links">
+    <a href="#how">How it works</a>
+    <a href="#roadmap">Curriculum</a>
+    <a href="#sample">Sample lesson</a>
+    <a href="#about">About</a>
+    <a class="topnav-cta" href="/lessons/0_absolute_basics_python.html">Start →</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
   <div class="hero-inner">
-    <div class="hero-logo">🚀</div>
-    <h1>DS Bridging Bootcamp</h1>
-    <p class="tagline">Data science from <strong>absolute zero</strong> to job-ready —
-       every idea in plain English first, then the code line-by-line, then the deep why.</p>
-    <div class="hero-badges">
-      <span>24 modules</span>
-      <span>4-layer teaching</span>
-      <span>Runnable notebooks</span>
-      <span>Interview-ready</span>
+    <div class="hero-logo"><svg class="logo" width="72" height="72" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#7c5cff"/><stop offset="1" stop-color="#4dd0e1"/></linearGradient></defs><rect x="9" y="12" width="3.2" height="26" rx="1.4" fill="url(#lg)"/><rect x="35.8" y="7" width="3.2" height="31" rx="1.4" fill="url(#lg)"/><path d="M4 34 L44 27" stroke="url(#lg)" stroke-width="3.2" stroke-linecap="round"/><path d="M10.6 13 C18 26, 30 22, 37.4 8.5" stroke="url(#lg)" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M15 20 L15 33 M20 22 L20 32 M25 22 L25 31 M30 20 L30 30" stroke="url(#lg)" stroke-width="1.2" opacity=".7"/></svg></div>
+    <h1>Bridge into <span class="grad">Data Science</span></h1>
+    <p class="tagline">A free, 24-module path from <strong>absolute zero</strong> to
+       <strong>job-ready</strong> — every idea in plain English first, then the code
+       line-by-line, then the deep why.</p>
+    <p class="cred">Built by a mathematics graduate for self-taught coders and career-switchers
+       who have projects but shaky foundations.</p>
+    <div class="hero-cta">
+      <a class="cta" href="/lessons/0_absolute_basics_python.html">Start with Module 0 →</a>
+      <a class="cta ghost" href="#sample">Preview a lesson</a>
     </div>
-    <a class="cta" href="/lessons/0_absolute_basics_python.html">Start with Module 0 →</a>
+    <div class="hero-badges">
+      <span>🎓 24 modules</span>
+      <span>🧩 4-layer method</span>
+      <span>▶ Runnable notebooks</span>
+      <span>💼 Interview-ready</span>
+    </div>
   </div>
 </header>
-<section class="how">
-  <h2>How each lesson works</h2>
+
+<section class="how" id="how">
+  <h2>How every lesson works</h2>
+  <p class="section-sub">The same four layers, every time — so you can stop at intuition, or go all the way to the math.</p>
   <div class="how-grid">
     <div class="how-box plain"><b>🌱 In plain English</b><p>The idea with zero jargon and an everyday analogy.</p></div>
     <div class="how-box readcode"><b>🔤 Reading the code</b><p>Every line explained, one at a time.</p></div>
@@ -32,38 +53,82 @@
     <div class="how-box takeaway"><b>✅ Takeaway + 🗣️ interview</b><p>One line to remember, one line to say in an interview.</p></div>
   </div>
 </section>
-<section class="grid-wrap">
-  <h2>The curriculum</h2>
-  <div class="grid">
-    <a class="card" href="/lessons/0_absolute_basics_python.html"><div class="card-top"><span class="card-emoji">🐣</span><span class="card-num">Module 0</span></div><div class="card-title">Absolute Basics: Python from Zero</div></a>
-<a class="card" href="/lessons/01_numpy.html"><div class="card-top"><span class="card-emoji">🔢</span><span class="card-num">Module 1</span></div><div class="card-title">NumPy: Fast Arrays</div></a>
-<a class="card" href="/lessons/02_pandas.html"><div class="card-top"><span class="card-emoji">🐼</span><span class="card-num">Module 2</span></div><div class="card-title">Pandas: Spreadsheets in Python</div></a>
-<a class="card" href="/lessons/03_data_cleaning.html"><div class="card-top"><span class="card-emoji">🧹</span><span class="card-num">Module 3</span></div><div class="card-title">Data Cleaning</div></a>
-<a class="card" href="/lessons/04_eda_visualization.html"><div class="card-top"><span class="card-emoji">📊</span><span class="card-num">Module 4</span></div><div class="card-title">EDA &amp; Visualization</div></a>
-<a class="card" href="/lessons/05_statistics_probability.html"><div class="card-top"><span class="card-emoji">📈</span><span class="card-num">Module 5</span></div><div class="card-title">Statistics &amp; Probability</div></a>
-<a class="card" href="/lessons/06_feature_engineering_scaling.html"><div class="card-top"><span class="card-emoji">⚙️</span><span class="card-num">Module 6</span></div><div class="card-title">Feature Engineering &amp; Scaling</div></a>
-<a class="card" href="/lessons/07_regression.html"><div class="card-top"><span class="card-emoji">📉</span><span class="card-num">Module 7</span></div><div class="card-title">Regression</div></a>
-<a class="card" href="/lessons/08_classification_knn.html"><div class="card-top"><span class="card-emoji">🎯</span><span class="card-num">Module 8</span></div><div class="card-title">Classification &amp; KNN</div></a>
-<a class="card" href="/lessons/09_evaluation_cv_gridsearch.html"><div class="card-top"><span class="card-emoji">🔍</span><span class="card-num">Module 9</span></div><div class="card-title">Evaluation, CV &amp; Grid Search</div></a>
-<a class="card" href="/lessons/10_trees_ensembles_boosting.html"><div class="card-top"><span class="card-emoji">🌳</span><span class="card-num">Module 10</span></div><div class="card-title">Trees, Ensembles &amp; Boosting</div></a>
-<a class="card" href="/lessons/11_clustering_pca.html"><div class="card-top"><span class="card-emoji">🔮</span><span class="card-num">Module 11</span></div><div class="card-title">Clustering &amp; PCA</div></a>
-<a class="card" href="/lessons/12_neural_networks_intro.html"><div class="card-top"><span class="card-emoji">🧠</span><span class="card-num">Module 12</span></div><div class="card-title">Neural Networks Intro</div></a>
-<a class="card" href="/lessons/13_job_readiness_interview_prep.html"><div class="card-top"><span class="card-emoji">💼</span><span class="card-num">Module 13</span></div><div class="card-title">Job Readiness &amp; Interviews</div></a>
-<a class="card" href="/lessons/14_sql_for_data_science.html"><div class="card-top"><span class="card-emoji">🗄️</span><span class="card-num">Module 14</span></div><div class="card-title">SQL for Data Science</div></a>
-<a class="card" href="/lessons/15_apis_web_scraping.html"><div class="card-top"><span class="card-emoji">🕸️</span><span class="card-num">Module 15</span></div><div class="card-title">APIs &amp; Web Scraping</div></a>
-<a class="card" href="/lessons/16_probability_combinatorics_bayes.html"><div class="card-top"><span class="card-emoji">🎲</span><span class="card-num">Module 16</span></div><div class="card-title">Probability, Combinatorics, Bayes</div></a>
-<a class="card" href="/lessons/17_ab_testing_anova_power.html"><div class="card-top"><span class="card-emoji">🧪</span><span class="card-num">Module 17</span></div><div class="card-title">A/B Testing, ANOVA &amp; Power</div></a>
-<a class="card" href="/lessons/18_oop_linear_algebra_calculus.html"><div class="card-top"><span class="card-emoji">➗</span><span class="card-num">Module 18</span></div><div class="card-title">OOP, Linear Algebra &amp; Calculus</div></a>
-<a class="card" href="/lessons/19_time_series.html"><div class="card-top"><span class="card-emoji">⏳</span><span class="card-num">Module 19</span></div><div class="card-title">Time Series</div></a>
-<a class="card" href="/lessons/20_nlp_recommendation_systems.html"><div class="card-top"><span class="card-emoji">💬</span><span class="card-num">Module 20</span></div><div class="card-title">NLP &amp; Recommender Systems</div></a>
-<a class="card" href="/lessons/21_bash_git.html"><div class="card-top"><span class="card-emoji">🐚</span><span class="card-num">Module 21</span></div><div class="card-title">Bash &amp; Git</div></a>
-<a class="card" href="/lessons/22_bigdata_spark.html"><div class="card-top"><span class="card-emoji">⚡</span><span class="card-num">Module 22</span></div><div class="card-title">Big Data &amp; Spark</div></a>
-<a class="card" href="/lessons/23_aws_deployment_mlops.html"><div class="card-top"><span class="card-emoji">☁️</span><span class="card-num">Module 23</span></div><div class="card-title">AWS Deployment &amp; MLOps</div></a>
+
+<section class="roadmap" id="roadmap">
+  <h2>Your learning roadmap</h2>
+  <p class="section-sub">Five phases, 24 modules — a guided journey, not a pile of tutorials.</p>
+  <div class="phase"><div class="phase-head"><h3>Phase 0 · Foundations</h3><p class="phase-promise">Start from absolute zero — Python, then fast arrays &amp; tables.</p></div><div class="grid"><a class="card" href="/lessons/0_absolute_basics_python.html" data-slug="0_absolute_basics_python"><div class="card-top"><span class="card-emoji">🐣</span><span class="card-num">Module 0</span></div><div class="card-title">Absolute Basics: Python from Zero</div><div class="card-outcome">What code, variables, loops &amp; functions actually are.</div><div class="card-tags"><span class="badge diff-b">Beginner</span><span class="badge time">⏱ ~60m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/01_numpy.html" data-slug="01_numpy"><div class="card-top"><span class="card-emoji">🔢</span><span class="card-num">Module 1</span></div><div class="card-title">NumPy: Fast Arrays</div><div class="card-outcome">Vectorized thinking — why arrays beat Python loops.</div><div class="card-tags"><span class="badge diff-b">Beginner</span><span class="badge time">⏱ ~40m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/02_pandas.html" data-slug="02_pandas"><div class="card-top"><span class="card-emoji">🐼</span><span class="card-num">Module 2</span></div><div class="card-title">Pandas: Spreadsheets in Python</div><div class="card-outcome">Load, filter, group &amp; join real tabular data.</div><div class="card-tags"><span class="badge diff-b">Beginner</span><span class="badge time">⏱ ~55m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/03_data_cleaning.html" data-slug="03_data_cleaning"><div class="card-top"><span class="card-emoji">🧹</span><span class="card-num">Module 3</span></div><div class="card-title">Data Cleaning</div><div class="card-outcome">Handle missing values, dupes, dtypes &amp; outliers.</div><div class="card-tags"><span class="badge diff-b">Beginner</span><span class="badge time">⏱ ~45m</span></div><span class="card-go">Open lesson →</span></a></div></div>
+<div class="phase"><div class="phase-head"><h3>Phase 1 · Stats &amp; Modeling</h3><p class="phase-promise">The math and the first models that turn data into predictions.</p></div><div class="grid"><a class="card" href="/lessons/04_eda_visualization.html" data-slug="04_eda_visualization"><div class="card-top"><span class="card-emoji">📊</span><span class="card-num">Module 4</span></div><div class="card-title">EDA &amp; Visualization</div><div class="card-outcome">Ask questions with charts and read the story.</div><div class="card-tags"><span class="badge diff-b">Beginner</span><span class="badge time">⏱ ~45m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/05_statistics_probability.html" data-slug="05_statistics_probability"><div class="card-top"><span class="card-emoji">📈</span><span class="card-num">Module 5</span></div><div class="card-title">Statistics &amp; Probability</div><div class="card-outcome">Distributions, CLT, p-values &amp; confidence intervals.</div><div class="card-tags"><span class="badge diff-i">Intermediate</span><span class="badge time">⏱ ~55m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/06_feature_engineering_scaling.html" data-slug="06_feature_engineering_scaling"><div class="card-top"><span class="card-emoji">⚙️</span><span class="card-num">Module 6</span></div><div class="card-title">Feature Engineering &amp; Scaling</div><div class="card-outcome">Encode, scale &amp; transform features without leakage.</div><div class="card-tags"><span class="badge diff-i">Intermediate</span><span class="badge time">⏱ ~45m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/07_regression.html" data-slug="07_regression"><div class="card-top"><span class="card-emoji">📉</span><span class="card-num">Module 7</span></div><div class="card-title">Regression</div><div class="card-outcome">Predict numbers: linear regression from scratch + sklearn.</div><div class="card-tags"><span class="badge diff-i">Intermediate</span><span class="badge time">⏱ ~45m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/08_classification_knn.html" data-slug="08_classification_knn"><div class="card-top"><span class="card-emoji">🎯</span><span class="card-num">Module 8</span></div><div class="card-title">Classification &amp; KNN</div><div class="card-outcome">Predict classes: logistic regression &amp; KNN.</div><div class="card-tags"><span class="badge diff-i">Intermediate</span><span class="badge time">⏱ ~45m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/09_evaluation_cv_gridsearch.html" data-slug="09_evaluation_cv_gridsearch"><div class="card-top"><span class="card-emoji">🔍</span><span class="card-num">Module 9</span></div><div class="card-title">Evaluation, CV &amp; Grid Search</div><div class="card-outcome">Trust your model: CV, the right metric &amp; tuning.</div><div class="card-tags"><span class="badge diff-i">Intermediate</span><span class="badge time">⏱ ~45m</span></div><span class="card-go">Open lesson →</span></a></div></div>
+<div class="phase"><div class="phase-head"><h3>Phase 2 · Machine Learning Core</h3><p class="phase-promise">Ensembles, unsupervised learning and neural nets.</p></div><div class="grid"><a class="card" href="/lessons/10_trees_ensembles_boosting.html" data-slug="10_trees_ensembles_boosting"><div class="card-top"><span class="card-emoji">🌳</span><span class="card-num">Module 10</span></div><div class="card-title">Trees, Ensembles &amp; Boosting</div><div class="card-outcome">Decision trees, Random Forest &amp; XGBoost.</div><div class="card-tags"><span class="badge diff-i">Intermediate</span><span class="badge time">⏱ ~50m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/11_clustering_pca.html" data-slug="11_clustering_pca"><div class="card-top"><span class="card-emoji">🔮</span><span class="card-num">Module 11</span></div><div class="card-title">Clustering &amp; PCA</div><div class="card-outcome">Find structure without labels: KMeans &amp; PCA.</div><div class="card-tags"><span class="badge diff-i">Intermediate</span><span class="badge time">⏱ ~45m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/12_neural_networks_intro.html" data-slug="12_neural_networks_intro"><div class="card-top"><span class="card-emoji">🧠</span><span class="card-num">Module 12</span></div><div class="card-title">Neural Networks Intro</div><div class="card-outcome">Neurons, activations &amp; backprop intuition.</div><div class="card-tags"><span class="badge diff-i">Intermediate</span><span class="badge time">⏱ ~50m</span></div><span class="card-go">Open lesson →</span></a></div></div>
+<div class="phase"><div class="phase-head"><h3>Phase 3 · Job-Ready Skills</h3><p class="phase-promise">Interviews, SQL, APIs &amp; the full analyst toolkit.</p></div><div class="grid"><a class="card" href="/lessons/13_job_readiness_interview_prep.html" data-slug="13_job_readiness_interview_prep"><div class="card-top"><span class="card-emoji">💼</span><span class="card-num">Module 13</span></div><div class="card-title">Job Readiness &amp; Interviews</div><div class="card-outcome">Tell your story &amp; answer DS interview questions.</div><div class="card-tags"><span class="badge diff-b">Beginner</span><span class="badge time">⏱ ~40m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/14_sql_for_data_science.html" data-slug="14_sql_for_data_science"><div class="card-top"><span class="card-emoji">🗄️</span><span class="card-num">Module 14</span></div><div class="card-title">SQL for Data Science</div><div class="card-outcome">JOINs, CTEs &amp; window functions for analysts.</div><div class="card-tags"><span class="badge diff-i">Intermediate</span><span class="badge time">⏱ ~50m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/15_apis_web_scraping.html" data-slug="15_apis_web_scraping"><div class="card-top"><span class="card-emoji">🕸️</span><span class="card-num">Module 15</span></div><div class="card-title">APIs &amp; Web Scraping</div><div class="card-outcome">Pull data from APIs &amp; scrape the web ethically.</div><div class="card-tags"><span class="badge diff-i">Intermediate</span><span class="badge time">⏱ ~45m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/16_probability_combinatorics_bayes.html" data-slug="16_probability_combinatorics_bayes"><div class="card-top"><span class="card-emoji">🎲</span><span class="card-num">Module 16</span></div><div class="card-title">Probability, Combinatorics, Bayes</div><div class="card-outcome">Counting, Bayes&#x27; theorem &amp; Naive Bayes.</div><div class="card-tags"><span class="badge diff-a">Advanced</span><span class="badge time">⏱ ~55m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/17_ab_testing_anova_power.html" data-slug="17_ab_testing_anova_power"><div class="card-top"><span class="card-emoji">🧪</span><span class="card-num">Module 17</span></div><div class="card-title">A/B Testing, ANOVA &amp; Power</div><div class="card-outcome">Design experiments: t-tests, ANOVA &amp; power.</div><div class="card-tags"><span class="badge diff-a">Advanced</span><span class="badge time">⏱ ~55m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/18_oop_linear_algebra_calculus.html" data-slug="18_oop_linear_algebra_calculus"><div class="card-top"><span class="card-emoji">➗</span><span class="card-num">Module 18</span></div><div class="card-title">OOP, Linear Algebra &amp; Calculus</div><div class="card-outcome">Classes, eigenvectors &amp; gradient descent by hand.</div><div class="card-tags"><span class="badge diff-a">Advanced</span><span class="badge time">⏱ ~60m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/19_time_series.html" data-slug="19_time_series"><div class="card-top"><span class="card-emoji">⏳</span><span class="card-num">Module 19</span></div><div class="card-title">Time Series</div><div class="card-outcome">Decomposition, stationarity &amp; ARIMA forecasting.</div><div class="card-tags"><span class="badge diff-a">Advanced</span><span class="badge time">⏱ ~50m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/20_nlp_recommendation_systems.html" data-slug="20_nlp_recommendation_systems"><div class="card-top"><span class="card-emoji">💬</span><span class="card-num">Module 20</span></div><div class="card-title">NLP &amp; Recommender Systems</div><div class="card-outcome">TF-IDF, cosine similarity &amp; recommenders.</div><div class="card-tags"><span class="badge diff-a">Advanced</span><span class="badge time">⏱ ~55m</span></div><span class="card-go">Open lesson →</span></a></div></div>
+<div class="phase"><div class="phase-head"><h3>Phase 4 · Production &amp; Scale</h3><p class="phase-promise">Engineering that gets your models into the real world.</p></div><div class="grid"><a class="card" href="/lessons/21_bash_git.html" data-slug="21_bash_git"><div class="card-top"><span class="card-emoji">🐚</span><span class="card-num">Module 21</span></div><div class="card-title">Bash &amp; Git</div><div class="card-outcome">Shell wrangling &amp; the git mental model.</div><div class="card-tags"><span class="badge diff-b">Beginner</span><span class="badge time">⏱ ~40m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/22_bigdata_spark.html" data-slug="22_bigdata_spark"><div class="card-top"><span class="card-emoji">⚡</span><span class="card-num">Module 22</span></div><div class="card-title">Big Data &amp; Spark</div><div class="card-outcome">Scale out with PySpark when data won&#x27;t fit RAM.</div><div class="card-tags"><span class="badge diff-a">Advanced</span><span class="badge time">⏱ ~50m</span></div><span class="card-go">Open lesson →</span></a>
+<a class="card" href="/lessons/23_aws_deployment_mlops.html" data-slug="23_aws_deployment_mlops"><div class="card-top"><span class="card-emoji">☁️</span><span class="card-num">Module 23</span></div><div class="card-title">AWS Deployment &amp; MLOps</div><div class="card-outcome">Ship models: joblib, Docker, AWS &amp; monitoring.</div><div class="card-tags"><span class="badge diff-a">Advanced</span><span class="badge time">⏱ ~55m</span></div><span class="card-go">Open lesson →</span></a></div></div>
+</section>
+
+<section class="sample" id="sample">
+  <h2>See the method in action</h2>
+  <p class="section-sub">Example: <b>What is gradient descent?</b></p>
+  <div class="sample-card">
+    <div class="callout plain"><div class="callout-h">🌱 In plain English</div>
+      <p>Like walking downhill in thick fog: you can't see the bottom, so you feel which way the ground slopes and take a small step that way — again and again — until it's flat.</p></div>
+    <div class="callout readcode"><div class="callout-h">🔤 Reading the code</div>
+      <pre class="code"><code class="language-python">w = w - lr * grad   # step against the slope; lr = how big a step</code></pre></div>
+    <div class="callout deeper"><div class="callout-h">🎓 Go deeper</div>
+      <p>Gradient descent minimises a loss function by repeatedly updating parameters in the direction opposite the gradient. The learning rate <code>lr</code> trades speed for stability.</p></div>
+    <div class="callout takeaway"><div class="callout-h">✅ Takeaway + 🗣️ interview</div>
+      <p><b>Remember:</b> follow the slope downhill in small steps. <b>Say it:</b> "Gradient descent iteratively moves parameters opposite the gradient of the loss to find a minimum."</p></div>
+  </div>
+  <div class="center"><a class="cta" href="/lessons/0_absolute_basics_python.html">Start learning →</a></div>
+</section>
+
+<section class="about" id="about">
+  <h2>Who this is for</h2>
+  <div class="about-grid">
+    <div class="about-box"><h3>👤 Built for</h3><ul>
+      <li>Absolute beginners starting from zero</li>
+      <li>Self-taught coders with shaky foundations</li>
+      <li>Students switching into data science</li>
+      <li>Anyone prepping for DS interviews</li>
+    </ul></div>
+    <div class="about-box"><h3>🎁 You'll leave with</h3><ul>
+      <li>Real Python & data intuition</li>
+      <li>Mental models for core ML algorithms</li>
+      <li>Interview-ready explanations you can defend</li>
+      <li>Portfolio-ready, runnable notebooks</li>
+    </ul></div>
+    <div class="about-box"><h3>🧭 How to use it</h3><ul>
+      <li>Work through the phases in order</li>
+      <li>Run every notebook in Colab as you read</li>
+      <li>Skim 🎓 boxes on the first pass; return for depth</li>
+      <li>Explain each takeaway out loud</li>
+    </ul></div>
   </div>
 </section>
-<footer class="foot">
+
+<footer class="foot" id="foot">
+  <div class="center"><a class="cta" href="/lessons/0_absolute_basics_python.html">Begin at Module 0 →</a></div>
   <p>Built by <strong>Stephen Muema</strong> · Mathematics + Data Science ·
-     <a href="https://github.com/Kaks753/DS_bridging">GitHub</a></p>
+     <a href="https://github.com/Kaks753/DS_bridging">GitHub</a> ·
+     <a href="https://github.com/Kaks753/DS_bridging/issues">Feedback</a></p>
 </footer>
+<script src="/assets/app.js"></script>
 </body>
 </html>

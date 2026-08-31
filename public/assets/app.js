@@ -37,7 +37,21 @@
     });
   }
 
-  // ---- progress: mark visited modules ----
+  // ---- build in-page table of contents from H2s ----
+  var toc = document.getElementById('lesson-toc');
+  if (toc) {
+    var heads = document.querySelectorAll('.lesson-wrap h2');
+    if (heads.length >= 3) {
+      var html = '<div class="toc-title">On this page</div><ul>';
+      heads.forEach(function (h, i) {
+        if (!h.id) h.id = 'sec-' + i;
+        html += '<li><a href="#' + h.id + '">' + h.textContent + '</a></li>';
+      });
+      toc.innerHTML = html + '</ul>';
+    }
+  }
+
+  // ---- progress: mark visited modules (sidebar + home cards) ----
   var KEY = 'dsb_progress';
   function getProgress() {
     try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return {}; }
@@ -52,6 +66,10 @@
   var prog = getProgress();
   document.querySelectorAll('.nav-item').forEach(function (a) {
     if (prog[a.getAttribute('data-slug')]) a.classList.add('done');
+  });
+  // home cards: show a ✓ on modules already visited
+  document.querySelectorAll('.card[data-slug]').forEach(function (c) {
+    if (prog[c.getAttribute('data-slug')]) c.classList.add('done');
   });
 
   // ---- search ----
