@@ -260,7 +260,7 @@ def sidebar_html(active_slug):
         cls = "active" if slug == active_slug else ""
         num = "0" if i == 0 else str(i)
         items.append(
-            f'<a class="nav-item {cls}" href="{slug}.html" data-slug="{slug}">'
+            f'<a class="nav-item {cls}" href="/lessons/{slug}.html" data-slug="{slug}">'
             f'<span class="nav-emoji">{emoji}</span>'
             f'<span class="nav-num">M{num}</span>'
             f'<span class="nav-label">{html.escape(label)}</span></a>'
@@ -288,13 +288,13 @@ def page_shell(title, body, active_slug, prev_link, next_link, module_num, stem)
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)} — DS Bridging Bootcamp</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="/assets/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 </head>
 <body>
 <button id="menu-toggle" aria-label="Toggle menu">☰</button>
 <aside id="sidebar">
-  <a class="brand" href="../index.html">
+  <a class="brand" href="/index.html">
     <span class="brand-logo">🚀</span>
     <span class="brand-text">DS Bridging<br><small>Bootcamp</small></span>
   </a>
@@ -319,7 +319,7 @@ def page_shell(title, body, active_slug, prev_link, next_link, module_num, stem)
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-<script src="../assets/app.js"></script>
+<script src="/assets/app.js"></script>
 </body>
 </html>"""
 
@@ -342,12 +342,12 @@ def build():
         prev_link = next_link = ""
         if idx > 0:
             ps, pl, pe = present[idx - 1]
-            prev_link = f'<a class="pn prev" href="{slug_for(ps)}.html">← {html.escape(pl)}</a>'
+            prev_link = f'<a class="pn prev" href="/lessons/{slug_for(ps)}.html">← {html.escape(pl)}</a>'
         else:
-            prev_link = '<a class="pn prev" href="../index.html">← Home</a>'
+            prev_link = '<a class="pn prev" href="/index.html">← Home</a>'
         if idx < len(present) - 1:
             ns, nl, ne = present[idx + 1]
-            next_link = f'<a class="pn next" href="{slug_for(ns)}.html">{html.escape(nl)} →</a>'
+            next_link = f'<a class="pn next" href="/lessons/{slug_for(ns)}.html">{html.escape(nl)} →</a>'
 
         page = page_shell(title, body, slug, prev_link, next_link, module_num, stem)
         (LESSONS / f"{slug}.html").write_text(page)
@@ -369,7 +369,7 @@ def build_index(built):
     cards = []
     for slug, title, emoji, num, label in built:
         cards.append(
-            f'<a class="card" href="lessons/{slug}.html">'
+            f'<a class="card" href="/lessons/{slug}.html">'
             f'<div class="card-top"><span class="card-emoji">{emoji}</span>'
             f'<span class="card-num">Module {num}</span></div>'
             f'<div class="card-title">{html.escape(label)}</div></a>'
@@ -383,7 +383,7 @@ def build_index(built):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DS Bridging Bootcamp — Learn Data Science from Zero</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%80%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="/assets/style.css">
 </head>
 <body class="home">
 <header class="hero">
@@ -398,7 +398,7 @@ def build_index(built):
       <span>Runnable notebooks</span>
       <span>Interview-ready</span>
     </div>
-    <a class="cta" href="lessons/{built[0][0] if built else ''}.html">Start with Module 0 →</a>
+    <a class="cta" href="/lessons/{built[0][0] if built else ''}.html">Start with Module 0 →</a>
   </div>
 </header>
 <section class="how">

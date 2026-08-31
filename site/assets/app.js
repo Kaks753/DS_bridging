@@ -32,7 +32,7 @@
   var results = document.getElementById('search-results');
   if (input && results) {
     var index = [];
-    fetch('../assets/search-index.json')
+    fetch('/assets/search-index.json')
       .then(function (r) { return r.json(); })
       .then(function (d) { index = d; })
       .catch(function () {});
@@ -61,7 +61,7 @@
         return;
       }
       results.innerHTML = scored.map(function (x) {
-        return '<a href="' + x.item.slug + '.html">' + x.item.emoji + ' ' +
+        return '<a href="/lessons/' + x.item.slug + '.html">' + x.item.emoji + ' ' +
           x.item.label + ' <span class="sr-num">· Module ' + x.item.num + '</span></a>';
       }).join('');
       results.style.display = 'block';
